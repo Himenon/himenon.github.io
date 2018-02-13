@@ -162,7 +162,7 @@ TeXで数式を掛けるところからも非常に役にたちました。
 特に、ディレクティブが優秀で、後からclassをつけたり、画像のサイズ変更したりでき、
 目次ツリーや、`include`でファイルを分割できるところも非常に活躍しました。
 
-だｋれども、最近のエディターではMarkdownのサポートが主流で、[reStructuredText](http://docs.sphinx-users.jp/rest.html)の記法で書いているドキュメントは、ちょっと（数年）前Pythonのライブラリ系ぐらいしか見ない。
+だけれども、最近のエディターではMarkdownのサポートが主流で、[reStructuredText](http://docs.sphinx-users.jp/rest.html)の記法で書いているドキュメントは、ちょっと（数年）前Pythonのライブラリ系ぐらいしか見ない。
 
 使い勝手の面からしてもMarkdownのほうが便利だったため、
 PyPI用のドキュメントを書く以外では、最近ではなかなか使っていません。
