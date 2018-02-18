@@ -1,20 +1,23 @@
-site_name: himenon.github.io
-site_description: 明日ヤローはバカヤロー
+site_name: ぎじゅつ箱
+site_description: 気楽にドヤろうぜ
 site_author: K.Himeno
 
 theme: windmill
 
 repo_name: Himenon/himenon.github.io
 repo_url: https://github.com/Himenon/himenon.github.io
-edit_uri: edit/draft/src
+edit_uri: edit/seed/src
 
 extra:
   logo: assets/images/icon.jpg
-  version: 1.0.0
+  version: 1.0.1
   article_nav_top: false
 
 extra_css:
   - assets/css/font.css
+
+extra_javascript:
+  - assets/js/mermaid.min.js
 
 docs_dir: src
 site_dir: docs

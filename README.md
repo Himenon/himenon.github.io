@@ -13,6 +13,12 @@ docker-compose up
 docker-compose run server mkdocs build --clean
 ```
 
+## Deploy
+
+```bash
+mkdocs gh-deploy --remote-branch master
+```
+
 ## Author
 
 K.Himeno
