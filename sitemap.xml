@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <lastmod>2018-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,8 +12,28 @@
     
         
     <url>
-     <loc>/tools/static-site-generator/</loc>
-     <lastmod>2018-02-14</lastmod>
+     <loc>/kubernetes/Nginx access control for kubernetes/</loc>
+     <lastmod>2018-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>/server/Multiple Reverse Proxy Sapmle with oauth2_proxy/</loc>
+     <lastmod>2018-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>/tools/Static site generator/</loc>
+     <lastmod>2018-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする - ぎじゅつ箱</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <link href="../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "\u8907\u6570\u306e\u30db\u30b9\u30c8\u3092oauth2_proxy\u3092\u7528\u3044\u3066OAuth\u8a8d\u8a3c\u3057\u3066\u30ea\u30d0\u30fc\u30b9\u30d7\u30ed\u30ad\u30b7\u3059\u308b", url: "#oauth2_proxyoauth", children: [
+              {title: "\u3053\u308c\u306f\u306a\u306b\uff1f", url: "#_1" },
+              {title: "\u3053\u3068\u306e\u767a\u7aef", url: "#_3" },
+              {title: "\u5b9f\u88c5\u5185\u5bb9", url: "#_4" },
+              {title: "\u6700\u5f8c\u306b", url: "#_6" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script>
+      <script src="../../assets/js/mermaid.min.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="oauth2_proxyoauth">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする<a class="headerlink" href="#oauth2_proxyoauth" title="Permanent link">&para;</a></h1>
+<p id="created_at">作成日: <time datetime="2018-02-19T01:00">2018/02/19</time></p>
+
+<p><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="640px" version="1.1" content="&lt;mxfile userAgent=&quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36&quot; version=&quot;8.2.1&quot; editor=&quot;www.draw.io&quot; type=&quot;google&quot;&gt;&lt;diagram id=&quot;2f404044-711c-603c-8f00-f6bb4c023d3c&quot; name=&quot;Page-1&quot;&gt;7Zpfc6M2EMA/jR/tAfHH+NFO4lxn0k7m0pn2njoCBOiCERUitvPpuwKBjYWbzJUYX6Z5SGC1Aml/q12tyMS62ezuOc6TX1lI0gkywt3Eup0g5KI5/JaCfS2Yz41aEHMa1iLzIHiir0QJG7WShqToKArGUkHzrjBgWUYC0ZFhztm2qxaxtPvWHMdEEzwFONWlf9BQJLXUa6Yl5V8IjZPmzaa7qFs2uFFWMykSHLLtkci6m1g3nDFRX212NySVtmvsUvdbn2ltB8ZJJt7TwV1ECFueEbmRjf1oPgU49TNecFqq6T4R/kI4yJZq0GLfWKIQnD23RoDhrxKxSeHShEuYXC71NrtYusEsStk2SDAXs5yzgBRAYbVNqCBPOQ6k4hbUQBbRNL1hKePVO6wQEy8K5POqlx21uIFH/Aha1JAJF2R31hJma1/wS8I2RPA9qDQd5lbdRfmk1SDaHgibhpIlR3RdJcPKqeL20Qe7w4Uy/bsx2OcxrD4xBsu+LgyOhuG3mGa7cQg4xAvtPgIe8i3XHYYAcrsEzPm4BFyNAMOlSNBfYLvdfhQQURShoHcphK7vOgOBsK0uCM8elYOncVgCBpA8cvYC+ZiPhIK4Z1DMFz6YZxAUrnFda2Kh2ZqEsENRt4yLhMUsw+ndQbrirMxCIp9pdEmQHRV/SvHMUXffjloeCacwZMJVR7AY3x+py9tvx22nHb4TIfZqDwcLl4HoMMAHxnL1snpKch7/DgmmzUoekLdCtsA8JuKsFuoHzkmKBX3pjmFYeo3v/E/vx+nZo9HzTC0O6oFPxTa6qQqJY1wyDFGoJJYpjTOQCWnBVvqAfZI+soIKymSrz4RgG1BIZcMKB89x5QjdXAQ/oFK9bFnkdcEj2eHmJqI76TorNZ7bRAhZKS2lGdA6CDM0o1ArRRRcjM8CeCNah1hg+CPlhVSiPEjJtLqdggnWEsHal7UU4VMTebM8iweItN6iG2gdTwu0TR48jrONbGDWlsYazSZyR7qu9yBwgaskeOIAMH/R5c5JQV+xXylINjmjmagG66wmzq2kBaurqBea7ICVgwRgOLkaz3hOAdmRZvHv1UKcys1hxDLRxBJzACKn+8H3bkPQh6Q+T6+LTEDi4o20RuYXeRWMjK/k75IU4iPJpCQSI3Ix5/abexLvclz0Qqmo6tWpPyM7oJOSOrBc0UoZAIKFvA4E2+jZGFqXo6AXS4oC/swU2ixxJRQWPVsEN5UWLuEilhdPZZ7DRqpTPtUq8L5Wq5H5vJHcMxYDFE2+fC15j/ieiqT0dfkaaiqfsefeHrDZ0OUPNHsm4S+Z3nI13oSaKKueYx00OrvU/+RrzqKbDtsYe+xrqMfXzI9xtoWeEB0tIX4lMOeC1N7Wc2jyebIiMrpZEdlIx2NeLBQs5pqtB6j1muuqcmvrvh8t3U6XzGSoUk4lozdKOa+f5wVKuYUep+1ZtXcscihz5HJBhl6sf6bNvX2yf2k/sY2yXKweaw9+NGK8eTTSORg5nJNc3fp631GJO9b6sgzzI2j2BL+fjVxzhvQGOWc8cvqZ1hDr8F1pq6Vp/iQ0my8j10tTP8ayZJ6T328Yh8xVnTZe5Mxk9ITnzLsJr+80y7lcvuv7yi8qrwgpl4e3yCh5Wlxx0fURkE4/t0FBr1Ma6MwRbg//blO1Hf3PknX3Dw==&lt;/diagram&gt;&lt;/mxfile&gt;" onclick="(function(svg){var src=window.event.target||window.event.srcElement;while (src!=null&amp;&amp;src.nodeName.toLowerCase()!='a'){src=src.parentNode;}if(src==null){if(svg.wnd!=null&amp;&amp;!svg.wnd.closed){svg.wnd.focus();}else{var r=function(evt){if(evt.data=='ready'&amp;&amp;evt.source==svg.wnd){svg.wnd.postMessage(decodeURIComponent(svg.getAttribute('content')),'*');window.removeEventListener('message',r);}};window.addEventListener('message',r);svg.wnd=window.open('https://www.draw.io/?client=1&amp;lightbox=1&amp;edit=_blank');}}})(this);" viewBox="0 0 640 338" style="cursor:pointer;max-width:100%;max-height:338px;"><defs/><g transform="translate(0.5,0.5)"><rect x="84" y="237" width="100" height="60" rx="3.6" ry="3.6" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2" pointer-events="none"/><g transform="translate(109.5,260.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="47" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 47px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">Server A</div></div></foreignObject><text x="24" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Server A</text></switch></g><rect x="254" y="237" width="100" height="60" rx="3.6" ry="3.6" fill="#dae8fc" stroke="#6c8ebf" stroke-width="2" pointer-events="none"/><g transform="translate(279.5,260.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="47" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 47px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">Server B</div></div></foreignObject><text x="24" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Server B</text></switch></g><rect x="174" y="87" width="100" height="60" rx="3.6" ry="3.6" fill="#d5e8d4" stroke="#82b366" stroke-width="2" pointer-events="none"/><g transform="translate(207.5,110.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="31" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 31px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">Nginx</div></div></foreignObject><text x="16" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Nginx</text></switch></g><rect x="344" y="1" width="100" height="60" rx="3.6" ry="3.6" fill="#fff2cc" stroke="#d6b656" stroke-width="2" pointer-events="none"/><g transform="translate(356.5,24.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="73" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 73px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">oauth2_proxy</div></div></foreignObject><text x="37" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">oauth2_proxy</text></switch></g><rect x="514" y="87" width="100" height="60" rx="3.6" ry="3.6" fill="#ffe6cc" stroke="#d79b00" stroke-width="2" pointer-events="none"/><g transform="translate(526.5,110.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="73" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; width: 73px; white-space: nowrap; word-wrap: normal; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">Auth Provider</div></div></foreignObject><text x="37" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">Auth Provider</text></switch></g><path d="M 224 147 L 224 192 L 134 192 L 134 230.63" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 134 235.88 L 130.5 228.88 L 134 230.63 L 137.5 228.88 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 224 147 L 224 192 L 304 192 L 304 230.63" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 304 235.88 L 300.5 228.88 L 304 230.63 L 307.5 228.88 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><image x="-0.5" y="74.5" width="84" height="84" xlink:href="https://cdn2.iconfinder.com/data/icons/circle-icons-1/64/browser-128.png" preserveAspectRatio="none" pointer-events="none"/><g transform="translate(181.5,3.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="85" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; font-weight: bold; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">2. /oauth2/auth</div></div></foreignObject><text x="43" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica" font-weight="bold">2. /oauth2/auth</text></switch></g><g transform="translate(86.5,89.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="64" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; font-weight: bold;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">1.  Request</div></div></foreignObject><text x="32" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica" font-weight="bold">1.  Request</text></switch></g><g transform="translate(244.5,319.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="119" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">server-b.example.com</div></div></foreignObject><text x="60" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">server-b.example.com</text></switch></g><g transform="translate(74.5,319.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="119" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">server-a.example.com</div></div></foreignObject><text x="60" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica">server-a.example.com</text></switch></g><g transform="translate(514.5,200.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="98" height="103" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 13px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;"><u>Support Provider</u><br />Google<br />Azure<br />Github<br />Facebook<br />Gitlab<br />LinkedIn<br /></div></div></foreignObject><text x="49" y="58" fill="#000000" text-anchor="middle" font-size="13px" font-family="Helvetica">[Not supported by viewer]</text></switch></g><g transform="translate(116.5,161.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="97" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; font-weight: bold;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">5. Reverse Proxy</div></div></foreignObject><text x="49" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica" font-weight="bold">5. Reverse Proxy</text></switch></g><path d="M 444 31 L 564 31 L 564 80.63" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 564 85.88 L 560.5 78.88 L 564 80.63 L 567.5 78.88 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(346.5,129.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="94" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; font-weight: bold; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">4. Response 200</div></div></foreignObject><text x="47" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica" font-weight="bold">4. Response 200</text></switch></g><path d="M 224 87 L 224 31 L 337.63 31" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 342.88 31 L 335.88 34.5 L 337.63 31 L 335.88 27.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 84 117 L 167.63 117" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 172.88 117 L 165.88 120.5 L 167.63 117 L 165.88 113.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 514 117 L 280.37 117" fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><path d="M 275.12 117 L 282.12 113.5 L 280.37 117 L 282.12 120.5 Z" fill="#000000" stroke="#000000" stroke-miterlimit="10" pointer-events="none"/><g transform="translate(493.5,3.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="141" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; font-weight: bold; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">3. Authorization Request</div></div></foreignObject><text x="71" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica" font-weight="bold">3. Authorization Request</text></switch></g><g transform="translate(518.5,159.5)"><switch><foreignObject style="overflow:visible;" pointer-events="all" width="91" height="12" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"><div xmlns="http://www.w3.org/1999/xhtml" style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; vertical-align: top; white-space: nowrap; font-weight: bold; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml" style="display:inline-block;text-align:inherit;text-decoration:inherit;">Set redirect urls<br /></div></div></foreignObject><text x="46" y="12" fill="#000000" text-anchor="middle" font-size="12px" font-family="Helvetica" font-weight="bold">Set redirect urls&lt;br&gt;</text></switch></g></g>&lt;/svg</p>
+<h2 id="_1">これはなに？<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/bitly/oauth2_proxy">oatuh2_proxy</a>を複数のリバースプロキシ先に対応させた、
+サンプル(<a href="https://github.com/Himenon/oauth2_proxy">Himenon/oauth2_proxy</a>)を作成した紹介です。</p>
+<p>（スターください。PRも歓迎です）</p>
+<h3 id="_2">何に使える？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>例えば、</p>
+<ul>
+<li>社内ドキュメントをホスティングした時に、OAuth2で保護したい。</li>
+<li>Globalにテスト用のアプリケーションを作って内部のみに公開したいが、ip制限だけでなく、OAuthをかけたい</li>
+</ul>
+<p>などなど、対外向けのサービスで使うというより、内部向けのアプリや、情報を保護するための用途で使えます。</p>
+<h2 id="_3">ことの発端<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>(読み飛ばして大丈夫です。)</p>
+<p><a href="https://techconf.cookpad.com/2018/">Cookpad Tech Conf 2018</a>で<strong>Challenges for Global Service from a Perspective of SRE</strong>の発表で、
+認証周りの業務が増えてがつらく、それをnginx側でoauthをproxyさせること脱Basic認証をし、管理するアプリケーションが増えても柔軟に対応できるようにした、
+と聞いた際に自分でもやってみようと思ったことが発端です。</p>
+<p>Coockpadさんの記事もありますので、これ以上はそちらを読んで下さい。</p>
+<ul>
+<li><a href="http://techlife.cookpad.com/entry/2015/10/16/080000">2015-10-16 nginx で omniauth を利用してアクセス制御を行う</a></li>
+<li><a href="https://github.com/sorah/nginx_omniauth_adapter">sorah/nginx_omniauth_adapter</a></li>
+</ul>
+<p>僕自身もBasic認証つれぇ、モダンにやりたい、って思ってたのでちょうどいいと思ってたところだったので、
+その辺のツール落ちていないか、というところから探してみました。</p>
+<p>そして、出会ったのが<a href="https://github.com/bitly/oauth2_proxy">oatuh2_proxy</a>。
+色んな人がメンテナスしている + スター数が3k超えってところで使ってみようと思いました。</p>
+<p>日本語の記事を調べたところ、割と最近(今が2018/2なので)の記事も発見できました。</p>
+<ul>
+<li>2017/12/14 <a href="http://moznion.hatenadiary.com/entry/2017/12/14/230945">手っ取り早くウェブアプリケーションにOAuth2認証を導入する</a></li>
+<li>2017/04/05 <a href="https://qiita.com/minamijoyo/items/52041ff8628263355810">oauth2_proxyでRundeckにGitHub認証でログインする</a></li>
+<li>2016/01/18 <a href="http://lamanotrama.hateblo.jp/entry/2016/01/18/142116">oauth2_proxyとNginxのauth_requestを組み合わせると便利</a></li>
+</ul>
+<p>他にも次のコードも発見しました。</p>
+<ul>
+<li><a href="https://github.com/a5huynh/oauth2_proxy">a5huynh/oauth2_proxy</a></li>
+</ul>
+<p>ただ、欲しかった情報が</p>
+<ul>
+<li>わかりやすいサンプルコード</li>
+<li>Dockerを使っている</li>
+<li>複数のホストに対してOAuthが対応している</li>
+</ul>
+<p>だったので、どれも満たしていなかったので自分で作ることにしました。</p>
+<h2 id="_4">実装内容<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>難しいことはしてませんが、以下の2点が他と異なるので、ここで取り上げます。</p>
+<ul>
+<li>redirect_urls</li>
+<li>Cookie対策</li>
+</ul>
+<p>また、以下では冒頭のアーキテクチャ図にある名称で説明します。</p>
+<h3 id="redirect_urls">redirect_urls<a class="headerlink" href="#redirect_urls" title="Permanent link">&para;</a></h3>
+<p>Providerのredirect_url<strong>s</strong>を複数指定すること。
+コード風にかくと、</p>
+<pre><code>redirect_urls = [
+    'server-a.example.com',
+    'server-b.example.com'
+]
+</code></pre>
+
+<p>と言った具合です。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Providerによっては複数の入力欄があったり、カンマ区切りで入力したりさまざまなので、
+そこは個々の入力方法を確認して下さい。</p>
+</div>
+<h3 id="cookie">Cookie対策<a class="headerlink" href="#cookie" title="Permanent link">&para;</a></h3>
+<p>実行ファイル、<code>google_auth_proxy</code>がとる引数で<code>--cookie-domain</code>があるのですが(<a href="https://github.com/Himenon/oauth2_proxy/blob/master/oauth2_proxy/run.sh#L12">この部分</a>)、
+ここをサブドメインを含めずに書きます。
+つまり、<code>--cookie-domain=example.com</code>とし、server-aでもserver-bでも同じCookieを利用するようにします。</p>
+<p>このようにすることで、CSRFがコケることなく、複数のサブドメインで認証できます。</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>無論、この手は普通やらないと思いますし、何が起こるかわからないので、
+実際のサービスとしては使ってはいけません。</p>
+<p>これは、内部向けだったり、用途が限られた空間内でBasic認証などによる不必要な認証管理をするための1手段としては有効なので、
+このProxyを噛ませるアプリケーションの公開範囲をキチンと管理できた上で利用するならば有効な手だと思います。</p>
+</div>
+<h3 id="todo">課題(TODO)<a class="headerlink" href="#todo" title="Permanent link">&para;</a></h3>
+<p>Cookie Domainを明確に単一にすることが現状の課題です。
+これは2つのことを解決します。</p>
+<p>1つ目は先に上げたCSRFの問題です。
+例えば<code>proxy.example.com</code>のように、現状の<code>*.example.com</code>よりも狭い範囲でCookieが利用されている方が
+サブドメインで分けられた、他のアプリケーションが不必要なCookieをロードする必要がなくなります。</p>
+<p>2つ目は、redirect_urlsの問題です。
+一見、問題がなささそうに見えますがそうではありません。
+redirect_urlsはどこに・誰が登録しますか？
+リバースプロキシする対象が増減たびに、Providerのredirect_urlsを更新する必要があります。</p>
+<p>これはオペレーションミスの可能性を含んでいますし、
+実装者はnginxの調整以外に、Providerの管理者に更新依頼をするというプロセスが増えてしまいます。</p>
+<h4 id="_5">理想<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p>理想のフローは次のような手順です(ざっくり)</p>
+<div class="mermaid">
+sequenceDiagram
+  Browser->>Nginx: request(a.example.com)
+  Nginx->>oauth2_proxy: proxy(proxy.example.com/oauth2/auth)
+  oauth2_proxy->>Provider: request
+  Provider->>Nginx: response(redirect: proxy.example.com)
+  Nginx->>Backend: Reverse Proxy (a.example.com)
+</div>
+
+<p>これが解決できたらまた更新しようと思います。</p>
+<h2 id="_6">最後に<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>誤植・間違い、もっとこうした方がいい、僕はこうやった（ドヤァ）、などありましたら、
+やさしく鎌を<a href="https://twitter.com/himenoglyph">Twitter</a>などに投げていただけると幸いです。</p>
+</div>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../tools/Static site generator/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../tools/Static site generator/" class="btn btn-xs btn-link">
+        Static site generator
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../kubernetes/Nginx access control for kubernetes/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../kubernetes/Nginx access control for kubernetes/" class="btn btn-xs btn-link">
+        Kubernetesに配置したNginxでアクセス制御する
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

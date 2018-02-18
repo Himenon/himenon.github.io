@@ -6,12 +6,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="明日ヤローはバカヤロー">
+    <meta name="description" content="気楽にドヤろうぜ">
     <meta name="author" content="K.Himeno">
     
     <link rel="shortcut icon" href="./img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>himenon.github.io</title>
+    <title>ぎじゅつ箱</title>
     <link href="./css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="./css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="./css/base.css" rel="stylesheet">
@@ -35,13 +35,15 @@
       var is_top_frame = (window === window.parent);
         
         var pageToc = [
-          {title: "Home", url: "#home", children: [
+          {title: "\u304e\u3058\u3085\u3064\u7bb1\u306e\u30db\u30fc\u30e0", url: "#_1", children: [
+              {title: "\u305b\u3064\u3081\u3044", url: "#_2" },
               {title: "SNS", url: "#sns" },
           ]},
         ];
 
     </script>
     <script src="./js/base.js"></script>
+      <script src="./assets/js/mermaid.min.js"></script>
       <script src="./search/require.js"></script>
       <script src="./search/search.js"></script>
     <script>
@@ -95,9 +97,9 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
         <img class="wm-top-logo" src="./assets/images/icon.jpg"/>
       
       <div class="wm-top-title">
-        himenon.github.io<br>
+        ぎじゅつ箱<br>
         
-          <span class="wm-top-version">v1.0.0</span>
+          <span class="wm-top-version">v1.0.1</span>
         
       </div>
     </a>
@@ -116,13 +118,31 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
       </li>
     </ul>
   <ul class="wm-toctree">
-        <li class="wm-toc-li wm-toc-lev1 "><a href="." class="wm-article-link wm-toc-text">Home</a>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="." class="wm-article-link wm-toc-text">ぎじゅつ箱のホーム</a>
 </li>
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Kubernetes</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="kubernetes/Nginx access control for kubernetes/" class="wm-article-link wm-toc-text">Nginx access control for kubernetes</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Server</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="server/Multiple Reverse Proxy Sapmle with oauth2_proxy/" class="wm-article-link wm-toc-text">Multiple Reverse Proxy Sapmle with oauth2 proxy</a>
+</li>
+  </ul>
+</li>
+
         <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Tools</span>
 </li>
 <li class="wm-toc-li-nested collapse">
   <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="tools/static-site-generator/" class="wm-article-link wm-toc-text">Static site generator</a>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="tools/Static site generator/" class="wm-article-link wm-toc-text">Static site generator</a>
 </li>
   </ul>
 </li>
@@ -138,9 +158,16 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="home">Home<a class="headerlink" href="#home" title="Permanent link">&para;</a></h1>
-<p>時々、何か書きます。
+    <h1 id="_1">ぎじゅつ箱のホーム<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>このブログのスター数</p>
+<iframe src="http://ghbtns.com/github-btn.html?user=Himenon&repo=himenon.github.io&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+
+<p>1つでも役に立った、と思ったらスターが欲しいです。</p>
+<h2 id="_2">せつめい<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>時々、ぎじゅつてきな何かを書きます。
 誤字脱字や間違いなどがあれば、お気軽にSNSなどでコメントください。</p>
+<p>Githubにソースを公開しているので、PRを投げていただけると嬉しいな。
+<a href="https://github.com/Himenon/himenon.github.io/">https://github.com/Himenon/himenon.github.io/</a></p>
 <h2 id="sns">SNS<a class="headerlink" href="#sns" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Twitter: <a href="https://twitter.com/">@himenoglyph</a></li>
@@ -153,12 +180,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="tools/static-site-generator/" class="btn btn-xs btn-default pull-right">
+      <a href="kubernetes/Nginx access control for kubernetes/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="tools/static-site-generator/" class="btn btn-xs btn-link">
-        Static site generator
+      <a href="kubernetes/Nginx access control for kubernetes/" class="btn btn-xs btn-link">
+        Nginx access control for kubernetes
       </a>
     </div>
     
@@ -175,5 +202,5 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </html>
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-02-13 17:31:18
+Build Date UTC : 2018-02-18 16:21:20
 -->
