@@ -1,8 +1,9 @@
 # 酔いどれGCPUG で発表してきました
 
 <p id="created_at">作成日: <time datetime="2018-03-04T14:00">2018/03/04</time></p>
+<p id="updated_at">更新日: <time datetime="2018-03-07T12:00">2018/03/07</time></p>
 
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/vJUu0WsVcnUJYU" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/mehinon/gke-gcpug-20180302" title="GKE始めるにあたって 最初に知っておきたかったこと - 酔いどれGCPUG 2018/03/02" target="_blank">GKE始めるにあたって 最初に知っておきたかったこと - 酔いどれGCPUG 2018/03/02</a> </strong> from <strong><a href="https://www.slideshare.net/mehinon" target="_blank">Kosei Himeno</a></strong> </div>
+<script async class="speakerdeck-embed" data-id="f50568a9df364fd3836f1167e1b3b96b" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
 
 ## はじめに
 
