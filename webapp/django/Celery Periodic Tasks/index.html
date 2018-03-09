@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>新しいAppをDjangoに追加した場合にやること - 技術の定点観測</title>
+    <title>Periodic Tasksを利用する - 技術の定点観測</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,11 +33,9 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "\u65b0\u3057\u3044App\u3092Django\u306b\u8ffd\u52a0\u3057\u305f\u5834\u5408\u306b\u3084\u308b\u3053\u3068", url: "#appdjango", children: [
-              {title: "urlpattern\u306e\u8ffd\u52a0", url: "#urlpattern" },
-              {title: "\u30e9\u30d9\u30eb\u3068\u30d1\u30b9\u3092\u4ed8\u3051\u308b", url: "#_1" },
-              {title: "Migration", url: "#migration" },
-              {title: "STATICFILES_DIRS", url: "#staticfiles_dirs" },
+          {title: "Periodic Tasks\u3092\u5229\u7528\u3059\u308b", url: "#periodic-tasks", children: [
+              {title: "settings.py\u306e\u30ed\u30fc\u30c9", url: "#settingspy" },
+              {title: "celery_app", url: "#celery_app" },
           ]},
         ];
 
@@ -67,30 +65,38 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="appdjango">新しいAppをDjangoに追加した場合にやること<a class="headerlink" href="#appdjango" title="Permanent link">&para;</a></h1>
-<h2 id="urlpattern">urlpatternの追加<a class="headerlink" href="#urlpattern" title="Permanent link">&para;</a></h2>
-<pre><code class="python">urlpatterns = [
-    ....
-    url(r'^another/app/', include('another_app.urls')),
-] + static(settings.STATIC_ROOT, document_root=settings.STATIC_ROOT)
+    <h1 id="periodic-tasks">Periodic Tasksを利用する<a class="headerlink" href="#periodic-tasks" title="Permanent link">&para;</a></h1>
+<h2 id="settingspy">settings.pyのロード<a class="headerlink" href="#settingspy" title="Permanent link">&para;</a></h2>
+<p>どうやら<code>settings.py</code>を探索しに行っているようなので、
+次のようなディレクトリ管理ができない。</p>
+<pre><code>proj/
+    settings/
+        __init__.py
 </code></pre>
 
-<h2 id="_1">ラベルとパスを付ける<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<pre><code class="python">from django.apps import AppConfig
-
-class AnotherAppConfig(AppConfig):
-    name = 'another_app'   # プロジェクトルートからのPath
-    label = 'another_app'  # プロジェクト内で固有のラベル
+<p>また、</p>
+<pre><code>proj/
+    settings.py
+    config/
+        prd_settings.py
+        dev_settings.py
 </code></pre>
 
-<h2 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">&para;</a></h2>
-<h2 id="staticfiles_dirs">STATICFILES_DIRS<a class="headerlink" href="#staticfiles_dirs" title="Permanent link">&para;</a></h2>
-<p>Staticディレクトリを追加したいバア追加したい場合</p>
-<pre><code class="python">STATICFILES_DIRS [
-    # ....
-    'path/to/your/app/static'
-]
+<p>などのようにして、<code>settings.py</code>から<code>prd_settings</code>を<code>import</code>してもだめだった。</p>
+<p><code>settings.py</code>内部では条件分岐などは利用できるようだ。</p>
+<pre><code class="python">from settings import prd_settings
+INSTALLED_APPS = prd_settings.INSTALLED_APPS
 </code></pre>
+
+<p>以下もダメ</p>
+<pre><code>from . import settings
+
+__all__ = ['settings']
+</code></pre>
+
+<h2 id="celery_app">celery_app<a class="headerlink" href="#celery_app" title="Permanent link">&para;</a></h2>
+<p>http://tokibito.hatenablog.com/entry/20150409/1428590388</p>
+<p>この方のやり方の場合、<code>urls</code>に登録した場合のみ、Djangoの管理画面から表示される。</p>
 
   <br>
     
@@ -98,20 +104,20 @@ class AnotherAppConfig(AppConfig):
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-default pull-right">
+      <a href="../Seperate DB/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-link">
-        Celery Periodic Tasks
+      <a href="../Seperate DB/" class="btn btn-xs btn-link">
+        Seperate DB
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Add Celery Tasks/" class="btn btn-xs btn-default pull-left">
+      <a href="../Add new app/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Add Celery Tasks/" class="btn btn-xs btn-link">
-        Celeryのアプリを追加するときに気をつけること
+        Previous</a><a href="../Add new app/" class="btn btn-xs btn-link">
+        新しいAppをDjangoに追加した場合にやること
       </a>
     </div>
     

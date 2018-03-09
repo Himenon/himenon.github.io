@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-03-07</lastmod>
+     <lastmod>2018-03-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,7 +13,7 @@
         
     <url>
      <loc>/db/read-basic-knowledge-of-nosql/</loc>
-     <lastmod>2018-03-07</lastmod>
+     <lastmod>2018-03-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -23,7 +23,7 @@
         
     <url>
      <loc>/kubernetes/Nginx access control for kubernetes/</loc>
-     <lastmod>2018-03-07</lastmod>
+     <lastmod>2018-03-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -43,7 +43,7 @@
         
     <url>
      <loc>/server/Multiple Reverse Proxy Sapmle with oauth2_proxy/</loc>
-     <lastmod>2018-03-07</lastmod>
+     <lastmod>2018-03-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -53,13 +53,19 @@
         
     <url>
      <loc>/tools/Static site generator/</loc>
-     <lastmod>2018-03-07</lastmod>
+     <lastmod>2018-03-09</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     
 
     
+        
+    <url>
+     <loc></loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
         
     <url>
      <loc></loc>

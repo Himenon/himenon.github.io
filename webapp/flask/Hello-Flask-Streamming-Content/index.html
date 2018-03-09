@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Flaskのストリーミングを利用してみる - 技術の定点観測</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <link href="../../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Flask\u306e\u30b9\u30c8\u30ea\u30fc\u30df\u30f3\u30b0\u3092\u5229\u7528\u3057\u3066\u307f\u308b", url: "#flask", children: [
+              {title: "\u57fa\u672c", url: "#_1" },
+              {title: "\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4f7f\u3046", url: "#_3" },
+              {title: "stream_with_context", url: "#stream_with_context" },
+              {title: "\u6240\u611f", url: "#_4" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script>
+      <script src="../../../assets/js/mermaid.min.js"></script>
+      <script src="../../../search/require.js"></script>
+      <script src="../../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="flask">Flaskのストリーミングを利用してみる<a class="headerlink" href="#flask" title="Permanent link">&para;</a></h1>
+<p>FlaskにStreaming Contentsというものが存在したので、
+この実装方法を見てみる。</p>
+<ul>
+<li><a href="http://flask.pocoo.org/docs/0.12/patterns/streaming/">http://flask.pocoo.org/docs/0.12/patterns/streaming/</a></li>
+</ul>
+<h2 id="_1">基本<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>本記事中では<a href="https://gist.github.com/Himenon/9a4e7dd1a7e57a6da09b2b9624a737a0">サンプルコード</a>
+の一部を使って解説しながら進めていくので、サンプルコードを適宜参照してほしい。</p>
+<p>まずは、コードを書いてみる。適当なディレクトリ(ここでは<code>myapp</code>)に<code>server.py</code>を用意する。</p>
+<pre><code class="python">@app.route('/hello-world')
+def hello_world():
+    def generate():
+        for comment in get_comments():
+            yield '&lt;li&gt;' + comment + '&lt;/li&gt;'
+            time.sleep(0.5)  # 動作をわかりやすくするために追加
+    return Response(generate())
+</code></pre>
+
+<p>実行すると次のようになった。</p>
+<p><img alt="Google ChromeにおけるStreamingの実際の動画" src="../images/hello-world-streaming.gif" /></p>
+<p>手元の環境で確認したところ、ChromeとFirefoxでは動画のような挙動になったが、
+Safariはローディングが長くなっただけの、同期的な場合と同じ結果になった。
+どうやら、ブラウザごとにローディングの仕組みが異なるようである。</p>
+<h3 id="_2">何が起きた？<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>Responseの第一引数(もしくは<code>response=</code>)は、StringかIteratorを受け取る。
+そこにGeneratorを渡すことによって、ストリーミングすることが可能となる。
+これは<a href="https://knzm.readthedocs.io/en/latest/pep-0333-ja.html#buffering-and-streaming">PEP333(日本語訳)のBuffering and Streaming</a>に次のように決められている。</p>
+<blockquote>
+<p>しかしながら、大きいファイル、または HTTP ストリーミングの特殊な用途 (複合「サーバプッシュ」など) のために、アプリケーションは出力をより小さ なブロックに提供する必要があるかもしれない (例えばメモリに大きいファイ ルをロードすることを避けるため)。また、応答のある部分を生成するのに時間 がかかる場合も時々あるが、それに先行するレスポンスの部分を前もって送る ことは役に立つだろう。<Br>
+これらの場合では、通常、アプリケーションはブロックごとの様式で出力を生 成するイテレータ (しばしばジェネレータ・イテレータ) を返すだろう。これ らのブロックは、 mulitpart 境界 (「サーバプッシュ」のための) や、時間の かかるタスク (ディスクに存在するファイルの別のブロックを読むなど) のす ぐ前で分割が起こるかもしれない。<br>
+引用：<a href="https://knzm.readthedocs.io/en/latest/pep-0333-ja.html#buffering-and-streaming">PEP333(日本語訳)のBuffering and Streaming</a></p>
+</blockquote>
+<p>つまり、
+巨大、もしくは大量のデータを送信する時、ストリーミングを利用すれば、サーバー側のメモリーの使用量が押さえられるから、
+そのような場合に使うために用意されている。（ただし、トレードオフとして転送時間が同期的なレスポンスの場合よりも長くなる）。</p>
+<p>ただし、この仕様はMUSTではないため、他のWSGIミドルウェアが対応していない場合もあるので、注意したほうがよさそう。</p>
+<h2 id="_3">テンプレートを使う<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>Jinja2のテンプレートを使った場合のストリーミングの実装を見てみる。
+まずはテンプレートの用意をする。
+Flaskのテンプレートは次のようなディレクトリに配置しておけば良い。
+全体のコードは<a href="https://gist.github.com/Himenon/9a4e7dd1a7e57a6da09b2b9624a737a0">サンプルコード</a>から適宜取得して欲しい。</p>
+<pre><code>myapp/
+├── server.py
+└── templates
+    └── comment_list.html  # 追加
+</code></pre>
+
+<p>まずは、<a href="http://flask.pocoo.org/docs/0.12/patterns/streaming/">http://flask.pocoo.org/docs/0.12/patterns/streaming/</a>に書いてあるコードを真似してみる。</p>
+<pre><code class="python">def stream_template(template_name, **context):
+    app.update_template_context(context)
+    t = app.jinja_env.get_template(template_name)   # jinja2.Template
+    rv = t.stream(context)                          # jinja2.environment.TemplateStream 
+    rv.enable_buffering(5)
+    return rv
+
+@app.route('/hello-world-with-template')
+def hello_world_with_template():
+    return Response(stream_template('comment_list.html', comments=get_comments()))
+</code></pre>
+
+<p><code>/hello-world-with-template</code>にアクセスすれば、レンダリングされていることが分かる。
+が、<code>time.sleep</code>を入れる場所がないのでもう少し深ぼってみる</p>
+<h3 id="jinja2template">jinja2.Templateの挙動を確認する<a class="headerlink" href="#jinja2template" title="Permanent link">&para;</a></h3>
+<p>テンプレートエンジンはJinja2を利用するため、読むべきAPIドキュメントはJinja2の方。</p>
+<ul>
+<li>http://jinja.pocoo.org/docs/2.10/api/#jinja2.Template</li>
+</ul>
+<p><code>jinja2.environment.TemplateStream</code>の挙動を検証する。
+<code>templates</code>が存在する、<code>myapp/</code>の中でipythonを叩いてみる。</p>
+<pre><code class="python">from flask import Flask
+app = Flask('hello')
+
+context = {
+    'comments': [ 'Count: {}'.format(i) for i in range(100) ]
+}
+app.update_template_context(context)
+t = app.jinja_env.get_template('comment_list.html')
+
+rv = t.stream(context) # jinja2.environment.TemplateStream
+rv.enable_buffering(5) # バッファサイズ
+
+next(rv) # listの1〜5  まで
+next(rv) # listの6〜11 まで
+# ...
+</code></pre>
+
+<p><code>jinja2.environment.TemplateStream</code>は<code>enable_buffering</code>で指定された
+大きさにチャンクされたイテレータ化されてくる（<code>__iter__</code>を持っている)。</p>
+<p>これを逆手に取って、どの様にレンダリングされていくか、確認するため似、次のようにコードを書き換えてみる。</p>
+<pre><code class="python">def stream_template(template_name, **context):
+    app.update_template_context(context)
+    t = app.jinja_env.get_template(template_name)
+    rv = t.stream(context)
+    rv.enable_buffering(5)
+    for buffer in rv:
+        yield buffer
+        time.sleep(0.5)
+</code></pre>
+
+<p>これを実行すると、次のような結果になった。</p>
+<p><img alt="テンプレートエンジンを使った場合の挙動" src="../images/hello-world-streaming-with-template.gif" /></p>
+<p>やはりResponseにイテレータを渡していることがわかった。</p>
+<h2 id="stream_with_context">stream_with_context<a class="headerlink" href="#stream_with_context" title="Permanent link">&para;</a></h2>
+<p>Generatorの中でリクエストに含まれるパラメータを取得したい場合がある。
+generator中では<code>flask.requrest</code>にアクセスできないため、それを可能にするために、
+<code>stream_with_context</code>を利用する。これを利用することにより、
+<code>flask.request</code>にアクセスすることができる。</p>
+<pre><code class="python">@app.route('/stream')
+def streamed_response():
+    def generate():
+        yield 'Hello '
+        time.sleep(1)
+        yield request.args['name'] # stream_with_contextでwrapされてるためアクセウ可
+        time.sleep(1)
+        yield '!'
+
+    return Response(stream_with_context(generate()))
+</code></pre>
+
+<h2 id="_4">所感<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>PEP333に書いてあるとおり、データ容量の大きなデータを送信する場合に使えることがわかる。
+数MB、もしくは数GB単位のデータをウェブサイトからダウンロードする時、サーバー側に負荷をかけないためにも
+このパターンは使えそうである。</p>
+<p><strong>参考</strong></p>
+<p>本文中で出てきたリンクをまとめておく。</p>
+<ul>
+<li>サンプルコード: <a href="https://gist.github.com/Himenon/9a4e7dd1a7e57a6da09b2b9624a737a0">https://gist.github.com/Himenon/9a4e7dd1a7e57a6da09b2b9624a737a0</a></li>
+<li>Flask Streaming Content: <a href="http://flask.pocoo.org/docs/0.12/patterns/streaming/">http://flask.pocoo.org/docs/0.12/patterns/streaming/</a></li>
+<li>PEP333: <a href="https://knzm.readthedocs.io/en/latest/pep-0333-ja.html#buffering-and-streaming">https://knzm.readthedocs.io/en/latest/pep-0333-ja.html#buffering-and-streaming</a></li>
+<li>Jinja2: <a href="http://jinja.pocoo.org/docs/2.10/api/#jinja2.Template">http://jinja.pocoo.org/docs/2.10/api/#jinja2.Template</a></li>
+</ul>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav">
+      <a href="../../django/Seperate DB/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../django/Seperate DB/" class="btn btn-xs btn-link">
+        DjangoのApp単位で利用するデータベースを分離する
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
