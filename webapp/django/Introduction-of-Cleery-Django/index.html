@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する - 技術の定点観測</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <link href="../../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Django 2.0\u306bCelery 4.0\u3092\u5c0e\u5165\u3057\u3001WEB\u306e\u7ba1\u7406\u753b\u9762\u3067Cron\u3092\u7ba1\u7406\u3059\u308b", url: "#django-20celery-40webcron", children: [
+              {title: "\u306f\u3058\u3081\u306b", url: "#_1" },
+              {title: "\u6e96\u5099", url: "#_3" },
+              {title: "Django\u306e\u4f5c\u6210", url: "#django" },
+              {title: "\u30bf\u30b9\u30af\u306e\u8ffd\u52a0", url: "#_4" },
+              {title: "\u30bf\u30b9\u30af\u306e\u5b9f\u884c", url: "#_8" },
+              {title: "\u304a\u308f\u308a\u306b", url: "#_10" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script>
+      <script src="../../../assets/js/mermaid.min.js"></script>
+      <script src="../../../search/require.js"></script>
+      <script src="../../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="django-20celery-40webcron">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する<a class="headerlink" href="#django-20celery-40webcron" title="Permanent link">&para;</a></h1>
+<p id="created_at">作成日: <time datetime="2018-03-12T01:40">2018/03/12</time></p>
+
+<h2 id="_1">はじめに<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Django 2.0に対して、Celery 4を導入してみたので、その時の知見を書く。
+導入自体はそうそう難しくはなかったが、これで動く、といったサンプルコードがなかなか無かったので、
+書いておきます。。</p>
+<p><a href="https://github.com/Himenon/DjangoSample/tree/master/taskmanager_v1">サンプルコード</a></p>
+<h3 id="_2">類似技術<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>類似技術で有名なものとしては</p>
+<ul>
+<li>cookpad/kuroko2: <a href="https://github.com/cookpad/kuroko2">https://github.com/cookpad/kuroko2</a></li>
+<li>RUNDECK: <a href="http://rundeck.org/">http://rundeck.org/</a></li>
+</ul>
+<p>がありますが、実はCeleryとDjagnoでも同じようなことができるので、Pythonやっている人は喜びましょう。</p>
+<p>手っ取り早いのは<a href="https://github.com/Himenon/DjangoSample/tree/master/taskmanager_v1">サンプルコード</a>
+をさっさと起動することです。この記事は解説に文字を割いていますので。</p>
+<h2 id="_3">準備<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>本サンプルコードは以下の環境で作成した。</p>
+<pre><code>Django==2.0.3
+django-celery-results==1.0.1
+django-celery-beat==1.1.1
+redis==2.10.6
+</code></pre>
+
+<p><code>requirements.txt</code>に上記を記述し、<code>pip install -r requirements.txt</code>でインストールしておく。</p>
+<h2 id="django">Djangoの作成<a class="headerlink" href="#django" title="Permanent link">&para;</a></h2>
+<p>1.プロジェクトの作成</p>
+<pre><code>django-admin startproject tm
+</code></pre>
+
+<p>すると次のようなツリーが作成される。</p>
+<pre><code>.
+├── manage.py
+└── tm
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+</code></pre>
+
+<p>2.Extensionの追加</p>
+<p><code>tm/settings.py</code>に次の記述を入れます。</p>
+<pre><code class="python">INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django_celery_beat',     # 追加
+    'django_celery_results',  # 追加
+]
+</code></pre>
+
+<p>3.<code>celery.py</code>の追加</p>
+<p><code>tm/</code>以下に<code>celery.py</code>を追加する。
+celeryの名前空間を汚染しているが、これであっている。</p>
+<pre><code>.
+├── manage.py
+└── tm
+    ├── __init__.py
+    ├── celery.py     # 追加
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+</code></pre>
+
+<p><code>celery.py</code>は以下のように記述する。</p>
+<pre><code class="python">from os import environ
+from celery import Celery
+app = Celery('tm', broker=environ.get('BROKER_URL'))
+app.config_from_object('django.conf:settings', namespace='CELERY')
+app.autodiscover_tasks()
+</code></pre>
+
+<p>これは、後々登場する<code>@task</code>もしくは<code>@shared_task</code>デコレータを、worker起動時に、
+自動的に<code>INSTALLED_APPS</code>から探索する役割を果たす。</p>
+<p><code>BROKER_URL</code>は、環境変数から指定できるようにしてある。これは状況に合わせて変化して欲しい。</p>
+<p>4.<code>__init__.py</code>にappを読み込むようにする。</p>
+<p><code>tm/__init__.py</code>にCeleryを呼び出すコード記述しておく。</p>
+<pre><code class="python">from .celery import app as celery_app
+
+__all__ = ['celery_app']
+</code></pre>
+
+<p>5.Migration</p>
+<p>CeleryのプラグインはDatabaseへのMigrationを必要とします。</p>
+<pre><code>python3 manage.py migrate
+</code></pre>
+
+<p><code>django-celery-beat</code>はタスクの実行スケジュール管理のために、
+<code>django-celery-results</code>は実行五の結果を保存しておくためにDatabaseを利用します。</p>
+<p>また、Adminユーザーを作成していない場合は、</p>
+<pre><code>python3 manage.py createsuperuser
+</code></pre>
+
+<p>でユーザーを作成しておきましょう。
+ここまでうまくいくと、次の画像のように管理画面に、タスクのスケジュール管理の画面が出現します。
+定期実行タスクの管理がここからできるようになります。</p>
+<p><img alt="Celeryを追加したときの管理画面" src="../images/celery-django-admin.png" /></p>
+<p>次に、タスクを追加してきます。</p>
+<h2 id="_4">タスクの追加<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h3 id="_5">アプリの追加<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>タスクの追加の前に、アプリの追加をしておきましょう。
+<code>manage.py</code>のあるところで、次のコマンドを叩きます。</p>
+<pre><code class="bash">python3 manage.py startapp tapp_a
+python3 manage.py startapp tapp_b
+</code></pre>
+
+<p>今回はアプリ同士の相互呼び出しも検証するため、2つのアプリを追加しておきます。
+<code>INSTALLED_APPS</code>は次のように更新しておきます。</p>
+<pre><code class="python">INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django_celery_beat',
+    'django_celery_results',
+    'tapp_a',    # 追加
+    'tapp_b',    # 追加
+]
+</code></pre>
+
+<h3 id="_6">タスクの追加<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p><code>tapp_a</code>にシンプルなタスクを追加します。
+<code>tasks.py</code>というファイルを作成し、次のように記述します。</p>
+<pre><code class="python">from celery import shared_task
+
+@shared_task
+def hello_from_a(*args, **kwargs):
+    print(&quot;Hello! From A&quot;)
+    print(&quot;args = {}&quot;.format(args))
+    print(&quot;kwargs = {}&quot;.format(kwargs))
+</code></pre>
+
+<p><code>@shared_task</code>を指定すると、Django Adminで認識されます。
+画像ではPeriodic Tasksの管理画面中で、いくつかのタスクを追加した場合のものを表示しています。</p>
+<p><img alt="タスクを追加した時" src="../images/celery-django-admin-add-tasks.png" /></p>
+<p>また、登録したタスクに初期値を与えたい場合は<code>Arguments</code>を利用すると可能です。</p>
+<p><img alt="引数に値を渡したい場合" src="../images/celery-django-admin-args.png" /></p>
+<h3 id="_7">実行タイミングの指定<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>実行タイミングの指定は、Interval、Crontab、Solarの3つのうち1つのみが選択可能です。
+どうしても数種類の実行方法が必要な場合は、別タスクとして登録し直します。</p>
+<ul>
+<li>Interval: 10秒ごとなど。一定間隔で行う</li>
+<li>Crontab: 指定した日時で実行を行う</li>
+<li>Solar: 指定した緯度経度に基づいた、日の出、日没などのタイミングで自動的に実行する</li>
+</ul>
+<p>これはお好みで設定して下さい。</p>
+<p>ここまで終われば、タスクの登録が完了です。</p>
+<h2 id="_8">タスクの実行<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>定期実行タスクに関しては、SchedulerとWorker、BrokerをDjangoとは別のプロセスで起動させる必要があります。
+<a href="https://github.com/Himenon/DjangoSample/tree/master/taskmanager_v1">サンプルコード</a>では、
+docker-composeを用いて楽をしています。</p>
+<p>ただ、ここはそれほど難しものではなく、起動コマンドが異なるだけとなります。
+Brokerに関しては今回はredisを採用しており、自動的に立ち上がるので、ここでの説明は省きます。</p>
+<h3 id="scheduler-worker">scheduler, workerの起動<a class="headerlink" href="#scheduler-worker" title="Permanent link">&para;</a></h3>
+<p>schedulerの起動コマンドは次の通りです。</p>
+<pre><code class="bash">DJANGO_SETTINGS_MODULE=tm.settings celery -A tm beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --pidfile /celerybeat.pid
+</code></pre>
+
+<p>workerの起動コマンドは次のとおりです。</p>
+<pre><code>bash -c &quot;DJANGO_SETTINGS_MODULE=tm.settings celery -A tm worker&quot;
+</code></pre>
+
+<h4 id="_9">解説<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h4>
+<h5 id="worker">workerについて<a class="headerlink" href="#worker" title="Permanent link">&para;</a></h5>
+<p>ここで重要なポイントは<code>DJANGO_SETTINGS_MODULE=tm.settings</code>です。
+(これを忘れるとひどく沼にはまります。)</p>
+<p><code>celery -A tm</code>は<code>tm/__init__.py</code>を見に行きます。ここに<code>celery_app</code>が存在しない場合はエラーとなります。
+次に、<code>celery.py</code>の<code>app.config_from_object</code>と<code>app.autodiscover_tasks</code>においては、
+Djangoの<code>settings.py</code>を探索しに行きます。</p>
+<pre><code class="python">app.config_from_object('django.conf:settings', namespace='CELERY')
+</code></pre>
+
+<p>通常、DEBUGサーバーなど立ち上げる時、<code>python3 manage.py runserver</code>などとしますが、
+コードを見ると</p>
+<pre><code class="python">os.environ.setdefault(&quot;DJANGO_SETTINGS_MODULE&quot;, &quot;tm.settings&quot;)
+</code></pre>
+
+<p>が走っています。つまり、起動時に環境変数を登録しているため、Djangoを利用するceleryも環境変数、もしくは変数を
+起動時に定義しておかなければなりません。</p>
+<p>タスクの認識に関しては、</p>
+<pre><code class="python">app.autodiscover_tasks()
+</code></pre>
+
+<p>が自動的に<code>settings.py</code>から<code>INSTALLED_APPS</code>を吸ってきて解決してくれるので、それぞれの<code>APP</code>で
+Workerを明示的に起動する必要はありません。むしろ、それを行った場合、<code>APP</code>間でModelを参照するといったことができなくなります。</p>
+<h5 id="scheduler">schedulerについて<a class="headerlink" href="#scheduler" title="Permanent link">&para;</a></h5>
+<p>Schedulerの役割は至ってシンプルです。</p>
+<ol>
+<li>Databaseに登録されているタスクの監視</li>
+<li>指定の時刻になった時、Brokerに対してWorkerがタスクを実行するようにメッセージを送信</li>
+</ol>
+<p>1のおかげで、Django Adminでタスクを登録、編集、削除した時に自動的にスケジューリングされます。
+2はBrokerへ登録されたタスクを実行するようにメッセージを投げるだけです。
+実際に実行されるかどうかは保証されません。</p>
+<p>そのスケジュールを管理するためのデータベースとして、
+<code>--scheduler django_celery_beat.schedulers:DatabaseScheduler</code>を指定しておきます。
+未指定の場合は、コマンドの実行ディレクトリにSchedulerの管理用のファイルが作成されます。
+<code>django_celery_beat.schedulers:DatabaseScheduler</code>を指定してる場合は、
+Djando Adminでは見えませんが、Database上にスケジュールが記述され、仮にSchedulerが落ちたとしても、
+どのタスクがスケジューリングされているかは残ります。</p>
+<p><code>--pidfile /celerybeat.pid</code>としているのは、開発上の都合といえばそのとおりです。
+起動場所に<code>pid</code>ファイルが生成されますが、Schedulerを再起動した場合に、
+<code>pid</code>ファイルが存在した場合、Schedulerの多重起動を防ぐためにSchedulerが起動しません。</p>
+<p>コンテナを利用している場合は、良くコンテナごと落とすため、これは不便なため、マウントされていなコンテナのディレクトリに<code>pid</code>ファイルを投げています。
+実際に運用するときは、Schedulerのコンテナのサイズを1のままにしておくのが普通かと思います。</p>
+<p>どうしてもSchedulerを冗長化するために複数のコンテナを利用する場合は、各コンテナに永続ボリュームをマウントして、<code>pid</code>ファイルが
+一意になるように設定しておくこともできますが....</p>
+<h2 id="_10">おわりに<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h2>
+<p>ここまでで、タスクのスケジューリング実行が可能となります。
+長くなってしまいそうなので、説明はここまでにしますが、<a href="https://github.com/Himenon/DjangoSample/tree/master/taskmanager_v1">サンプルコード</a>
+ではもうちょっとサンプルを追加しています。興味がある人はぜひご覧ください。</p>
+<p><strong>参考</strong></p>
+<ul>
+<li><a href="http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html">Periodic Tasks | Celery 4.1.0 documentation</a></li>
+</ul>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../Seperate DB/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../Seperate DB/" class="btn btn-xs btn-link">
+        Seperate DB
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Celery Periodic Tasks/" class="btn btn-xs btn-link">
+        Periodic Tasksを利用する
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
