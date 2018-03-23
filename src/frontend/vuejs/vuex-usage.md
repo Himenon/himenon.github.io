@@ -1,5 +1,8 @@
 # VuexのModuleの使い方
 
+<p id="created_at">作成日: <time datetime="2018-03-15T22:40">2018/03/15 22:40</time></p>
+<p id="updated_at">更新日: <time datetime="2018-03-24T01:47">2018/03/24 01:47</time></p>
+
 ## ディレクトリ構成
 
 ```
@@ -61,7 +64,7 @@ export default new Vuex.Store({
 
 ## components/wdiget/top.vue
 
-```js
+```jsx
 <template lang="pug">
   .wrapper
     h1 Show Message
