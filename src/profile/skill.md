@@ -1,11 +1,11 @@
-# Skill Set
+# スキルセット
 
 <p id="created_at">作成日: <time datetime="2018-03-27T02:00">2018/03/27</time></p>
 
 - 技術の学習フェーズ: 狭く深く
 - 次のフェーズ: 深いところから広げる
 
-## Language
+## Computer Lang
 
 ### Python
 
@@ -185,8 +185,7 @@ React Nativeのエラーの時にこの知識が活躍した。
 
 #### Xcode
 
-Xcode 9以降も使える。
-ビルドの依存関係のエラーなど対応できます。
+Xcode(>=9.2)のインタフェースはちょくちょく触ります。
 
 ### JavaScript
 
