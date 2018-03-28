@@ -2,8 +2,13 @@
 
 <p id="created_at">作成日: <time datetime="2018-03-27T02:00">2018/03/27</time></p>
 
-- 技術の学習フェーズ: 狭く深く
-- 次のフェーズ: 深いところから広げる
+**学習フェーズ**
+
+- 狭く深く <-- 今ここ
+- より速く
+- 深淵から横へ
+- 堅実に強く
+- 天元突破
 
 ## Computer Lang
 
@@ -70,6 +75,7 @@ wxpythonでGUIの基本的な部分は学んだ。
 - mkdocs-material
 - mkdocs-windmill
 - mock
+- mockredispy
 - mysqlclient
 - nose
 - notebook
@@ -168,9 +174,12 @@ iOSのリリースはしていない。macOSに関してはGithubからダウン
 
 - MAC OS X COCOAプログラミング 第4版
 
+[Realm](https://realm.io/jp/)も使える。
+
 #### 参考リポジトリ
 
 - ios
+    - <https://github.com/Himenon/iosWorkspace>
     - <https://github.com/Himenon/MusicButton>
 - macOS
     - <https://github.com/Himenon/VideoStreaming>
@@ -187,6 +196,13 @@ React Nativeのエラーの時にこの知識が活躍した。
 
 Xcode(>=9.2)のインタフェースはちょくちょく触ります。
 
+### PHP
+
+- PHP >= 7.0
+- Laravel 5.4
+
+これ以上特に語ることはない。
+
 ### JavaScript
 
 #### VanilaJS
@@ -201,6 +217,8 @@ Cloud Functionで利用。
 WEBアプリケーションをこれで作成したことはない。
 ツールとして利用することは度々あるので、ちょっとしたことはかける。
 Headless Chromeを使ってPDF作成など、マイクロサービスとして利用すれば面白そう、という予感はある。
+
+いまはZappierやIFTTTとあそぶ。
 
 #### Virtual DOM
 
@@ -238,6 +256,12 @@ RedisはTask Queueでだいぶお世話になっている。
 
 - (辞書) [Redis入門 インメモリKVSによる高速データ管理](https://www.kadokawa.co.jp/product/311877000000/)
 
+#### Scala
+
+下記のページのScala程度ならやった
+
+<http://docs.scala-lang.org/tour/basics.html>
+
 #### mongoDB
 
 Twitterのデータなどを放り込むときなどに利用。
@@ -269,6 +293,41 @@ oatuh2をNginxにツッコんだぐらい。
 [入門 Kubernetes](https://www.oreilly.co.jp/books/9784873118406/)の
 6,7割程度は実際にやったことが在る。
 
+Helm Chartsを公開しているので、ぜひ使って欲しいし、
+他の人も公開して欲しい。今の所4つホスティングしている。
+
+- <https://github.com/Himenon/charts<>
+    - node-red
+    - redash
+    - scrapy-splash
+    - scrapyd
+
+Kubernetesのプロジェクトで、[GoogleCloudPlatform/agones](https://github.com/GoogleCloudPlatform/agones)
+をwatch中。
+
+## CI
+
+### Circle CI
+
+Version 2.0以降が使える。
+ドキュメントは一部修正PRを投げてマージされている。
+KubernetesのDeployフローで利用したことがある。
+
+- <https://github.com/circleci/circleci-docs>
+
+### Travis CI
+
+PublicでCIを回す時はTravis CIを利用する。
+自分で仕込める。
+
+### Werker
+
+使ったことはあるが、Circle CIのほうが使いやすかった。
+
+### Fastlane
+
+仕込まれているものを使っただけで、設定はしたことがない。
+
 ## Cloud
 
 [酔いどれGCPUG 2018/03/02](https://gcpug-tokyo.connpass.com/event/78667/)というイベントでLTしてきた事がある。
@@ -277,6 +336,7 @@ oatuh2をNginxにツッコんだぐらい。
 ## AWS
 
 EC2とS3程度鹿利用したことがない。GCP民。
+AuroraやDynamoDBに興味がある。
 
 ### Google Cloud Platform
 
@@ -300,6 +360,24 @@ EC2とS3程度鹿利用したことがない。GCP民。
 情報収集に関してはGCPUGのSlack、GCPのアーキテクチャ実践レポート、
 Twitterなどから逐次吸い上げ。
 
-Kubernetesのプロジェクトで、[GoogleCloudPlatform/agones](https://github.com/GoogleCloudPlatform/agones)
-をwatch中。
+## 次に学ぶことリスト
 
+1. Streaming系
+    - 動画配信したい
+    - リアルタイム性を求めて
+1. 速さを求めて
+    - C/C++
+    - Go
+    - Scala
+1. セキュリティ系
+    - より堅牢に、強くなりたい。
+1. マイクロサービス系
+    - gRPC
+    - Task Queue
+    - Actor Model
+    - 分散処理
+1. ネットワーク系
+    - 電子を感じたい(意訳: 物理レイヤーが向きだなるまでOSI層を掘り下げていきたい)
+1. Event駆動プログラミング
+    - Cloud FunctionとかPub/Subを時前で実装できるレベルになりたい
+    - Nginxすぎょい
