@@ -4,7 +4,15 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-03-24</lastmod>
+     <lastmod>2018-03-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/pick-up-article/</loc>
+     <lastmod>2018-03-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,14 +20,52 @@
     
         
     <url>
-     <loc>/db/read-basic-knowledge-of-nosql/</loc>
-     <lastmod>2018-03-24</lastmod>
+     <loc></loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc></loc>
+     <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     
 
     
+        
+    <url>
+     <loc></loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>/db/read-basic-knowledge-of-nosql/</loc>
+     <lastmod>2018-03-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc></loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc></loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
         
     <url>
      <loc></loc>
@@ -33,13 +79,19 @@
         
     <url>
      <loc>/kubernetes/Nginx access control for kubernetes/</loc>
-     <lastmod>2018-03-24</lastmod>
+     <lastmod>2018-03-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/kubernetes/Shortcut-for-kubectl/</loc>
+     <lastmod>2018-03-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/kubernetes/error helm incompatible version/</loc>
-     <lastmod>2018-03-24</lastmod>
+     <lastmod>2018-03-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -49,13 +101,13 @@
         
     <url>
      <loc>/poem/Container-App-Directory-Management-Consideration/</loc>
-     <lastmod>2018-03-24</lastmod>
+     <lastmod>2018-03-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/poem/Container-Worker-Design/</loc>
-     <lastmod>2018-03-24</lastmod>
+     <lastmod>2018-03-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -74,8 +126,30 @@
     
         
     <url>
+     <loc>/profile/reading/</loc>
+     <lastmod>2018-03-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/profile/skill/</loc>
+     <lastmod>2018-03-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/profile/study-event/</loc>
+     <lastmod>2018-03-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
      <loc>/server/Multiple Reverse Proxy Sapmle with oauth2_proxy/</loc>
-     <lastmod>2018-03-24</lastmod>
+     <lastmod>2018-03-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -85,13 +159,19 @@
         
     <url>
      <loc>/tools/Github-GraphQL/</loc>
-     <lastmod>2018-03-24</lastmod>
+     <lastmod>2018-03-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/tools/Static site generator/</loc>
-     <lastmod>2018-03-24</lastmod>
+     <lastmod>2018-03-29</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/tools/slack-library/</loc>
+     <lastmod>2018-03-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>新しいAppをDjangoに追加した場合にやること - 技術の定点観測</title>
+    <title>Axiosでasync/awaitを利用する - 技術の定点観測</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,11 +33,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "\u65b0\u3057\u3044App\u3092Django\u306b\u8ffd\u52a0\u3057\u305f\u5834\u5408\u306b\u3084\u308b\u3053\u3068", url: "#appdjango", children: [
-              {title: "urlpattern\u306e\u8ffd\u52a0", url: "#urlpattern" },
-              {title: "\u30e9\u30d9\u30eb\u3068\u30d1\u30b9\u3092\u4ed8\u3051\u308b", url: "#_1" },
-              {title: "Migration", url: "#migration" },
-              {title: "STATICFILES_DIRS", url: "#staticfiles_dirs" },
+          {title: "Axios\u3067async/await\u3092\u5229\u7528\u3059\u308b", url: "#axiosasyncawait", children: [
           ]},
         ];
 
@@ -67,30 +63,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="appdjango">新しいAppをDjangoに追加した場合にやること<a class="headerlink" href="#appdjango" title="Permanent link">&para;</a></h1>
-<h2 id="urlpattern">urlpatternの追加<a class="headerlink" href="#urlpattern" title="Permanent link">&para;</a></h2>
-<pre><code class="python">urlpatterns = [
-    ....
-    url(r'^another/app/', include('another_app.urls')),
-] + static(settings.STATIC_ROOT, document_root=settings.STATIC_ROOT)
-</code></pre>
-
-<h2 id="_1">ラベルとパスを付ける<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<pre><code class="python">from django.apps import AppConfig
-
-class AnotherAppConfig(AppConfig):
-    name = 'another_app'   # プロジェクトルートからのPath
-    label = 'another_app'  # プロジェクト内で固有のラベル
-</code></pre>
-
-<h2 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">&para;</a></h2>
-<h2 id="staticfiles_dirs">STATICFILES_DIRS<a class="headerlink" href="#staticfiles_dirs" title="Permanent link">&para;</a></h2>
-<p>Staticディレクトリを追加したいバア追加したい場合</p>
-<pre><code class="python">STATICFILES_DIRS [
-    # ....
-    'path/to/your/app/static'
-]
-</code></pre>
+    <h1 id="axiosasyncawait">Axiosでasync/awaitを利用する<a class="headerlink" href="#axiosasyncawait" title="Permanent link">&para;</a></h1>
 
   <br>
     
@@ -98,20 +71,20 @@ class AnotherAppConfig(AppConfig):
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-default pull-right">
+      <a href="../../vuejs/my-vue-setup/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-link">
-        Celery Periodic Tasks
+      <a href="../../vuejs/my-vue-setup/" class="btn btn-xs btn-link">
+        My vue setup
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../../../tools/slack-library/" class="btn btn-xs btn-default pull-left">
+      <a href="../../../db/mongo/basic-read-write/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../../../tools/slack-library/" class="btn btn-xs btn-link">
-        言語別Slack通知ライブラリ
+        Previous</a><a href="../../../db/mongo/basic-read-write/" class="btn btn-xs btn-link">
+        mongo DBの基本的なRead Write
       </a>
     </div>
     

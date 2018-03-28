@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>新しいAppをDjangoに追加した場合にやること - 技術の定点観測</title>
+    <title>時間データのビジュアライズ - 技術の定点観測</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,11 +33,8 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "\u65b0\u3057\u3044App\u3092Django\u306b\u8ffd\u52a0\u3057\u305f\u5834\u5408\u306b\u3084\u308b\u3053\u3068", url: "#appdjango", children: [
-              {title: "urlpattern\u306e\u8ffd\u52a0", url: "#urlpattern" },
-              {title: "\u30e9\u30d9\u30eb\u3068\u30d1\u30b9\u3092\u4ed8\u3051\u308b", url: "#_1" },
-              {title: "Migration", url: "#migration" },
-              {title: "STATICFILES_DIRS", url: "#staticfiles_dirs" },
+          {title: "\u6642\u9593\u30c7\u30fc\u30bf\u306e\u30d3\u30b8\u30e5\u30a2\u30e9\u30a4\u30ba", url: "#_1", children: [
+              {title: "\u65e5\u6642\u306e\u30d2\u30b9\u30c8\u30b0\u30e9\u30e0\u5316", url: "#_2" },
           ]},
         ];
 
@@ -67,30 +64,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="appdjango">新しいAppをDjangoに追加した場合にやること<a class="headerlink" href="#appdjango" title="Permanent link">&para;</a></h1>
-<h2 id="urlpattern">urlpatternの追加<a class="headerlink" href="#urlpattern" title="Permanent link">&para;</a></h2>
-<pre><code class="python">urlpatterns = [
-    ....
-    url(r'^another/app/', include('another_app.urls')),
-] + static(settings.STATIC_ROOT, document_root=settings.STATIC_ROOT)
-</code></pre>
-
-<h2 id="_1">ラベルとパスを付ける<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<pre><code class="python">from django.apps import AppConfig
-
-class AnotherAppConfig(AppConfig):
-    name = 'another_app'   # プロジェクトルートからのPath
-    label = 'another_app'  # プロジェクト内で固有のラベル
-</code></pre>
-
-<h2 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">&para;</a></h2>
-<h2 id="staticfiles_dirs">STATICFILES_DIRS<a class="headerlink" href="#staticfiles_dirs" title="Permanent link">&para;</a></h2>
-<p>Staticディレクトリを追加したいバア追加したい場合</p>
-<pre><code class="python">STATICFILES_DIRS [
-    # ....
-    'path/to/your/app/static'
-]
-</code></pre>
+    <h1 id="_1">時間データのビジュアライズ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="_2">日時のヒストグラム化<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>https://stackoverflow.com/questions/27365467/can-pandas-plot-a-histogram-of-dates</li>
+</ul>
 
   <br>
     
@@ -98,20 +76,20 @@ class AnotherAppConfig(AppConfig):
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-default pull-right">
+      <a href="../../../cloud/GoogleCloudPlatform/KubernetesEngine/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-link">
-        Celery Periodic Tasks
+      <a href="../../../cloud/GoogleCloudPlatform/KubernetesEngine/" class="btn btn-xs btn-link">
+        KubernetesEngine
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../../../tools/slack-library/" class="btn btn-xs btn-default pull-left">
+      <a href="../pandas-convert-column-to-datetime/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../../../tools/slack-library/" class="btn btn-xs btn-link">
-        言語別Slack通知ライブラリ
+        Previous</a><a href="../pandas-convert-column-to-datetime/" class="btn btn-xs btn-link">
+        PandasのColumnをDateTimeに型変換する
       </a>
     </div>
     

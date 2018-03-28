@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>新しいAppをDjangoに追加した場合にやること - 技術の定点観測</title>
+    <title>MongoDBの基本クエリ - 技術の定点観測</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,11 +33,10 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "\u65b0\u3057\u3044App\u3092Django\u306b\u8ffd\u52a0\u3057\u305f\u5834\u5408\u306b\u3084\u308b\u3053\u3068", url: "#appdjango", children: [
-              {title: "urlpattern\u306e\u8ffd\u52a0", url: "#urlpattern" },
-              {title: "\u30e9\u30d9\u30eb\u3068\u30d1\u30b9\u3092\u4ed8\u3051\u308b", url: "#_1" },
-              {title: "Migration", url: "#migration" },
-              {title: "STATICFILES_DIRS", url: "#staticfiles_dirs" },
+          {title: "MongoDB\u306e\u57fa\u672c\u30af\u30a8\u30ea", url: "#mongodb", children: [
+              {title: "\u6587\u5b57\u5217\u4e2d\u306e\u542b\u3080", url: "#_1" },
+              {title: "\u914d\u5217", url: "#_2" },
+              {title: "Reference", url: "#reference" },
           ]},
         ];
 
@@ -67,30 +66,34 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="appdjango">新しいAppをDjangoに追加した場合にやること<a class="headerlink" href="#appdjango" title="Permanent link">&para;</a></h1>
-<h2 id="urlpattern">urlpatternの追加<a class="headerlink" href="#urlpattern" title="Permanent link">&para;</a></h2>
-<pre><code class="python">urlpatterns = [
-    ....
-    url(r'^another/app/', include('another_app.urls')),
-] + static(settings.STATIC_ROOT, document_root=settings.STATIC_ROOT)
+    <h1 id="mongodb">MongoDBの基本クエリ<a class="headerlink" href="#mongodb" title="Permanent link">&para;</a></h1>
+<h2 id="_1">文字列中の含む<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<pre><code class="javascript">db.client.find({
+    'text': {'$regex': 'hello'}
+})
 </code></pre>
 
-<h2 id="_1">ラベルとパスを付ける<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<pre><code class="python">from django.apps import AppConfig
-
-class AnotherAppConfig(AppConfig):
-    name = 'another_app'   # プロジェクトルートからのPath
-    label = 'another_app'  # プロジェクト内で固有のラベル
+<h2 id="_2">配列<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="_3">長さ<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>タグが3つ含まれるもの</p>
+<pre><code class="js">db.client.find({
+    'tags': {'$size': 3}
+})
 </code></pre>
 
-<h2 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">&para;</a></h2>
-<h2 id="staticfiles_dirs">STATICFILES_DIRS<a class="headerlink" href="#staticfiles_dirs" title="Permanent link">&para;</a></h2>
-<p>Staticディレクトリを追加したいバア追加したい場合</p>
-<pre><code class="python">STATICFILES_DIRS [
-    # ....
-    'path/to/your/app/static'
-]
+<p>https://docs.mongodb.com/manual/reference/operator/query/size/</p>
+<h3 id="_4">大小比較<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>Where句を利用する</p>
+<pre><code class="js">client.find_one({
+    &quot;$where&quot;: &quot;this.entities.hashtags &gt; 0&quot;
+})
 </code></pre>
+
+<p>https://docs.mongodb.com/manual/reference/operator/query/where/#op._S_where</p>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">&para;</a></h2>
+<ul>
+<li>SQLからの比較: https://docs.mongodb.com/manual/reference/sql-comparison/</li>
+</ul>
 
   <br>
     
@@ -98,20 +101,20 @@ class AnotherAppConfig(AppConfig):
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-default pull-right">
+      <a href="../basic-read-write/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-link">
-        Celery Periodic Tasks
+      <a href="../basic-read-write/" class="btn btn-xs btn-link">
+        Basic read write
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../../../tools/slack-library/" class="btn btn-xs btn-default pull-left">
+      <a href="../../read-basic-knowledge-of-nosql/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../../../tools/slack-library/" class="btn btn-xs btn-link">
-        言語別Slack通知ライブラリ
+        Previous</a><a href="../../read-basic-knowledge-of-nosql/" class="btn btn-xs btn-link">
+        NOSQLとは何か...
       </a>
     </div>
     

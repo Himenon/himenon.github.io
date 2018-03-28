@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>新しいAppをDjangoに追加した場合にやること - 技術の定点観測</title>
+    <title>PandasのColumnをDateTimeに型変換する - 技術の定点観測</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,11 +33,9 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "\u65b0\u3057\u3044App\u3092Django\u306b\u8ffd\u52a0\u3057\u305f\u5834\u5408\u306b\u3084\u308b\u3053\u3068", url: "#appdjango", children: [
-              {title: "urlpattern\u306e\u8ffd\u52a0", url: "#urlpattern" },
-              {title: "\u30e9\u30d9\u30eb\u3068\u30d1\u30b9\u3092\u4ed8\u3051\u308b", url: "#_1" },
-              {title: "Migration", url: "#migration" },
-              {title: "STATICFILES_DIRS", url: "#staticfiles_dirs" },
+          {title: "Pandas\u306eColumn\u3092DateTime\u306b\u578b\u5909\u63db\u3059\u308b", url: "#pandascolumndatetime", children: [
+              {title: "to_datetime\u3092\u5229\u7528\u3059\u308b", url: "#to_datetime" },
+              {title: "Timezone\u306e\u5909\u66f4", url: "#timezone" },
           ]},
         ];
 
@@ -67,30 +65,28 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="appdjango">新しいAppをDjangoに追加した場合にやること<a class="headerlink" href="#appdjango" title="Permanent link">&para;</a></h1>
-<h2 id="urlpattern">urlpatternの追加<a class="headerlink" href="#urlpattern" title="Permanent link">&para;</a></h2>
-<pre><code class="python">urlpatterns = [
-    ....
-    url(r'^another/app/', include('another_app.urls')),
-] + static(settings.STATIC_ROOT, document_root=settings.STATIC_ROOT)
+    <h1 id="pandascolumndatetime">PandasのColumnをDateTimeに型変換する<a class="headerlink" href="#pandascolumndatetime" title="Permanent link">&para;</a></h1>
+<h2 id="to_datetime">to_datetimeを利用する<a class="headerlink" href="#to_datetime" title="Permanent link">&para;</a></h2>
+<pre><code class="python">df = df.to_datetime(df['created_at'], format='')
 </code></pre>
 
-<h2 id="_1">ラベルとパスを付ける<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<pre><code class="python">from django.apps import AppConfig
-
-class AnotherAppConfig(AppConfig):
-    name = 'another_app'   # プロジェクトルートからのPath
-    label = 'another_app'  # プロジェクト内で固有のラベル
+<p>strftimeのリファレンスを読みながら調整</p>
+<ul>
+<li>http://strftime.org/</li>
+<li>https://pandas.pydata.org/pandas-docs/stable/generated/pandas.to_datetime.html</li>
+</ul>
+<p><strong>Twitterの場合</strong></p>
+<pre><code>Sun Mar 25 09:10:42 +0000 2018
 </code></pre>
 
-<h2 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">&para;</a></h2>
-<h2 id="staticfiles_dirs">STATICFILES_DIRS<a class="headerlink" href="#staticfiles_dirs" title="Permanent link">&para;</a></h2>
-<p>Staticディレクトリを追加したいバア追加したい場合</p>
-<pre><code class="python">STATICFILES_DIRS [
-    # ....
-    'path/to/your/app/static'
-]
+<pre><code>%a %b %d %H:%M:%S +0000 %Y
 </code></pre>
+
+<ul>
+<li><a href="https://stackoverflow.com/questions/7703865/going-from-twitter-date-to-python-datetime-date">Going from twitter date to Python datetime date - StackOverflow</a></li>
+</ul>
+<h2 id="timezone">Timezoneの変更<a class="headerlink" href="#timezone" title="Permanent link">&para;</a></h2>
+<p>http://pman0214.github.io/blog/pandas-tz-convert.html</p>
 
   <br>
     
@@ -98,20 +94,20 @@ class AnotherAppConfig(AppConfig):
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-default pull-right">
+      <a href="../visualize-time/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Celery Periodic Tasks/" class="btn btn-xs btn-link">
-        Celery Periodic Tasks
+      <a href="../visualize-time/" class="btn btn-xs btn-link">
+        Visualize time
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../../../tools/slack-library/" class="btn btn-xs btn-default pull-left">
+      <a href="../../jupyter/change-jupyter-config-dir/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../../../tools/slack-library/" class="btn btn-xs btn-link">
-        言語別Slack通知ライブラリ
+        Previous</a><a href="../../jupyter/change-jupyter-config-dir/" class="btn btn-xs btn-link">
+        jupyter_notebook_config.pyの読み込み先を変更する
       </a>
     </div>
     
