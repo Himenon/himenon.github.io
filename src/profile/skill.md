@@ -10,7 +10,7 @@
 - 堅実に強く
 - 天元突破
 
-## Computer Lang
+## Computer Langage
 
 ### Python
 
@@ -333,7 +333,7 @@ PublicでCIを回す時はTravis CIを利用する。
 [酔いどれGCPUG 2018/03/02](https://gcpug-tokyo.connpass.com/event/78667/)というイベントでLTしてきた事がある。
 詳細は[酔いどれGCPUG で発表してきました](/presentation/2018/03-02-Yoidore-GCPUG-LT/)に書いてある。
 
-## AWS
+### AWS
 
 EC2とS3程度鹿利用したことがない。GCP民。
 AuroraやDynamoDBに興味がある。
@@ -359,6 +359,42 @@ AuroraやDynamoDBに興味がある。
 2017年11月ぐらいから勉強を初めて使えるようになった。
 情報収集に関してはGCPUGのSlack、GCPのアーキテクチャ実践レポート、
 Twitterなどから逐次吸い上げ。
+
+## Tool
+
+効率が上がるなら投資を惜しまない系です。
+
+### Adobe
+
+- Lightroom (いまはほぼこれ)
+- Photoshop (Ligtroomで物足りなくなったら)
+- Illustrator (大学時代の図はほとんどこれ)
+- Premiere Pro
+- InDesign (本を作ったことがある)
+
+### Modeling
+
+- Blender (大学院の修士論文発表のときの図作成ツール)
+
+### CAD
+
+- DraftSight
+- AutoCad (2D図面)
+
+### Mac Application
+
+- Alfred
+- Filedrop
+- HyperSwitch
+- Macs Fan Control
+- Magnet
+- MindNode
+- OmniDiskSweeper
+- Quiver
+- Reeder
+- Sketch
+- Skim
+- Yoink
 
 ## 次に学ぶことリスト
 
