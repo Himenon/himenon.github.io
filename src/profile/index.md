@@ -25,6 +25,11 @@
 
 [Githubの活動状況](/profile/github-activity)をご覧ください。
 
+**OSS活動**
+
+- [Redashに2つPRを投げています](https://github.com/getredash/redash/pulls/Himenon)
+- [Circle CIのドキュメントのバグを修正しました。](https://github.com/circleci/circleci-docs/pulls?q=is%3Apr+author%3AHimenon+is%3Aclosed)
+
 ## Q. 行動原理
 
 - 楽しそうなこと・楽しいを提供できる場に収束していく性質があります。
