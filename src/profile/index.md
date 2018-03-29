@@ -30,6 +30,17 @@
 - [Redashに2つPRを投げています](https://github.com/getredash/redash/pulls/Himenon)
 - [Circle CIのドキュメントのバグを修正しました。](https://github.com/circleci/circleci-docs/pulls?q=is%3Apr+author%3AHimenon+is%3Aclosed)
 
+## Q. 一日、どれくらいコード書いているの？
+
+[wakatime](https://wakatime.com/)というサービスからデータを集計しています。
+直近7日間の結果が出ます。
+
+ここに表示されている部分は「**個人的な活動**」ものです。所属する企業や団体とは無関係です。
+
+<figure><embed src="https://wakatime.com/share/@946da99b-7d15-4aa3-8b56-fe6298d1246b/59678fb3-dc73-4838-954a-5afa6d384627.svg"></embed></figure>
+
+だいたい1日2〜2.5時間書いています。お仕事の時間も含めると、一日10時間くらいはコード書いていると思います。
+
 ## Q. 行動原理
 
 - 楽しそうなこと・楽しいを提供できる場に収束していく性質があります。
