@@ -9,7 +9,7 @@
 ## Q. 活動を見たい
 
 [勉強会参加履歴](/profile/study-history/)をご覧ください。
-直近だと、2018/03/02に[LT発表](/#presentation/2018/03-02-Yoidore-GCPUG-LT/)してます。
+直近だと、2018/03/02に[LT発表](/presentation/2018/03-02-Yoidore-GCPUG-LT/)してます。
 
 **大学時代の学んだこと**
 
