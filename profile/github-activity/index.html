@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Githubの活動状況 - 技術の定点観測</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <link href="../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Github\u306e\u6d3b\u52d5\u72b6\u6cc1", url: "#github", children: [
+              {title: "\u6700\u8fd1\u529b\u3092\u5165\u308c\u3066\u3044\u308b\u3082\u306e", url: "#_1" },
+              {title: "\u3069\u3053\u306b\u884c\u3063\u3066\u3082\u5f79\u306b\u7acb\u3064\u3084\u3064", url: "#_2" },
+              {title: "\u52c9\u5f37\u7528\u30ea\u30dd\u30b8\u30c8\u30ea", url: "#_3" },
+              {title: "\u904e\u53bb\u306e\u4f5c\u54c1", url: "#_4" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script>
+      <script src="../../assets/js/mermaid.min.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="github">Githubの活動状況<a class="headerlink" href="#github" title="Permanent link">&para;</a></h1>
+<h2 id="_1">最近力を入れているもの<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/Himenon/hakka-py">Himenon/hakka-py</a><ul>
+<li>Workerを作成するためのもの。FlaskとCeleryとrqにインスパイアされた感じ。</li>
+<li>NodeJS版など、他の言語でも簡単にコンテナをワーカー化できるようなものを画策中</li>
+<li>pytest-watchを利用してTDD。</li>
+</ul>
+</li>
+<li><a href="https://github.com/Himenon/SmallWork">Himenon/SmallWork</a><ul>
+<li>WEBアプリケーションの"なうい"技術を追いかけるようのリポジトリ（ちまちま更新）</li>
+</ul>
+</li>
+</ul>
+<h2 id="_2">どこに行っても役に立つやつ<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/Himenon/oauth2_proxy">Himenon/oauth2_proxy</a><ul>
+<li>oauth2_proxyが入ったNginxでReverse Proxyした時に、GoogleなどのOAuth認証がかかるようなもの。</li>
+<li>それを複数のドメインに対して行ったサンプルコード</li>
+<li><a href="../../server/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">記事</a>を書いて紹介しています。</li>
+</ul>
+</li>
+<li><a href="https://github.com/Himenon/charts">Himenon/charts</a><ul>
+<li>KubernetesのChartsリポジトリ</li>
+<li>redashは公式のものなどが無かったので自作しています。(<code>helm install himenon/redash</code>でインストールDONE)</li>
+<li>Kubernetesのことを知らないとそもそも作れないやつです。</li>
+</ul>
+</li>
+</ul>
+<h2 id="_3">勉強用リポジトリ<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>基本Privateの勉強用のリポジトリです。見えない部分のコミットはこっちに寄っています。
+もともと130位リポジトリを保有していたのですが、管理できなくなったので"◯◯Workspace"でひとまとめにしています。</p>
+<p>非公開の場合は諸般の事情により、なので、面識のある人しか見せていません。</p>
+<ul>
+<li>(公開中) <a href="https://github.com/Himenon/iosWorkspace">Himenon/iosWorkspace</a><ul>
+<li>GPS</li>
+<li>描画</li>
+<li>音（録音/再生）</li>
+<li>動画</li>
+<li>写真</li>
+</ul>
+</li>
+<li>(非公開) <a href="https://github.com/Himenon/PythonWorkspace">Himenon/PythonWorkspace</a><ul>
+<li>Flask</li>
+<li>GUI(tk, wxPython, Kivy, PyQt)</li>
+<li>Design Pattern</li>
+<li>SeleniumGrid</li>
+<li>分析計: Matplotlib / Numpy / ffmpeg</li>
+<li>Web Application</li>
+</ul>
+</li>
+<li>(非公開) <a href="https://github.com/Himenon/FrontEndWorkspace">Himenon/FrontEndWorkspace</a><ul>
+<li>Chromeの拡張機能</li>
+<li>静的サイトジェネレーター用のテンプレート</li>
+<li>タスクランナー</li>
+<li>React</li>
+<li>可視化ツール系</li>
+</ul>
+</li>
+</ul>
+<h2 id="_4">過去の作品<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<p>一応、大学時代に作っていたアプリケーション。</p>
+<ul>
+<li>(非公開) <a href="https://github.com/Himenon/BookMaker">Himenon/BookMaker</a><ul>
+<li>rails4.2.3で作成</li>
+<li>MarkdownからPDFを作成するためのウェブアプリケーション</li>
+<li>pandocを利用</li>
+<li>自動保存機能の実装を行っている</li>
+<li>gulp + Coffee Script</li>
+<li>全体的にモノリシック</li>
+<li>制作：1人</li>
+</ul>
+</li>
+</ul>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../" class="btn btn-xs btn-link">
+        Home
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../presentation/2018/03-02-Yoidore-GCPUG-LT/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../presentation/2018/03-02-Yoidore-GCPUG-LT/" class="btn btn-xs btn-link">
+        酔いどれGCPUG で発表してきました
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
