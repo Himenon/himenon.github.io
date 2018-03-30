@@ -32,3 +32,38 @@ kubectl config set-context (kubectl config current-context) --namespace=
 ```
 kubectl get deploy,svc,po
 ```
+
+
+## コマンドラインからDeploymentにServiceをバインドする
+
+`hello-web`というDeploymentに含まれるコンテナが、Port8080でExposeしているとする。
+それに対して、type=LoadBalancerのServiceを接続して、アプリケーションをPort 80で公開する。
+
+```bash
+$ kubectl expose deployment hello-web --type=LoadBalancer --port 80 --target-port 8080
+```
+
+## Deploymentを速攻で試す
+
+ローカルにあるコンテナを使ってデバッグを行う用。
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: debug-pod
+  labels:
+    app: debug-pod
+spec:
+  replicas: 1
+  tempalte:
+    metadata:
+      labels:
+        app: debug-pod
+    spec:
+      containers:
+        - name: debug-container
+          image: "[YOUR IMAEGE]"
+      command: [""]
+```
+

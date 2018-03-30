@@ -10,7 +10,7 @@ edit_uri: edit/seed/src
 
 extra:
   logo: assets/images/icon.jpg
-  version: 1.0.1
+  version: 1.1.0
   article_nav_top: false
 
 extra_css:
