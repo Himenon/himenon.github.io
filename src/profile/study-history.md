@@ -2,8 +2,6 @@
 
 <p id="created_at">作成日: <time datetime="2018-03-28T01:28">2018/03/28</time></p>
 
-過去参加した勉強会
-
 ## 勉強会系
 
 参加予定
@@ -14,7 +12,7 @@
 
 1. 03/08 Kubernetes Meetup Tokyo #10
 1. 03/02 酔いどれGCPUG
-    - LT参加
+    - LT発表しました → [発表後のブログ](/presentation/2018/03-02-Yoidore-GCPUG-LT/)
 1. 02/21 【サポーターズCoLab勉強会】GKEで学ぶKubernetes入門
 1. 02/16 Docker Meetup Tokyo #21
 1. 02/10 Cookpad TechConf 2018
