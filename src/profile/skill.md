@@ -201,7 +201,7 @@ Xcode(>=9.2)のインタフェースはちょくちょく触ります。
 - PHP >= 7.0
 - Laravel 5.4
 
-これ以上特に語ることはない。
+Laravelは良かったです。
 
 ### JavaScript
 
@@ -210,15 +210,6 @@ Xcode(>=9.2)のインタフェースはちょくちょく触ります。
 すごく昔に作った作品。物理の研究で、電磁波の挙動をアニメーションした時に作った。
 
 - <https://codepen.io/Himenon/pen/wzApRb>
-
-#### NodeJS
-
-Cloud Functionで利用。
-WEBアプリケーションをこれで作成したことはない。
-ツールとして利用することは度々あるので、ちょっとしたことはかける。
-Headless Chromeを使ってPDF作成など、マイクロサービスとして利用すれば面白そう、という予感はある。
-
-いまはZappierやIFTTTとあそぶ。
 
 #### Virtual DOM
 
@@ -230,6 +221,32 @@ VDOMの仕組みは[picodom](https://github.com/jorgebucaran/ultradom)の作者�
 - Ultradom(旧picodom)
 
 vuexを用いた状態管理はWebsocketの実装と相性が良く、気持ちよく書ける。
+
+### NodeJS
+
+Cloud Functionで利用。
+WEBアプリケーションをこれで作成したことはない。
+ツールとして利用することは度々あるので、ちょっとしたことはかける。
+Headless Chromeを使ってPDF作成など、マイクロサービスとして利用すれば面白そう、という予感はある。
+
+いまはZappierやIFTTTとあそぶ。
+
+## Web Application Framework
+
+### Django
+
+### Flask
+
+### Laravel
+
+Version 5.4を半年ほど。
+一本記事を書いてます（本サイトに移植中）。
+
+<http://www.archiveknow.com/2017/10/fw-laravel-validator-after.html>
+
+### Sintra
+
+### Ruby on Rails
 
 ## Database
 
@@ -282,10 +299,17 @@ oatuh2をNginxにツッコんだぐらい。
 - Golang / C++の計算機サーバーを作成経験あり
 - ユーザー管理
 
+#### 直接実験した記事
+
+- <http://www.archiveknow.com/2017/04/ubuntu-server-1604hddunix.html>
+- <http://www.archiveknow.com/2017/04/ubuntuufwiptables.html>
+
 ### Vagrant
 
 **今はもう使っていない**。Docker以前の開発環境で利用。
 ディストリビューションからVagrant用のBoxを1から作ったことがある。
+
+関連記事：<http://www.archiveknow.com/2017/04/vagrant-box.html>
 
 ### Kubernetes
 
@@ -359,6 +383,15 @@ AuroraやDynamoDBに興味がある。
 2017年11月ぐらいから勉強を初めて使えるようになった。
 情報収集に関してはGCPUGのSlack、GCPのアーキテクチャ実践レポート、
 Twitterなどから逐次吸い上げ。
+
+#### やったこと
+
+- GKEのCI/CD設計
+    - Github + Circle CI + Container Builder + Container Registry + GKE + Helm
+    - マイクロサービスがsubmoduleの場合の設計を行った。
+- GKEを含んだデータ基盤の構築
+- GCFのCI/CD設計
+    - Github + Circle CI
 
 ## Tool
 
