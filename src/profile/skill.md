@@ -29,6 +29,11 @@ wxpythonでGUIの基本的な部分は学んだ。
 - <https://pypi.org/project/hakka/>
 - <https://pypi.org/project/OrderedFormat/>
 
+
+#### 遊んだもの
+
+- [MHWの被ダメージ計算](https://gist.github.com/Himenon/57cc1e750ea4d386adde1e427cfab9c4)
+
 #### 直接利用したことのあるpipライブラリ
 
 - airflow
@@ -39,6 +44,7 @@ wxpythonでGUIの基本的な部分は学んだ。
 - celery
 - certifi
 - click
+- [cookiecutter](cookiecutter)
 - Django
 - django-admin2
 - django-braces
@@ -211,6 +217,11 @@ Laravelは良かったです。
 
 - <https://codepen.io/Himenon/pen/wzApRb>
 
+LaravelのValidation->afterの実装パターンを見て、
+Toggle系のイベント発火うまくできるんじゃないかと実装したやつ
+
+- <https://gist.github.com/Himenon/e65ea464b1ea53f1d8f781bd66da94e0>
+
 #### Virtual DOM
 
 VDOMの仕組みは[picodom](https://github.com/jorgebucaran/ultradom)の作者の発表(Node学園2017)と、
@@ -233,9 +244,40 @@ Headless Chromeを使ってPDF作成など、マイクロサービスとして�
 
 ## Web Application Framework
 
+### [Bottle](https://github.com/bottlepy/bottle)
+
+プラグインを登録
+
+<https://github.com/bottlepy/bottle/blob/master/bottle.py#L916-L932>
+
+からの、発火。
+
+<https://github.com/bottlepy/bottle/blob/master/bottle.py#L815-L825>
+
+わかりやすい。
+
 ### Django
 
+バージョンは2.0を利用。（開発途中まで1系だったが、v2に切り替えた。一部Modelだけ変更したが、それ以外はテスト落ちず）。
+データ基盤の中核として利用した。
+APIは[Django REST framework](http://www.django-rest-framework.org/)を利用。
+Task Queueに関しては、[Celery](http://www.celeryproject.org/)を導入し、
+Celery 4系をDjango 2系に組み込んだ記事はなかったので、
+[記事](/webapp/django/Introduction-of-Celery-Django/)にした。
+
 ### Flask
+
+#### Fixtureの使い方がうまい
+
+Fixtureを生成
+
+<https://github.com/pallets/flask/blob/master/tests/conftest.py#L61-L64>
+
+setUp, tearDownを使わずにテストを作成。
+
+<https://github.com/pallets/flask/blob/master/tests/test_basic.py#L28-L35>
+
+賢い
 
 ### Laravel
 
@@ -244,9 +286,17 @@ Version 5.4を半年ほど。
 
 <http://www.archiveknow.com/2017/10/fw-laravel-validator-after.html>
 
+この辺のコード賢いなぁと。
+
+<https://github.com/illuminate/validation/blob/fd94fb74ae3aec60c745d2a537e766c18eedbab6/Validator.php#L243-L250>
+
 ### Sintra
 
+最近鈍っている。
+
 ### Ruby on Rails
+
+Active Recordは優秀。最近鈍っている。
 
 ## Database
 
