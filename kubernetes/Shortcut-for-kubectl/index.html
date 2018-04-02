@@ -38,6 +38,8 @@
               {title: "\u30b3\u30f3\u30c6\u30ad\u30b9\u30c8\u306e\u5207\u308a\u66ff\u3048", url: "#_2" },
               {title: "Default\u306eNamespace\u306e\u5909\u66f4", url: "#defaultnamespace" },
               {title: "Deployment, Service, Pods\u3092\u4e00\u6c17\u306b\u78ba\u8a8d\u3059\u308b", url: "#deployment-service-pods" },
+              {title: "\u30b3\u30de\u30f3\u30c9\u30e9\u30a4\u30f3\u304b\u3089Deployment\u306bService\u3092\u30d0\u30a4\u30f3\u30c9\u3059\u308b", url: "#deploymentservice" },
+              {title: "Deployment\u3092\u901f\u653b\u3067\u8a66\u3059", url: "#deployment" },
           ]},
         ];
 
@@ -89,18 +91,45 @@ $ kubectl config use-context docker-for-desktop
 <pre><code>kubectl get deploy,svc,po
 </code></pre>
 
+<h2 id="deploymentservice">コマンドラインからDeploymentにServiceをバインドする<a class="headerlink" href="#deploymentservice" title="Permanent link">&para;</a></h2>
+<p><code>hello-web</code>というDeploymentに含まれるコンテナが、Port8080でExposeしているとする。
+それに対して、type=LoadBalancerのServiceを接続して、アプリケーションをPort 80で公開する。</p>
+<pre><code class="bash">$ kubectl expose deployment hello-web --type=LoadBalancer --port 80 --target-port 8080
+</code></pre>
+
+<h2 id="deployment">Deploymentを速攻で試す<a class="headerlink" href="#deployment" title="Permanent link">&para;</a></h2>
+<p>ローカルにあるコンテナを使ってデバッグを行う用。</p>
+<pre><code class="yaml">apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: debug-pod
+  labels:
+    app: debug-pod
+spec:
+  replicas: 1
+  tempalte:
+    metadata:
+      labels:
+        app: debug-pod
+    spec:
+      containers:
+        - name: debug-container
+          image: &quot;[YOUR IMAEGE]&quot;
+      command: [&quot;&quot;]
+</code></pre>
+
   <br>
     
 
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../error helm incompatible version/" class="btn btn-xs btn-default pull-right">
+      <a href="../cron-wake-up-down/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../error helm incompatible version/" class="btn btn-xs btn-link">
-        Error helm incompatible version
+      <a href="../cron-wake-up-down/" class="btn btn-xs btn-link">
+        Cron wake up down
       </a>
     </div>
     
