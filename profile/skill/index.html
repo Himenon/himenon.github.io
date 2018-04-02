@@ -41,7 +41,7 @@
               {title: "CI", url: "#ci" },
               {title: "Cloud", url: "#cloud" },
               {title: "Tool", url: "#tool" },
-              {title: "\u6b21\u306b\u5b66\u3076\u3053\u3068\u30ea\u30b9\u30c8", url: "#_8" },
+              {title: "\u6b21\u306b\u5b66\u3076\u3053\u3068\u30ea\u30b9\u30c8", url: "#_9" },
           ]},
         ];
 
@@ -98,6 +98,10 @@ wxpythonでGUIの基本的な部分は学んだ。</p>
 <li><a href="https://pypi.org/project/hakka/">https://pypi.org/project/hakka/</a></li>
 <li><a href="https://pypi.org/project/OrderedFormat/">https://pypi.org/project/OrderedFormat/</a></li>
 </ul>
+<h4 id="_4">遊んだもの<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://gist.github.com/Himenon/57cc1e750ea4d386adde1e427cfab9c4">MHWの被ダメージ計算</a></li>
+</ul>
 <h4 id="pip">直接利用したことのあるpipライブラリ<a class="headerlink" href="#pip" title="Permanent link">&para;</a></h4>
 <ul>
 <li>airflow</li>
@@ -108,6 +112,7 @@ wxpythonでGUIの基本的な部分は学んだ。</p>
 <li>celery</li>
 <li>certifi</li>
 <li>click</li>
+<li><a href="../cookiecutter">cookiecutter</a></li>
 <li>Django</li>
 <li>django-admin2</li>
 <li>django-braces</li>
@@ -236,7 +241,7 @@ iOSのリリースはしていない。macOSに関してはGithubからダウン
 <li>MAC OS X COCOAプログラミング 第4版</li>
 </ul>
 <p><a href="https://realm.io/jp/">Realm</a>も使える。</p>
-<h4 id="_4">参考リポジトリ<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<h4 id="_5">参考リポジトリ<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
 <ul>
 <li>ios<ul>
 <li><a href="https://github.com/Himenon/iosWorkspace">https://github.com/Himenon/iosWorkspace</a></li>
@@ -250,7 +255,7 @@ iOSのリリースはしていない。macOSに関してはGithubからダウン
 </ul>
 </li>
 </ul>
-<h4 id="_5">パッケージ管理<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<h4 id="_6">パッケージ管理<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <p>cocoapodsとcarthageは利用できる。
 <a href="https://realm.io/jp">Realm</a>が利用したことがある。
 React Nativeのエラーの時にこの知識が活躍した。</p>
@@ -268,6 +273,11 @@ React Nativeのエラーの時にこの知識が活躍した。</p>
 <ul>
 <li><a href="https://codepen.io/Himenon/pen/wzApRb">https://codepen.io/Himenon/pen/wzApRb</a></li>
 </ul>
+<p>LaravelのValidation-&gt;afterの実装パターンを見て、
+Toggle系のイベント発火うまくできるんじゃないかと実装したやつ</p>
+<ul>
+<li><a href="https://gist.github.com/Himenon/e65ea464b1ea53f1d8f781bd66da94e0">https://gist.github.com/Himenon/e65ea464b1ea53f1d8f781bd66da94e0</a></li>
+</ul>
 <h4 id="virtual-dom">Virtual DOM<a class="headerlink" href="#virtual-dom" title="Permanent link">&para;</a></h4>
 <p>VDOMの仕組みは<a href="https://github.com/jorgebucaran/ultradom">picodom</a>の作者の発表(Node学園2017)と、
 実際にソースコードを読んでコードレベルで理解した。</p>
@@ -284,14 +294,36 @@ WEBアプリケーションをこれで作成したことはない。
 Headless Chromeを使ってPDF作成など、マイクロサービスとして利用すれば面白そう、という予感はある。</p>
 <p>いまはZappierやIFTTTとあそぶ。</p>
 <h2 id="web-application-framework">Web Application Framework<a class="headerlink" href="#web-application-framework" title="Permanent link">&para;</a></h2>
+<h3 id="bottle"><a href="https://github.com/bottlepy/bottle">Bottle</a><a class="headerlink" href="#bottle" title="Permanent link">&para;</a></h3>
+<p>プラグインを登録</p>
+<p><a href="https://github.com/bottlepy/bottle/blob/master/bottle.py#L916-L932">https://github.com/bottlepy/bottle/blob/master/bottle.py#L916-L932</a></p>
+<p>からの、発火。</p>
+<p><a href="https://github.com/bottlepy/bottle/blob/master/bottle.py#L815-L825">https://github.com/bottlepy/bottle/blob/master/bottle.py#L815-L825</a></p>
+<p>わかりやすい。</p>
 <h3 id="django">Django<a class="headerlink" href="#django" title="Permanent link">&para;</a></h3>
+<p>バージョンは2.0を利用。（開発途中まで1系だったが、v2に切り替えた。一部Modelだけ変更したが、それ以外はテスト落ちず）。
+データ基盤の中核として利用した。
+APIは<a href="http://www.django-rest-framework.org/">Django REST framework</a>を利用。
+Task Queueに関しては、<a href="http://www.celeryproject.org/">Celery</a>を導入し、
+Celery 4系をDjango 2系に組み込んだ記事はなかったので、
+<a href="../../webapp/django/Introduction-of-Celery-Django/">記事</a>にした。</p>
 <h3 id="flask">Flask<a class="headerlink" href="#flask" title="Permanent link">&para;</a></h3>
+<h4 id="fixture">Fixtureの使い方がうまい<a class="headerlink" href="#fixture" title="Permanent link">&para;</a></h4>
+<p>Fixtureを生成</p>
+<p><a href="https://github.com/pallets/flask/blob/master/tests/conftest.py#L61-L64">https://github.com/pallets/flask/blob/master/tests/conftest.py#L61-L64</a></p>
+<p>setUp, tearDownを使わずにテストを作成。</p>
+<p><a href="https://github.com/pallets/flask/blob/master/tests/test_basic.py#L28-L35">https://github.com/pallets/flask/blob/master/tests/test_basic.py#L28-L35</a></p>
+<p>賢い</p>
 <h3 id="laravel">Laravel<a class="headerlink" href="#laravel" title="Permanent link">&para;</a></h3>
 <p>Version 5.4を半年ほど。
 一本記事を書いてます（本サイトに移植中）。</p>
 <p><a href="http://www.archiveknow.com/2017/10/fw-laravel-validator-after.html">http://www.archiveknow.com/2017/10/fw-laravel-validator-after.html</a></p>
+<p>この辺のコード賢いなぁと。</p>
+<p><a href="https://github.com/illuminate/validation/blob/fd94fb74ae3aec60c745d2a537e766c18eedbab6/Validator.php#L243-L250">https://github.com/illuminate/validation/blob/fd94fb74ae3aec60c745d2a537e766c18eedbab6/Validator.php#L243-L250</a></p>
 <h3 id="sintra">Sintra<a class="headerlink" href="#sintra" title="Permanent link">&para;</a></h3>
+<p>最近鈍っている。</p>
 <h3 id="ruby-on-rails">Ruby on Rails<a class="headerlink" href="#ruby-on-rails" title="Permanent link">&para;</a></h3>
+<p>Active Recordは優秀。最近鈍っている。</p>
 <h2 id="database">Database<a class="headerlink" href="#database" title="Permanent link">&para;</a></h2>
 <h3 id="rdbms">RDBMS<a class="headerlink" href="#rdbms" title="Permanent link">&para;</a></h3>
 <ul>
@@ -332,7 +364,7 @@ oatuh2をNginxにツッコんだぐらい。</p>
 <li>Golang / C++の計算機サーバーを作成経験あり</li>
 <li>ユーザー管理</li>
 </ul>
-<h4 id="_6">直接実験した記事<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<h4 id="_7">直接実験した記事<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
 <ul>
 <li><a href="http://www.archiveknow.com/2017/04/ubuntu-server-1604hddunix.html">http://www.archiveknow.com/2017/04/ubuntu-server-1604hddunix.html</a></li>
 <li><a href="http://www.archiveknow.com/2017/04/ubuntuufwiptables.html">http://www.archiveknow.com/2017/04/ubuntuufwiptables.html</a></li>
@@ -399,7 +431,7 @@ AuroraやDynamoDBに興味がある。</p>
 <p>2017年11月ぐらいから勉強を初めて使えるようになった。
 情報収集に関してはGCPUGのSlack、GCPのアーキテクチャ実践レポート、
 Twitterなどから逐次吸い上げ。</p>
-<h4 id="_7">やったこと<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h4>
+<h4 id="_8">やったこと<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
 <ul>
 <li>GKEのCI/CD設計<ul>
 <li>Github + Circle CI + Container Builder + Container Registry + GKE + Helm</li>
@@ -446,7 +478,7 @@ Twitterなどから逐次吸い上げ。</p>
 <li>Skim</li>
 <li>Yoink</li>
 </ul>
-<h2 id="_8">次に学ぶことリスト<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<h2 id="_9">次に学ぶことリスト<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <ol>
 <li>Streaming系<ul>
 <li>動画配信したい</li>
