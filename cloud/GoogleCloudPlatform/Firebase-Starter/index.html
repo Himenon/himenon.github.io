@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>FirebaseにおけるCloud Functions - 技術の定点観測</title>
+    <title>Firebaseことはじめ - 技術の定点観測</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,8 +33,10 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Firebase\u306b\u304a\u3051\u308bCloud Functions", url: "#firebasecloud-functions", children: [
-              {title: "Trigger of Cloud function", url: "#trigger-of-cloud-function" },
+          {title: "Firebase\u3053\u3068\u306f\u3058\u3081", url: "#firebase", children: [
+              {title: "\u4e8b\u524d\u6e96\u5099", url: "#_1" },
+              {title: "Samples", url: "#samples" },
+              {title: "Tutorial", url: "#tutorial" },
           ]},
         ];
 
@@ -64,39 +66,28 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="firebasecloud-functions">FirebaseにおけるCloud Functions<a class="headerlink" href="#firebasecloud-functions" title="Permanent link">&para;</a></h1>
-<h2 id="trigger-of-cloud-function">Trigger of Cloud function<a class="headerlink" href="#trigger-of-cloud-function" title="Permanent link">&para;</a></h2>
-<h3 id="cloud-firebase">Cloud Firebaseのトリガー<a class="headerlink" href="#cloud-firebase" title="Permanent link">&para;</a></h3>
-<p>Firestore: <a href="https://firebase.google.com/docs/firestore/?hl=ja">NOSQLクラウドデータベース</a></p>
-<ul>
-<li>https://firebase.google.com/docs/functions/firestore-events?hl=ja </li>
-</ul>
-<h4 id="when">When:<a class="headerlink" href="#when" title="Permanent link">&para;</a></h4>
-<p>特定のドキュメントに変更が加えられたとき</p>
-<ul>
-<li>onCreate</li>
-<li>onUpdate</li>
-<li>onDelete</li>
-<li>onWrite</li>
-</ul>
-<h4 id="how">How:<a class="headerlink" href="#how" title="Permanent link">&para;</a></h4>
-<pre><code class="js">exports.myFunctionName = functions.firestore
-  .document('users/marie')
-  .onWrite((event) =&gt; {
-    // ... Your code here
-  });
+    <h1 id="firebase">Firebaseことはじめ<a class="headerlink" href="#firebase" title="Permanent link">&para;</a></h1>
+<h2 id="_1">事前準備<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><a href="https://firebase.google.com/docs/cli/">https://firebase.google.com/docs/cli/</a></p>
+<pre><code>npm install -g firebase-tools
 </code></pre>
 
-<h3 id="cloud-function">Cloud Functionを利用する<a class="headerlink" href="#cloud-function" title="Permanent link">&para;</a></h3>
+<h2 id="samples">Samples<a class="headerlink" href="#samples" title="Permanent link">&para;</a></h2>
 <ul>
-<li><a href="https://firebase.google.com/docs/functions/typescript?hl=ja">Cloud Functions に TypeScript を使用する</a></li>
+<li><a href="https://github.com/firebase/functions-samples">https://github.com/firebase/functions-samples</a></li>
 </ul>
-<h3 id="_1">テスト<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="https://firebase.google.com/docs/functions/local-emulator?hl=ja">ローカルでの関数の実行</a></li>
-<li><a href="https://firebase.google.com/docs/functions/unit-testing?hl=ja">Cloud Functions の単体テスト</a></li>
-<li>Stub/Mock test</li>
-</ul>
+<h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
+<pre><code>firebase login
+</code></pre>
+
+<pre><code>firebase init
+# 選択肢
+# Projectの選択
+</code></pre>
+
+<p>まずは空デプロイ</p>
+<pre><code>firebase deploy
+</code></pre>
 
   <br>
     
@@ -104,20 +95,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Firebase-Starter/" class="btn btn-xs btn-default pull-right">
+      <a href="../KubernetesEngine/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Firebase-Starter/" class="btn btn-xs btn-link">
-        Firebase Starter
+      <a href="../KubernetesEngine/" class="btn btn-xs btn-link">
+        KubernetesEngine
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Cloud-Function/" class="btn btn-xs btn-default pull-left">
+      <a href="../Firebase-Cloud-Functions/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Cloud-Function/" class="btn btn-xs btn-link">
-        Cloud Function
+        Previous</a><a href="../Firebase-Cloud-Functions/" class="btn btn-xs btn-link">
+        FirebaseにおけるCloud Functions
       </a>
     </div>
     
