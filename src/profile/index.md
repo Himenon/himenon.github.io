@@ -6,6 +6,9 @@
 
 [スキルセット](/profile/skill/)のページをご覧ください。
 
+- Qiita: <https://qiita.com/himenoglyph>
+- GIthub: <https://github.com/>
+
 ## Q. 活動を見たい
 
 [勉強会参加履歴](/profile/study-history/)をご覧ください。

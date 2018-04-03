@@ -29,6 +29,11 @@ wxpythonでGUIの基本的な部分は学んだ。
 - <https://pypi.org/project/hakka/>
 - <https://pypi.org/project/OrderedFormat/>
 
+
+#### 遊んだもの
+
+- [MHWの被ダメージ計算](https://gist.github.com/Himenon/57cc1e750ea4d386adde1e427cfab9c4)
+
 #### 直接利用したことのあるpipライブラリ
 
 - airflow
@@ -39,6 +44,7 @@ wxpythonでGUIの基本的な部分は学んだ。
 - celery
 - certifi
 - click
+- [cookiecutter](cookiecutter)
 - Django
 - django-admin2
 - django-braces
@@ -201,7 +207,7 @@ Xcode(>=9.2)のインタフェースはちょくちょく触ります。
 - PHP >= 7.0
 - Laravel 5.4
 
-これ以上特に語ることはない。
+Laravelは良かったです。
 
 ### JavaScript
 
@@ -211,14 +217,10 @@ Xcode(>=9.2)のインタフェースはちょくちょく触ります。
 
 - <https://codepen.io/Himenon/pen/wzApRb>
 
-#### NodeJS
+LaravelのValidation->afterの実装パターンを見て、
+Toggle系のイベント発火うまくできるんじゃないかと実装したやつ
 
-Cloud Functionで利用。
-WEBアプリケーションをこれで作成したことはない。
-ツールとして利用することは度々あるので、ちょっとしたことはかける。
-Headless Chromeを使ってPDF作成など、マイクロサービスとして利用すれば面白そう、という予感はある。
-
-いまはZappierやIFTTTとあそぶ。
+- <https://gist.github.com/Himenon/e65ea464b1ea53f1d8f781bd66da94e0>
 
 #### Virtual DOM
 
@@ -230,6 +232,71 @@ VDOMの仕組みは[picodom](https://github.com/jorgebucaran/ultradom)の作者�
 - Ultradom(旧picodom)
 
 vuexを用いた状態管理はWebsocketの実装と相性が良く、気持ちよく書ける。
+
+### NodeJS
+
+Cloud Functionで利用。
+WEBアプリケーションをこれで作成したことはない。
+ツールとして利用することは度々あるので、ちょっとしたことはかける。
+Headless Chromeを使ってPDF作成など、マイクロサービスとして利用すれば面白そう、という予感はある。
+
+いまはZappierやIFTTTとあそぶ。
+
+## Web Application Framework
+
+### [Bottle](https://github.com/bottlepy/bottle)
+
+プラグインを登録
+
+<https://github.com/bottlepy/bottle/blob/master/bottle.py#L916-L932>
+
+からの、発火。
+
+<https://github.com/bottlepy/bottle/blob/master/bottle.py#L815-L825>
+
+わかりやすい。
+
+### Django
+
+バージョンは2.0を利用。（開発途中まで1系だったが、v2に切り替えた。一部Modelだけ変更したが、それ以外はテスト落ちず）。
+データ基盤の中核として利用した。
+APIは[Django REST framework](http://www.django-rest-framework.org/)を利用。
+Task Queueに関しては、[Celery](http://www.celeryproject.org/)を導入し、
+Celery 4系をDjango 2系に組み込んだ記事はなかったので、
+[記事](/webapp/django/Introduction-of-Celery-Django/)にした。
+
+### Flask
+
+#### Fixtureの使い方がうまい
+
+Fixtureを生成
+
+<https://github.com/pallets/flask/blob/master/tests/conftest.py#L61-L64>
+
+setUp, tearDownを使わずにテストを作成。
+
+<https://github.com/pallets/flask/blob/master/tests/test_basic.py#L28-L35>
+
+賢い
+
+### Laravel
+
+Version 5.4を半年ほど。
+一本記事を書いてます（本サイトに移植中）。
+
+<http://www.archiveknow.com/2017/10/fw-laravel-validator-after.html>
+
+この辺のコード賢いなぁと。
+
+<https://github.com/illuminate/validation/blob/fd94fb74ae3aec60c745d2a537e766c18eedbab6/Validator.php#L243-L250>
+
+### Sintra
+
+最近鈍っている。
+
+### Ruby on Rails
+
+Active Recordは優秀。最近鈍っている。
 
 ## Database
 
@@ -282,10 +349,17 @@ oatuh2をNginxにツッコんだぐらい。
 - Golang / C++の計算機サーバーを作成経験あり
 - ユーザー管理
 
+#### 直接実験した記事
+
+- <http://www.archiveknow.com/2017/04/ubuntu-server-1604hddunix.html>
+- <http://www.archiveknow.com/2017/04/ubuntuufwiptables.html>
+
 ### Vagrant
 
 **今はもう使っていない**。Docker以前の開発環境で利用。
 ディストリビューションからVagrant用のBoxを1から作ったことがある。
+
+関連記事：<http://www.archiveknow.com/2017/04/vagrant-box.html>
 
 ### Kubernetes
 
@@ -359,6 +433,15 @@ AuroraやDynamoDBに興味がある。
 2017年11月ぐらいから勉強を初めて使えるようになった。
 情報収集に関してはGCPUGのSlack、GCPのアーキテクチャ実践レポート、
 Twitterなどから逐次吸い上げ。
+
+#### やったこと
+
+- GKEのCI/CD設計
+    - Github + Circle CI + Container Builder + Container Registry + GKE + Helm
+    - マイクロサービスがsubmoduleの場合の設計を行った。
+- GKEを含んだデータ基盤の構築
+- GCFのCI/CD設計
+    - Github + Circle CI
 
 ## Tool
 
