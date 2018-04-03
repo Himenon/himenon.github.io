@@ -238,9 +238,18 @@ vuexを用いた状態管理はWebsocketの実装と相性が良く、気持ち�
 Cloud Functionで利用。
 WEBアプリケーションをこれで作成したことはない。
 ツールとして利用することは度々あるので、ちょっとしたことはかける。
-Headless Chromeを使ってPDF作成など、マイクロサービスとして利用すれば面白そう、という予感はある。
 
-いまはZappierやIFTTTとあそぶ。
+いまはZappierやIFTTT、Cloud Functionと遊んでます。
+
+#### 作ったもの
+
+- [Himenon/web2pdf - Github](https://github.com/Himenon/web2pdf)
+- [web2pdf - npm](https://www.npmjs.com/package/web2pdf)
+
+Markdownで提出したらPDFを要求されたときの緊急避難対応用に作成した。
+せっかくなので、npmでインストールできるようにリリースもしておいた。
+リリースするならテストしろよってことで、jestでテストをちょこっと書いてtravis-ciにツッコんだ。
+初めてnpmに登録したりしたので、2時間かかったけど、次はもうちょっと早く行けそう。
 
 ## Web Application Framework
 
