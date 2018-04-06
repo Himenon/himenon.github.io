@@ -1,5 +1,13 @@
 # 言語別Slack通知ライブラリ
 
+##
+
+Webhook URLの発行
+
+- <https://slack.com/services/new/incoming-webhook>
+
+いつもわからなくなる。
+
 ## Python
 
 ## slackweb
