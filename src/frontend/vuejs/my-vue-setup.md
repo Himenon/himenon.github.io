@@ -50,6 +50,7 @@ $ npm install socket-client
 CSSプリプロセッサ
 
 ```bash
+$ npm install vue-style-loader
 $ npm install sass-loader node-sass --save-dev
 ```
 
