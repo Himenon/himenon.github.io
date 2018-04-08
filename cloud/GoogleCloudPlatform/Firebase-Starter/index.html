@@ -37,6 +37,8 @@
               {title: "\u4e8b\u524d\u6e96\u5099", url: "#_1" },
               {title: "Samples", url: "#samples" },
               {title: "Tutorial", url: "#tutorial" },
+              {title: "\u30c6\u30b9\u30c8\u74b0\u5883", url: "#_2" },
+              {title: "WEB\u5074\u306e\u4f5c\u6210", url: "#web" },
           ]},
         ];
 
@@ -88,6 +90,55 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>まずは空デプロイ</p>
 <pre><code>firebase deploy
 </code></pre>
+
+<h2 id="_2">テスト環境<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>jestを用いる</p>
+<pre><code class="bash">$ npm install -D jest @types/jest sinon ts-jest
+</code></pre>
+
+<p>package.jsonに書きを追記</p>
+<pre><code class="json">&quot;jest&quot;: {
+&quot;moduleFileExtensions&quot;: [
+  &quot;ts&quot;,
+  &quot;tsx&quot;,
+  &quot;js&quot;
+],
+&quot;testMatch&quot;: [
+  &quot;**/**/tests/*.+(ts|tsx|js)&quot;  // ここはご自由に
+],
+&quot;transform&quot;: {
+  &quot;^.+\\.tsx?$&quot;: &quot;ts-jest&quot;
+},
+&quot;globals&quot;: {
+  &quot;ts-jest&quot;: {
+    &quot;tsConfigFile&quot;: &quot;tsconfig.json&quot;
+  }
+}
+}
+</code></pre>
+
+<h2 id="web">WEB側の作成<a class="headerlink" href="#web" title="Permanent link">&para;</a></h2>
+<p>https://firebase.google.com/docs/web/setup?hl=ja</p>
+<pre><code class="javascript">&lt;script src=&quot;https://www.gstatic.com/firebasejs/4.9.0/firebase.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+  var config = {
+    apiKey: &quot;&lt;API_KEY&gt;&quot;,
+    authDomain: &quot;&lt;PROJECT_ID&gt;.firebaseapp.com&quot;,
+    databaseURL: &quot;https://&lt;DATABASE_NAME&gt;.firebaseio.com&quot;,
+    storageBucket: &quot;&lt;BUCKET&gt;.appspot.com&quot;,
+    messagingSenderId: &quot;&lt;SENDER_ID&gt;&quot;,
+  };
+  firebase.initializeApp(config);
+&lt;/script&gt;
+</code></pre>
+
+<ul>
+<li>API_KEY: </li>
+<li>PROJECT_ID: </li>
+<li>DATABASE_NAME:</li>
+</ul>
 
   <br>
     

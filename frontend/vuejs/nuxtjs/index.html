@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Axiosでasync/awaitを利用する - 技術の定点観測</title>
+    <title>Nuxt.jsをやる - 技術の定点観測</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,7 +33,10 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Axios\u3067async/await\u3092\u5229\u7528\u3059\u308b", url: "#axiosasyncawait", children: [
+          {title: "Nuxt.js\u3092\u3084\u308b", url: "#nuxtjs", children: [
+              {title: "\u306f\u3058\u3081\u306b", url: "#_1" },
+              {title: "\u74b0\u5883\u69cb\u7bc9", url: "#_2" },
+              {title: "Vue.js\u3092Nuxt.js\u306eVue.js\u306e\u9055\u3046\u3068\u3053\u308d", url: "#vuejsnuxtjsvuejs" },
           ]},
         ];
 
@@ -63,11 +66,64 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="axiosasyncawait">Axiosでasync/awaitを利用する<a class="headerlink" href="#axiosasyncawait" title="Permanent link">&para;</a></h1>
-<ul>
-<li><a href="https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined">Babel 6 regeneratorRuntime is not defined</a></li>
-</ul>
-<p><code>babel-polyfill</code>が必要</p>
+    <h1 id="nuxtjs">Nuxt.jsをやる<a class="headerlink" href="#nuxtjs" title="Permanent link">&para;</a></h1>
+<h2 id="_1">はじめに<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>オレの求めていたものはこれだった感はんぱない</p>
+<h2 id="_2">環境構築<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<pre><code>npm install 
+npm install -D pug
+npm install --save axios socket.io-client
+</code></pre>
+
+<h2 id="vuejsnuxtjsvuejs">Vue.jsをNuxt.jsのVue.jsの違うところ<a class="headerlink" href="#vuejsnuxtjsvuejs" title="Permanent link">&para;</a></h2>
+<h3 id="vuex">vuex<a class="headerlink" href="#vuex" title="Permanent link">&para;</a></h3>
+<h4 id="vuexstatefunction">vuexのstateがfunction<a class="headerlink" href="#vuexstatefunction" title="Permanent link">&para;</a></h4>
+<pre><code class="js">const state = {
+    # hogehgoe
+}
+</code></pre>
+
+<p>が</p>
+<pre><code class="js">const state = () =&gt; ({
+    # hogehoge
+});
+</code></pre>
+
+<p>になる。</p>
+<h4 id="modules">modulesの扱い<a class="headerlink" href="#modules" title="Permanent link">&para;</a></h4>
+<p>通常のVue.jsでは次のように、<code>mymodule.js</code>ファイルに分離された
+モジュールを登録していた。</p>
+<pre><code class="js">import Vuex from 'vuex'
+import Vue from 'vue'
+import mymodule from './mymodule'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  modules: {
+    mymodule,
+  },
+  strict: process.env.NODE_ENV !== 'production'
+})
+</code></pre>
+
+<p>Nuxt.jsの場合、ファイル単位で既にモジュール化されるため、<code>mymodule.js</code>内で
+exportするだけでよくなった。</p>
+<pre><code class="js">// mymodulejs
+const state = () =&gt; ({}); // ここは標準のVue.jsと異なる
+const actions = {};
+const getters = {};
+const mutations = {};
+const computed = {};
+export default {
+    namespaced: true,
+    state,
+    actions,
+    getters,
+    mutations,
+    computed
+}
+</code></pre>
 
   <br>
     
@@ -75,20 +131,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../../vuejs/my-vue-setup/" class="btn btn-xs btn-default pull-right">
+      <a href="../ssr-cache-investigation/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../../vuejs/my-vue-setup/" class="btn btn-xs btn-link">
-        My vue setup
+      <a href="../ssr-cache-investigation/" class="btn btn-xs btn-link">
+        Ssr cache investigation
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../../settings/" class="btn btn-xs btn-default pull-left">
+      <a href="../my-vue-setup/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../../settings/" class="btn btn-xs btn-link">
-        lodash
+        Previous</a><a href="../my-vue-setup/" class="btn btn-xs btn-link">
+        Vueのセットアップ
       </a>
     </div>
     
