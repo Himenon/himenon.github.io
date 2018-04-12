@@ -87,3 +87,53 @@ export const createStore = storeData instanceof Function ? storeData : () => {
 `storeData`はコレよりも前に、生成される。
 `index.js`でVuexのインスタンスをそのままexportしていると`storeData`がFunctionに為り、そのまま返される。
 そうでない場合は、moduleを探索される。
+
+
+## Middeleware周り
+
+app/client.js
+
+```javascript
+  // Get route's matched components
+  const matches = []
+  const Components = getMatchedComponents(to, matches)
+
+  // If no Components matched, generate 404
+  if (!Components.length) {
+    // Default layout
+    await callMiddleware.call(this, Components, app.context)
+    if (nextCalled) return
+    // Load layout for error page
+    const layout = await this.loadLayout(typeof NuxtError.layout === 'function' ? NuxtError.layout(app.context) : NuxtError.layout)
+    await callMiddleware.call(this, Components, app.context, layout)
+    if (nextCalled) return
+    // Show error page
+    app.context.error({ statusCode: 404, message: '<%= messages.error_404 %>' })
+    return next()
+  }
+```
+
+## router
+
+
+リダイレクトさせたいんだけど〜ってとき
+
+<https://github.com/nuxt/nuxt.js/blob/8157fbfde948fbdb8589a84ef2ac3dcdb2c9baf3/test/fixtures/children/pages/patch/_id/child/_slug.vue#L50>
+
+```javascript
+this.$router.replace({ query: Object.assign({}, this.$route.query, { q: this.q }) })
+```
+
+もしくは
+
+```javascript
+$nuxt.$router.push('/')
+```
+
+template内
+
+<https://github.com/nuxt/nuxt.js/blob/aa342330d7fc6ca9d757792bfd6677184779640c/examples/tailwindcss/pages/about.vue#L7>
+
+```
+<button @click="$router.push('/')" class="mt-4 bg-blue hover:bg-blue-light text-white font-bold py-2 px-4 border-b-4 border-blue-dark hover:border-blue rounded">
+```
