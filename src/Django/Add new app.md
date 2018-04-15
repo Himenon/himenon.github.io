@@ -1,4 +1,4 @@
-# 新しいAppをDjangoに追加した場合にやること
+# DjangoにAppを新たに追加したときにやること
 
 ## urlpatternの追加
 

@@ -1,5 +1,4 @@
-# Periodic Tasksを利用する
-
+# CeleryのPeriodic Tasksを使う方法
 
 ## settings.pyのロード
 

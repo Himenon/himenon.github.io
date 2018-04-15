@@ -2,7 +2,7 @@
 
 <p id="created_at">作成日: <time datetime="2018-02-19T01:00">2018/02/19</time></p>
 
-{!server/images/reverse-proxy-architecture-including-oauth2_proxy.svg!}
+{!infrastructure/images/reverse-proxy-architecture-including-oauth2_proxy.svg!}
 
 ## これはなに？
 
