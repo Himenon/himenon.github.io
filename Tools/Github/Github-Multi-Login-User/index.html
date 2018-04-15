@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>時間データのビジュアライズ - 技術の定点観測</title>
+    <title>Githubで複数ユーザーのログインをした時の対応 - 技術の定点観測</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,8 +33,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "\u6642\u9593\u30c7\u30fc\u30bf\u306e\u30d3\u30b8\u30e5\u30a2\u30e9\u30a4\u30ba", url: "#_1", children: [
-              {title: "\u65e5\u6642\u306e\u30d2\u30b9\u30c8\u30b0\u30e9\u30e0\u5316", url: "#_2" },
+          {title: "Github\u3067\u8907\u6570\u30e6\u30fc\u30b6\u30fc\u306e\u30ed\u30b0\u30a4\u30f3\u3092\u3057\u305f\u6642\u306e\u5bfe\u5fdc", url: "#github", children: [
           ]},
         ];
 
@@ -64,11 +63,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="_1">時間データのビジュアライズ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="_2">日時のヒストグラム化<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<ul>
-<li>https://stackoverflow.com/questions/27365467/can-pandas-plot-a-histogram-of-dates</li>
-</ul>
+    <h1 id="github">Githubで複数ユーザーのログインをした時の対応<a class="headerlink" href="#github" title="Permanent link">&para;</a></h1>
+<p>よくある。いろいろと設定するのが面倒くさいので、remoteに下記のフォーマットで追加して、一気に行く</p>
+<pre><code>git remote add github https://[username]@github.com/[username]/[repo].git
+</code></pre>
+
+<p>https://Himenon@github.com/Himenon/nuxt-firebase-auth.git</p>
 
   <br>
     
@@ -76,20 +76,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../../../mongoDB/basic-query/" class="btn btn-xs btn-default pull-right">
+      <a href="../../Slack/slack-library/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../../../mongoDB/basic-query/" class="btn btn-xs btn-link">
-        Basic query
+      <a href="../../Slack/slack-library/" class="btn btn-xs btn-link">
+        Slack library
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../pandas-convert-column-to-datetime/" class="btn btn-xs btn-default pull-left">
+      <a href="../Github-GraphQL/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../pandas-convert-column-to-datetime/" class="btn btn-xs btn-link">
-        PandasのColumnをDateTimeに型変換する
+        Previous</a><a href="../Github-GraphQL/" class="btn btn-xs btn-link">
+        GithubのGraphQLを利用する
       </a>
     </div>
     

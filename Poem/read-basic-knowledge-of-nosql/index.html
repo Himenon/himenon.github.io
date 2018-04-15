@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>NOSQLとは何か... - 技術の定点観測</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <link href="../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "NOSQL\u3068\u306f\u4f55\u304b...", url: "#nosql", children: [
+              {title: "\u9006\u5f15\u304d", url: "#_1" },
+              {title: "TODO", url: "#todo" },
+              {title: "\u6700\u5f8c\u306b", url: "#_11" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script>
+      <script src="../../assets/js/mermaid.min.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="nosql">NOSQLとは何か...<a class="headerlink" href="#nosql" title="Permanent link">&para;</a></h1>
+<p id="created_at">作成日: <time datetime="2018-02-24T23:00">2018/02/24</time></p>
+
+<p>NOSQLの知識が欲しかったので、ちょっと古いが次の本を読んだ。</p>
+<blockquote>
+<p><strong>NOSQLの基礎知識 (ビッグデータを活かすデータベース技術)</strong></p>
+<ul>
+<li>作者: 本橋信也,河野達也,鶴見利章,太田洋</li>
+<li>出版社/メーカー: リックテレコム</li>
+<li>発売日: 2012/04/25</li>
+<li>http://www.ric.co.jp/book/contents/book_887.html</li>
+</ul>
+</blockquote>
+<p>逆引き的に自分なりにまとめておく。</p>
+<p>ただし、出版日が数年前なだけあって、既に古いと思われる部分はなるべく書かないか、
+明記しておく。</p>
+<h2 id="_1">逆引き<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">ビッグデータ<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>小さなデータが膨大に集まって、全体として大きなデータとなっているもの</p>
+<h3 id="_3">ラージオブジェクト<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>1つのファイルサイズが大きいもの</p>
+<h3 id="_4">結果整合性<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>ビッグデータ環境</p>
+<h3 id="sql">SQL<a class="headerlink" href="#sql" title="Permanent link">&para;</a></h3>
+<p>行と列で構成されるテーブル形</p>
+<ul>
+<li>MySQL</li>
+<li>Postgres</li>
+</ul>
+<h3 id="kvs">KVS<a class="headerlink" href="#kvs" title="Permanent link">&para;</a></h3>
+<p>KeyとValueの組からなるデータ</p>
+<ul>
+<li>Redis</li>
+<li>Dynamo</li>
+</ul>
+<h3 id="_5">カラム指向型<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>Key/Value形式を拡張したもので、行だけでなく、列に対して
+動的に追加することができる。</p>
+<ul>
+<li>BigTable</li>
+</ul>
+<h3 id="_6">ドキュメント思考型<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>JSON、BSOM、XMLといったデータ記述書式で記されたドキュメント型</p>
+<ul>
+<li>CouchDB</li>
+<li>MongoDB</li>
+</ul>
+<h3 id="_7">スケールアップ<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>サーバーのハードウェア自体の強化</p>
+<h3 id="_8">スケールアウト<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>サーバー自体の数を増やす</p>
+<h3 id="_9">シャーディング<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>複数のサーバーにデータを分割する方法</p>
+<h3 id="cap">CAP定理<a class="headerlink" href="#cap" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>C</strong>onsistency: 整合性</li>
+<li><strong>A</strong>vailability: 可用性</li>
+<li><strong>P</strong>artitions: 分断耐性</li>
+</ul>
+<p>分散システムにおいて、C、A、Pの3つのうち最大で2つしか満たすことができない、という定理</p>
+<p><a href="https://ja.wikipedia.org/wiki/CAP%E5%AE%9A%E7%90%86">CAP定理 - Wikipedia</a></p>
+<h3 id="acid">ACID<a class="headerlink" href="#acid" title="Permanent link">&para;</a></h3>
+<p>トランザクションの実行保証をするために、
+データベースに求められる4つの特性</p>
+<ul>
+<li><strong>A</strong>tomicity（原子性）</li>
+<li><strong>C</strong>onsistency（一貫性）</li>
+<li><strong>I</strong>solation（独立性）</li>
+<li><strong>D</strong>urability（耐久性）</li>
+</ul>
+<p><a href="https://ja.wikipedia.org/wiki/ACID_(%E3%82%B3%E3%83%B3%E3%83%94%E3%83%A5%E3%83%BC%E3%82%BF%E7%A7%91%E5%AD%A6)">ACID (コンピュータ科学) - Wikipedia</a></p>
+<h3 id="base">BASE<a class="headerlink" href="#base" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>BASEとは、「アプリケーションは基本的にどんなときでも動き(Basicallly Available)、常に整合性を保つ必要はないが(Soft-state)、結果として整合性がとれる状態に至る(Eventual Consistency)という特性」<br />
+p83</p>
+</blockquote>
+<ul>
+<li><strong>B</strong>asically <strong>A</strong>vailable</li>
+<li><strong>S</strong>oft-state</li>
+<li><strong>E</strong>ventual Consistencty</li>
+</ul>
+<h3 id="quorum">Quorum(クォーラム)<a class="headerlink" href="#quorum" title="Permanent link">&para;</a></h3>
+<p>議決に必要な定足数。</p>
+<ul>
+<li>N: レプリカの数</li>
+<li>R: ノードから読み出す数</li>
+<li>W: ノードに書き込む数</li>
+</ul>
+<pre><code>R + W &gt; Nの場合には整合性が保証できる。
+</code></pre>
+
+<p><code>R+W</code>がノード数より大きい場合、<strong>結果的に</strong>書き込みが完了したデータを読み込むことができる、ということ。</p>
+<h3 id="vector-clockstimestamp">ベクタークロック(Vector Clocks)/タイムスタンプ(Timestamp)<a class="headerlink" href="#vector-clockstimestamp" title="Permanent link">&para;</a></h3>
+<p>複数のクライアントからの同時更新があった場合に、
+どのようにデータのバージョンを管理し、最終的な仲裁を行うか、
+という課題に対する、代表的な解決方法。</p>
+<p><strong>タイムスタンプ</strong></p>
+<ul>
+<li>「新しいものが勝つ」という方法。</li>
+<li>サーバー側、クライアント側のどちらでも決定して良い。</li>
+</ul>
+<p><strong>ベクタークロック</strong></p>
+<p>整合性を確保する際に用いる手法の1つ。</p>
+<ul>
+<li>http://www.atmarkit.co.jp/ait/articles/1211/05/news007_3.html</li>
+</ul>
+<h3 id="consistent-hashing">コンシステント・ハッシング(Consistent Hashing)<a class="headerlink" href="#consistent-hashing" title="Permanent link">&para;</a></h3>
+<p>ノードをリング状に配置し、ハッシュ値を元に
+それらのノードに書き込みを行っていく方法。
+キーの値が特定の値に偏ることなく拡散するようにする。</p>
+<h3 id="log-structured-merge-tree-lsm-tree">Log Structured Merge Tree (LSM-Tree)<a class="headerlink" href="#log-structured-merge-tree-lsm-tree" title="Permanent link">&para;</a></h3>
+<p>Bigtableに触発されたNOSQLのデータベースが含む技術。
+メモリを使って応答性能を高めながら、ハードディスクにデータを書くのすることで、データの安全性を保つ。</p>
+<p>メリット</p>
+<ul>
+<li>書き込み性能が非常に高い</li>
+</ul>
+<p>デメリット</p>
+<ul>
+<li>読み込み性能の低下(※おそらくHDDの場合。SSDは話が変わる)</li>
+</ul>
+<p>読み込み性能を低下を軽減させるために、定期的にコンパクションを行い、
+SS Tableの数を少なくする。</p>
+<h3 id="mem-table">Mem table<a class="headerlink" href="#mem-table" title="Permanent link">&para;</a></h3>
+<p>メモリーキャッシュ領域に存在。</p>
+<h3 id="commit-log">Commit Log<a class="headerlink" href="#commit-log" title="Permanent link">&para;</a></h3>
+<p>履歴情報をディスク内で保持</p>
+<h3 id="ss-table">SS Table<a class="headerlink" href="#ss-table" title="Permanent link">&para;</a></h3>
+<p>永続ボリュームに格納</p>
+<h3 id="meta-data">メタデータ(Meta Data)テーブル<a class="headerlink" href="#meta-data" title="Permanent link">&para;</a></h3>
+<h3 id="_10">ルートテーブル<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<h3 id="cascheck-and-swap">CAS(Check And Swap)<a class="headerlink" href="#cascheck-and-swap" title="Permanent link">&para;</a></h3>
+<p>ある値の更新時に、その値が自分以外のプロセスによって更新されていないか確認し、
+自分のみが更新していると確認できた上で、更新処理を適用するオペレーション。</p>
+<h3 id="hadoop-mapreduce">Hadoop MapReduce<a class="headerlink" href="#hadoop-mapreduce" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>複数のサーバーを用いて、大量のデータを並列分散処理するプログラミングのためのソフトウェア
+ある一定期間のデータを集めた上で一括処理するために用いられる。<br />
+p121</p>
+</blockquote>
+<h3 id="hdfshadoop-distributed-file-system">HDFS(Hadoop Distributed File System)<a class="headerlink" href="#hdfshadoop-distributed-file-system" title="Permanent link">&para;</a></h3>
+<p>マスタ型。MapReduceのデータ入出力として使用したトキに、最大の性能を発揮するように設計されている。</p>
+<h3 id="mapreduce">MapReduce処理<a class="headerlink" href="#mapreduce" title="Permanent link">&para;</a></h3>
+<p><strong>Mapタスク</strong></p>
+<p>データを分解して必要な情報を抽出し、有用な形へ変換する役割</p>
+<p>分散処理することで、現実的な時間で処理が終わる</p>
+<p><strong>Reduceタスク</strong></p>
+<p>抽出された情報を集約し、一塊のデータとして出力する役割</p>
+<h2 id="todo">TODO<a class="headerlink" href="#todo" title="Permanent link">&para;</a></h2>
+<p>図の挿入</p>
+<h2 id="_11">最後に<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>誤植・間違い、もっとこうした方がいい、僕はこうやった（ドヤァ）、などありましたら、
+やさしく鎌を<a href="https://twitter.com/himenoglyph">Twitter</a>などに投げていただけると幸いです。</p>
+</div>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../static-site-generator/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../static-site-generator/" class="btn btn-xs btn-link">
+        Static site generator
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Container-Worker-Design/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Container-Worker-Design/" class="btn btn-xs btn-link">
+        コンテナ型のワーカーの設計（仮）
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

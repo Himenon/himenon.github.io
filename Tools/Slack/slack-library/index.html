@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>時間データのビジュアライズ - 技術の定点観測</title>
+    <title>言語別Slack通知ライブラリ - 技術の定点観測</title>
     <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../../css/base.css" rel="stylesheet">
@@ -33,8 +33,10 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "\u6642\u9593\u30c7\u30fc\u30bf\u306e\u30d3\u30b8\u30e5\u30a2\u30e9\u30a4\u30ba", url: "#_1", children: [
-              {title: "\u65e5\u6642\u306e\u30d2\u30b9\u30c8\u30b0\u30e9\u30e0\u5316", url: "#_2" },
+          {title: "\u8a00\u8a9e\u5225Slack\u901a\u77e5\u30e9\u30a4\u30d6\u30e9\u30ea", url: "#slack", children: [
+              {title: "Python", url: "#python" },
+              {title: "slackweb", url: "#slackweb" },
+              {title: "django-channels", url: "#django-channels" },
           ]},
         ];
 
@@ -64,10 +66,24 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="_1">時間データのビジュアライズ<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<h2 id="_2">日時のヒストグラム化<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+    <h1 id="slack">言語別Slack通知ライブラリ<a class="headerlink" href="#slack" title="Permanent link">&para;</a></h1>
+<h2 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>Webhook URLの発行</p>
 <ul>
-<li>https://stackoverflow.com/questions/27365467/can-pandas-plot-a-histogram-of-dates</li>
+<li><a href="https://slack.com/services/new/incoming-webhook">https://slack.com/services/new/incoming-webhook</a></li>
+</ul>
+<p>いつもわからなくなる。</p>
+<h2 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h2>
+<h2 id="slackweb">slackweb<a class="headerlink" href="#slackweb" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/satoshi03/slack-python-webhook">https://github.com/satoshi03/slack-python-webhook</a></p>
+<pre><code>pip install slackweb
+</code></pre>
+
+<h2 id="django-channels">django-channels<a class="headerlink" href="#django-channels" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/ymyzk/kawasemi">https://github.com/ymyzk/kawasemi</a></li>
+<li><a href="https://blog.ymyzk.com/2015/06/django-channels-release-notes/">https://blog.ymyzk.com/2015/06/django-channels-release-notes/</a></li>
+<li><a href="http://uni8inu.hatenablog.com/entry/2016/11/30/195311">http://uni8inu.hatenablog.com/entry/2016/11/30/195311</a></li>
 </ul>
 
   <br>
@@ -76,20 +92,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../../../mongoDB/basic-query/" class="btn btn-xs btn-default pull-right">
+      <a href="../../Zapier/zapier-development/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../../../mongoDB/basic-query/" class="btn btn-xs btn-link">
-        Basic query
+      <a href="../../Zapier/zapier-development/" class="btn btn-xs btn-link">
+        Zapier development
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../pandas-convert-column-to-datetime/" class="btn btn-xs btn-default pull-left">
+      <a href="../../Github/Github-Multi-Login-User/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../pandas-convert-column-to-datetime/" class="btn btn-xs btn-link">
-        PandasのColumnをDateTimeに型変換する
+        Previous</a><a href="../../Github/Github-Multi-Login-User/" class="btn btn-xs btn-link">
+        Githubで複数ユーザーのログインをした時の対応
       </a>
     </div>
     

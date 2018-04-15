@@ -35,8 +35,9 @@
       var is_top_frame = (window === window.parent);
         
         var pageToc = [
-          {title: "\u30db\u30fc\u30e0", url: "#_1", children: [
-              {title: "\u3053\u306e\u30b5\u30a4\u30c8\u306b\u3064\u3044\u3066", url: "#_2" },
+          {title: "Hey!", url: "#hey", children: [
+              {title: "\u3053\u306e\u30b5\u30a4\u30c8\u306b\u3064\u3044\u3066", url: "#_1" },
+              {title: "\u6ce8\u610f\u70b9", url: "#_2" },
               {title: "SNS", url: "#sns" },
           ]},
         ];
@@ -118,10 +119,226 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
       </li>
     </ul>
   <ul class="wm-toctree">
-        <li class="wm-toc-li wm-toc-lev1 "><a href="." class="wm-article-link wm-toc-text">ホーム</a>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="." class="wm-article-link wm-toc-text">Hey!</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="pick-up-article/" class="wm-article-link wm-toc-text">Pick up article</a>
 </li>
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Django</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Django/Add new app/" class="wm-article-link wm-toc-text">Add new app</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Django/Introduction-of-Celery-Django/" class="wm-article-link wm-toc-text">Introduction of Celery Django</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Django/Seperate-Django-Database/" class="wm-article-link wm-toc-text">Seperate Django Database</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Firebase</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Firebase/Auth-Error-Tips/" class="wm-article-link wm-toc-text">Auth Error Tips</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Firebase/Firebase-Cloud-Functions/" class="wm-article-link wm-toc-text">Firebase Cloud Functions</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Firebase/Firebase-Starter/" class="wm-article-link wm-toc-text">Firebase Starter</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Flask</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Flask/Hello-Flask-Streamming-Content/" class="wm-article-link wm-toc-text">Hello Flask Streamming Content</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Frontend</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Frontend/settings/" class="wm-article-link wm-toc-text">Settings</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Es6</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Frontend/es6/usage-axios/" class="wm-article-link wm-toc-text">Usage axios</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Vuejs</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Frontend/vuejs/my-vue-setup/" class="wm-article-link wm-toc-text">My vue setup</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Frontend/vuejs/nuxtjs/" class="wm-article-link wm-toc-text">Nuxtjs</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Frontend/vuejs/ssr-cache-investigation/" class="wm-article-link wm-toc-text">Ssr cache investigation</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Frontend/vuejs/vuex-usage/" class="wm-article-link wm-toc-text">Vuex usage</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">GCP</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="GCP/Cloud-Function/" class="wm-article-link wm-toc-text">Cloud Function</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="GCP/GKE/" class="wm-article-link wm-toc-text">GKE</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Infrastructure</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/" class="wm-article-link wm-toc-text">Multiple Reverse Proxy Sapmle with oauth2 proxy</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Kubernetes</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Kubernetes/Nginx access control for kubernetes/" class="wm-article-link wm-toc-text">Nginx access control for kubernetes</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Kubernetes/Shortcut-for-kubectl/" class="wm-article-link wm-toc-text">Shortcut for kubectl</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Kubernetes/cron-wake-up-down/" class="wm-article-link wm-toc-text">Cron wake up down</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Kubernetes/error helm incompatible version/" class="wm-article-link wm-toc-text">Error helm incompatible version</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Nodejs</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Nodejs/Request-library-description-for-json-value/" class="wm-article-link wm-toc-text">Request library description for json value</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Nodejs/dynamic-import/" class="wm-article-link wm-toc-text">Dynamic import</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Nodejs/execute-async-mjs/" class="wm-article-link wm-toc-text">Execute async mjs</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Poem</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Poem/Container-App-Directory-Management-Consideration/" class="wm-article-link wm-toc-text">Container App Directory Management Consideration</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Poem/Container-Worker-Design/" class="wm-article-link wm-toc-text">Container Worker Design</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Poem/read-basic-knowledge-of-nosql/" class="wm-article-link wm-toc-text">Read basic knowledge of nosql</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Poem/static-site-generator/" class="wm-article-link wm-toc-text">Static site generator</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Presentation</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">2018</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Presentation/2018/03-02-Yoidore-GCPUG-LT/" class="wm-article-link wm-toc-text">03 02 Yoidore GCPUG LT</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Profile</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Profile/github-activity/" class="wm-article-link wm-toc-text">Github activity</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Profile/" class="wm-article-link wm-toc-text">Home</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Profile/skill/" class="wm-article-link wm-toc-text">Skill</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Profile/study-history/" class="wm-article-link wm-toc-text">Study history</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Python</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 "><a href="Python/test-know-how/" class="wm-article-link wm-toc-text">Test know how</a>
+</li>
+  </ul>
+</li>
+
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Tools</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Git</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Tools/Git/git-tips/" class="wm-article-link wm-toc-text">Git tips</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Github</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Tools/Github/Github-GraphQL/" class="wm-article-link wm-toc-text">Github GraphQL</a>
+</li>
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Tools/Github/Github-Multi-Login-User/" class="wm-article-link wm-toc-text">Github Multi Login User</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Slack</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Tools/Slack/slack-library/" class="wm-article-link wm-toc-text">Slack library</a>
+</li>
+  </ul>
+</li>
+
+      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Zapier</span>
+</li>
+<li class="wm-toc-li-nested collapse">
+  <ul class="wm-toctree">
+      <li class="wm-toc-li wm-toc-lev3 "><a href="Tools/Zapier/zapier-development/" class="wm-article-link wm-toc-text">Zapier development</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
         <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Analytics</span>
 </li>
 <li class="wm-toc-li-nested collapse">
@@ -149,215 +366,14 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   </ul>
 </li>
 
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Cloud</span>
+        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">mongoDB</span>
 </li>
 <li class="wm-toc-li-nested collapse">
   <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">GoogleCloudPlatform</span>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="mongoDB/basic-query/" class="wm-article-link wm-toc-text">Basic query</a>
 </li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="cloud/GoogleCloudPlatform/Cloud-Function/" class="wm-article-link wm-toc-text">Cloud Function</a>
+      <li class="wm-toc-li wm-toc-lev2 "><a href="mongoDB/basic-read-write/" class="wm-article-link wm-toc-text">Basic read write</a>
 </li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="cloud/GoogleCloudPlatform/Firebase-Cloud-Functions/" class="wm-article-link wm-toc-text">Firebase Cloud Functions</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="cloud/GoogleCloudPlatform/Firebase-Starter/" class="wm-article-link wm-toc-text">Firebase Starter</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="cloud/GoogleCloudPlatform/KubernetesEngine/" class="wm-article-link wm-toc-text">KubernetesEngine</a>
-</li>
-  </ul>
-</li>
-
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Db</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="db/read-basic-knowledge-of-nosql/" class="wm-article-link wm-toc-text">Read basic knowledge of nosql</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Mongo</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="db/mongo/basic-query/" class="wm-article-link wm-toc-text">Basic query</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="db/mongo/basic-read-write/" class="wm-article-link wm-toc-text">Basic read write</a>
-</li>
-  </ul>
-</li>
-
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Frontend</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="frontend/settings/" class="wm-article-link wm-toc-text">Settings</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Async await</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="frontend/async-await/usage-axios/" class="wm-article-link wm-toc-text">Usage axios</a>
-</li>
-  </ul>
-</li>
-
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Vuejs</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="frontend/vuejs/my-vue-setup/" class="wm-article-link wm-toc-text">My vue setup</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="frontend/vuejs/nuxtjs/" class="wm-article-link wm-toc-text">Nuxtjs</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="frontend/vuejs/ssr-cache-investigation/" class="wm-article-link wm-toc-text">Ssr cache investigation</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="frontend/vuejs/vuex-usage/" class="wm-article-link wm-toc-text">Vuex usage</a>
-</li>
-  </ul>
-</li>
-
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Kubernetes</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="kubernetes/Nginx access control for kubernetes/" class="wm-article-link wm-toc-text">Nginx access control for kubernetes</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="kubernetes/Shortcut-for-kubectl/" class="wm-article-link wm-toc-text">Shortcut for kubectl</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="kubernetes/cron-wake-up-down/" class="wm-article-link wm-toc-text">Cron wake up down</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="kubernetes/error helm incompatible version/" class="wm-article-link wm-toc-text">Error helm incompatible version</a>
-</li>
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Nodejs</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="nodejs/request-package-json/" class="wm-article-link wm-toc-text">Request package json</a>
-</li>
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Poem</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="poem/Container-App-Directory-Management-Consideration/" class="wm-article-link wm-toc-text">Container App Directory Management Consideration</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="poem/Container-Worker-Design/" class="wm-article-link wm-toc-text">Container Worker Design</a>
-</li>
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Presentation</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">2018</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="presentation/2018/03-02-Yoidore-GCPUG-LT/" class="wm-article-link wm-toc-text">03 02 Yoidore GCPUG LT</a>
-</li>
-  </ul>
-</li>
-
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Profile</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="profile/github-activity/" class="wm-article-link wm-toc-text">Github activity</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="profile/" class="wm-article-link wm-toc-text">Home</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="profile/skill/" class="wm-article-link wm-toc-text">Skill</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="profile/study-history/" class="wm-article-link wm-toc-text">Study history</a>
-</li>
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Python</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="python/test-know-how/" class="wm-article-link wm-toc-text">Test know how</a>
-</li>
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Server</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="server/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/" class="wm-article-link wm-toc-text">Multiple Reverse Proxy Sapmle with oauth2 proxy</a>
-</li>
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Tools</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 "><a href="tools/Github-GraphQL/" class="wm-article-link wm-toc-text">Github GraphQL</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="tools/slack-library/" class="wm-article-link wm-toc-text">Slack library</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 "><a href="tools/static-site-generator/" class="wm-article-link wm-toc-text">Static site generator</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Zapier</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="tools/zapier/zapier-development/" class="wm-article-link wm-toc-text">Zapier development</a>
-</li>
-  </ul>
-</li>
-
-  </ul>
-</li>
-
-        <li class="wm-toc-li wm-toc-lev1 wm-toc-opener"><span class="wm-toc-text">Webapp</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Django</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="webapp/django/Add new app/" class="wm-article-link wm-toc-text">Add new app</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="webapp/django/Celery Periodic Tasks/" class="wm-article-link wm-toc-text">Celery Periodic Tasks</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="webapp/django/Introduction-of-Celery-Django/" class="wm-article-link wm-toc-text">Introduction of Celery Django</a>
-</li>
-      <li class="wm-toc-li wm-toc-lev3 "><a href="webapp/django/Seperate DB/" class="wm-article-link wm-toc-text">Seperate DB</a>
-</li>
-  </ul>
-</li>
-
-      <li class="wm-toc-li wm-toc-lev2 wm-toc-opener"><span class="wm-toc-text">Flask</span>
-</li>
-<li class="wm-toc-li-nested collapse">
-  <ul class="wm-toctree">
-      <li class="wm-toc-li wm-toc-lev3 "><a href="webapp/flask/Hello-Flask-Streamming-Content/" class="wm-article-link wm-toc-text">Hello Flask Streamming Content</a>
-</li>
-  </ul>
-</li>
-
   </ul>
 </li>
 
@@ -372,16 +388,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="_1">ホーム<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+    <h1 id="hey">Hey!<a class="headerlink" href="#hey" title="Permanent link">&para;</a></h1>
 <p>このブログのスター数</p>
 <iframe src="https://ghbtns.com/github-btn.html?user=Himenon&repo=himenon.github.io&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
 
 <p>1つでも役に立った、と思ったらスターが欲しいです。</p>
-<h2 id="_2">このサイトについて<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_1">このサイトについて<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <p>時々、技術的なことについて書いていきまます。
 誤字脱字や間違いなどがあれば、お気軽にSNSなどでコメントください。</p>
-<p>Githubにソースを公開しているので、PRを投げていただけると嬉しいな。
+<p>Githubにソースを公開しているので、PRを投げていただけると嬉しいです。
 <a href="https://github.com/Himenon/himenon.github.io/">https://github.com/Himenon/himenon.github.io/</a></p>
+<h2 id="_2">注意点<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>このサイトの構造は定期的にメンテナンスを加えています。
+URLがコロコロ変わる可能性があるので、SEO的にはよくありませんが、
+整理しながらでもないと、気持ち悪いので、その辺は諦めています。</p>
 <h2 id="sns">SNS<a class="headerlink" href="#sns" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Twitter: <a href="https://twitter.com/">@himenoglyph</a></li>
@@ -417,5 +437,5 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </html>
 <!--
 MkDocs version : 0.17.2
-Build Date UTC : 2018-04-08 18:36:28
+Build Date UTC : 2018-04-15 16:57:40
 -->

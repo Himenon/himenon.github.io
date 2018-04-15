@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Firebaseことはじめ - 技術の定点観測</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <link href="../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Firebase\u3053\u3068\u306f\u3058\u3081", url: "#firebase", children: [
+              {title: "\u4e8b\u524d\u6e96\u5099", url: "#_1" },
+              {title: "Samples", url: "#samples" },
+              {title: "Tutorial", url: "#tutorial" },
+              {title: "\u30c6\u30b9\u30c8\u74b0\u5883", url: "#_2" },
+              {title: "WEB\u5074\u306e\u4f5c\u6210", url: "#web" },
+              {title: "\u74b0\u5883\u5909\u6570\u306e\u8a2d\u5b9a", url: "#_3" },
+              {title: "Firestore\u3067\u8e93\u304f", url: "#firestore" },
+              {title: "Cloud Function\u306e\u5206\u5272", url: "#cloud-function" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script>
+      <script src="../../assets/js/mermaid.min.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="firebase">Firebaseことはじめ<a class="headerlink" href="#firebase" title="Permanent link">&para;</a></h1>
+<h2 id="_1">事前準備<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><a href="https://firebase.google.com/docs/cli/">https://firebase.google.com/docs/cli/</a></p>
+<pre><code>npm install -g firebase-tools
+</code></pre>
+
+<h2 id="samples">Samples<a class="headerlink" href="#samples" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://github.com/firebase/functions-samples">https://github.com/firebase/functions-samples</a></li>
+</ul>
+<h2 id="tutorial">Tutorial<a class="headerlink" href="#tutorial" title="Permanent link">&para;</a></h2>
+<pre><code>firebase login
+</code></pre>
+
+<pre><code>firebase init
+# 選択肢
+# Projectの選択
+</code></pre>
+
+<p>まずは空デプロイ</p>
+<pre><code>firebase deploy
+</code></pre>
+
+<h2 id="_2">テスト環境<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>jestを用いる</p>
+<pre><code class="bash">$ npm install -D jest @types/jest sinon ts-jest
+</code></pre>
+
+<p>package.jsonに書きを追記</p>
+<pre><code class="json">&quot;jest&quot;: {
+&quot;moduleFileExtensions&quot;: [
+  &quot;ts&quot;,
+  &quot;tsx&quot;,
+  &quot;js&quot;
+],
+&quot;testMatch&quot;: [
+  &quot;**/**/tests/*.+(ts|tsx|js)&quot;  // ここはご自由に
+],
+&quot;transform&quot;: {
+  &quot;^.+\\.tsx?$&quot;: &quot;ts-jest&quot;
+},
+&quot;globals&quot;: {
+  &quot;ts-jest&quot;: {
+    &quot;tsConfigFile&quot;: &quot;tsconfig.json&quot;
+  }
+}
+}
+</code></pre>
+
+<h2 id="web">WEB側の作成<a class="headerlink" href="#web" title="Permanent link">&para;</a></h2>
+<p>https://firebase.google.com/docs/web/setup?hl=ja</p>
+<pre><code class="javascript">&lt;script src=&quot;https://www.gstatic.com/firebasejs/4.9.0/firebase.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+  var config = {
+    apiKey: &quot;&lt;API_KEY&gt;&quot;,
+    authDomain: &quot;&lt;PROJECT_ID&gt;.firebaseapp.com&quot;,
+    databaseURL: &quot;https://&lt;DATABASE_NAME&gt;.firebaseio.com&quot;,
+    storageBucket: &quot;&lt;BUCKET&gt;.appspot.com&quot;,
+    messagingSenderId: &quot;&lt;SENDER_ID&gt;&quot;,
+  };
+  firebase.initializeApp(config);
+&lt;/script&gt;
+</code></pre>
+
+<ul>
+<li>API_KEY: </li>
+<li>PROJECT_ID: </li>
+<li>DATABASE_NAME:</li>
+</ul>
+<h2 id="_3">環境変数の設定<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>config側からぶっこむ</p>
+<pre><code class="js">const webpack = require('webpack')
+config.plugins.push(
+  new webpack.EnvironmentPlugin(['APIKEY', 'AUTHDOMAIN', 'DATABASEURL', 'PROJECTID', 'STORAGEBUCKET', 'MESSAGINGSENDERID'])
+)
+</code></pre>
+
+<h2 id="firestore">Firestoreで躓く<a class="headerlink" href="#firestore" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/46636255/firebase-firestore-is-not-a-function-when-trying-to-initialize-cloud-firestore">firebase.firestore() is not a function when trying to initialize Cloud Firestore</a></li>
+</ul>
+<p>firestoreのUnitttest</p>
+<p>適当に<code>GCLOUD_PROJECT</code>を設定しておく必要がある。</p>
+<pre><code>process.env.GCLOUD_PROJECT = 'xxxxxx'
+</code></pre>
+
+<ul>
+<li>https://github.com/firebase/functions-samples/issues/250</li>
+<li>https://www.npmjs.com/package/cross-env</li>
+</ul>
+<h2 id="cloud-function">Cloud Functionの分割<a class="headerlink" href="#cloud-function" title="Permanent link">&para;</a></h2>
+<p>https://stackoverflow.com/questions/43486278/how-do-i-structure-cloud-functions-for-firebase-to-deploy-multiple-functions-fro</p>
+<p>https://stackoverflow.com/questions/46818082/error-http-error-400-the-request-has-errors-firebase-firestore-cloud-function</p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../Flask/Hello-Flask-Streamming-Content/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../Flask/Hello-Flask-Streamming-Content/" class="btn btn-xs btn-link">
+        Hello Flask Streamming Content
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Firebase-Cloud-Functions/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Firebase-Cloud-Functions/" class="btn btn-xs btn-link">
+        FirebaseにおけるCloud Functions
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

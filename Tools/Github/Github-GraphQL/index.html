@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>GithubのGraphQLを利用する - 技術の定点観測</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <link href="../../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Github\u306eGraphQL\u3092\u5229\u7528\u3059\u308b", url: "#githubgraphql", children: [
+              {title: "issue\u306e\u63a2\u7d22", url: "#issue" },
+              {title: "issue\u304b\u3089label\u3092\u5916\u3059", url: "#issuelabel" },
+              {title: "Scheme Type", url: "#scheme-type" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script>
+      <script src="../../../assets/js/mermaid.min.js"></script>
+      <script src="../../../search/require.js"></script>
+      <script src="../../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="githubgraphql">GithubのGraphQLを利用する<a class="headerlink" href="#githubgraphql" title="Permanent link">&para;</a></h1>
+<p>WEBUI上で手っ取り早く検証ができるのでこれを利用する</p>
+<ul>
+<li>https://developer.github.com/v4/explorer/</li>
+</ul>
+<p>自己の環境でやるときは、CORS対策しないと行けないのでやや面倒</p>
+<h3 id="issue">issueの探索<a class="headerlink" href="#issue" title="Permanent link">&para;</a></h3>
+<pre><code class="graphql">query ($owner: String!, $repoName: String!) { 
+  repository(owner: $owner, name: $repoName){
+    issues(first: 100, states: OPEN) {
+      nodes {
+        id
+        title
+        labels(first: 5) {
+          nodes {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+
+<pre><code>variables {
+  &quot;owner&quot;: &quot;Himenon&quot;,
+  &quot;repoName&quot;: &quot;SmallWork&quot;
+}
+</code></pre>
+
+<h3 id="issuelabel">issueからlabelを外す<a class="headerlink" href="#issuelabel" title="Permanent link">&para;</a></h3>
+<p>GraphQLのmutaitonで、removeLabelとかがあればよかったのですが、存在せず、</p>
+<p>https://developer.github.com/v4/mutation/</p>
+<p>Input Objectsから探しても</p>
+<p>https://developer.github.com/v4/input_object/</p>
+<p>labelのlの字も無かったので、v3のAPIを叩くことにしました。</p>
+<h4 id="v3">v3<a class="headerlink" href="#v3" title="Permanent link">&para;</a></h4>
+<p>https://developer.github.com/v3/issues/</p>
+<p>Endpoint: <code>https://api.github.com</code></p>
+<p>Shellはfishで合わせます</p>
+<p><strong>GET</strong></p>
+<pre><code class="bash">set OAUTH_TOKEN XXXXX
+set OWNER Himenon
+set REPO himenon.github.io
+curl -H &quot;Authorization: token $OAUTH_TOKEN&quot; https://api.github.com/repos/$OWNER/$REPO/labels
+</code></pre>
+
+<p><strong>POST</strong></p>
+<pre><code class="bash">set NUMBER 1
+set LABEL todo
+# /repos/:owner/:repo/issues/:number/labels/:name
+curl -H &quot;Authorization: token $OAUTH_TOKEN&quot; https://api.github.com/repos/$OWNER/$REPO/issues/$NUMBER/labels/$LABEL -X DELETE
+</code></pre>
+
+<h3 id="scheme-type">Scheme Type<a class="headerlink" href="#scheme-type" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Query</li>
+<li>Object</li>
+<li>Mutations</li>
+</ul>
+<p>OBjects</p>
+<h3 id="_1"><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../Github-Multi-Login-User/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../Github-Multi-Login-User/" class="btn btn-xs btn-link">
+        Github Multi Login User
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../Git/git-tips/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../Git/git-tips/" class="btn btn-xs btn-link">
+        Git Tips
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>PythonのTest - 技術の定点観測</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <link href="../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Python\u306eTest", url: "#pythontest", children: [
+              {title: "pytest.mark", url: "#pytestmark" },
+              {title: "pytest.fixture", url: "#pytestfixture" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script>
+      <script src="../../assets/js/mermaid.min.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="pythontest">PythonのTest<a class="headerlink" href="#pythontest" title="Permanent link">&para;</a></h1>
+<h2 id="pytestmark">pytest.mark<a class="headerlink" href="#pytestmark" title="Permanent link">&para;</a></h2>
+<h3 id="pytestmarkskip">pytest.mark.skip<a class="headerlink" href="#pytestmarkskip" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://docs.pytest.org/en/latest/skipping.html">https://docs.pytest.org/en/latest/skipping.html</a></li>
+</ul>
+<h2 id="pytestfixture">pytest.fixture<a class="headerlink" href="#pytestfixture" title="Permanent link">&para;</a></h2>
+<h3 id="flask">Flaskのテストコードより<a class="headerlink" href="#flask" title="Permanent link">&para;</a></h3>
+<p><code>unittest.TestCase</code>のsetUpやtearDownを使って、テスト対象のインスタンスを使いまわすやり方があるが、
+単純にインスタンスがほしいというだけの場合がある。
+それを実現するためにテスト用のメソッド内でインスタンスを生成するのも芸がない。
+また、Flaskの用にデコレータを使ったメソッドのテストはどのようにやるのか調べたら、
+<code>pytest.fixture</code>の使い方に興味深い方法があったので紹介。</p>
+<p><a href="https://github.com/pallets/flask/blob/master/tests/conftest.py#L61-L64">flask/tests/conftest.py</a></p>
+<pre><code class="python">class Flask(_Flask):
+    testing = True
+    secret_key = 'test key'
+
+@pytest.fixture
+def app():
+    app = Flask('flask_test', root_path=os.path.dirname(__file__))
+    return app
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
+</code></pre>
+
+<p><a href="https://github.com/pallets/flask/blob/master/tests/test_basic.py#L28-L35">flask/tests/test_basic.py</a></p>
+<pre><code class="python">def test_options_work(app, client):
+    @app.route('/', methods=['GET', 'POST'])
+    def index():
+        return 'Hello World'
+
+    rv = client.open('/', method='OPTIONS')
+    assert sorted(rv.allow) == ['GET', 'HEAD', 'OPTIONS', 'POST']
+    assert rv.data == b''
+</code></pre>
+
+<p><strong>ドキュメント</strong></p>
+<ul>
+<li><a href="https://docs.pytest.org/en/latest/fixture.html#fixtures-as-function-arguments">Fixtures as Function arguments - pytest</a></li>
+</ul>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../Tools/Git/git-tips/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../Tools/Git/git-tips/" class="btn btn-xs btn-link">
+        Git tips
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../Profile/study-history/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../Profile/study-history/" class="btn btn-xs btn-link">
+        参加した勉強会
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

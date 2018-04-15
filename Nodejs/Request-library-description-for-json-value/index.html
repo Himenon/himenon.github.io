@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>nodeのrequestライブラリの`json`オプションの取り扱いについて - 技術の定点観測</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <link href="../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "node\u306erequest\u30e9\u30a4\u30d6\u30e9\u30ea\u306ejson\u30aa\u30d7\u30b7\u30e7\u30f3\u306e\u53d6\u308a\u6271\u3044\u306b\u3064\u3044\u3066", url: "#noderequestjson", children: [
+              {title: "TL;DR", url: "#tldr" },
+              {title: "\u7c21\u5358\u306b\u8abf\u3079\u3066\u307f\u305f", url: "#_1" },
+              {title: "\u5b9f\u88c5\u30b3\u30fc\u30c9\u304b\u3089\u8abf\u3079\u3066\u307f\u305f", url: "#_2" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script>
+      <script src="../../assets/js/mermaid.min.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="noderequestjson">nodeのrequestライブラリの<code>json</code>オプションの取り扱いについて<a class="headerlink" href="#noderequestjson" title="Permanent link">&para;</a></h1>
+<h2 id="tldr">TL;DR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h2>
+<p>つべこべいわず、該当コード見たほうが早い</p>
+<ul>
+<li><a href="https://github.com/request/request/blob/master/request.js#L1278-L1313">https://github.com/request/request/blob/master/request.js#L1278-L1313</a></li>
+</ul>
+<p>コードを読んでもわからなかったら続きをどうぞ。</p>
+<h2 id="_1">簡単に調べてみた<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>知人が、nodeのHTTP Clientである<a href="https://github.com/request/request">reuqest</a>をPOST時に利用したときに、
+<code>json: true</code>のoptionがあるけど、<code>body</code>がjsonかされないっていう話を聞いたので、調べてみた。</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/27190447/pass-json-to-http-post-request">https://stackoverflow.com/questions/27190447/pass-json-to-http-post-request</a></li>
+<li><a href="https://stackoverflow.com/questions/8675688/send-content-type-application-json-post-with-node-js">send Content-Type: application/json post with node.js</a></li>
+</ul>
+<p>どうやら、optionの<code>json</code>にBooleanではなく、直接Objectを渡したほうが早い。</p>
+<h2 id="_2">実装コードから調べてみた<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="json">オプションの<code>json</code>をどうのように取り扱っているか<a class="headerlink" href="#json" title="Permanent link">&para;</a></h3>
+<p>冒頭でも紹介した<a href="https://github.com/request/request/blob/master/request.js#L1278-L1313">https://github.com/request/request/blob/master/request.js#L1278-L1313</a>である。</p>
+<p>いろいろぶっ飛ばして、</p>
+<pre><code class="js">Request.prototype.json = function (val) {
+  var self = this
+
+  // 中略
+
+  self._json = true
+  if (typeof val === 'boolean') {
+    // jsonオプションの値がbooleanの場合
+    if (self.body !== undefined) {
+      // bodyがundefinedでなけれあば
+      if (!/^application\/x-www-form-urlencoded\b/.test(self.getHeader('content-type'))) {
+        // content-typeが application/x-www-form-urlencoded とマッチした倍、
+        // https://github.com/request/request/blob/master/lib/helpers.js#L20-L28
+        self.body = safeStringify(self.body, self._jsonReplacer)
+      } else {
+        // rfc3986でエンコード
+        // https://github.com/request/request/blob/master/lib/querystring.js#L42-L46
+        self.body = self._qs.rfc3986(self.body)
+      }
+      if (!self.hasHeader('content-type')) {
+        // content-typeが指定されていなければ、application/jsonに指定
+        self.setHeader('content-type', 'application/json')
+      }
+    }
+} else {
+    // jsonがbooleanでないとき 
+    // bodyに入れ直していますね。
+    self.body = safeStringify(val, self._jsonReplacer)
+    if (!self.hasHeader('content-type')) {
+      // content-typeが指定されていなければ、application/jsonに指定
+      self.setHeader('content-type', 'application/json')
+    }
+  }
+
+  return self
+}
+</code></pre>
+
+<p>これで謎は解けました。
+<code>rfc3986</code>が出てきたのですが、別の章で紹介。</p>
+<h3 id="_3">もっと詳しく見てみる<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>渋川さんの記事が大変参考になります。
+読んでいた当時はよくわからなかったのですが、今となっては噛み締めて読めますね。。。
+RFC大事。</p>
+<ul>
+<li><a href="https://qiita.com/shibukawa/items/c0730092371c0e243f62">encodeURIComponentが世界基準だと誤解してた話</a></li>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent">encodeURIComponent() - MDN</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent">encodeURIComponent() - demo</a></li>
+</ul>
+<p>RFC3986に厳格に対応したライブラリ</p>
+<ul>
+<li><a href="https://github.com/ljharb/qs">ljharb/qs</a><ul>
+<li><a href="https://nodejs.org/api/querystring.html">Query String - Node.js v9.11.1 Documentation</a></li>
+<li>requests内部で利用されていますね</li>
+</ul>
+</li>
+</ul>
+<p>RFC3986関連</p>
+<ul>
+<li><a href="https://triple-underscore.github.io/RFC3986-ja.html">RFC3986 日本語訳の複製</a></li>
+<li><a href="http://freak-da.hatenablog.com/entry/20080321/p1">URIに使ってよい文字の話 - RFC2396 と RFC3986</a></li>
+<li><a href="http://info-i.net/rfc3986-url">RFC3986を読みながらURLエンコードについて考えた</a></li>
+</ul>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../dynamic-import/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../dynamic-import/" class="btn btn-xs btn-link">
+        Dynamic import
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../Kubernetes/error helm incompatible version/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../Kubernetes/error helm incompatible version/" class="btn btn-xs btn-link">
+        Error: incompatible versions client[v2.8.2] server[v2.7.2]
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

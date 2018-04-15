@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>酔いどれGCPUG で発表してきました - 技術の定点観測</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <link href="../../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "\u9154\u3044\u3069\u308cGCPUG \u3067\u767a\u8868\u3057\u3066\u304d\u307e\u3057\u305f", url: "#gcpug", children: [
+              {title: "\u306f\u3058\u3081\u306b", url: "#_1" },
+              {title: "GKE\u3092\u4f7f\u3046\u6642\u306b\u5fc5\u8981\u306a\u77e5\u8b58", url: "#gke" },
+              {title: "\u305d\u308c\u305e\u308c\u306e\u7ae0\u306b\u3064\u3044\u3066", url: "#_2" },
+              {title: "\u7d42\u308f\u308a\u306b", url: "#_5" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script>
+      <script src="../../../assets/js/mermaid.min.js"></script>
+      <script src="../../../search/require.js"></script>
+      <script src="../../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="gcpug">酔いどれGCPUG で発表してきました<a class="headerlink" href="#gcpug" title="Permanent link">&para;</a></h1>
+<p id="created_at">作成日: <time datetime="2018-03-04T14:00">2018/03/04</time></p>
+
+<p id="updated_at">更新日: <time datetime="2018-03-07T12:00">2018/03/07</time></p>
+
+<script async class="speakerdeck-embed" data-id="f50568a9df364fd3836f1167e1b3b96b" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+<h2 id="_1">はじめに<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>「GKE始めるにあたって 最初に知っておきたかったこと」というタイトルで発表しました。</p>
+<p>※ GKE = Google Kubernetes Engine</p>
+<p>LTをした動機は、KubernetesをGoogle Cloud Platformで使うにあたって、
+参入障壁がだいぶ高かったので、もっといろんな人が使って、情報を発信してくれるといいな、
+というところからです。</p>
+<p>説明しきれなかった部分などがあるので、補足的に載せておきます。</p>
+<h2 id="gke">GKEを使う時に必要な知識<a class="headerlink" href="#gke" title="Permanent link">&para;</a></h2>
+<p>GKEを使うにあたっては大きく以下の2つの知識が必要です。</p>
+<ul>
+<li>Gogle Cloud Platform (略称 GCP)</li>
+<li>Kubernetes (略称 k8s)</li>
+</ul>
+<p><strong>GCP</strong></p>
+<p>GCPを初めて使った当初は公式のチュートリアルをコツコツとやって、
+このサービスはこれができるのか、あれができるのか、でもお金はこれだけかかるのか、
+とかいろいろ試してみると分かります。</p>
+<p><strong>Kubernetes</strong></p>
+<p>Kubernetesは実際にコンテナを載せて、ロードバランサーの設定から、
+Podの構成を考えたり、開発環境と本番環境をどうやって切り替えるか、
+といったところを実際に手を動かしてやってみるのですが、量が多いです。
+（慣れてしまえば、実際にはそうでもないのですが）</p>
+<p>どちらにせよ、学習コストが結構かかります。
+なので、発表では最初にこれを知っておけば楽ができる、ということにフォーカスを当てています。</p>
+<h2 id="_2">それぞれの章について<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<p>次のような章立てで資料を構成しています。</p>
+<ol>
+<li>Helm</li>
+<li>組み合わせ</li>
+<li>周辺ツール</li>
+<li>情報源</li>
+</ol>
+<p>それぞれの章について、もっともっと話したいことがたくさんあったのですが、
+今回はぐっとこらえて、全体感を大雑把に説明しました。</p>
+<p>ただ、ここでは文字をたくさん書けるので、次に何をやるといいの、というところまで載せて置こうと思います。</p>
+<p>一度資料を見た人は復習しながら、初めての人は追加情報としてこれ以降をご覧ください。</p>
+<h3 id="1-helm">1. Helm<a class="headerlink" href="#1-helm" title="Permanent link">&para;</a></h3>
+<p>Helmというkubernetesのパッケージマネージャーがあります。Emacsのhelmではありません(笑)。</p>
+<ul>
+<li>https://github.com/kubernetes/helm</li>
+<li>https://docs.helm.sh/</li>
+</ul>
+<p>helmは何を解決してくれるかというと、設定ファイルをテンプレート化してくれるということです。</p>
+<h4 id="helm">helmを使わない場合の例<a class="headerlink" href="#helm" title="Permanent link">&para;</a></h4>
+<p>具体的に説明します。Podという単位でKubernetes上にコンテナをデプロイするのですが、
+1つのコンテナに対して様々な設定を書く必要があります。</p>
+<p>コンテナに関してはdockerを利用するのですが、仮に<a href="https://hub.docker.com/r/library/hello-world/">hello-world</a>をデプロイしようとすると、<a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/">デプロイメント</a>
+という設定ファイルを記述していきます。</p>
+<p><code>deployment.yaml</code>というファイル名で以下の設定を記述します。</p>
+<pre><code class="yaml"># この設定で動くかどうか確認していませんが、設定内容自体は正しいはずです
+apiVersion: extensions/v1beta1     # Version
+kind: Deployment                   # マニフェストの種類
+metadata:
+  name: docker-hello-world         # 名前
+  labels:
+    app: docker-hello-world        # Deploymentのラベル
+spec:
+  replicas: 1                      # podのレプリカ数
+  template:
+    metadata:
+      labels:
+        app: docker-hello-world    # ラベル
+    spec:
+      containers:
+        - name: docker-hello-world # コンテナの名前
+          image: hello-world:linux # イメージ名とタグ
+</code></pre>
+
+<p>Kubernetesへの適用は</p>
+<pre><code class="bash">kubectl apply deployment.yaml
+</code></pre>
+
+<p>とすれば完了です。</p>
+<p>さて、ここで本番環境、開発環境を切り分けたいとき、
+同じ設定ファイルを使うのですが、これをコピーして2つのデプロイメントファイルを作る、ということを想像してみて下さい。</p>
+<p>かなり嫌です。</p>
+<p>一番変えたいのはコンテナのイメージのタグだけだったりするのに、他の項目まで面倒をみるとなると叫びたくたくなります。</p>
+<p>これを解決してくれるのがhelmです。</p>
+<h4 id="helm_1">helmを使った場合の例<a class="headerlink" href="#helm_1" title="Permanent link">&para;</a></h4>
+<p>早速テンプレート化していきます。今回はイメージだけテンプレート化します。
+テンプレートはhelmコマンドで作成できます。</p>
+<pre><code>helm create hello-world-sapmle
+</code></pre>
+
+<p>ここで作成されるテンプレートは次のようになります。</p>
+<pre><code>hello-world-sample/
+├── Chart.yaml
+├── charts
+├── templates              # テンプレート化したい設定ファイルをここに溜める
+│   ├── NOTES.txt
+│   ├── _helpers.tpl
+│   ├── deployment.yaml
+│   ├── ingress.yaml
+│   └── service.yaml
+└── values.yaml
+</code></pre>
+
+<p>ただ、今回の説明ではdeploymentだけあればいいので、次のようにしておきます。</p>
+<pre><code>hello-world-sample/
+├── Chart.yaml
+├── charts
+├── templates
+│   ├── NOTES.txt
+│   ├── deployment.yaml
+└── values.yaml
+</code></pre>
+
+<p><code>deployment.yaml</code>を書き直します。</p>
+<pre><code class="yaml"># この設定で動くかどうか確認していませんが、設定内容自体は正しいはずです
+apiVersion: extensions/v1beta1     # Version
+kind: Deployment                   # マニフェストの種類
+metadata:
+  name: docker-hello-world         # 名前
+  labels:
+    app: docker-hello-world        # Deploymentのラベル
+spec:
+  replicas: 1                      # podのレプリカ数
+  template:
+    metadata:
+      labels:
+        app: docker-hello-world    # ラベル
+    spec:
+      containers:
+        - name: docker-hello-world # コンテナの名前
+          image: {{ .Values.image.repo }}:{{ .Values.image.tag }} # イメージ名とタグ
+</code></pre>
+
+<p>凄くシンプルなのですが、</p>
+<pre><code class="yaml">image: hello-world:linux
+</code></pre>
+
+<p>が</p>
+<pre><code>yaml: {{ .Values.image.repo }}:{{ .Values.image.tag }}
+</code></pre>
+
+<p>に変わりました。別途<code>values.yaml</code> というファイルに、実際に入れる値を記入します</p>
+<pre><code class="yaml">image:
+  repo: hello-world
+  tag: linux
+</code></pre>
+
+<p>ローカル環境からkubernetesに対して設定を適用するためには</p>
+<pre><code>$ helm install ./hello-world-sample --name=hello-my-sample
+</code></pre>
+
+<p>とすれば完了です。<code>helm create</code>コマンドではじめに作られる<code>values.yaml</code>はデフォルト設定を記述しますが、
+値を切り替えたい場合は次のようにします。
+仮に、<code>another-values.yaml</code>というファイルに別の設定を書いた場合、</p>
+<pre><code>$ helm install -f ./another-values.yaml ./hello-world-sample --name=hello-my-sample
+
+# アップグレードする場合は、helm upgradeコマンドを使用します
+$ helm upgrade hello-my-sample -f ./another-values.yaml ./hello-world
+</code></pre>
+
+<p>とすれば適用できます。設定ファイルだけを切り替えるだけで良いので、
+例えばブランチ名をprefixとしてvalues.yamlファイルを切り替えるなどするとCIの設計が簡単になります。</p>
+<h4 id="_3">次にやること<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<p>テンプレート化が完了すると非常に開発効率が上がります。
+それに伴い、様々なことが自動化しやすくなるので次のことをやっていくといいでしょう。</p>
+<ul>
+<li>KubernetesのNamespaceの設計</li>
+<li>Githubのブランチ名の設計(KubernetesのNamespaceと対応させる等)</li>
+<li>CIツールでデプロイ/テストフローの設計</li>
+<li>Helmのホスティング(Public/Private)</li>
+<li>Helm以外のツールを探す(参考資料)</li>
+</ul>
+<p>つまり、デプロイフローの設計を行うことで、開発ルールの全般的な設計ができるようになります。</p>
+<p><strong>参考資料</strong></p>
+<ul>
+<li><a href="https://deeeet.com/writing/2018/01/10/kubernetes-yaml/">2018/01/10 Kubernetes YAMLの壁</a></li>
+<li><a href="https://codefresh.io/">codefresh</a></li>
+</ul>
+<h3 id="2">2. 組み合わせ<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>主にGCPのサービスとの組み合わせの話です。
+今回、Container BuilderとCloud SQL、Cloud Storageを中心としたざっくりとした話をしました。</p>
+<p>Kubernetesと何をどう連携させていくか、というのをかる〜〜〜く説明したスライドになっています。
+ちょっとだけ補足説明を加えておきます。</p>
+<p><strong>Container Builder</strong></p>
+<p>120回/1日までBuildが無料でできます（超えたとしても小額）。
+ただ、Buildが成功したかどうか通知させたいとき、そのイベントをPub/Subの方に投げられるので、
+それをトリガーにCloud FunctionからSlackに通知を投げさせています。</p>
+<p><strong>Cloud Storage</strong></p>
+<p>データの永続化と言われれば、必ず出てきますが、今回はhelmのPrivateホスティングで利用しました。
+helmのパッケージはChartと呼ばれますが、Chartはウェブ上で公開することが可能です。
+例えば次のように<a href="https://github.com/bitnami/charts">bitnami/charts</a>をhelmの探索リポジトリとして加えることができます。</p>
+<pre><code class="bash">$ helm repo add bitnami-incubator https://charts.bitnami.com/incubator
+</code></pre>
+
+<p>ただ、やはり構成管理とかはPrivateにしておくべきものです。Google Cloud Storage(GCS)でそれが可能です。
+<a href="https://github.com/viglesiasce/helm-gcs">viglesiasce/helm-gcs</a>という非公式のプラグインが存在します。
+実際に使うときは、これをほんの少しだけ改造してGCSにhelmをホスティングし、
+gcloud authで認証を通した後にhelmから自前のchartを呼び出せるようにしています。</p>
+<p>一貫してGCPを使う場合におすすめです。</p>
+<p><strong>Cloud SQL</strong></p>
+<p>これ、本当はもうちょっとサービスの内容を語りたかったのですが、本題とそれてしまうので、さくっとchartsを紹介するだけになってしまいました。</p>
+<p>何を話たかったかというと、Cloud SQLってそれだけで従量課金なんですよね(当たり前だろ、と思う人はすみません)。
+以外に一番低いインスタンスを立ち上げても数千円飛んでいってしまうと。それに、PostgreSQLはベータ版です。</p>
+<p>要件にも依るのですが、実験的にDBを使いたい場合などPodにMySQLサーバーやPostgreSQLサーバーを立ち上げて、
+Persistent VolumeをマウントさせたほうがGKEの稼働料金のみで済むということです。無論、その分のスペックは持って行かれますが。</p>
+<p>kubernetes/chartsには</p>
+<ul>
+<li><a href="https://github.com/kubernetes/charts/tree/master/stable/mysql">MySQL</a></li>
+<li><a href="https://github.com/kubernetes/charts/tree/master/stable/postgresql">PostgreSQL</a></li>
+</ul>
+<p>が存在します。つまり、</p>
+<pre><code class="bash">$ helm install stable/postgresql --name=test-psql
+</code></pre>
+
+<p>とするだけで、Persistent Volumeの要求が自動的に行われ、</p>
+<pre><code class="bash">$ helm delete --purge test-psql
+</code></pre>
+
+<p>とすれば、Persistent Volumeごと削除されます。
+ここで伝えたい内容が2つ有ります。</p>
+<p><strong>1. Cloud SQLを使わなくてもいいかもしれない例</strong></p>
+<p>例えばですが、<a href="https://redash.io/">redash</a>はユーザー管理にPostgresを利用しています。
+使い方にもよりますが、分析系は内部の人間のみしか使わないので、Cloud SQLは必要ない、と判断できなくもありません。</p>
+<p><strong>2. KubernetesのVolumeの勉強になる</strong></p>
+<p><a href="https://github.com/kubernetes/charts/tree/master/stable/mysql">kubernetes/charts - MySQL</a>を見てみると分かるのですが、
+<a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims">Persitent Volume Claim</a>(PVC)の設定しか記述がありません。</p>
+<p>Persistent Volume(PV)はただのボリュームで、
+PVCはPVを要求するためだけのものです。PVCの設定で<code>storageClassName</code>を明示的に記入した場合、
+既存のPVが要求されますが、無記名(<code>""</code>)、の場合、ランダムな名前のPVがGCSに生成されてマウントされます。</p>
+<p>つまり、AWSのS3やAzureなどのボリュームをマウントしたい場合、予めPVで作成しておき、PVCは<code>storageClassName</code>でPVを参照することをするだけでよくなります。</p>
+<h4 id="_4">次にやること<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="https://cloud.google.com/products/?hl=en">プロダクトとサービス - Google Cloud Platform</a>を可能な限りたくさん触る</li>
+<li>Volume関連<ul>
+<li><a href="https://cloud.google.com/products/data-transfer/?hl=ja">CLOUD DATA TRANSFER</a></li>
+<li><a href="https://kubernetes.io/docs/tutorials/stateful-application/basic-stateful-set/">StatefulSet Basics</a></li>
+</ul>
+</li>
+</ul>
+<p>GKEとその他のサービス連携は</p>
+<ul>
+<li>コンテナを利用するだけで解決できるもの(helm installで終わりなど)</li>
+<li>Kubernetesのマニフェストを書き換えるだけで解決できるもの(Volume関連)</li>
+</ul>
+<p>と区別できると思います。
+やはり、それを知るためにはいろいろと試してみることが手っ取り早いので、スキマ時間にチュートリアルをバンバンやっておきましょう(自戒)。</p>
+<h3 id="3">3. 周辺ツール<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>GCPのアイコンセットと、draw.ioは知っておくと便利ですよ〜、というぐらいです。</p>
+<ul>
+<li>https://cloud.google.com/icons/</li>
+<li>https://about.draw.io/</li>
+</ul>
+<p>komposeはdocker-composeからkubernetesのマニフェストに移行する時に使う程度</p>
+<ul>
+<li>https://github.com/kubernetes/kompose</li>
+</ul>
+<p>docker edge版を利用するとkubernetes環境がローカルに手に入るのも知っていれば、そうだね、という程度のもの。
+デフォルトでkubernetesが使えるのはうれしいですね。</p>
+<ul>
+<li>https://www.docker.com/kubernetes</li>
+</ul>
+<h3 id="4">4. 情報源<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
+<p>ただのサイト紹介程度です。
+古くなっていたらTwitterでぼやいていただけると....</p>
+<p><strong>スライド中のリンク</strong></p>
+<ul>
+<li><a href="https://htmlpreview.github.io/?https://github.com/kubernetes/kubernetes/blob/HEAD/docs/api-reference/v1/definitions.html">Top Level API Objects</a></li>
+<li><a href="https://github.com/kubernetes">kubernetes - github</a></li>
+<li><a href="https://github.com/GoogleCloudPlatform">Google Cloud Platform - github</a></li>
+<li><a href="https://cloud.google.com/community/tutorials/">All Community Tutorials BETA</a></li>
+<li><a href="https://cloud.google.com/solutions/continuous-integration-helm-concourse#architecture">Solution Article</a></li>
+<li><a href="https://kubernetesbootcamp.github.io/kubernetes-bootcamp/index.html">Kubernetes Bootcamp (古いため非推奨)</a></li>
+</ul>
+<p><strong>日本語の資料</strong></p>
+<ul>
+<li><a href="https://speakerdeck.com/hihihiroro/kubernetesniru-men-sitai">Kubernetesに入門したい by Hiroaki ONO</a>
+Kubernetesの用語など、図付きでわかりやすく説明されています。</li>
+</ul>
+<p><strong>発表系</strong></p>
+<ul>
+<li><a href="https://k8sjp.connpass.com/">Kubernetes Meetup Tokyo - connpass</a></li>
+<li><a href="https://dockerjp.connpass.com/">Docker Meetup Tokyo - connpass</a></li>
+</ul>
+<p>カテゴライズした記事を別途用意しようかなと思います。</p>
+<h2 id="_5">終わりに<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<p>GCPUGの運営の皆さん、お疲れ様でした、そして、ありがとうございました。
+gcpugのslackはいつも見ていますが、ためになる情報ばかりで勉強になります。</p>
+<p>GCPはまだまだひよっこですが、初めて触ってるときにしかわからないつまづきなどを共有して、
+色んな人と情報交換できるようなればいいなと思って発表しました。</p>
+<p>開発者が消耗せず、よりクリエイティブなことができる世界に貢献できていれば幸いです。おわり。</p>
+<p><strong>GCPUGの情報</strong></p>
+<ul>
+<li>https://gcpug.jp/</li>
+<li>https://gcpug-tokyo.connpass.com/</li>
+</ul>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../../Profile/github-activity/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../../Profile/github-activity/" class="btn btn-xs btn-link">
+        Github activity
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../../Poem/static-site-generator/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../../Poem/static-site-generator/" class="btn btn-xs btn-link">
+        静的サイトジェネレーターを選ぶとき、何を思ふ？
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

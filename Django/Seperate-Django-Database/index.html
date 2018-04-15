@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Djangoで複数のデータベースを利用する - 技術の定点観測</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <link href="../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Django\u3067\u8907\u6570\u306e\u30c7\u30fc\u30bf\u30d9\u30fc\u30b9\u3092\u5229\u7528\u3059\u308b", url: "#django", children: [
+              {title: "settings.py", url: "#settingspy" },
+              {title: "Database routers", url: "#database-routers" },
+              {title: "Migration", url: "#migration" },
+              {title: "\u6700\u5f8c\u306b", url: "#_1" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script>
+      <script src="../../assets/js/mermaid.min.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="django">Djangoで複数のデータベースを利用する<a class="headerlink" href="#django" title="Permanent link">&para;</a></h1>
+<p id="updated_at">更新日: <time datetime="2018-04-16T01:00">2018/04/16</time></p>
+
+<p>ユーザー管理用のデータベースと、分析用のデータベースなどのように分離したいときがあります。
+Django 2.0のドキュメントでは<a href="https://docs.djangoproject.com/en/2.0/topics/db/multi-db/">Multiple databases</a>の章に説明があります。</p>
+<p>やることは4つ</p>
+<ol>
+<li><code>settings.py</code>の<code>DATABASES</code>に複数のDBの接続先を記入する</li>
+<li><code>settings.py</code>に<code>DATABASE_APPS_MAPPING</code>を定義し、アプリケーションごとにKV形式で接続先のDB名を記述する</li>
+<li><code>settings.py</code>に<code>DATABASE_ROUTERS</code>を定義し、接続するDBを振り分けるためのRouterの定義を配列形式で記述する</li>
+<li><code>DATABASE_ROUTERS</code>に定義されたrouterを用意する</li>
+</ol>
+<p>実際に具体例を示してみます。
+ここで示す具体例では、<code>DATABASE_APPS_MAPPING</code>に指定したとおりにデータベースが
+振り分けるという単純なことだけを達成します。</p>
+<p>ちょっと大雑把ではありますが、下記のようなディレクトリ構成を取っているものとします。
+<code>myapp</code>はdjangoのアプリケーションです。</p>
+<pre><code>myapp/
+├── myapp/settings.py
+├── manage.py
+└── routers.py
+</code></pre>
+
+<h2 id="settingspy">settings.py<a class="headerlink" href="#settingspy" title="Permanent link">&para;</a></h2>
+<pre><code class="python"># myapp/settings.py
+from os import environ
+
+# 接続先データベースの定義
+DATABASES = {
+  'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mydb',
+        'USER': environ.get('DEFAULT_MYSQL_USER'),
+        'PASSWORD': environ.get('DEFAULT_MYSQL_PASSWORD'),
+        'HOST': environ.get('DEFAULT_DB_HOST', '127.0.0.1'),
+        'PORT': environ.get('DEFAULT_DB_PORT', '3306'),
+        'OPTIONS': {
+            'init_command': &quot;SET sql_mode='STRICT_TRANS_TABLES'&quot;,
+            'charset': 'utf8mb4',
+        },
+        'TEST': {
+            'CHARSET': 'utf8mb4',
+            'COLLATION': 'utf8mb4_general_ci',
+        },
+  },
+  'analytics': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mydb',
+        'USER': environ.get('ANALYTICS_MYSQL_USER'),
+        'PASSWORD': environ.get('ANALYTICS_MYSQL_PASSWORD'),
+        'HOST': environ.get('ANALYTICS_DB_HOST', '127.0.0.1'),
+        'PORT': environ.get('ANALYTICS_DB_PORT', '3306'),
+        'OPTIONS': {
+            'init_command': &quot;SET sql_mode='STRICT_TRANS_TABLES'&quot;,
+            'charset': 'utf8mb4',
+        },
+        'TEST': {
+            'CHARSET': 'utf8mb4',
+            'COLLATION': 'utf8mb4_general_ci',
+        },
+  }
+}
+
+# アプリケーションごとの接続先DBのマッピング
+DATABASE_APPS_MAPPING = {
+    # defaultには管理系のTable
+    'admin'              : 'default',
+    'auth'               : 'default',
+    'contenttypes'       : 'default',
+    'sessions'           : 'default',
+    'messages'           : 'default',
+    'staticfiles'        : 'default',
+    'django_celery_beat' : 'default',
+    # analyticsには分析計のTable
+    'myapp'              : 'analytics',
+}
+
+# 利用するRouter, manage.pyから見ての相対パス
+DATABASE_ROUTERS = [
+    'router.DatabaseRouter',
+]
+</code></pre>
+
+<h2 id="database-routers">Database routers<a class="headerlink" href="#database-routers" title="Permanent link">&para;</a></h2>
+<p>以下の4つのメソッドが定義されたクラスを用意します。</p>
+<ul>
+<li><code>db_for_read</code></li>
+<li><code>db_for_write</code></li>
+<li><code>allow_relation</code></li>
+<li><code>allow_migrate</code></li>
+</ul>
+<p>参考: <a href="https://docs.djangoproject.com/en/2.0/topics/db/multi-db/#database-routers">Database routers</a></p>
+<p><code>router.DatabaseRouter</code>は次のように定義しています。</p>
+<pre><code class="python"># routers.py
+from myapp.settings import DATABASE_APPS_MAPPING
+
+class DatabaseRouter(object):
+    def db_for_read(self, model, **hints):
+        if model._meta.app_label in DATABASE_APPS_MAPPING:
+            return DATABASE_APPS_MAPPING[model._meta.app_label]
+        return None
+
+    def db_for_write(self, model, **hints):
+        if model._meta.app_label in DATABASE_APPS_MAPPING:
+            return DATABASE_APPS_MAPPING[model._meta.app_label]
+        return None
+
+    def allow_relation(self, obj1, obj2, **hints):
+        db1 = DATABASE_APPS_MAPPING.get(obj1._meta.app_label)
+        db2 = DATABASE_APPS_MAPPING.get(obj2._meta.app_label)
+        if db1 and db2:
+            return db1 == db2
+        return None
+
+    def allow_migrate(self, db, app_label, model=None, **hints):
+        if db in DATABASE_APPS_MAPPING.values():
+            return DATABASE_APPS_MAPPING.get(app_label) == db
+        elif app_label in DATABASE_APPS_MAPPING:
+            return False
+</code></pre>
+
+<p>これで設定完了です</p>
+<h2 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">&para;</a></h2>
+<p>Migrationはコマンドが変わります。
+通常、<code>./manage.py migrate</code>を行うと、<code>default</code>で指定されたDBに対してMigrationが実行されますが、
+今回は分離しているので、<code>--database</code>引数を用いて明示的に指定する必要があります。</p>
+<pre><code class="bash">$ ./manage.py migrate                          # defaultに対するMigration
+$ ./manage.py migrate --database=analytics     # analyticsに対するMigration
+</code></pre>
+
+<p>これでMigrationが実行されます。
+また、その他のコマンドでもDB単位で実行する必要があるので、注意が必要です。</p>
+<h2 id="_1">最後に<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>最近、Python界隈が分析系や深層学習などで騒がれていますが、
+データを蓄積するDBの管理の話が出てこないのが気になります。</p>
+<p>みなさん、どうやって管理しているのでしょう？
+分析基盤の担当の方がいらっしゃれば良いのですが、全員がそうではないと思いますので、
+この記事が一人で全部やらないといけないなぁ、と思っている人のところに届けばと思います。</p>
+<p>間違いがあればTwitterなどで報告してくれると修正いたします。</p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../Firebase/Auth-Error-Tips/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../Firebase/Auth-Error-Tips/" class="btn btn-xs btn-link">
+        Auth Error Tips
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Introduction-of-Celery-Django/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Introduction-of-Celery-Django/" class="btn btn-xs btn-link">
+        Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
