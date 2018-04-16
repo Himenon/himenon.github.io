@@ -175,3 +175,8 @@
 ## 分散処理
 
 - [Akka](https://akka.io/)
+
+## Credit Card系
+
+- [creditcardjs](https://creditcardjs.com/)
+    - UIに関する[ディスカッション](https://creditcardjs.com/credit-card-type-detection#credit-card-regular-expression-hell)も書いてって良い
