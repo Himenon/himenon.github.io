@@ -75,5 +75,17 @@ export default {
 }
 ```
 
+### computed
+
+- <https://jp.vuejs.org/v2/guide/computed.html#%E7%AE%97%E5%87%BA%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3-vs-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89>
+
+> Date.now() はリアクティブな依存ではないため、次の算出プロパティは二度と更新されないことを意味します:
+
+リアクティブになっていない場合は例えmapGettersであっても、更新されない
+
+
+
+
+
 
 
