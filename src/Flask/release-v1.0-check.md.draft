@@ -1,0 +1,17 @@
+# Flaskのv1.0のリリースで変わったこと
+
+2018/4/26にFlaskがv1.0になりましたね。
+いくつかパッチがあたって、現在はマイナーバージョンがちょっと上がっていますが。
+
+<https://www.palletsprojects.com/blog/flask-1-0-released/>
+
+リリース内容を確認しておきます。
+
+- Pythonの下位互換性の打ち切り
+    - Python 2.6, 3.3の削除
+- python-dotenvがインストールされている場合、`.flaskenv`か`.env`
+- 開発サーバーはデフォルトでmulti-threadedでで並列にrクエストを処理する
+- `flask.ext`は以前に非推奨になったが、完全に削除された
+
+
+
