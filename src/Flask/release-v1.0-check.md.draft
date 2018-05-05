@@ -10,7 +10,7 @@
 - Pythonの下位互換性の打ち切り
     - Python 2.6, 3.3の削除
 - python-dotenvがインストールされている場合、`.flaskenv`か`.env`
-- 開発サーバーはデフォルトでmulti-threadedでで並列にrクエストを処理する
+- 開発サーバーはデフォルトでmulti-threadedでで並列にリクエストを処理する
 - `flask.ext`は以前に非推奨になったが、完全に削除された
 - `request.form`の不足したkeyにアクセスすると、デバッグモードの時にエラーメッセージが表示され、一般的な開発者に対して非常にの混乱の元となる。
 - `app.logger`の挙動は大幅に簡素化され、カスタマイズするのが楽になった。loggerは常に`flask.app`に名付けられ、登録されていなければ、ハンドラーが追加され、
@@ -32,3 +32,26 @@
 requestからの任意のエンコーディングを許可しません。
 
 
+## 検証用コード
+
+`Pipfile`
+
+```
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[scripts]
+serve = "python app.py"
+
+[packages]
+flask = "==1.0.2"
+python-dotenv = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
+
+```
