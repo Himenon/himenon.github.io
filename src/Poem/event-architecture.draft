@@ -1,0 +1,21 @@
+# Event Architecture
+
+- RESTful
+    - Cache
+    - exponential delay time
+- Publisher/Subscriber
+- Messaging
+
+- 結果整合性
+- 到達保証
+- イベントストア
+    - イベントログ
+
+- Thread Pool
+- 識別子
+    - 重複の排除
+
+## SaaS
+
+TODO: Cloudサービス
+
