@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方 - 技術の定点観測</title>
+    <link href="../../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../css/highlight.css">
+    <link href="../../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "\u81ea\u4f5c\u306e\u30d5\u30a1\u30a4\u30eb\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8(\u96db\u5f62)\u3092\u751f\u6210\u3059\u308bCookiecutter\u306e\u4f7f\u3044\u65b9", url: "#cookiecutter", children: [
+              {title: "\u4f7f\u3044\u65b9", url: "#_1" },
+              {title: "\u81ea\u5206\u306e\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3092\u4f5c\u308b", url: "#_3" },
+              {title: "\u516c\u958b\u3059\u308b", url: "#_6" },
+              {title: "\u6700\u5f8c\u306b", url: "#_7" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../../js/base.js"></script>
+      <script src="../../../assets/js/mermaid.min.js"></script>
+      <script src="../../../search/require.js"></script>
+      <script src="../../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="cookiecutter">自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方<a class="headerlink" href="#cookiecutter" title="Permanent link">&para;</a></h1>
+<p id="created_at">作成日: <time datetime="2018-05-20T22:00">2018/05/20 22:00</time></p>
+
+<p id="updated_at">更新日: <time datetime="2018-05-21T18:00">2018/05/21 18:00</time></p>
+
+<p>開発に限らず、PC作業をしているとさまざまな場面でファイルやディレクトリツリーを構築します。
+ここでは、生成されるこれらのファイル、ディレクトリ群をまとめてプロジェクトレイアウトと呼称します。</p>
+<p>プロジェクトレイアウトをコピペで作っていると、プロジェクト名が異なっていると、
+影響するファイル名やClass名が多いでしょう。
+そんなツールの1つにcookiecutterというオープンソースがあります。</p>
+<ul>
+<li><a href="https://github.com/audreyr/cookiecutter">audreyr/cookiecutter</a></li>
+</ul>
+<p>図で説明すると、次のようになります。</p>
+<p><img alt="CookieCutterのアーキテクチャ" src="../cookiecutter-architecture.svg" /></p>
+<ul>
+<li>プロジェクトの雛形: Githubリポジトリ or ローカル</li>
+<li>雛形に挿入する値: cookiecutter利用者に委ねられる。デフォルトはインタラクティブに入力。</li>
+<li>Project Layout: 出力結果。</li>
+</ul>
+<h2 id="_1">使い方<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<h3 id="_2">インタラクティブに使う<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>もっともシンプルなコマンドは、引数にテンプレートのURLもしくは相対パスを指定することです。</p>
+<p>Pythonのパッケージを作る際のボイラープレートで試してみます(<a href="https://github.com/audreyr/cookiecutter-pypackage">audreyr/cookiecutter-pypackage</a>)。</p>
+<pre><code class="bash">$ cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git
+</code></pre>
+
+<p><img alt="CookieCutterを実行したときの画像" src="../cookiecutter-sample.png" /></p>
+<p>対話式に聞かれた後に、プロジェクトレイアウトが生成されます。</p>
+<h3 id="help">Help<a class="headerlink" href="#help" title="Permanent link">&para;</a></h3>
+<p><code>cookiecutter -h</code> でヘルプを表示しておきます。</p>
+<pre><code>Usage: cookiecutter [OPTIONS] TEMPLATE [EXTRA_CONTEXT]...
+
+  Create a project from a Cookiecutter project template (TEMPLATE).
+
+  Cookiecutter is free and open source software, developed and managed by
+  volunteers. If you would like to help out or fund the project, please get
+  in touch at https://github.com/audreyr/cookiecutter.
+
+Options:
+  -V, --version              Show the version and exit.
+  --no-input                 Do not prompt for parameters and only use
+                             cookiecutter.json file content
+  -c, --checkout TEXT        branch, tag or commit to checkout after git clone
+  -v, --verbose              Print debug information
+  --replay                   Do not prompt for parameters and only use
+                             information entered previously
+  -f, --overwrite-if-exists  Overwrite the contents of the output directory if
+                             it already exists
+  -o, --output-dir PATH      Where to output the generated project dir into
+  --config-file PATH         User configuration file
+  --default-config           Do not load a config file. Use the defaults
+                             instead
+  --debug-file PATH          File to be used as a stream for DEBUG logging
+  -h, --help                 Show this message and exit.
+
+</code></pre>
+
+<h2 id="_3">自分のテンプレートを作る<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<p>とてもシンプルです。
+CookieCutterは内部のテンプレートエンジンに<a href="http://jinja.pocoo.org/docs/2.10/">Jinja2</a>を採用しており、
+Jinja2の記法が利用できます。</p>
+<h3 id="_4">速攻サンプル<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>最もシンプルなテンプレートを作成してみます。</p>
+<pre><code>simple-template/
+├── cookiecutter.json
+└── {{cookiecutter.project_name}}/
+</code></pre>
+
+<p><code>cookiecutter.json</code>の中身は次のようにします。</p>
+<pre><code>{
+    &quot;project_name&quot;: &quot;hello-world&quot;
+}
+</code></pre>
+
+<p>次に、<code>simple-template</code>をテンプレートとして利用してみます。</p>
+<pre><code class="bash">$ cookiecutter ./simple-template
+</code></pre>
+
+<p>これでテンプレートとして利用できます。</p>
+<h3 id="_5">カスタマイズ方法<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>cookiecutterで自作テンプレートを作るときは、次のルールを守っておけば良いでしょう。</p>
+<ol>
+<li>変数の定義は<code>cookiecutter.json</code>に書く。<ul>
+<li>利用可能な型は、String, List, Dictionaryです。</li>
+</ul>
+</li>
+<li>変数を展開する場所では<code>{{cookiecutter.xxx}}</code>のように、Jinja2のテンプレートが展開できる記法で記述し、<code>cookiecutter</code>のメンバ変数として展開できるようにしておく。<ul>
+<li>展開時に、条件分岐を行ったり、for-loopを利用することも可能です。</li>
+</ul>
+</li>
+</ol>
+<p>詳しい説明は<a href="https://cookiecutter.readthedocs.io/en/latest/advanced/index.html">Advanced Usage - cookiecutter</a>に載っています。</p>
+<p>また、既に公開されているcookiecutter用のテンプレートを見てみることもお勧めします。</p>
+<ul>
+<li><a href="https://github.com/audreyr/cookiecutter-pypackage/blob/master/cookiecutter.json">cookiecutter.json - audreyr/cookiecutter-pypackage</a></li>
+</ul>
+<h2 id="_6">公開する<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<p>とてもシンプルな答えはGithubやBitbucketにホスティングすることです。</p>
+<h2 id="_7">最後に<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
+<p>作っては捨て、という大量生産大量消費の時代にもってこいなパッケージとなっております。
+cookiecutterはPythonで作成されていますが、テンプレートとするプロジェクトは言語を問いません。</p>
+<p>DEMOでプレビューするときや、ちょっとした検証をしたい時用の雛形を予め作っておくと時間の節約になります。</p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../Git/git-tips/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../Git/git-tips/" class="btn btn-xs btn-link">
+        Git tips
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../../Python/test-know-how/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../../Python/test-know-how/" class="btn btn-xs btn-link">
+        PythonのTest
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>

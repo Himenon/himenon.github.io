@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/pick-up-article/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,19 +21,19 @@
         
     <url>
      <loc>/Django/Add new app/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Django/Introduction-of-Celery-Django/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Django/Seperate-Django-Database/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -43,19 +43,19 @@
         
     <url>
      <loc>/Firebase/Auth-Error-Tips/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Firebase/Firebase-Cloud-Functions/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Firebase/Firebase-Starter/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -65,7 +65,7 @@
         
     <url>
      <loc>/Flask/Hello-Flask-Streamming-Content/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -75,7 +75,7 @@
         
     <url>
      <loc>/Frontend/settings/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -97,13 +97,13 @@
         
     <url>
      <loc>/GCP/Cloud-Function/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/GCP/GKE/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -113,7 +113,7 @@
         
     <url>
      <loc>/Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -123,25 +123,25 @@
         
     <url>
      <loc>/Kubernetes/Nginx access control for kubernetes/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Kubernetes/Shortcut-for-kubectl/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Kubernetes/cron-wake-up-down/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Kubernetes/error helm incompatible version/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -151,19 +151,25 @@
         
     <url>
      <loc>/Nodejs/Request-library-description-for-json-value/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Nodejs/dynamic-import/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Nodejs/execute-async-mjs/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/Nodejs/manage-npm-package/</loc>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -173,25 +179,25 @@
         
     <url>
      <loc>/Poem/Container-App-Directory-Management-Consideration/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Poem/Container-Worker-Design/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Poem/read-basic-knowledge-of-nosql/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Poem/static-site-generator/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -211,25 +217,25 @@
         
     <url>
      <loc>/Profile/github-activity/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Profile/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Profile/skill/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/Profile/study-history/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -239,13 +245,19 @@
         
     <url>
      <loc>/Python/test-know-how/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     
 
     
+        
+    <url>
+     <loc></loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
         
     <url>
      <loc></loc>
@@ -293,13 +305,13 @@
         
     <url>
      <loc>/mongoDB/basic-query/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/mongoDB/basic-read-write/</loc>
-     <lastmod>2018-04-16</lastmod>
+     <lastmod>2018-05-21</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

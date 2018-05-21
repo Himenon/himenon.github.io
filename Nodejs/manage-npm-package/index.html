@@ -11,7 +11,7 @@
     
     <link rel="shortcut icon" href="../../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Module jsで非同期関数を実行する - 技術の定点観測</title>
+    <title>npmのpaackage管理について - 技術の定点観測</title>
     <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../../css/base.css" rel="stylesheet">
@@ -33,7 +33,9 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Module js\u3067\u975e\u540c\u671f\u95a2\u6570\u3092\u5b9f\u884c\u3059\u308b", url: "#module-js", children: [
+          {title: "npm\u306epaackage\u7ba1\u7406\u306b\u3064\u3044\u3066", url: "#npmpaackage", children: [
+              {title: "package\u306e\u30a2\u30c3\u30d7\u30c7\u30fc\u30c8", url: "#package" },
+              {title: "npx", url: "#npx" },
           ]},
         ];
 
@@ -63,33 +65,28 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <div class="container-fluid wm-page-content">
     
 
-    <h1 id="module-js">Module jsで非同期関数を実行する<a class="headerlink" href="#module-js" title="Permanent link">&para;</a></h1>
-<p>TwitterのOAuth認証を試したい時などでこの欲求は生じる</p>
-<pre><code class="js">// twitter-oauth.mjs
-import OAuth from 'oauth';
-import util from 'util';
-
-(async () =&gt; {
-  const oa = new OAuth.OAuth(
-    'https://api.twitter.com/oauth/request_token',
-    'https://api.twitter.com/oauth/access_token',
-    process.env.CONSUMER_KEY,
-    process.env.CONSUMER_SECRET,
-    '1.0A',
-    null,
-    'HMAC-SHA1'
-  );
-  oa.getOAuthRequestToken = util.promisify(oa.getOAuthRequestToken)
-  const oauth_token = await oa.getOAuthRequestToken();
-  const url = `https://api.twitter.com/oauth/authorize?oauth_token=${oauth_token}`;
-  console.log(url);
-})();
+    <h1 id="npmpaackage">npmのpaackage管理について<a class="headerlink" href="#npmpaackage" title="Permanent link">&para;</a></h1>
+<p>公式ドキュメント：<a href="https://docs.npmjs.com/cli/">https://docs.npmjs.com/cli/</a></p>
+<h2 id="package">packageのアップデート<a class="headerlink" href="#package" title="Permanent link">&para;</a></h2>
+<pre><code>npm outdated
 </code></pre>
 
-<pre><code class="bash">$ node --experimental-modules twitter-oauth.mjs
+<pre><code>npm update
 </code></pre>
 
-<p>即時関数でwrapしで実行するのがミソ。</p>
+<p>セキュリティ系の問題</p>
+<pre><code>npm audit
+</code></pre>
+
+<p>参考</p>
+<ul>
+<li><a href="https://blog.kazu69.net/2018/05/14/package_security_aware_with_npm_audit_added_npm_v6/">npm@6で追加されたnpm auditでpackageのセキュリティ情報をチェックする</a></li>
+<li><a href="http://techlog.voyagegroup.com/entry/2016/06/27/080000">2016-06-27 毎週のように依存パッケージを上げ続ける努力</a></li>
+</ul>
+<h2 id="npx">npx<a class="headerlink" href="#npx" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://www.npmjs.com/package/npx">npx</a></li>
+</ul>
 
   <br>
     
@@ -97,20 +94,20 @@ import util from 'util';
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../manage-npm-package/" class="btn btn-xs btn-default pull-right">
+      <a href="../../Poem/Container-App-Directory-Management-Consideration/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../manage-npm-package/" class="btn btn-xs btn-link">
-        Manage npm package
+      <a href="../../Poem/Container-App-Directory-Management-Consideration/" class="btn btn-xs btn-link">
+        Container App Directory Management Consideration
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../dynamic-import/" class="btn btn-xs btn-default pull-left">
+      <a href="../execute-async-mjs/" class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../dynamic-import/" class="btn btn-xs btn-link">
-        PackageのDynamic Import
+        Previous</a><a href="../execute-async-mjs/" class="btn btn-xs btn-link">
+        Module jsで非同期関数を実行する
       </a>
     </div>
     
