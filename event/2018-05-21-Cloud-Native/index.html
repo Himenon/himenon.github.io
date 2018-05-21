@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="K.Himeno">
+    
+    <link rel="shortcut icon" href="../../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>[イベントレポート] Cloud Native Meetup Tokyo #1 - 技術の定点観測</title>
+    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/highlight.css">
+    <link href="../../assets/css/font.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../../js/jquery-3.2.1.min.js"></script>
+    <script src="../../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '../..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "[\u30a4\u30d9\u30f3\u30c8\u30ec\u30dd\u30fc\u30c8] Cloud Native Meetup Tokyo #1", url: "#cloud-native-meetup-tokyo-1", children: [
+              {title: "\u958b\u50ac\u6982\u8981", url: "#_1" },
+              {title: "with NATS with Kubernetes\u306e\u4e16\u754c\u3078", url: "#with-nats-with-kubernetes" },
+              {title: "Fluent Bit vs Fluentd 1.x", url: "#fluent-bit-vs-fluentd-1x" },
+              {title: "\u30b5\u30fc\u30d3\u30b9\u30e1\u30c3\u30b7\u30e5\u3068\u4ef2\u9593\u305f\u3061 \u301cIstio &amp; Conduit\u301c", url: "#istio-conduit" },
+              {title: "LT", url: "#lt" },
+              {title: "\u5168\u4f53\u7684\u306a\u611f\u60f3", url: "#_2" },
+          ]},
+        ];
+
+    </script>
+    <script src="../../js/base.js"></script>
+      <script src="../../assets/js/mermaid.min.js"></script>
+      <script src="../../search/require.js"></script>
+      <script src="../../search/search.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-55455343-7', 'himenon.github.io');
+        ga('send', 'pageview');
+    </script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+    
+
+    <h1 id="cloud-native-meetup-tokyo-1">[イベントレポート] Cloud Native Meetup Tokyo #1<a class="headerlink" href="#cloud-native-meetup-tokyo-1" title="Permanent link">&para;</a></h1>
+<p>※特にガチ目にまとめるわけじゃないです。
+独断と偏見で端折って書きます。</p>
+<h2 id="_1">開催概要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p><code>#1</code>とあって、Cloud Native Meetup Tokyoの開催理由を<a href="https://twitter.com/amsy810">@amsy810</a>さんが説明。</p>
+<ul>
+<li>エコシステム多い</li>
+<li>検証大変</li>
+<li>同士求む</li>
+</ul>
+<p>らしい。</p>
+<h2 id="with-nats-with-kubernetes">with NATS with Kubernetesの世界へ<a class="headerlink" href="#with-nats-with-kubernetes" title="Permanent link">&para;</a></h2>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/8H2FNvFZYEcmKJ" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+
+<p><div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/hayahitokawamitsu/with-nats-with-kubernetes" title="with NATS with Kubernetesの世界へ" target="_blank">with NATS with Kubernetesの世界へ</a> </strong> from <strong><a href="https://www.slideshare.net/hayahitokawamitsu" target="_blank">Hosei uni, Faculty of Computer and Information Sciences</a></strong> </div></p>
+<p>Hayahito Kawamitsuさんから。</p>
+<ul>
+<li>NATSってそもそも何？</li>
+<li>スライドは導入を意識して作った</li>
+<li>資料を既に公開しているので、手を動かしながら確認できるよ</li>
+<li>IoTをやる上で、メッセージングを使うのはスタンダートになっている。<ul>
+<li>GCPだとCloud Pub/Subとか</li>
+</ul>
+</li>
+<li>CNCFがメッセージングサービスをホストしたよ<ul>
+<li><a href="https://www.linuxfoundation.jp/blog/cncf-to-host-nats/">CNCFがNATSをホストへ</a></li>
+</ul>
+</li>
+<li>メッセージングどんだけ流行ってるのかGCPのサンプルソリューションの登場回数から調査したよ<ul>
+<li>GCEが1位かと思ったけどそうじゃなかった</li>
+<li>Pub/Subも10位以内にいるよ</li>
+</ul>
+</li>
+<li>メッセージングモデルは3つあるよ(だいたいPub/Subの亜種)<ul>
+<li>Pub/Sub</li>
+<li>Request/Reply</li>
+<li>Queueing (Load balanced queue subscriber)</li>
+</ul>
+</li>
+<li>NATSは大きく2つある<ul>
+<li>NATS<ul>
+<li>NATSサーバーに接続した後にメッセージを受取可能</li>
+</ul>
+</li>
+<li>Streaming<ul>
+<li>中にNATSを持っている</li>
+<li>繋ぐ前のメッセージを受け取ることもできる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Monitoring, Loggingあるよ</li>
+<li>ベンチマークとパフォーマンス<ul>
+<li>NATSはパフォーマンスがKafka二倍くらい....ほんと？<ul>
+<li>結論から言えば、本当</li>
+<li>ある程度パフォーマンスが出る</li>
+</ul>
+</li>
+<li>チューニング用のサポートツールがある</li>
+</ul>
+</li>
+</ul>
+<hr />
+<p>【感想】Cloud Pub/Subは<a href="https://cloudplatformonline.com/2018-onboard-jp-tokyo.html">Cloud OnBoard - 東京</a>でもだいぶ推されいたし、Kubernetes上に自前でメッセージングシステム立てる機会があったので、面白かった。
+とりあえず、NATSの性能が本当に真なら、KafkaとRedisの置き換えになるかなぁ。</p>
+<h2 id="fluent-bit-vs-fluentd-1x">Fluent Bit vs Fluentd 1.x<a class="headerlink" href="#fluent-bit-vs-fluentd-1x" title="Permanent link">&para;</a></h2>
+<p><strong>スライドは未公開？</strong></p>
+<p>Mizuno Seiyaさんから。</p>
+<p>Fluentdの内部のお話からFluent Bitの話。
+内部実装を追って、何やってるか検証してた。
+だいぶアーキテクチャ図がわかりやすく、こういう仕組みなのか〜、ほぉ〜、という程度の理解（小並感）</p>
+<p>マサカリ歓迎、とのことだったので実況のTwiterにfluentdの中の人から飛んでたのを補足。</p>
+<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">fluentdとfluent-bitの使い分けはこんな感じですね &gt; <a href="https://t.co/4M1cqDkqpX">https://t.co/4M1cqDkqpX</a> <a href="https://twitter.com/hashtag/cloudnativejp?src=hash&amp;ref_src=twsrc%5Etfw">#cloudnativejp</a></p>&mdash; SKSの申し子 (@repeatedly) <a href="https://twitter.com/repeatedly/status/998519530669277185?ref_src=twsrc%5Etfw">2018年5月21日</a></blockquote>
+
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>こういうの、発表する側、聞く側とってもためになるので嬉しいです。</p>
+<hr />
+<p>【感想】fluentd、直接導入したことないので（GKE使ったので）、ふと気になった時にこの発表思い出してみようと思った。</p>
+<h2 id="istio-conduit">サービスメッシュと仲間たち 〜Istio &amp; Conduit〜<a class="headerlink" href="#istio-conduit" title="Permanent link">&para;</a></h2>
+<script async class="speakerdeck-embed" data-id="d49488e5b2064e0486f96071ad6882fc" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+<p><a href="https://twitter.com/amsy810">@amsy810</a>さんから。</p>
+<p>1行でまとめると、Istio推し。わいが検証する。</p>
+<p>Service Meshの話。
+マイクロサービスは良いけど、複雑化していくよね、どうやって管理していくの、という導入から、
+Istio, Conduit, Linkerdのコンテナパターンと機能・性能比較まで。
+IstioはVMまで境界に含めれるらしい、というのは知らなかった。
+ただ、Istioのバージョンは0.7でいつGAになるのか、わからないので本番投入はまだ。
+あとはレイテンシー問題もあるので、高レイテンシーが許容されるところじゃないとまだ使えない。</p>
+<hr />
+<p>【感想】家に帰って下のサンプルを動かしてみた。</p>
+<ul>
+<li><a href="https://istio.io/docs/guides/bookinfo.html">Bookinfo - Istio</a></li>
+<li><a href="https://istio.io/docs/guides/integrating-vms.html">Integrating Virtual Machines - Istio</a></li>
+</ul>
+<p>YAMLファイルはあるけど、アプリケーションの実装コードがなかったので、<code>kubectl exec</code>でアクセスして確認。</p>
+<ul>
+<li><a href="http://www.atmarkit.co.jp/ait/articles/1802/09/news015.html">「サービスメッシュ」「Istio」って何？　どう使える？　どう役立つ？ - @IT</a></li>
+</ul>
+<p>サービスメッシュはInjectionするだけなので、
+アプリケーション側のエンジニアは特に意識しなくても、良さそうということは分かった。</p>
+<h2 id="lt">LT<a class="headerlink" href="#lt" title="Permanent link">&para;</a></h2>
+<p><a href="https://twitter.com/tn961ir">@tn961ir</a>さんから。</p>
+<p><strong>スライドは未公開？</strong></p>
+<ul>
+<li><strong>Cloud Native</strong>の定義のPRがあがってる<ul>
+<li><a href="https://github.com/cncf/toc/pull/117">Create Cloud Native Definition #117</a></li>
+</ul>
+</li>
+<li><a href="https://www.nginx.com/products/nginx-unit/">Nginx Unit</a>の話<ul>
+<li>できること/できないことの紹介</li>
+</ul>
+</li>
+</ul>
+<p>【感想】Nginxかわいい</p>
+<h2 id="_2">全体的な感想<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>検証してくれる方、ありがとうございます。</li>
+<li>まだまだ奥が深いなぁ。</li>
+<li>このあたりのMeetup、強そうな人ばかりで恐縮ですが、同年代の人いないんですかね。。。</li>
+<li>消化出ていない部分もあるので、コツコツやろう。</li>
+</ul>
+<p>気がついたらいっぱい書いてた。おわり。</p>
+
+  <br>
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../../mongoDB/basic-query/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../../mongoDB/basic-query/" class="btn btn-xs btn-link">
+        Basic query
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../../analytics/pandas/visualize-time/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../../analytics/pandas/visualize-time/" class="btn btn-xs btn-link">
+        時間データのビジュアライズ
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="col-md-12 wm-page-content">
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
