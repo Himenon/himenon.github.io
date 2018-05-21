@@ -1,13 +1,24 @@
 # 自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方
 
-開発に限らず、PC作業をしているとさまざまな場面でファイルやディレクトリツリーを構築します。
-同じ作業を繰り返すのはDRYの精神に反しますので、これを防ぎましょう。
+<p id="created_at">作成日: <time datetime="2018-05-20T22:00">2018/05/20 22:00</time></p>
+<p id="updated_at">更新日: <time datetime="2018-05-21T18:00">2018/05/21 18:00</time></p>
 
+開発に限らず、PC作業をしているとさまざまな場面でファイルやディレクトリツリーを構築します。
+ここでは、生成されるこれらのファイル、ディレクトリ群をまとめてプロジェクトレイアウトと呼称します。
+
+プロジェクトレイアウトをコピペで作っていると、プロジェクト名が異なっていると、
+影響するファイル名やClass名が多いでしょう。
 そんなツールの1つにcookiecutterというオープンソースがあります。
 
 * [audreyr/cookiecutter](https://github.com/audreyr/cookiecutter)
 
-概要は次の図のようなイメージ。
+図で説明すると、次のようになります。
+
+![CookieCutterのアーキテクチャ](cookiecutter-architecture.svg)
+
+- プロジェクトの雛形: Githubリポジトリ or ローカル
+- 雛形に挿入する値: cookiecutter利用者に委ねられる。デフォルトはインタラクティブに入力。
+- Project Layout: 出力結果。
 
 ## 使い方
 
@@ -23,7 +34,7 @@ $ cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git
 
 ![CookieCutterを実行したときの画像](cookiecutter-sample.png)
 
-対話式に聞かれた後に、ファイルツリーが生成されます。
+対話式に聞かれた後に、プロジェクトレイアウトが生成されます。
 
 ### Help
 
@@ -70,7 +81,7 @@ Jinja2の記法が利用できます。
 ```
 simple-template/
 ├── cookiecutter.json
-└── {{cookiecutter.project_name}} // Directory
+└── {{cookiecutter.project_name}}/
 ```
 
 `cookiecutter.json`の中身は次のようにします。
@@ -81,7 +92,7 @@ simple-template/
 }
 ```
 
-これ`simple-template`をテンプレートとして利用してみます。
+次に、`simple-template`をテンプレートとして利用してみます。
 
 ```bash
 $ cookiecutter ./simple-template
@@ -89,8 +100,32 @@ $ cookiecutter ./simple-template
 
 これでテンプレートとして利用できます。
 
+### カスタマイズ方法
+
+cookiecutterで自作テンプレートを作るときは、次のルールを守っておけば良いでしょう。
+
+1. 変数の定義は`cookiecutter.json`に書く。
+    - 利用可能な型は、String, List, Dictionaryです。
+2. 変数を展開する場所では`{{cookiecutter.xxx}}`のように、Jinja2のテンプレートが展開できる記法で記述し、`cookiecutter`のメンバ変数として展開できるようにしておく。
+    - 展開時に、条件分岐を行ったり、for-loopを利用することも可能です。
+
+
+詳しい説明は[Advanced Usage - cookiecutter](https://cookiecutter.readthedocs.io/en/latest/advanced/index.html)に載っています。
+
+また、既に公開されているcookiecutter用のテンプレートを見てみることもお勧めします。
+
+- [cookiecutter.json - audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage/blob/master/cookiecutter.json)
+
 ## 公開する
 
+とてもシンプルな答えはGithubやBitbucketにホスティングすることです。
+
+## 最後に
+
+作っては捨て、という大量生産大量消費の時代にもってこいなパッケージとなっております。
+cookiecutterはPythonで作成されていますが、テンプレートとするプロジェクトは言語を問いません。
+
+DEMOでプレビューするときや、ちょっとした検証をしたい時用の雛形を予め作っておくと時間の節約になります。
 
 
 
