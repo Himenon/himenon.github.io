@@ -1,5 +1,8 @@
 # [イベントレポート] Cloud Native Meetup Tokyo #1
 
+<p id="created_at">作成日: <time datetime="2018-05-22T00:00">2018/05/22 00:00</time></p>
+<p id="updated_at">更新日: <time datetime="2018-05-22T23:50">2018/05/23 23:50</time></p>
+
 ※特にガチ目にまとめるわけじゃないです。
 独断と偏見で端折って書きます。
 
@@ -53,7 +56,7 @@ Hayahito Kawamitsuさんから。
 
 ## Fluent Bit vs Fluentd 1.x
 
-**スライドは未公開？**
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/hzVjSMXIbMY5Bp" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/seiyamizuno35/fluentd12-fluent-bit-97985725" title="Fluentd1.2 &amp; Fluent Bit" target="_blank">Fluentd1.2 &amp; Fluent Bit</a> </strong> from <strong><a href="https://www.slideshare.net/seiyamizuno35" target="_blank">Seiya Mizuno</a></strong> </div>
 
 Mizuno Seiyaさんから。
 
