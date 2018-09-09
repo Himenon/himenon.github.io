@@ -4,4 +4,3 @@ fontawesome_markdown
 markdown-include
 Pygments>=2.2
 pymdown-extensions
-mkdocs-windmill

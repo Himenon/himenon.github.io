@@ -10,3 +10,4 @@ services:
       - 8000:8000
     volumes:
       - ./:/src
+      - ./extensions:/extensions
