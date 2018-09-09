@@ -2,7 +2,9 @@ site_name: 技術の定点観測
 site_description: 気楽にドヤろうぜ
 site_author: K.Himeno
 
-theme: windmill
+theme:
+    name: null
+    custom_dir: 'custom_theme/'
 
 repo_name: Himenon/himenon.github.io
 repo_url: https://github.com/Himenon/himenon.github.io
@@ -30,3 +32,4 @@ markdown_extensions:
       base_path: src
   - toc:
       permalink: true
+      separator: "_"

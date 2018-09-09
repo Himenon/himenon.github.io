@@ -1,0 +1,117 @@
+html, body, div {
+    padding: 0;
+    margin: 0;
+}
+
+/* Style */
+
+body {
+    font-family: sans-serif;
+    padding: 1.2em 3em;
+    color: #333;
+    background-color: #f3f3f3cf;
+}
+
+a {
+    color: #28d
+}
+
+li {
+    margin: 4px 0
+}
+
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+code {
+    background: #f8f8f8;
+}
+
+/* Layout */
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    justify-content: space-around;
+}
+
+.site-nav {
+    font-size: 0.8em;
+    flex-grow: 1;
+    align-self: flex-start;
+    padding: 0 1.2em;
+    flex-basis: 20%;
+    background-color: #FFF;
+    margin-right: 1em;
+}
+
+.site-nav ul {
+    list-style: none;
+}
+
+.site-nav ul ul > li {
+    border-left: 2px solid #ccc;
+    padding-left: 3px;
+}
+
+.site-nav ul ul li:hover {
+    border-color: #696969;
+}
+
+.site-nav ul li a {
+    display: block;
+    width: 100%;
+}
+
+ul li a:hover {
+    background-color: #ffeb3b4f;
+}
+
+.site-nav ul {
+    padding-left: 0;
+}
+
+.content {
+    flex-grow: 3;
+    align-self: flex-start;
+    padding: 0 1.2em;
+    flex-basis: 65%;
+    background-color: #FFF;
+    margin-right: 1em;
+}
+
+.content img {
+    width: 100%;
+}
+
+.page-nav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1.2em;
+    font-size: 0.8em;
+    flex-grow: 1;
+    align-self: flex-start;
+    flex-basis: 15%;
+    background-color: #FFF;
+    padding: 0 1.2em;
+}
+
+.page-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.page-nav ul > li {
+    border-left: 2px solid #ccc;
+    padding-left: 3px;
+}
+
+.page-nav ul > li:hover {
+    border-color: #696969;
+}
