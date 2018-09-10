@@ -27,7 +27,7 @@ site_dir: docs
 google_analytics: ['UA-55455343-7', 'himenon.github.io']
 
 markdown_extensions:
-  - code_highlight
+  # - code_highlight
   - admonition
   - markdown_include.include:
       base_path: src

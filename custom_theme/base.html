@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ config.site_name }}</title>
+    {%- block htmltitle %}
+    <title>{% if page and page.title and not page.is_homepage %}{{ page.title }} | {% endif %}{{ config.site_name }}</title>
+    {%- endblock %}
+    {% if page and page.is_homepage %}<meta name="description" content="{{ config.site_description }}">{% endif %}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
     <link rel="stylesheet" href="/main.css">
     <link rel="stylesheet" href="/prism.css">
 </head>
 
 <body>
+    <header>
+    <h1><a href="{{ config.site_url }}">{{ config.site_name }}</a></h1>
+    </header>
     <div class="container">
         <div class="site-nav">
-            <h2>サイト内のトピック</h2>
+            <h2>サイト内トピック</h2>
             {% include "site_nav.html" %}
         </div>
         <div class="content">
@@ -21,7 +27,7 @@
             {%- endblock %}
         </div>
         <div class="page-nav">
-            <h2>ページ内の目次</h2>
+            <h2>ページ内目次</h2>
             {% include "page_nav.html" %}
         </div>
     </div>

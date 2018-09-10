@@ -26,10 +26,22 @@ pre {
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    background-color: #eee;
+    padding: 8px;
+    border-radius: 2px;
 }
 
-code {
-    background: #f8f8f8;
+.headerlink {
+    display: none;
+}
+
+h1:hover .headerlink,
+h2:hover .headerlink,
+h3:hover .headerlink,
+h4:hover .headerlink,
+h5:hover .headerlink,
+h6:hover .headerlink {
+    display: inline;
 }
 
 /* Layout */
@@ -49,15 +61,31 @@ code {
     flex-basis: 20%;
     background-color: #FFF;
     margin-right: 1em;
+    overflow: hidden;
+    border-top: 3px solid #28d;
+    border-bottom: 3px solid #28d;
 }
 
 .site-nav ul {
     list-style: none;
 }
 
-.site-nav ul ul > li {
-    border-left: 2px solid #ccc;
-    padding-left: 3px;
+.site-nav .most-deep-item > a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.site-nav .most-deep-item > a::before {
+    content: "├";
+    margin-right: 1em;
+    display: inline-block;
+}
+
+.site-nav .most-deep-item:last-child > a::before {
+    content: "└";
+    margin-right: 1em;
+    display: inline-block;
 }
 
 .site-nav ul ul li:hover {
@@ -84,6 +112,8 @@ ul li a:hover {
     flex-basis: 65%;
     background-color: #FFF;
     margin-right: 1em;
+    border-top: 3px solid #28d;
+    border-bottom: 3px solid #28d;
 }
 
 .content img {
@@ -100,6 +130,8 @@ ul li a:hover {
     flex-basis: 15%;
     background-color: #FFF;
     padding: 0 1.2em;
+    border-top: 3px solid #28d;
+    border-bottom: 3px solid #28d;
 }
 
 .page-nav ul {

@@ -1,0 +1,17 @@
+<li {% if not nav_item.children %}class="most-deep-item"{% endif %}>
+  {%- if nav_item.url -%}
+    <a href="{{ config.site_url }}{{ nav_item.url }}">{{ nav_item.title }}</a>
+  {%- else -%}
+    <span><b><u>{{ nav_item.title }}</u></b></span>
+  {%- endif %}
+</li>
+
+{%- if nav_item.children %}
+<li>
+  <ul>
+    {%- for nav_item in nav_item.children %}
+      {% include 'nav_item.html' %}
+    {%- endfor %}
+  </ul>
+</li>
+{% endif %}

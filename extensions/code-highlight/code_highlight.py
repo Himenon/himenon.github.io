@@ -9,9 +9,7 @@ class CodeHighlightExtension(Extension):
         super(CodeHighlightExtension, self).__init__(*args, **kwargs)
 
     def extendMarkdown(self, md, md_globals):
-        print(md)
-        print(md_globals)
-        print("だめですきょー")
+        pass
 
 def makeExtension(*args, **kwargs):
     return CodeHighlightExtension(*args, **kwargs)
