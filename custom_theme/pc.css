@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 html, body, div {
     padding: 0;
     margin: 0;
@@ -20,15 +24,18 @@ li {
     margin: 4px 0
 }
 
-pre {
+.content-body > * {
     white-space: pre-wrap;       /* Since CSS 2.1 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
-    background-color: #eee;
+}
+
+.content-body pre {
     padding: 8px;
     border-radius: 2px;
+    background-color: #eee;
 }
 
 .headerlink {
@@ -56,6 +63,7 @@ h6:hover .headerlink {
 .site-nav {
     font-size: 0.8em;
     flex-grow: 1;
+    flex-shrink: 0;
     align-self: flex-start;
     padding: 0 1.2em;
     flex-basis: 20%;

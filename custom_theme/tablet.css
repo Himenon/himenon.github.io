@@ -1,0 +1,19 @@
+@media screen and (max-width: 1024px) {
+    .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .content {
+        order: 1;
+    }
+    .page-nav {
+        order: 2;
+        position: unset;
+        flex-shrink: 0;
+    }
+    .site-nav {
+        order: 3;
+        flex-shrink: 0;
+        margin-top: 3em;
+    }
+}

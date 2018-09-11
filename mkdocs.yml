@@ -1,3 +1,5 @@
+strict: true
+
 site_name: 技術の定点観測
 site_description: 気楽にドヤろうぜ
 site_author: K.Himeno
@@ -25,7 +27,6 @@ docs_dir: src
 site_dir: docs
 
 google_analytics: ['UA-55455343-7', 'himenon.github.io']
-twitter_id: himenoglyph
 
 markdown_extensions:
   # - code_highlight

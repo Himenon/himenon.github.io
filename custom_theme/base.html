@@ -9,13 +9,15 @@
     {%- endblock %}
     {% if page and page.is_homepage %}<meta name="description" content="{{ config.site_description }}">{% endif %}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
-    <link rel="stylesheet" href="/main.css?hoge">
+    <link rel="stylesheet" href="/pc.css?hoge1">
+    <link rel="stylesheet" href="/tablet.css?hoge1">
+    <link rel="stylesheet" href="/sp.css?hoge2">
     <link rel="stylesheet" href="/prism.css">
 </head>
 
 <body>
-    <header>
-    <h1><a href="{{ config.site_url }}">{{ config.site_name }}</a></h1>
+    <header class="site-header">
+        <h1><a href="{{ config.site_url }}">{{ config.site_name }}</a></h1>
     </header>
     <div class="container">
         <div class="site-nav">
