@@ -1,75 +1,354 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  
-  
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>[イベントレポート] Cloud Native Meetup Tokyo #1 | 技術の定点観測</title>
     
-    <meta name="author" content="K.Himeno">
-    
-    <link rel="shortcut icon" href="../../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>[イベントレポート] Cloud Native Meetup Tokyo #1 - 技術の定点観測</title>
-    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/highlight.css">
-    <link href="../../assets/css/font.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-
-    <script src="../../js/jquery-3.2.1.min.js"></script>
-    <script src="../../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '../..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "[\u30a4\u30d9\u30f3\u30c8\u30ec\u30dd\u30fc\u30c8] Cloud Native Meetup Tokyo #1", url: "#cloud-native-meetup-tokyo-1", children: [
-              {title: "\u958b\u50ac\u6982\u8981", url: "#_1" },
-              {title: "with NATS with Kubernetes\u306e\u4e16\u754c\u3078", url: "#with-nats-with-kubernetes" },
-              {title: "Fluent Bit vs Fluentd 1.x", url: "#fluent-bit-vs-fluentd-1x" },
-              {title: "\u30b5\u30fc\u30d3\u30b9\u30e1\u30c3\u30b7\u30e5\u3068\u4ef2\u9593\u305f\u3061 \u301cIstio &amp; Conduit\u301c", url: "#istio-conduit" },
-              {title: "LT", url: "#lt" },
-              {title: "\u5168\u4f53\u7684\u306a\u611f\u60f3", url: "#_2" },
-          ]},
-        ];
-
-    </script>
-    <script src="../../js/base.js"></script>
-      <script src="../../assets/js/mermaid.min.js"></script>
-      <script src="../../search/require.js"></script>
-      <script src="../../search/search.js"></script>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-55455343-7', 'himenon.github.io');
-        ga('send', 'pageview');
-    </script> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+    <link rel="stylesheet" href="/pc.css?hoge1">
+    <link rel="stylesheet" href="/tablet.css?hoge1">
+    <link rel="stylesheet" href="/sp.css?hoge2">
+    <link rel="stylesheet" href="/prism.css">
 </head>
 
 <body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
-
-
-
-<div class="container-fluid wm-page-content">
+    <header class="site-header">
+        <h1><a href="">技術の定点観測</a></h1>
+    </header>
+    <div class="container">
+        <div class="site-nav">
+            <h2>サイト内トピック</h2>
+            
+    <ul>
     
+        <li class="most-deep-item"><a href="../..">Hey!</a>
+</li>
+    
+        <li class="most-deep-item"><a href="../../pick-up-article/">Pick Up Article</a>
+</li>
+    
+        <li ><span><b><u>Django</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Django/Add new app/">DjangoにAppを新たに追加したときにやること</a>
+</li>
+      <li class="most-deep-item"><a href="../../Django/Introduction-of-Celery-Django/">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a>
+</li>
+      <li class="most-deep-item"><a href="../../Django/Seperate-Django-Database/">Djangoで複数のデータベースを利用する</a>
+</li>
+  </ul>
+</li>
 
-    <h1 id="cloud-native-meetup-tokyo-1">[イベントレポート] Cloud Native Meetup Tokyo #1<a class="headerlink" href="#cloud-native-meetup-tokyo-1" title="Permanent link">&para;</a></h1>
+    
+        <li ><span><b><u>Firebase</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Firebase/Auth-Error-Tips/">FirebaseのAuthで躓いたこと</a>
+</li>
+      <li class="most-deep-item"><a href="../../Firebase/Firebase-Cloud-Functions/">FirebaseにおけるCloud Functions</a>
+</li>
+      <li class="most-deep-item"><a href="../../Firebase/Firebase-Starter/">Firebaseことはじめ</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Flask</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Flask/Hello-Flask-Streamming-Content/">Flaskのストリーミングを利用してみる</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Frontend</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Frontend/settings/">lodash</a>
+</li>
+      <li ><span><b><u>Es6</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Frontend/es6/usage-axios/">Axiosでasync/awaitを利用する</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Vuejs</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Frontend/vuejs/my-vue-setup/">Vueのセットアップ</a>
+</li>
+      <li class="most-deep-item"><a href="../../Frontend/vuejs/nuxtjs/">Nuxt.jsをやる</a>
+</li>
+      <li class="most-deep-item"><a href="../../Frontend/vuejs/ssr-cache-investigation/">VuejsのSSR(Server Side Rendering)のページ・部分キャッシュは何で実装できるか</a>
+</li>
+      <li class="most-deep-item"><a href="../../Frontend/vuejs/vuex-usage/">VuexのModuleの使い方</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>GCP</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../GCP/Cloud-Function/">Cloud Function</a>
+</li>
+      <li class="most-deep-item"><a href="../../GCP/GKE/">GKEのコマンド</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Infrastructure</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Nodejs</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Nodejs/Request-library-description-for-json-value/">nodeのrequestライブラリの`json`オプションの取り扱いについて</a>
+</li>
+      <li class="most-deep-item"><a href="../../Nodejs/dynamic-import/">PackageのDynamic Import</a>
+</li>
+      <li class="most-deep-item"><a href="../../Nodejs/execute-async-mjs/">Module jsで非同期関数を実行する</a>
+</li>
+      <li class="most-deep-item"><a href="../../Nodejs/manage-npm-package/">npmのpaackage管理について</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Poem</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Poem/Container-App-Directory-Management-Consideration/">コンテナアプリケーション作成時のディレクトリ成長設計の考察</a>
+</li>
+      <li class="most-deep-item"><a href="../../Poem/Container-Worker-Design/">コンテナ型のワーカーの設計（仮）</a>
+</li>
+      <li class="most-deep-item"><a href="../../Poem/TDD/">TDDポエム</a>
+</li>
+      <li class="most-deep-item"><a href="../../Poem/read-basic-knowledge-of-nosql/">NOSQLとは何か...</a>
+</li>
+      <li class="most-deep-item"><a href="../../Poem/static-site-generator/">静的サイトジェネレーターを選ぶとき、何を思ふ？</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Profile</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Profile/github-activity/">Githubの活動状況</a>
+</li>
+      <li class="most-deep-item"><a href="../../Profile/">Profileの目次</a>
+</li>
+      <li class="most-deep-item"><a href="../../Profile/skill/">スキルセット</a>
+</li>
+      <li class="most-deep-item"><a href="../../Profile/study-history/">参加した勉強会</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Tools</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>Cookiecutter</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Tools/Cookiecutter/usage/">自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Git</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Tools/Git/git-tips/">Git Tips</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Github</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Tools/Github/Github-GraphQL/">GithubのGraphQLを利用する</a>
+</li>
+      <li class="most-deep-item"><a href="../../Tools/Github/Github-Multi-Login-User/">Githubで複数ユーザーのログインをした時の対応</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Slack</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Tools/Slack/slack-library/">言語別Slack通知ライブラリ</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Zapier</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Tools/Zapier/zapier-development/">Zapierで利用可能なアプリをを時前で作成する</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Analytics</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>Jupyter</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../analytics/jupyter/change-jupyter-config-dir/">jupyter_notebook_config.pyの読み込み先を変更する</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Pandas</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../analytics/pandas/pandas-convert-column-to-datetime/">PandasのColumnをDateTimeに型変換する</a>
+</li>
+      <li class="most-deep-item"><a href="../../analytics/pandas/visualize-time/">時間データのビジュアライズ</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Event</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="./">[イベントレポート] Cloud Native Meetup Tokyo #1</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Kubernetes</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../kubernetes/Nginx access control for kubernetes/">Nginx access control for kubernetes</a>
+</li>
+      <li class="most-deep-item"><a href="../../kubernetes/Shortcut-for-kubectl/">Shortcut for kubectl</a>
+</li>
+      <li class="most-deep-item"><a href="../../kubernetes/cron-wake-up-down/">Cron wake up down</a>
+</li>
+      <li class="most-deep-item"><a href="../../kubernetes/error helm incompatible version/">Error helm incompatible version</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>mongoDB</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../mongoDB/basic-query/">Basic query</a>
+</li>
+      <li class="most-deep-item"><a href="../../mongoDB/basic-read-write/">Basic read write</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Presentation</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>2018</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../presentation/2018/03-02-Yoidore-GCPUG-LT/">03 02 Yoidore GCPUG LT</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Python</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../python/test-know-how/">Test know how</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Raspberrypi</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../raspberrypi/os-install/">Os install</a>
+</li>
+      <li class="most-deep-item"><a href="../../raspberrypi/purchace/">Purchace</a>
+</li>
+  </ul>
+</li>
+
+    
+    </ul>
+
+        </div>
+        <div class="content">
+            <div class="content-header">
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+   class="twitter-share-button"
+   data-text="[イベントレポート] Cloud Native Meetup Tokyo #1"
+   data-via="himenoglyph"
+   data-related="himenoglyph"
+   data-show-count="true">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+            </div>
+            <div class="content-body">
+    <h1 id="cloud_native_meetup_tokyo_1">[イベントレポート] Cloud Native Meetup Tokyo #1<a class="headerlink" href="#cloud_native_meetup_tokyo_1" title="Permanent link">&para;</a></h1>
 <p id="created_at">作成日: <time datetime="2018-05-22T00:00">2018/05/22 00:00</time></p>
 
 <p id="updated_at">更新日: <time datetime="2018-05-22T23:50">2018/05/23 23:50</time></p>
@@ -84,7 +363,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>同士求む</li>
 </ul>
 <p>らしい。</p>
-<h2 id="with-nats-with-kubernetes">with NATS with Kubernetesの世界へ<a class="headerlink" href="#with-nats-with-kubernetes" title="Permanent link">&para;</a></h2>
+<h2 id="with_nats_with_kubernetes">with NATS with Kubernetesの世界へ<a class="headerlink" href="#with_nats_with_kubernetes" title="Permanent link">&para;</a></h2>
 <iframe src="//www.slideshare.net/slideshow/embed_code/key/8H2FNvFZYEcmKJ" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
 <p><div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/hayahitokawamitsu/with-nats-with-kubernetes" title="with NATS with Kubernetesの世界へ" target="_blank">with NATS with Kubernetesの世界へ</a> </strong> from <strong><a href="https://www.slideshare.net/hayahitokawamitsu" target="_blank">Hosei uni, Faculty of Computer and Information Sciences</a></strong> </div></p>
@@ -138,7 +417,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <hr />
 <p>【感想】Cloud Pub/Subは<a href="https://cloudplatformonline.com/2018-onboard-jp-tokyo.html">Cloud OnBoard - 東京</a>でもだいぶ推されいたし、Kubernetes上に自前でメッセージングシステム立てる機会があったので、面白かった。
 とりあえず、NATSの性能が本当に真なら、KafkaとRedisの置き換えになるかなぁ。</p>
-<h2 id="fluent-bit-vs-fluentd-1x">Fluent Bit vs Fluentd 1.x<a class="headerlink" href="#fluent-bit-vs-fluentd-1x" title="Permanent link">&para;</a></h2>
+<h2 id="fluent_bit_vs_fluentd_1x">Fluent Bit vs Fluentd 1.x<a class="headerlink" href="#fluent_bit_vs_fluentd_1x" title="Permanent link">&para;</a></h2>
 <iframe src="//www.slideshare.net/slideshow/embed_code/key/hzVjSMXIbMY5Bp" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
 <p><div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/seiyamizuno35/fluentd12-fluent-bit-97985725" title="Fluentd1.2 &amp; Fluent Bit" target="_blank">Fluentd1.2 &amp; Fluent Bit</a> </strong> from <strong><a href="https://www.slideshare.net/seiyamizuno35" target="_blank">Seiya Mizuno</a></strong> </div></p>
@@ -154,7 +433,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>こういうの、発表する側、聞く側とってもためになるので嬉しいです。</p>
 <hr />
 <p>【感想】fluentd、直接導入したことないので（GKE使ったので）、ふと気になった時にこの発表思い出してみようと思った。</p>
-<h2 id="istio-conduit">サービスメッシュと仲間たち 〜Istio &amp; Conduit〜<a class="headerlink" href="#istio-conduit" title="Permanent link">&para;</a></h2>
+<h2 id="istio_conduit">サービスメッシュと仲間たち 〜Istio &amp; Conduit〜<a class="headerlink" href="#istio_conduit" title="Permanent link">&para;</a></h2>
 <script async class="speakerdeck-embed" data-id="d49488e5b2064e0486f96071ad6882fc" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
 
 <p><a href="https://twitter.com/amsy810">@amsy810</a>さんから。</p>
@@ -200,37 +479,40 @@ IstioはVMまで境界に含めれるらしい、というのは知らなかっ�
 </ul>
 <p>気がついたらいっぱい書いてた。おわり。</p>
 
-  <br>
+            </div>
+        </div>
+        <div class="page-nav">
+            <h2>ページ内目次</h2>
+            <ul>
     
-
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    <li><a href="#cloud_native_meetup_tokyo_1">[イベントレポート] Cloud Native Meetup Tokyo #1</a></li>
     
-    <div class="wm-article-nav pull-right">
-      <a href="../../kubernetes/Nginx access control for kubernetes/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../../kubernetes/Nginx access control for kubernetes/" class="btn btn-xs btn-link">
-        Nginx access control for kubernetes
-      </a>
+    <li><a href="#_1">開催概要</a></li>
+    
+    <li><a href="#with_nats_with_kubernetes">with NATS with Kubernetesの世界へ</a></li>
+    
+    <li><a href="#fluent_bit_vs_fluentd_1x">Fluent Bit vs Fluentd 1.x</a></li>
+    
+    <li><a href="#istio_conduit">サービスメッシュと仲間たち 〜Istio &amp; Conduit〜</a></li>
+    
+    <li><a href="#lt">LT</a></li>
+    
+    <li><a href="#_2">全体的な感想</a></li>
+    
+    
+</ul>
+        </div>
     </div>
-    
-    <div class="wm-article-nav">
-      <a href="../../analytics/pandas/visualize-time/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../../analytics/pandas/visualize-time/" class="btn btn-xs btn-link">
-        時間データのビジュアライズ
-      </a>
-    </div>
-    
-  </div>
-
-    <br>
-</div>
-
-<footer class="col-md-12 wm-page-content">
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
-</footer>
-
+    <script src="/prism.js"></script>
+    <script src="/mermaid.min.js"></script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-55455343-7', 'himenon.github.io');
+ga('send', 'pageview');
+</script>
 </body>
+
 </html>

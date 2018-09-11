@@ -1,75 +1,353 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  
-  
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profileの目次 | 技術の定点観測</title>
     
-    <meta name="author" content="K.Himeno">
-    
-    <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Profileの目次 - 技術の定点観測</title>
-    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/highlight.css">
-    <link href="../assets/css/font.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "Profile\u306e\u76ee\u6b21", url: "#profile", children: [
-              {title: "Q. \u4f55\u304c\u3067\u304d\u308b\u4eba\u304b\u78ba\u8a8d\u3057\u305f\u3044", url: "#q" },
-              {title: "Q. \u6d3b\u52d5\u3092\u898b\u305f\u3044", url: "#q_1" },
-              {title: "Q. Github\u306e\u4f55\u3092\u898b\u308c\u3070\u3044\u3044\u306e\uff1f", url: "#q-github" },
-              {title: "Q. \u4e00\u65e5\u3001\u3069\u308c\u304f\u3089\u3044\u30b3\u30fc\u30c9\u66f8\u3044\u3066\u3044\u308b\u306e\uff1f", url: "#q_2" },
-              {title: "Q. \u884c\u52d5\u539f\u7406", url: "#q_3" },
-              {title: "Q. PR\u3067\u304d\u308b\u3053\u3068\u3042\u308b\uff1f", url: "#q-pr" },
-              {title: "Q. \u7565\u6b74", url: "#q_4" },
-          ]},
-        ];
-
-    </script>
-    <script src="../js/base.js"></script>
-      <script src="../assets/js/mermaid.min.js"></script>
-      <script src="../search/require.js"></script>
-      <script src="../search/search.js"></script>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-55455343-7', 'himenon.github.io');
-        ga('send', 'pageview');
-    </script> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+    <link rel="stylesheet" href="/pc.css?hoge1">
+    <link rel="stylesheet" href="/tablet.css?hoge1">
+    <link rel="stylesheet" href="/sp.css?hoge2">
+    <link rel="stylesheet" href="/prism.css">
 </head>
 
 <body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
-
-
-
-<div class="container-fluid wm-page-content">
+    <header class="site-header">
+        <h1><a href="">技術の定点観測</a></h1>
+    </header>
+    <div class="container">
+        <div class="site-nav">
+            <h2>サイト内トピック</h2>
+            
+    <ul>
     
+        <li class="most-deep-item"><a href="..">Hey!</a>
+</li>
+    
+        <li class="most-deep-item"><a href="../pick-up-article/">Pick Up Article</a>
+</li>
+    
+        <li ><span><b><u>Django</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Django/Add new app/">DjangoにAppを新たに追加したときにやること</a>
+</li>
+      <li class="most-deep-item"><a href="../Django/Introduction-of-Celery-Django/">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a>
+</li>
+      <li class="most-deep-item"><a href="../Django/Seperate-Django-Database/">Djangoで複数のデータベースを利用する</a>
+</li>
+  </ul>
+</li>
 
+    
+        <li ><span><b><u>Firebase</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Firebase/Auth-Error-Tips/">FirebaseのAuthで躓いたこと</a>
+</li>
+      <li class="most-deep-item"><a href="../Firebase/Firebase-Cloud-Functions/">FirebaseにおけるCloud Functions</a>
+</li>
+      <li class="most-deep-item"><a href="../Firebase/Firebase-Starter/">Firebaseことはじめ</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Flask</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Flask/Hello-Flask-Streamming-Content/">Flaskのストリーミングを利用してみる</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Frontend</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Frontend/settings/">lodash</a>
+</li>
+      <li ><span><b><u>Es6</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Frontend/es6/usage-axios/">Axiosでasync/awaitを利用する</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Vuejs</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Frontend/vuejs/my-vue-setup/">Vueのセットアップ</a>
+</li>
+      <li class="most-deep-item"><a href="../Frontend/vuejs/nuxtjs/">Nuxt.jsをやる</a>
+</li>
+      <li class="most-deep-item"><a href="../Frontend/vuejs/ssr-cache-investigation/">VuejsのSSR(Server Side Rendering)のページ・部分キャッシュは何で実装できるか</a>
+</li>
+      <li class="most-deep-item"><a href="../Frontend/vuejs/vuex-usage/">VuexのModuleの使い方</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>GCP</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../GCP/Cloud-Function/">Cloud Function</a>
+</li>
+      <li class="most-deep-item"><a href="../GCP/GKE/">GKEのコマンド</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Infrastructure</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Nodejs</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Nodejs/Request-library-description-for-json-value/">nodeのrequestライブラリの`json`オプションの取り扱いについて</a>
+</li>
+      <li class="most-deep-item"><a href="../Nodejs/dynamic-import/">PackageのDynamic Import</a>
+</li>
+      <li class="most-deep-item"><a href="../Nodejs/execute-async-mjs/">Module jsで非同期関数を実行する</a>
+</li>
+      <li class="most-deep-item"><a href="../Nodejs/manage-npm-package/">npmのpaackage管理について</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Poem</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Poem/Container-App-Directory-Management-Consideration/">コンテナアプリケーション作成時のディレクトリ成長設計の考察</a>
+</li>
+      <li class="most-deep-item"><a href="../Poem/Container-Worker-Design/">コンテナ型のワーカーの設計（仮）</a>
+</li>
+      <li class="most-deep-item"><a href="../Poem/TDD/">TDDポエム</a>
+</li>
+      <li class="most-deep-item"><a href="../Poem/read-basic-knowledge-of-nosql/">NOSQLとは何か...</a>
+</li>
+      <li class="most-deep-item"><a href="../Poem/static-site-generator/">静的サイトジェネレーターを選ぶとき、何を思ふ？</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Profile</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="github-activity/">Githubの活動状況</a>
+</li>
+      <li class="most-deep-item"><a href="./">Profileの目次</a>
+</li>
+      <li class="most-deep-item"><a href="skill/">Skill</a>
+</li>
+      <li class="most-deep-item"><a href="study-history/">Study history</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Tools</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>Cookiecutter</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Tools/Cookiecutter/usage/">Usage</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Git</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Tools/Git/git-tips/">Git tips</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Github</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Tools/Github/Github-GraphQL/">Github GraphQL</a>
+</li>
+      <li class="most-deep-item"><a href="../Tools/Github/Github-Multi-Login-User/">Github Multi Login User</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Slack</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Tools/Slack/slack-library/">Slack library</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Zapier</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Tools/Zapier/zapier-development/">Zapier development</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Analytics</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>Jupyter</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../analytics/jupyter/change-jupyter-config-dir/">Change jupyter config dir</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Pandas</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../analytics/pandas/pandas-convert-column-to-datetime/">Pandas convert column to datetime</a>
+</li>
+      <li class="most-deep-item"><a href="../analytics/pandas/visualize-time/">Visualize time</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Event</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../event/2018-05-21-Cloud-Native/">2018 05 21 Cloud Native</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Kubernetes</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../kubernetes/Nginx access control for kubernetes/">Nginx access control for kubernetes</a>
+</li>
+      <li class="most-deep-item"><a href="../kubernetes/Shortcut-for-kubectl/">Shortcut for kubectl</a>
+</li>
+      <li class="most-deep-item"><a href="../kubernetes/cron-wake-up-down/">Cron wake up down</a>
+</li>
+      <li class="most-deep-item"><a href="../kubernetes/error helm incompatible version/">Error helm incompatible version</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>mongoDB</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../mongoDB/basic-query/">Basic query</a>
+</li>
+      <li class="most-deep-item"><a href="../mongoDB/basic-read-write/">Basic read write</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Presentation</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>2018</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../presentation/2018/03-02-Yoidore-GCPUG-LT/">03 02 Yoidore GCPUG LT</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Python</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../python/test-know-how/">Test know how</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Raspberrypi</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../raspberrypi/os-install/">Os install</a>
+</li>
+      <li class="most-deep-item"><a href="../raspberrypi/purchace/">Purchace</a>
+</li>
+  </ul>
+</li>
+
+    
+    </ul>
+
+        </div>
+        <div class="content">
+            <div class="content-header">
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+   class="twitter-share-button"
+   data-text="Profileの目次"
+   data-via="himenoglyph"
+   data-related="himenoglyph"
+   data-show-count="true">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+            </div>
+            <div class="content-body">
     <h1 id="profile">Profileの目次<a class="headerlink" href="#profile" title="Permanent link">&para;</a></h1>
 <p>情報がたくさんあるので、まとめページです。</p>
 <h2 id="q">Q. 何ができる人か確認したい<a class="headerlink" href="#q" title="Permanent link">&para;</a></h2>
@@ -87,7 +365,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>見本誌や技術書店、大型系のイベントにはだいたい参加しています。
 サブカル系のイベントにも参加者としてちょくちょく参加。
 このサイトの趣旨とは異なる領域なので、直接聞いて下さい（注意：日が暮れます）。</p>
-<h2 id="q-github">Q. Githubの何を見ればいいの？<a class="headerlink" href="#q-github" title="Permanent link">&para;</a></h2>
+<h2 id="q_github">Q. Githubの何を見ればいいの？<a class="headerlink" href="#q_github" title="Permanent link">&para;</a></h2>
 <p><a href="../profile/github-activity/">Githubの活動状況</a>をご覧ください。</p>
 <p><strong>OSS活動</strong></p>
 <ul>
@@ -112,7 +390,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>会話は経験ベースの話し方が多い</li>
 <li>マメな性格</li>
 </ul>
-<h2 id="q-pr">Q. PRできることある？<a class="headerlink" href="#q-pr" title="Permanent link">&para;</a></h2>
+<h2 id="q_pr">Q. PRできることある？<a class="headerlink" href="#q_pr" title="Permanent link">&para;</a></h2>
 <p>情報収集能力・整理能力・課題解決能力が人より高いっぽいです。</p>
 <p><strong>整理能力</strong></p>
 <p>これに関しては、大学入学が2011年なのですが、それ以降の記録に関しては、
@@ -131,37 +409,42 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <li>Leverages (2017/4 -)</li>
 </ul>
 
-  <br>
+            </div>
+        </div>
+        <div class="page-nav">
+            <h2>ページ内目次</h2>
+            <ul>
     
-
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    <li><a href="#profile">Profileの目次</a></li>
     
-    <div class="wm-article-nav pull-right">
-      <a href="skill/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="skill/" class="btn btn-xs btn-link">
-        Skill
-      </a>
+    <li><a href="#q">Q. 何ができる人か確認したい</a></li>
+    
+    <li><a href="#q_1">Q. 活動を見たい</a></li>
+    
+    <li><a href="#q_github">Q. Githubの何を見ればいいの？</a></li>
+    
+    <li><a href="#q_2">Q. 一日、どれくらいコード書いているの？</a></li>
+    
+    <li><a href="#q_3">Q. 行動原理</a></li>
+    
+    <li><a href="#q_pr">Q. PRできることある？</a></li>
+    
+    <li><a href="#q_4">Q. 略歴</a></li>
+    
+    
+</ul>
+        </div>
     </div>
-    
-    <div class="wm-article-nav">
-      <a href="github-activity/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="github-activity/" class="btn btn-xs btn-link">
-        Githubの活動状況
-      </a>
-    </div>
-    
-  </div>
-
-    <br>
-</div>
-
-<footer class="col-md-12 wm-page-content">
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
-</footer>
-
+    <script src="/prism.js"></script>
+    <script src="/mermaid.min.js"></script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-55455343-7', 'himenon.github.io');
+ga('send', 'pageview');
+</script>
 </body>
+
 </html>

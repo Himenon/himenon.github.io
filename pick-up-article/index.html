@@ -1,95 +1,361 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  
-  
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pick Up Article | 技術の定点観測</title>
     
-    <meta name="author" content="K.Himeno">
-    
-    <link rel="shortcut icon" href="../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Pick Up Article - 技術の定点観測</title>
-    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/highlight.css">
-    <link href="../assets/css/font.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "Pick Up Article", url: "#pick-up-article", children: [
-              {title: "Article", url: "#article" },
-              {title: "Amazon Web Service (AWS)", url: "#amazon-web-service-aws" },
-              {title: "Books", url: "#books" },
-              {title: "CI/CD", url: "#cicd" },
-              {title: "Cluster", url: "#cluster" },
-              {title: "Google Cloud Platform (GCP)", url: "#google-cloud-platform-gcp" },
-              {title: "Headless Browser", url: "#headless-browser" },
-              {title: "Kubernetes", url: "#kubernetes" },
-              {title: "Microservice", url: "#microservice" },
-              {title: "JavaScript", url: "#javascript" },
-              {title: "Go", url: "#go" },
-              {title: "Python", url: "#python" },
-              {title: "Redis", url: "#redis" },
-              {title: "Streaming", url: "#streaming" },
-              {title: "Swift", url: "#swift" },
-              {title: "Web Service", url: "#web-service" },
-              {title: "WSGI", url: "#wsgi" },
-              {title: "\u5206\u6563\u51e6\u7406", url: "#_1" },
-              {title: "Credit Card\u7cfb", url: "#credit-card" },
-          ]},
-        ];
-
-    </script>
-    <script src="../js/base.js"></script>
-      <script src="../assets/js/mermaid.min.js"></script>
-      <script src="../search/require.js"></script>
-      <script src="../search/search.js"></script>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-55455343-7', 'himenon.github.io');
-        ga('send', 'pageview');
-    </script> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+    <link rel="stylesheet" href="/pc.css?hoge1">
+    <link rel="stylesheet" href="/tablet.css?hoge1">
+    <link rel="stylesheet" href="/sp.css?hoge2">
+    <link rel="stylesheet" href="/prism.css">
 </head>
 
 <body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
-
-
-
-<div class="container-fluid wm-page-content">
+    <header class="site-header">
+        <h1><a href="">技術の定点観測</a></h1>
+    </header>
+    <div class="container">
+        <div class="site-nav">
+            <h2>サイト内トピック</h2>
+            
+    <ul>
     
+        <li class="most-deep-item"><a href="..">Hey!</a>
+</li>
+    
+        <li class="most-deep-item"><a href="./">Pick Up Article</a>
+</li>
+    
+        <li ><span><b><u>Django</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Django/Add new app/">Add new app</a>
+</li>
+      <li class="most-deep-item"><a href="../Django/Introduction-of-Celery-Django/">Introduction of Celery Django</a>
+</li>
+      <li class="most-deep-item"><a href="../Django/Seperate-Django-Database/">Seperate Django Database</a>
+</li>
+  </ul>
+</li>
 
-    <h1 id="pick-up-article">Pick Up Article<a class="headerlink" href="#pick-up-article" title="Permanent link">&para;</a></h1>
+    
+        <li ><span><b><u>Firebase</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Firebase/Auth-Error-Tips/">Auth Error Tips</a>
+</li>
+      <li class="most-deep-item"><a href="../Firebase/Firebase-Cloud-Functions/">Firebase Cloud Functions</a>
+</li>
+      <li class="most-deep-item"><a href="../Firebase/Firebase-Starter/">Firebase Starter</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Flask</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Flask/Hello-Flask-Streamming-Content/">Hello Flask Streamming Content</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Frontend</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Frontend/settings/">Settings</a>
+</li>
+      <li ><span><b><u>Es6</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Frontend/es6/usage-axios/">Usage axios</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Vuejs</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Frontend/vuejs/my-vue-setup/">My vue setup</a>
+</li>
+      <li class="most-deep-item"><a href="../Frontend/vuejs/nuxtjs/">Nuxtjs</a>
+</li>
+      <li class="most-deep-item"><a href="../Frontend/vuejs/ssr-cache-investigation/">Ssr cache investigation</a>
+</li>
+      <li class="most-deep-item"><a href="../Frontend/vuejs/vuex-usage/">Vuex usage</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>GCP</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../GCP/Cloud-Function/">Cloud Function</a>
+</li>
+      <li class="most-deep-item"><a href="../GCP/GKE/">GKE</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Infrastructure</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">Multiple Reverse Proxy Sapmle with oauth2 proxy</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Nodejs</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Nodejs/Request-library-description-for-json-value/">Request library description for json value</a>
+</li>
+      <li class="most-deep-item"><a href="../Nodejs/dynamic-import/">Dynamic import</a>
+</li>
+      <li class="most-deep-item"><a href="../Nodejs/execute-async-mjs/">Execute async mjs</a>
+</li>
+      <li class="most-deep-item"><a href="../Nodejs/manage-npm-package/">Manage npm package</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Poem</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Poem/Container-App-Directory-Management-Consideration/">Container App Directory Management Consideration</a>
+</li>
+      <li class="most-deep-item"><a href="../Poem/Container-Worker-Design/">Container Worker Design</a>
+</li>
+      <li class="most-deep-item"><a href="../Poem/TDD/">TDD</a>
+</li>
+      <li class="most-deep-item"><a href="../Poem/read-basic-knowledge-of-nosql/">Read basic knowledge of nosql</a>
+</li>
+      <li class="most-deep-item"><a href="../Poem/static-site-generator/">Static site generator</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Profile</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Profile/github-activity/">Github activity</a>
+</li>
+      <li class="most-deep-item"><a href="../Profile/">Home</a>
+</li>
+      <li class="most-deep-item"><a href="../Profile/skill/">Skill</a>
+</li>
+      <li class="most-deep-item"><a href="../Profile/study-history/">Study history</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Tools</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>Cookiecutter</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Tools/Cookiecutter/usage/">Usage</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Git</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Tools/Git/git-tips/">Git tips</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Github</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Tools/Github/Github-GraphQL/">Github GraphQL</a>
+</li>
+      <li class="most-deep-item"><a href="../Tools/Github/Github-Multi-Login-User/">Github Multi Login User</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Slack</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Tools/Slack/slack-library/">Slack library</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Zapier</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Tools/Zapier/zapier-development/">Zapier development</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Analytics</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>Jupyter</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../analytics/jupyter/change-jupyter-config-dir/">Change jupyter config dir</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Pandas</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../analytics/pandas/pandas-convert-column-to-datetime/">Pandas convert column to datetime</a>
+</li>
+      <li class="most-deep-item"><a href="../analytics/pandas/visualize-time/">Visualize time</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Event</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../event/2018-05-21-Cloud-Native/">2018 05 21 Cloud Native</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Kubernetes</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../kubernetes/Nginx access control for kubernetes/">Nginx access control for kubernetes</a>
+</li>
+      <li class="most-deep-item"><a href="../kubernetes/Shortcut-for-kubectl/">Shortcut for kubectl</a>
+</li>
+      <li class="most-deep-item"><a href="../kubernetes/cron-wake-up-down/">Cron wake up down</a>
+</li>
+      <li class="most-deep-item"><a href="../kubernetes/error helm incompatible version/">Error helm incompatible version</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>mongoDB</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../mongoDB/basic-query/">Basic query</a>
+</li>
+      <li class="most-deep-item"><a href="../mongoDB/basic-read-write/">Basic read write</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Presentation</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>2018</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../presentation/2018/03-02-Yoidore-GCPUG-LT/">03 02 Yoidore GCPUG LT</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Python</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../python/test-know-how/">Test know how</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Raspberrypi</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../raspberrypi/os-install/">Os install</a>
+</li>
+      <li class="most-deep-item"><a href="../raspberrypi/purchace/">Purchace</a>
+</li>
+  </ul>
+</li>
+
+    
+    </ul>
+
+        </div>
+        <div class="content">
+            <div class="content-header">
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+   class="twitter-share-button"
+   data-text="Pick Up Article"
+   data-via="himenoglyph"
+   data-related="himenoglyph"
+   data-show-count="true">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+            </div>
+            <div class="content-body">
+    <h1 id="pick_up_article">Pick Up Article<a class="headerlink" href="#pick_up_article" title="Permanent link">&para;</a></h1>
 <p>ネストされている場合は合わせて読みたやつ</p>
 <h2 id="article">Article<a class="headerlink" href="#article" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://arxiv.org/pdf/1503.01986.pdf">Convex Color Image Segmentation with Optimal Transport Distances</a></li>
 <li><a href="https://arxiv.org/pdf/1710.00756.pdf">Neural Color Transfer between Images</a></li>
 </ul>
-<h2 id="amazon-web-service-aws">Amazon Web Service (AWS)<a class="headerlink" href="#amazon-web-service-aws" title="Permanent link">&para;</a></h2>
+<h2 id="amazon_web_service_aws">Amazon Web Service (AWS)<a class="headerlink" href="#amazon_web_service_aws" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://dev.classmethod.jp/cloud/aws/operational-event-on-aws/">AWS特有の運用イベントまとめ（非障害系）</a></li>
 <li><a href="http://www.publickey1.jp/blog/18/awscloudmapper.html">AWSのシステム構成情報を集めて構成図を自動生成してくれる「CloudMapper」、オープンソースで公開</a></li>
@@ -106,17 +372,17 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <ul>
 <li><a href="http://gongo.hatenablog.com/entry/2015/08/04/232650">Docker Hub 公式 PostgreSQL イメージを用いて、データベースクラスタ作成済みコンテナイメージを作成する</a></li>
 </ul>
-<h2 id="google-cloud-platform-gcp">Google Cloud Platform (GCP)<a class="headerlink" href="#google-cloud-platform-gcp" title="Permanent link">&para;</a></h2>
+<h2 id="google_cloud_platform_gcp">Google Cloud Platform (GCP)<a class="headerlink" href="#google_cloud_platform_gcp" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="../www.amazon.co.jp/dp/1491939206">The Art of Capacity Planning: Scaling Web Resources in the Cloud</a></li>
 <li><a href="https://cloud.google.com/kubernetes-engine/docs/tutorials/configuring-domain-name-static-ip">静的 IP アドレスを使用したドメイン名の設定</a></li>
 <li><a href="https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#reserve_new_static">静的外部 IP アドレスの予約</a></li>
 </ul>
-<h3 id="cloud-function">Cloud Function<a class="headerlink" href="#cloud-function" title="Permanent link">&para;</a></h3>
+<h3 id="cloud_function">Cloud Function<a class="headerlink" href="#cloud_function" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://cloudplatform.googleblog.com/2018/03/automatic-serverless-deployments-with-Cloud-Source-Repositories-and-Container-Builder.html?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed:+ClPlBl+(Cloud+Platform+Blog)">Automatic serverless deployments with Cloud Source Repositories and Container Builder</a></li>
 </ul>
-<h3 id="cloud-pubsub">Cloud Pub/Sub<a class="headerlink" href="#cloud-pubsub" title="Permanent link">&para;</a></h3>
+<h3 id="cloud_pubsub">Cloud Pub/Sub<a class="headerlink" href="#cloud_pubsub" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="http://uyamazak.hatenablog.com/entry/2017/09/25/142941">GoogleのCloud Pub/SubをやめてRedisのPub/Subに戻した話</a></li>
 <li><a href="https://developers.cyberagent.co.jp/blog/archives/1672/">Apache Kafka &amp; Google Cloud Pub/Sub 主要機能の比較</a></li>
@@ -126,11 +392,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <ul>
 <li><a href="https://codezine.jp/article/detail/10709">デプロイ自動化をマルチクラウドで！ CDツール「Spinnaker」をAWS上で検証してみた【デブサミ2018】</a></li>
 </ul>
-<h3 id="cloud-sql">Cloud SQL<a class="headerlink" href="#cloud-sql" title="Permanent link">&para;</a></h3>
+<h3 id="cloud_sql">Cloud SQL<a class="headerlink" href="#cloud_sql" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="http://www.mpon.me/entry/2017/04/22/025029">GKEからCloud SQLに接続する方法</a></li>
 </ul>
-<h2 id="headless-browser">Headless Browser<a class="headerlink" href="#headless-browser" title="Permanent link">&para;</a></h2>
+<h2 id="headless_browser">Headless Browser<a class="headerlink" href="#headless_browser" title="Permanent link">&para;</a></h2>
 <h3 id="puppetter">puppetter<a class="headerlink" href="#puppetter" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://github.com/GoogleChrome/puppeteer">GoogleChrome/puppeteer</a></li>
@@ -154,7 +420,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
 <li><a href="https://github.com/kubernetes/examples/blob/master/staging/runtime-constraints/README.md">Runtime Constraints example</a></li>
 </ul>
-<h3 id="loadbalancer-sticky-session-affinity">Loadbalancer, Sticky Session, Affinity<a class="headerlink" href="#loadbalancer-sticky-session-affinity" title="Permanent link">&para;</a></h3>
+<h3 id="loadbalancer_sticky_session_affinity">Loadbalancer, Sticky Session, Affinity<a class="headerlink" href="#loadbalancer_sticky_session_affinity" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="https://www.haproxy.com/blog/load-balancing-affinity-persistence-sticky-sessions-what-you-need-to-know/">load balancing, affinity, persistence, sticky sessions: what you need to know</a></li>
 <li><a href="https://ubiteku.oinker.me/2017/02/10/enable-sticky-session-in-kubernetes-on-aws/">Kubernetes on AWS で sticky session を実現する</a></li>
@@ -164,7 +430,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <ul>
 <li><a href="https://kubernetes.io/docs/tasks/job/fine-parallel-processing-work-queue/">Fine Parallel Processing Using a Work Queue</a></li>
 </ul>
-<h3 id="inner-application">Inner Application<a class="headerlink" href="#inner-application" title="Permanent link">&para;</a></h3>
+<h3 id="inner_application">Inner Application<a class="headerlink" href="#inner_application" title="Permanent link">&para;</a></h3>
 <ul>
 <li><a href="http://romana.io/">Romana</a></li>
 </ul>
@@ -245,7 +511,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <ul>
 <li><a href="https://github.com/bizz84/SwiftyStoreKit">bizz84/SwiftyStoreKit</a></li>
 </ul>
-<h2 id="web-service">Web Service<a class="headerlink" href="#web-service" title="Permanent link">&para;</a></h2>
+<h2 id="web_service">Web Service<a class="headerlink" href="#web_service" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://skillflow.io/">Skill Flow</a></li>
 </ul>
@@ -258,7 +524,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <ul>
 <li><a href="https://akka.io/">Akka</a></li>
 </ul>
-<h2 id="credit-card">Credit Card系<a class="headerlink" href="#credit-card" title="Permanent link">&para;</a></h2>
+<h2 id="credit_card">Credit Card系<a class="headerlink" href="#credit_card" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://creditcardjs.com/">creditcardjs</a><ul>
 <li>UIに関する<a href="https://creditcardjs.com/credit-card-type-detection#credit-card-regular-expression-hell">ディスカッション</a>も書いてって良い</li>
@@ -266,37 +532,66 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
 </ul>
 
-  <br>
+            </div>
+        </div>
+        <div class="page-nav">
+            <h2>ページ内目次</h2>
+            <ul>
     
-
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    <li><a href="#pick_up_article">Pick Up Article</a></li>
     
-    <div class="wm-article-nav pull-right">
-      <a href="../Django/Add new app/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Django/Add new app/" class="btn btn-xs btn-link">
-        Add new app
-      </a>
+    <li><a href="#article">Article</a></li>
+    
+    <li><a href="#amazon_web_service_aws">Amazon Web Service (AWS)</a></li>
+    
+    <li><a href="#books">Books</a></li>
+    
+    <li><a href="#cicd">CI/CD</a></li>
+    
+    <li><a href="#cluster">Cluster</a></li>
+    
+    <li><a href="#google_cloud_platform_gcp">Google Cloud Platform (GCP)</a></li>
+    
+    <li><a href="#headless_browser">Headless Browser</a></li>
+    
+    <li><a href="#kubernetes">Kubernetes</a></li>
+    
+    <li><a href="#microservice">Microservice</a></li>
+    
+    <li><a href="#javascript">JavaScript</a></li>
+    
+    <li><a href="#go">Go</a></li>
+    
+    <li><a href="#python">Python</a></li>
+    
+    <li><a href="#redis">Redis</a></li>
+    
+    <li><a href="#streaming">Streaming</a></li>
+    
+    <li><a href="#swift">Swift</a></li>
+    
+    <li><a href="#web_service">Web Service</a></li>
+    
+    <li><a href="#wsgi">WSGI</a></li>
+    
+    <li><a href="#_1">分散処理</a></li>
+    
+    <li><a href="#credit_card">Credit Card系</a></li>
+    
+    
+</ul>
+        </div>
     </div>
-    
-    <div class="wm-article-nav">
-      <a href=".." class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href=".." class="btn btn-xs btn-link">
-        Hey!
-      </a>
-    </div>
-    
-  </div>
-
-    <br>
-</div>
-
-<footer class="col-md-12 wm-page-content">
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
-</footer>
-
+    <script src="/prism.js"></script>
+    <script src="/mermaid.min.js"></script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-55455343-7', 'himenon.github.io');
+ga('send', 'pageview');
+</script>
 </body>
+
 </html>

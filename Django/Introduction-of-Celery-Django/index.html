@@ -1,75 +1,354 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  
-  
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する | 技術の定点観測</title>
     
-    <meta name="author" content="K.Himeno">
-    
-    <link rel="shortcut icon" href="../../img/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する - 技術の定点観測</title>
-    <link href="../../css/bootstrap-3.3.7.min.css" rel="stylesheet">
-    <link href="../../css/font-awesome-4.7.0.css" rel="stylesheet">
-    <link href="../../css/base.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../css/highlight.css">
-    <link href="../../assets/css/font.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-
-    <script src="../../js/jquery-3.2.1.min.js"></script>
-    <script src="../../js/bootstrap-3.3.7.min.js"></script>
-    <script src="../../js/highlight.pack.js"></script>
-    
-    <base target="_top">
-    <script>
-      var base_url = '../..';
-      var is_top_frame = false;
-        
-        var pageToc = [
-          {title: "Django 2.0\u306bCelery 4.0\u3092\u5c0e\u5165\u3057\u3001WEB\u306e\u7ba1\u7406\u753b\u9762\u3067Cron\u3092\u7ba1\u7406\u3059\u308b", url: "#django-20celery-40webcron", children: [
-              {title: "\u306f\u3058\u3081\u306b", url: "#_1" },
-              {title: "\u6e96\u5099", url: "#_3" },
-              {title: "Django\u306e\u4f5c\u6210", url: "#django" },
-              {title: "\u30bf\u30b9\u30af\u306e\u8ffd\u52a0", url: "#_4" },
-              {title: "\u30bf\u30b9\u30af\u306e\u5b9f\u884c", url: "#_8" },
-              {title: "\u304a\u308f\u308a\u306b", url: "#_10" },
-          ]},
-        ];
-
-    </script>
-    <script src="../../js/base.js"></script>
-      <script src="../../assets/js/mermaid.min.js"></script>
-      <script src="../../search/require.js"></script>
-      <script src="../../search/search.js"></script>
-    <script>
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-        ga('create', 'UA-55455343-7', 'himenon.github.io');
-        ga('send', 'pageview');
-    </script> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+    <link rel="stylesheet" href="/pc.css?hoge1">
+    <link rel="stylesheet" href="/tablet.css?hoge1">
+    <link rel="stylesheet" href="/sp.css?hoge2">
+    <link rel="stylesheet" href="/prism.css">
 </head>
 
 <body>
-<script>
-if (is_top_frame) { $('body').addClass('wm-top-page'); }
-</script>
-
-
-
-<div class="container-fluid wm-page-content">
+    <header class="site-header">
+        <h1><a href="">技術の定点観測</a></h1>
+    </header>
+    <div class="container">
+        <div class="site-nav">
+            <h2>サイト内トピック</h2>
+            
+    <ul>
     
+        <li class="most-deep-item"><a href="../..">Hey!</a>
+</li>
+    
+        <li class="most-deep-item"><a href="../../pick-up-article/">Pick Up Article</a>
+</li>
+    
+        <li ><span><b><u>Django</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../Add new app/">DjangoにAppを新たに追加したときにやること</a>
+</li>
+      <li class="most-deep-item"><a href="./">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a>
+</li>
+      <li class="most-deep-item"><a href="../Seperate-Django-Database/">Seperate Django Database</a>
+</li>
+  </ul>
+</li>
 
-    <h1 id="django-20celery-40webcron">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する<a class="headerlink" href="#django-20celery-40webcron" title="Permanent link">&para;</a></h1>
+    
+        <li ><span><b><u>Firebase</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Firebase/Auth-Error-Tips/">Auth Error Tips</a>
+</li>
+      <li class="most-deep-item"><a href="../../Firebase/Firebase-Cloud-Functions/">Firebase Cloud Functions</a>
+</li>
+      <li class="most-deep-item"><a href="../../Firebase/Firebase-Starter/">Firebase Starter</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Flask</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Flask/Hello-Flask-Streamming-Content/">Hello Flask Streamming Content</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Frontend</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Frontend/settings/">Settings</a>
+</li>
+      <li ><span><b><u>Es6</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Frontend/es6/usage-axios/">Usage axios</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Vuejs</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Frontend/vuejs/my-vue-setup/">My vue setup</a>
+</li>
+      <li class="most-deep-item"><a href="../../Frontend/vuejs/nuxtjs/">Nuxtjs</a>
+</li>
+      <li class="most-deep-item"><a href="../../Frontend/vuejs/ssr-cache-investigation/">Ssr cache investigation</a>
+</li>
+      <li class="most-deep-item"><a href="../../Frontend/vuejs/vuex-usage/">Vuex usage</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>GCP</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../GCP/Cloud-Function/">Cloud Function</a>
+</li>
+      <li class="most-deep-item"><a href="../../GCP/GKE/">GKE</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Infrastructure</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">Multiple Reverse Proxy Sapmle with oauth2 proxy</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Nodejs</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Nodejs/Request-library-description-for-json-value/">Request library description for json value</a>
+</li>
+      <li class="most-deep-item"><a href="../../Nodejs/dynamic-import/">Dynamic import</a>
+</li>
+      <li class="most-deep-item"><a href="../../Nodejs/execute-async-mjs/">Execute async mjs</a>
+</li>
+      <li class="most-deep-item"><a href="../../Nodejs/manage-npm-package/">Manage npm package</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Poem</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Poem/Container-App-Directory-Management-Consideration/">Container App Directory Management Consideration</a>
+</li>
+      <li class="most-deep-item"><a href="../../Poem/Container-Worker-Design/">Container Worker Design</a>
+</li>
+      <li class="most-deep-item"><a href="../../Poem/TDD/">TDD</a>
+</li>
+      <li class="most-deep-item"><a href="../../Poem/read-basic-knowledge-of-nosql/">Read basic knowledge of nosql</a>
+</li>
+      <li class="most-deep-item"><a href="../../Poem/static-site-generator/">Static site generator</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Profile</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Profile/github-activity/">Github activity</a>
+</li>
+      <li class="most-deep-item"><a href="../../Profile/">Home</a>
+</li>
+      <li class="most-deep-item"><a href="../../Profile/skill/">Skill</a>
+</li>
+      <li class="most-deep-item"><a href="../../Profile/study-history/">Study history</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Tools</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>Cookiecutter</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Tools/Cookiecutter/usage/">Usage</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Git</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Tools/Git/git-tips/">Git tips</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Github</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Tools/Github/Github-GraphQL/">Github GraphQL</a>
+</li>
+      <li class="most-deep-item"><a href="../../Tools/Github/Github-Multi-Login-User/">Github Multi Login User</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Slack</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Tools/Slack/slack-library/">Slack library</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Zapier</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../Tools/Zapier/zapier-development/">Zapier development</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Analytics</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>Jupyter</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../analytics/jupyter/change-jupyter-config-dir/">Change jupyter config dir</a>
+</li>
+  </ul>
+</li>
+
+      <li ><span><b><u>Pandas</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../analytics/pandas/pandas-convert-column-to-datetime/">Pandas convert column to datetime</a>
+</li>
+      <li class="most-deep-item"><a href="../../analytics/pandas/visualize-time/">Visualize time</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Event</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../event/2018-05-21-Cloud-Native/">2018 05 21 Cloud Native</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Kubernetes</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../kubernetes/Nginx access control for kubernetes/">Nginx access control for kubernetes</a>
+</li>
+      <li class="most-deep-item"><a href="../../kubernetes/Shortcut-for-kubectl/">Shortcut for kubectl</a>
+</li>
+      <li class="most-deep-item"><a href="../../kubernetes/cron-wake-up-down/">Cron wake up down</a>
+</li>
+      <li class="most-deep-item"><a href="../../kubernetes/error helm incompatible version/">Error helm incompatible version</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>mongoDB</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../mongoDB/basic-query/">Basic query</a>
+</li>
+      <li class="most-deep-item"><a href="../../mongoDB/basic-read-write/">Basic read write</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Presentation</u></b></span>
+</li>
+<li>
+  <ul>
+      <li ><span><b><u>2018</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../presentation/2018/03-02-Yoidore-GCPUG-LT/">03 02 Yoidore GCPUG LT</a>
+</li>
+  </ul>
+</li>
+
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Python</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../python/test-know-how/">Test know how</a>
+</li>
+  </ul>
+</li>
+
+    
+        <li ><span><b><u>Raspberrypi</u></b></span>
+</li>
+<li>
+  <ul>
+      <li class="most-deep-item"><a href="../../raspberrypi/os-install/">Os install</a>
+</li>
+      <li class="most-deep-item"><a href="../../raspberrypi/purchace/">Purchace</a>
+</li>
+  </ul>
+</li>
+
+    
+    </ul>
+
+        </div>
+        <div class="content">
+            <div class="content-header">
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+   class="twitter-share-button"
+   data-text="Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する"
+   data-via="himenoglyph"
+   data-related="himenoglyph"
+   data-show-count="true">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+            </div>
+            <div class="content-body">
+    <h1 id="django_20celery_40webcron">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する<a class="headerlink" href="#django_20celery_40webcron" title="Permanent link">&para;</a></h1>
 <p id="created_at">作成日: <time datetime="2018-03-12T01:40">2018/03/12</time></p>
 
 <h2 id="_1">はじめに<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
@@ -228,7 +507,7 @@ def hello_from_a(*args, **kwargs):
 docker-composeを用いて楽をしています。</p>
 <p>ただ、ここはそれほど難しものではなく、起動コマンドが異なるだけとなります。
 Brokerに関しては今回はredisを採用しており、自動的に立ち上がるので、ここでの説明は省きます。</p>
-<h3 id="scheduler-worker">scheduler, workerの起動<a class="headerlink" href="#scheduler-worker" title="Permanent link">&para;</a></h3>
+<h3 id="scheduler_worker">scheduler, workerの起動<a class="headerlink" href="#scheduler_worker" title="Permanent link">&para;</a></h3>
 <p>schedulerの起動コマンドは次の通りです。</p>
 <pre><code class="bash">DJANGO_SETTINGS_MODULE=tm.settings celery -A tm beat --scheduler django_celery_beat.schedulers:DatabaseScheduler --pidfile /celerybeat.pid
 </code></pre>
@@ -291,37 +570,40 @@ Djando Adminでは見えませんが、Database上にスケジュールが記述
 <li><a href="http://docs.celeryproject.org/en/latest/userguide/periodic-tasks.html">Periodic Tasks | Celery 4.1.0 documentation</a></li>
 </ul>
 
-  <br>
+            </div>
+        </div>
+        <div class="page-nav">
+            <h2>ページ内目次</h2>
+            <ul>
     
-
-  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    <li><a href="#django_20celery_40webcron">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a></li>
     
-    <div class="wm-article-nav pull-right">
-      <a href="../Seperate-Django-Database/" class="btn btn-xs btn-default pull-right">
-        Next
-        <i class="fa fa-chevron-right" aria-hidden="true"></i>
-      </a>
-      <a href="../Seperate-Django-Database/" class="btn btn-xs btn-link">
-        Seperate Django Database
-      </a>
+    <li><a href="#_1">はじめに</a></li>
+    
+    <li><a href="#_3">準備</a></li>
+    
+    <li><a href="#django">Djangoの作成</a></li>
+    
+    <li><a href="#_4">タスクの追加</a></li>
+    
+    <li><a href="#_8">タスクの実行</a></li>
+    
+    <li><a href="#_10">おわりに</a></li>
+    
+    
+</ul>
+        </div>
     </div>
-    
-    <div class="wm-article-nav">
-      <a href="../Add new app/" class="btn btn-xs btn-default pull-left">
-        <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Add new app/" class="btn btn-xs btn-link">
-        DjangoにAppを新たに追加したときにやること
-      </a>
-    </div>
-    
-  </div>
-
-    <br>
-</div>
-
-<footer class="col-md-12 wm-page-content">
-  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
-</footer>
-
+    <script src="/prism.js"></script>
+    <script src="/mermaid.min.js"></script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-55455343-7', 'himenon.github.io');
+ga('send', 'pageview');
+</script>
 </body>
+
 </html>
