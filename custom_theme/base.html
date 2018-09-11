@@ -9,7 +9,7 @@
     {%- endblock %}
     {% if page and page.is_homepage %}<meta name="description" content="{{ config.site_description }}">{% endif %}
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/main.css?hoge">
     <link rel="stylesheet" href="/prism.css">
 </head>
 
@@ -23,8 +23,14 @@
             {% include "site_nav.html" %}
         </div>
         <div class="content">
-            {%- block content %}
-            {%- endblock %}
+            <div class="content-header">
+                {%- block content_header %}
+                {%- endblock %}
+            </div>
+            <div class="content-body">
+                {%- block content %}
+                {%- endblock %}
+            </div>
         </div>
         <div class="page-nav">
             <h2>ページ内目次</h2>
@@ -33,6 +39,16 @@
     </div>
     <script src="/prism.js"></script>
     <script src="/mermaid.min.js"></script>
+    {%- if config.google_analytics %}
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', '{{ config.google_analytics[0] }}', '{{ config.google_analytics[1] }}');
+ga('send', 'pageview');
+</script>
+    {%- endif %}
 </body>
 
 </html>

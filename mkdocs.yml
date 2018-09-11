@@ -25,6 +25,7 @@ docs_dir: src
 site_dir: docs
 
 google_analytics: ['UA-55455343-7', 'himenon.github.io']
+twitter_id: himenoglyph
 
 markdown_extensions:
   # - code_highlight

@@ -78,7 +78,7 @@ h6:hover .headerlink {
 
 .site-nav .most-deep-item > a::before {
     content: "├";
-    margin-right: 1em;
+    margin-right: 0.8em;
     display: inline-block;
 }
 
@@ -107,6 +107,7 @@ ul li a:hover {
 
 .content {
     flex-grow: 3;
+    position: relative;
     align-self: flex-start;
     padding: 0 1.2em;
     flex-basis: 65%;
@@ -116,7 +117,12 @@ ul li a:hover {
     border-bottom: 3px solid #28d;
 }
 
-.content img {
+.content .content-header {
+    padding-top: 1.2em;
+    text-align: right;
+}
+
+.content .content-body img {
     max-width: 100%;
 }
 
@@ -139,11 +145,17 @@ ul li a:hover {
     padding: 0;
 }
 
-.page-nav ul > li {
-    border-left: 2px solid #ccc;
-    padding-left: 3px;
-}
-
 .page-nav ul > li:hover {
     border-color: #696969;
+}
+
+.page-nav ul li a {
+    display: block;
+    width: 100%;
+}
+
+.page-nav ul li a::before {
+    content: "+";
+    margin-right: 0.8em;
+    display: inline-block;
 }

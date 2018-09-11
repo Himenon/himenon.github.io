@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 
+{% block content_header %}
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+   class="twitter-share-button"
+   data-text="{{ page.title }}"
+   data-via="himenoglyph"
+   data-related="{{ config.twitter_id }}"
+   data-show-count="true">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+{% endblock %}
+
 {% block content %}
     {{ page.content }}
 {% endblock %}
