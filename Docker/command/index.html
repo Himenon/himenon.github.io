@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>[イベントレポート] Cloud Native Meetup Tokyo #1 | 技術の定点観測</title>
+    <title>Dockerコマンド | 技術の定点観測</title>
     
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
     <link rel="stylesheet" href="/pc.css">
@@ -20,158 +20,158 @@
             <div class="content-header">
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
    class="twitter-share-button"
-   data-text="[イベントレポート] Cloud Native Meetup Tokyo #1"
+   data-text="Dockerコマンド"
    data-via="himenoglyph"
    data-related="himenoglyph"
    data-show-count="true">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
-            <div class="content-body"><h1 id="cloud_native_meetup_tokyo_1">[イベントレポート] Cloud Native Meetup Tokyo #1<a class="headerlink" href="#cloud_native_meetup_tokyo_1" title="Permanent link">&para;</a></h1>
-<p id="created_at">作成日: <time datetime="2018-05-22T00:00">2018/05/22 00:00</time></p>
-
-<p id="updated_at">更新日: <time datetime="2018-05-22T23:50">2018/05/23 23:50</time></p>
-
-<p>※特にガチ目にまとめるわけじゃないです。
-独断と偏見で端折って書きます。</p>
-<h2 id="_1">開催概要<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p><code>#1</code>とあって、Cloud Native Meetup Tokyoの開催理由を<a href="https://twitter.com/amsy810">@amsy810</a>さんが説明。</p>
+            <div class="content-body"><h1 id="docker">Dockerコマンド<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h1>
 <ul>
-<li>エコシステム多い</li>
-<li>検証大変</li>
-<li>同士求む</li>
+<li>Created at 2018/09/13 04:00</li>
 </ul>
-<p>らしい。</p>
-<h2 id="with_nats_with_kubernetes">with NATS with Kubernetesの世界へ<a class="headerlink" href="#with_nats_with_kubernetes" title="Permanent link">&para;</a></h2>
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/8H2FNvFZYEcmKJ" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+<p>使っているときは、こんなの覚えているし（笑）
+と思っていたんですが、3か月使わなくなって忘れてしまったので、メモ帳から取り出します。</p>
+<h2 id="_1">プロセスの確認<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<pre><code class="sh">docker ps
+</code></pre>
 
-<p><div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/hayahitokawamitsu/with-nats-with-kubernetes" title="with NATS with Kubernetesの世界へ" target="_blank">with NATS with Kubernetesの世界へ</a> </strong> from <strong><a href="https://www.slideshare.net/hayahitokawamitsu" target="_blank">Hosei uni, Faculty of Computer and Information Sciences</a></strong> </div></p>
-<p>Hayahito Kawamitsuさんから。</p>
-<ul>
-<li>NATSってそもそも何？</li>
-<li>スライドは導入を意識して作った</li>
-<li>資料を既に公開しているので、手を動かしながら確認できるよ</li>
-<li>IoTをやる上で、メッセージングを使うのはスタンダートになっている。<ul>
-<li>GCPだとCloud Pub/Subとか</li>
-</ul>
-</li>
-<li>CNCFがメッセージングサービスをホストしたよ<ul>
-<li><a href="https://www.linuxfoundation.jp/blog/cncf-to-host-nats/">CNCFがNATSをホストへ</a></li>
-</ul>
-</li>
-<li>メッセージングどんだけ流行ってるのかGCPのサンプルソリューションの登場回数から調査したよ<ul>
-<li>GCEが1位かと思ったけどそうじゃなかった</li>
-<li>Pub/Subも10位以内にいるよ</li>
-</ul>
-</li>
-<li>メッセージングモデルは3つあるよ(だいたいPub/Subの亜種)<ul>
-<li>Pub/Sub</li>
-<li>Request/Reply</li>
-<li>Queueing (Load balanced queue subscriber)</li>
-</ul>
-</li>
-<li>NATSは大きく2つある<ul>
-<li>NATS<ul>
-<li>NATSサーバーに接続した後にメッセージを受取可能</li>
-</ul>
-</li>
-<li>Streaming<ul>
-<li>中にNATSを持っている</li>
-<li>繋ぐ前のメッセージを受け取ることもできる</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Monitoring, Loggingあるよ</li>
-<li>ベンチマークとパフォーマンス<ul>
-<li>NATSはパフォーマンスがKafka二倍くらい....ほんと？<ul>
-<li>結論から言えば、本当</li>
-<li>ある程度パフォーマンスが出る</li>
-</ul>
-</li>
-<li>チューニング用のサポートツールがある</li>
-</ul>
-</li>
-</ul>
-<hr />
-<p>【感想】Cloud Pub/Subは<a href="https://cloudplatformonline.com/2018-onboard-jp-tokyo.html">Cloud OnBoard - 東京</a>でもだいぶ推されいたし、Kubernetes上に自前でメッセージングシステム立てる機会があったので、面白かった。
-とりあえず、NATSの性能が本当に真なら、KafkaとRedisの置き換えになるかなぁ。</p>
-<h2 id="fluent_bit_vs_fluentd_1x">Fluent Bit vs Fluentd 1.x<a class="headerlink" href="#fluent_bit_vs_fluentd_1x" title="Permanent link">&para;</a></h2>
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/hzVjSMXIbMY5Bp" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+<pre><code class="sh">docker-compose ps
+</code></pre>
 
-<p><div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/seiyamizuno35/fluentd12-fluent-bit-97985725" title="Fluentd1.2 &amp; Fluent Bit" target="_blank">Fluentd1.2 &amp; Fluent Bit</a> </strong> from <strong><a href="https://www.slideshare.net/seiyamizuno35" target="_blank">Seiya Mizuno</a></strong> </div></p>
-<p>Mizuno Seiyaさんから。</p>
-<p>Fluentdの内部のお話からFluent Bitの話。
-内部実装を追って、何やってるか検証してた。
-だいぶアーキテクチャ図がわかりやすく、こういう仕組みなのか〜、ほぉ〜、という程度の理解（小並感）</p>
-<p>マサカリ歓迎、とのことだったので実況のTwiterにfluentdの中の人から飛んでたのを補足。</p>
-<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">fluentdとfluent-bitの使い分けはこんな感じですね &gt; <a href="https://t.co/4M1cqDkqpX">https://t.co/4M1cqDkqpX</a> <a href="https://twitter.com/hashtag/cloudnativejp?src=hash&amp;ref_src=twsrc%5Etfw">#cloudnativejp</a></p>&mdash; SKSの申し子 (@repeatedly) <a href="https://twitter.com/repeatedly/status/998519530669277185?ref_src=twsrc%5Etfw">2018年5月21日</a></blockquote>
+<h2 id="_2">コマンドの実行<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<pre><code class="sh">docker exec -it [container id] [command]
 
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+# ユーザーを指定
+docker exec -it --user [desired_user] [container id] [command]
+</code></pre>
 
-<p>こういうの、発表する側、聞く側とってもためになるので嬉しいです。</p>
-<hr />
-<p>【感想】fluentd、直接導入したことないので（GKE使ったので）、ふと気になった時にこの発表思い出してみようと思った。</p>
-<h2 id="istio_conduit">サービスメッシュと仲間たち 〜Istio &amp; Conduit〜<a class="headerlink" href="#istio_conduit" title="Permanent link">&para;</a></h2>
-<script async class="speakerdeck-embed" data-id="d49488e5b2064e0486f96071ad6882fc" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+<pre><code class="sh"># 起動していない場合
+docker-compose run [container name] [command]
 
-<p><a href="https://twitter.com/amsy810">@amsy810</a>さんから。</p>
-<p>1行でまとめると、Istio推し。わいが検証する。</p>
-<p>Service Meshの話。
-マイクロサービスは良いけど、複雑化していくよね、どうやって管理していくの、という導入から、
-Istio, Conduit, Linkerdのコンテナパターンと機能・性能比較まで。
-IstioはVMまで境界に含めれるらしい、というのは知らなかった。
-ただ、Istioのバージョンは0.7でいつGAになるのか、わからないので本番投入はまだ。
-あとはレイテンシー問題もあるので、高レイテンシーが許容されるところじゃないとまだ使えない。</p>
-<hr />
-<p>【感想】家に帰って下のサンプルを動かしてみた。</p>
+# すでに起動している場合
+docker-compose exec [container name] [command]
+</code></pre>
+
+<h3 id="pure">検証用に一発コマンドでpureな環境に入る<a class="headerlink" href="#pure" title="Permanent link">&para;</a></h3>
+<pre><code class="sh">docker run -it --rm alpine:3.3 /bin/sh
+docker run -it --rm centos:7 /bin/bash
+docker run -it --rm ubuntu:14.04 /bin/bash
+</code></pre>
+
 <ul>
-<li><a href="https://istio.io/docs/guides/bookinfo.html">Bookinfo - Istio</a></li>
-<li><a href="https://istio.io/docs/guides/integrating-vms.html">Integrating Virtual Machines - Istio</a></li>
+<li>参考：<a href="https://qiita.com/dtan4/items/3be396665f9305428f4f">Ubuntu や Alpine Linux をワンコマンドで瞬時に立ち上げる</a></li>
 </ul>
-<p>YAMLファイルはあるけど、アプリケーションの実装コードがなかったので、<code>kubectl exec</code>でアクセスして確認。</p>
+<h2 id="_3">イメージの停止・削除<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="docker_ps">すべてのdocker psを停止<a class="headerlink" href="#docker_ps" title="Permanent link">&para;</a></h3>
+<pre><code class="sh"># bash, zsh
+docker stop $(docker ps -a -q)
+
+# fish
+docker stop (docker ps -a -q)
+</code></pre>
+
+<h3 id="_4">コンテナの削除<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<pre><code class="sh">docker rmi `docker images -q`
+docker rm -f `docker ps -a -q`
+
+# fish
+docker rm -f (docker ps -a -q)
+</code></pre>
+
+<h3 id="docker_psnone">Docker psのNoneを消す<a class="headerlink" href="#docker_psnone" title="Permanent link">&para;</a></h3>
+<pre><code class="sh"># bash
+docker rmi $(docker images -f &quot;dangling=true&quot; -q)
+
+# fish
+docker rmi (docker images -f &quot;dangling=true&quot; -q)
+
+docker images | awk '/&lt;none/{print $3}' | xargs docker rmi
+</code></pre>
+
+<h3 id="docker-compose">docker-composeの場合<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h3>
+<pre><code class="sh">docker-compose stop
+docker-compose rm
+</code></pre>
+
+<h2 id="volume">Volume系<a class="headerlink" href="#volume" title="Permanent link">&para;</a></h2>
+<h3 id="_5">データの永続化<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>開発環境で、MySQLとかのバックアップ撮っておきたいなというとき。</p>
+<h4 id="mount">Mountする<a class="headerlink" href="#mount" title="Permanent link">&para;</a></h4>
+<p>現在いるディレクトリをサクッとコンテナにマウントして検証したいとき。</p>
+<pre><code class="sh">docker run  -v $(pwd):/work -w=/work -it [image name] [command]
+</code></pre>
+
+<h4 id="_6">自前で用意したくないとき<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<pre><code class="sh">docker volume create [volume name]
+</code></pre>
+
 <ul>
-<li><a href="http://www.atmarkit.co.jp/ait/articles/1802/09/news015.html">「サービスメッシュ」「Istio」って何？　どう使える？　どう役立つ？ - @IT</a></li>
+<li>https://docs.docker.com/storage/volumes/#start-a-container-with-a-volume</li>
 </ul>
-<p>サービスメッシュはInjectionするだけなので、
-アプリケーション側のエンジニアは特に意識しなくても、良さそうということは分かった。</p>
-<h2 id="lt">LT<a class="headerlink" href="#lt" title="Permanent link">&para;</a></h2>
-<p><a href="https://twitter.com/tn961ir">@tn961ir</a>さんから。</p>
-<p><strong>スライドは未公開？</strong></p>
+<p>MySQL 5.7を使ってたときに一瞬ハマったやつ</p>
 <ul>
-<li><strong>Cloud Native</strong>の定義のPRがあがってる<ul>
-<li><a href="https://github.com/cncf/toc/pull/117">Create Cloud Native Definition #117</a></li>
+<li><a href="https://github.com/docker-library/mysql/blob/master/5.7/docker-entrypoint.sh">mysql/5.7/docker-entrypoint.sh</a></li>
+<li><a href="http://d.hatena.ne.jp/hirose31/20161004/1475582156">MySQL 5.7のmysqld --initializeと鶏卵問題</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/server-options.html#option_mysqld_ignore-db-dir">--ignore-db-dir=dir_name</a></li>
+</ul>
+<h3 id="_7">コンテナ内からホストへファイルをコピーする<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<pre><code>docker cp &lt;containerId&gt;:/file/path/within/container /host/path/target
+</code></pre>
+
+<ul>
+<li>参考<ul>
+<li><a href="https://qiita.com/gologo13/items/7e4e404af80377b48fd5">Dockerでホストとコンテナ間でのファイルコピー - Qiita</a></li>
+<li><a href="https://stackoverflow.com/questions/22049212/copying-files-from-docker-container-to-host">Copying files from Docker container to host - Stack Overflow</a></li>
 </ul>
 </li>
-<li><a href="https://www.nginx.com/products/nginx-unit/">Nginx Unit</a>の話<ul>
-<li>できること/できないことの紹介</li>
 </ul>
-</li>
-</ul>
-<p>【感想】Nginxかわいい</p>
-<h2 id="_2">全体的な感想<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_8">環境変数<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
+<p>docker-composeを使っている場合</p>
 <ul>
-<li>検証してくれる方、ありがとうございます。</li>
-<li>まだまだ奥が深いなぁ。</li>
-<li>このあたりのMeetup、強そうな人ばかりで恐縮ですが、同年代の人いないんですかね。。。</li>
-<li>消化出ていない部分もあるので、コツコツやろう。</li>
+<li>https://docs.docker.com/compose/reference/envvars/</li>
+<li>https://suin.io/535</li>
 </ul>
-<p>気がついたらいっぱい書いてた。おわり。</p></div>
+<p>個人的には、direnvで事足りている</p>
+<ul>
+<li>https://github.com/direnv/direnv</li>
+</ul>
+<h2 id="inspector">Inspector<a class="headerlink" href="#inspector" title="Permanent link">&para;</a></h2>
+<p>https://docs.docker.com/engine/reference/commandline/ps/#filtering</p>
+<h3 id="--format">--formatコマンド<a class="headerlink" href="#--format" title="Permanent link">&para;</a></h3>
+<pre><code class="sh"># NAME CONTAINER_ID IMAGE
+docker ps --format &quot;table {{.Names}}\t{{.ID}}\t{{.Image}}&quot;
+
+# NAME CONTAINER_ID IP
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' [CONTAINER NAME]
+
+# NAME CONTAINER_ID IMAGE
+docker ps --format &quot;table {{.Names}}\t{{.ID}}\t{{.Image}}\t{{.Networks}}\t&quot;
+</code></pre>
+
+<h3 id="_9">ネットワークの調査<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<pre><code class="bash">$ docker inspect -f '{{.State.Pid}}' [container_name_or_id]
+</code></pre>
+
+<ul>
+<li><a href="https://stackoverflow.com/questions/40350456/docker-any-way-to-list-open-sockets-inside-a-running-docker-container">netstat - Docker: any way to list open sockets inside a running docker container? - Stack Overflow</a></li>
+</ul></div>
         </div>
         <div class="page-nav"><h2>ページ内目次</h2><ul>
     
-    <li><a href="#cloud_native_meetup_tokyo_1">[イベントレポート] Cloud Native Meetup Tokyo #1</a></li>
+    <li><a href="#docker">Dockerコマンド</a></li>
     
-    <li><a href="#_1">開催概要</a></li>
+    <li><a href="#_1">プロセスの確認</a></li>
     
-    <li><a href="#with_nats_with_kubernetes">with NATS with Kubernetesの世界へ</a></li>
+    <li><a href="#_2">コマンドの実行</a></li>
     
-    <li><a href="#fluent_bit_vs_fluentd_1x">Fluent Bit vs Fluentd 1.x</a></li>
+    <li><a href="#_3">イメージの停止・削除</a></li>
     
-    <li><a href="#istio_conduit">サービスメッシュと仲間たち 〜Istio &amp; Conduit〜</a></li>
+    <li><a href="#volume">Volume系</a></li>
     
-    <li><a href="#lt">LT</a></li>
+    <li><a href="#_8">環境変数</a></li>
     
-    <li><a href="#_2">全体的な感想</a></li>
+    <li><a href="#inspector">Inspector</a></li>
     
     
 </ul></div>
