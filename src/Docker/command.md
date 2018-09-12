@@ -1,5 +1,7 @@
 # Dockerコマンド
 
+* Created at 2018/09/13 04:00
+
 使っているときは、こんなの覚えているし（笑）
 と思っていたんですが、3か月使わなくなって忘れてしまったので、メモ帳から取り出します。
 
@@ -131,3 +133,28 @@ docker-composeを使っている場合
 個人的には、direnvで事足りている
 
 - https://github.com/direnv/direnv
+
+## Inspector
+
+https://docs.docker.com/engine/reference/commandline/ps/#filtering
+
+### --formatコマンド
+
+```sh
+# NAME CONTAINER_ID IMAGE
+docker ps --format "table {{.Names}}\t{{.ID}}\t{{.Image}}"
+
+# NAME CONTAINER_ID IP
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' [CONTAINER NAME]
+
+# NAME CONTAINER_ID IMAGE
+docker ps --format "table {{.Names}}\t{{.ID}}\t{{.Image}}\t{{.Networks}}\t"
+```
+
+### ネットワークの調査
+
+```bash
+$ docker inspect -f '{{.State.Pid}}' [container_name_or_id]
+```
+
+* [netstat \- Docker: any way to list open sockets inside a running docker container? \- Stack Overflow](https://stackoverflow.com/questions/40350456/docker-any-way-to-list-open-sockets-inside-a-running-docker-container)
