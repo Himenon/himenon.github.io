@@ -24,7 +24,9 @@ li {
     margin: 4px 0
 }
 
-.content-body > * {
+.content-body > p,
+.content-body > pre,
+.content-body > code {
     white-space: pre-wrap;       /* Since CSS 2.1 */
     white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
     white-space: -pre-wrap;      /* Opera 4-6 */
@@ -36,6 +38,11 @@ li {
     padding: 8px;
     border-radius: 2px;
     background-color: #eee;
+}
+
+.content-body ul {
+    margin-left: 0;
+    padding: 0 0 0 1.2em;
 }
 
 .headerlink {
