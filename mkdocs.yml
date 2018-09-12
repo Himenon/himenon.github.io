@@ -25,6 +25,7 @@ extra_javascript:
 
 docs_dir: src
 site_dir: docs
+site_url: https://himenon.github.io/
 
 google_analytics: ['UA-55455343-7', 'himenon.github.io']
 

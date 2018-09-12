@@ -1,7 +1,1 @@
-{% if nav|length>1 %}
-    <ul>
-    {% for nav_item in nav %}
-        {% include 'nav_item.html' %}
-    {% endfor %}
-    </ul>
-{% endif %}
+{% if nav|length>1 %}<ul>{% for nav_item in nav %}{% include 'nav_item.html' %}{% endfor %}</ul>{% endif %}
