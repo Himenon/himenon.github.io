@@ -30,7 +30,6 @@ site_url: https://himenon.github.io/
 google_analytics: ['UA-55455343-7', 'himenon.github.io']
 
 markdown_extensions:
-  # - code_highlight
   - admonition
   - markdown_include.include:
       base_path: src
