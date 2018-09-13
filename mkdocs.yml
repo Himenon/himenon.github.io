@@ -1,7 +1,7 @@
 strict: true
 
 site_name: 技術の定点観測
-site_description: 気楽にドヤろうぜ
+site_description: 手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。
 site_author: K.Himeno
 
 theme:
