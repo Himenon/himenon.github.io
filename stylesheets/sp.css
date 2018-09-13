@@ -3,13 +3,6 @@
         padding: 0;
         margin: 0;
     }
-    .site-header {
-        width: 100vw;
-        padding: 0 3vw;
-        margin: 0;
-        overflow: hidden;
-        margin: 0;
-    }
     .container {
         flex-direction: column;
         width: 100vw;

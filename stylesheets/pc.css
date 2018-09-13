@@ -11,7 +11,6 @@ html, body, div {
 
 body {
     font-family: sans-serif;
-    padding: 1.2em 3em;
     color: #333;
     background-color: #f3f3f3cf;
 }
@@ -35,9 +34,11 @@ li {
 }
 
 .content-body pre {
+    font-size: 0.8em;
     padding: 8px;
     border-radius: 2px;
     background-color: #eee;
+    border: 1px solid #AAA;
 }
 
 .content-body ul {
@@ -61,24 +62,44 @@ h6:hover .headerlink {
 /* Layout */
 
 .container {
+    width: 90vw;
+    margin: 0 auto;
     display: flex;
     flex-direction: row;
     align-content: space-between;
     justify-content: space-around;
 }
 
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    height: 2.5em;
+    margin-bottom: 2em;
+    padding: 0.3em 5vw;
+    background-color: #FFF;
+    position: sticky;
+    top: 0;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+}
+
+.site-header h1 {
+    font-size: 1.1em;
+    padding-top: 0.2em;
+    margin: 0;
+}
+
+.site-header .sns-share {
+    padding-top: 0.3em;
+}
+
 .site-nav {
-    font-size: 0.8em;
     flex-grow: 1;
     flex-shrink: 0;
     align-self: flex-start;
-    padding: 0 1.2em;
     flex-basis: 20%;
     background-color: #FFF;
     margin-right: 1em;
-    overflow: hidden;
-    border-top: 3px solid #28d;
-    border-bottom: 3px solid #28d;
 }
 
 .site-nav ul {
@@ -116,6 +137,15 @@ ul li a:hover {
     background-color: #ffeb3b4f;
 }
 
+.nav-layout {
+    padding: 2em 1.2em;
+    border-top: 3px solid #28d;
+    border-bottom: 3px solid #28d;
+    background-color: #FFF;
+    font-size: 0.8em;
+    overflow: hidden;
+}
+
 .site-nav ul {
     padding-left: 0;
 }
@@ -123,8 +153,8 @@ ul li a:hover {
 .content {
     flex-grow: 3;
     position: relative;
+    padding: 1.2em 2em;
     align-self: flex-start;
-    padding: 0 1.2em;
     flex-basis: 65%;
     background-color: #FFF;
     margin-right: 1em;
@@ -132,28 +162,23 @@ ul li a:hover {
     border-bottom: 3px solid #28d;
 }
 
-.content .content-header {
-    padding-top: 1.2em;
-    text-align: right;
-    height: 3em;
-}
-
 .content .content-body img {
     max-width: 100%;
+}
+
+.content-body h1:first-child {
+    border-bottom: dotted 2px #29d;
+    margin-bottom: 0.8em;
+    padding-bottom: 0.2em;
 }
 
 .page-nav {
     position: -webkit-sticky;
     position: sticky;
-    top: 1.2em;
-    font-size: 0.8em;
+    top: 5.6em;
     flex-grow: 1;
     align-self: flex-start;
     flex-basis: 15%;
-    background-color: #FFF;
-    padding: 0 1.2em;
-    border-top: 3px solid #28d;
-    border-bottom: 3px solid #28d;
 }
 
 .page-nav ul {

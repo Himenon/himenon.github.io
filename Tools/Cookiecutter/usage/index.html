@@ -6,26 +6,87 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方 | 技術の定点観測</title>
     
+    <link rel="stylesheet" href="/stylesheets/reboot.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
-    <link rel="stylesheet" href="/pc.css">
-    <link rel="stylesheet" href="/tablet.css">
-    <link rel="stylesheet" href="/sp.css">
-    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/stylesheets/pc.css">
+    <link rel="stylesheet" href="/stylesheets/tablet.css">
+    <link rel="stylesheet" href="/stylesheets/sp.css">
+    <link rel="stylesheet" href="/stylesheets/prism.css">
 </head>
 <body>
-    <header class="site-header"><h1><a href="https://himenon.github.io/">技術の定点観測</a></h1></header>
-    <div class="container">
-        <div class="site-nav"><h2>サイト内トピック</h2><ul><li class="most-deep-item"><span><b><u>Hey!</u></b></span></li><li class="most-deep-item"><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li><span><b><u>Django</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Django/Add new app/">DjangoにAppを新たに追加したときにやること</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Django/Introduction-of-Celery-Django/">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Django/Seperate-Django-Database/">Djangoで複数のデータベースを利用する</a></li></ul></li><li><span><b><u>Docker</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Docker/command/">Dockerコマンド</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Docker/pycharm/">PycharmでDockerを使う方法</a></li></ul></li><li><span><b><u>Firebase</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Firebase/Auth-Error-Tips/">FirebaseのAuthで躓いたこと</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Firebase/Firebase-Cloud-Functions/">FirebaseにおけるCloud Functions</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Firebase/Firebase-Starter/">Firebaseことはじめ</a></li></ul></li><li><span><b><u>Flask</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Flask/Hello-Flask-Streamming-Content/">Flaskのストリーミングを利用してみる</a></li></ul></li><li><span><b><u>Frontend</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Frontend/settings/">lodash</a></li><li><span><b><u>Es6</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Frontend/es6/usage-axios/">Axiosでasync/awaitを利用する</a></li></ul></li><li><span><b><u>Vuejs</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Frontend/vuejs/my-vue-setup/">Vueのセットアップ</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Frontend/vuejs/nuxtjs/">Nuxt.jsをやる</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Frontend/vuejs/ssr-cache-investigation/">VuejsのSSR(Server Side Rendering)のページ・部分キャッシュは何で実装できるか</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Frontend/vuejs/vuex-usage/">VuexのModuleの使い方</a></li></ul></li></ul></li><li><span><b><u>GCP</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/GCP/Cloud-Function/">Cloud Function</a></li><li class="most-deep-item"><a href="https://himenon.github.io/GCP/GKE/">GKEのコマンド</a></li></ul></li><li><span><b><u>Infrastructure</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a></li></ul></li><li><span><b><u>MySQL</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/MySQL/character-code/">DockerのMySQLでUTF-8を使えるようにする</a></li></ul></li><li><span><b><u>Nodejs</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Nodejs/Request-library-description-for-json-value/">nodeのrequestライブラリの`json`オプションの取り扱いについて</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Nodejs/dynamic-import/">PackageのDynamic Import</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Nodejs/execute-async-mjs/">Module jsで非同期関数を実行する</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Nodejs/manage-npm-package/">npmのpaackage管理について</a></li></ul></li><li><span><b><u>Poem</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Poem/Container-App-Directory-Management-Consideration/">コンテナアプリケーション作成時のディレクトリ成長設計の考察</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Poem/Container-Worker-Design/">コンテナ型のワーカーの設計（仮）</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Poem/TDD/">TDDポエム</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Poem/read-basic-knowledge-of-nosql/">NOSQLとは何か...</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Poem/static-site-generator/">静的サイトジェネレーターを選ぶとき、何を思ふ？</a></li></ul></li><li><span><b><u>Profile</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Profile/">Profileの目次</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Profile/github-activity/">Githubの活動状況</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Profile/skill/">スキルセット</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Profile/study-history/">参加した勉強会</a></li></ul></li><li><span><b><u>Tools</u></b></span></li><li><ul><li><span><b><u>Cookiecutter</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Tools/Cookiecutter/usage/">自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方</a></li></ul></li><li><span><b><u>Git</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Tools/Git/git-tips/">Git Tips</a></li></ul></li><li><span><b><u>Github</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Tools/Github/Github-GraphQL/">GithubのGraphQLを利用する</a></li><li class="most-deep-item"><a href="https://himenon.github.io/Tools/Github/Github-Multi-Login-User/">Githubで複数ユーザーのログインをした時の対応</a></li></ul></li><li><span><b><u>Slack</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Tools/Slack/slack-library/">言語別Slack通知ライブラリ</a></li></ul></li><li><span><b><u>Zapier</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/Tools/Zapier/zapier-development/">Zapierで利用可能なアプリをを時前で作成する</a></li></ul></li></ul></li><li><span><b><u>Analytics</u></b></span></li><li><ul><li><span><b><u>Jupyter</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/analytics/jupyter/change-jupyter-config-dir/">jupyter_notebook_config.pyの読み込み先を変更する</a></li></ul></li><li><span><b><u>Pandas</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/analytics/pandas/pandas-convert-column-to-datetime/">PandasのColumnをDateTimeに型変換する</a></li><li class="most-deep-item"><a href="https://himenon.github.io/analytics/pandas/visualize-time/">時間データのビジュアライズ</a></li></ul></li></ul></li><li><span><b><u>Event</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/event/2018-05-21-Cloud-Native/">[イベントレポート] Cloud Native Meetup Tokyo #1</a></li></ul></li><li><span><b><u>Kubernetes</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/kubernetes/Nginx access control for kubernetes/">Kubernetesに配置したNginxでアクセス制御する</a></li><li class="most-deep-item"><a href="https://himenon.github.io/kubernetes/Shortcut-for-kubectl/">Kubernetesでよく使うコマンド（コピペ用）</a></li><li class="most-deep-item"><a href="https://himenon.github.io/kubernetes/cron-wake-up-down/">GKEをCronで起動・停止させる</a></li><li class="most-deep-item"><a href="https://himenon.github.io/kubernetes/error helm incompatible version/">Error: incompatible versions client[v2.8.2] server[v2.7.2]</a></li></ul></li><li><span><b><u>mongoDB</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/mongoDB/basic-query/">MongoDBの基本クエリ</a></li><li class="most-deep-item"><a href="https://himenon.github.io/mongoDB/basic-read-write/">mongo DBの基本的なRead Write</a></li></ul></li><li><span><b><u>Presentation</u></b></span></li><li><ul><li><span><b><u>2018</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/presentation/2018/03-02-Yoidore-GCPUG-LT/">酔いどれGCPUG で発表してきました</a></li></ul></li></ul></li><li><span><b><u>Python</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/python/test-know-how/">PythonのTest</a></li></ul></li><li><span><b><u>Raspberrypi</u></b></span></li><li><ul><li class="most-deep-item"><a href="https://himenon.github.io/raspberrypi/os-install/">RaspberrypiのOSインストール</a></li><li class="most-deep-item"><a href="https://himenon.github.io/raspberrypi/purchace/">Raspberrypiのパーツを買った</a></li></ul></li></ul></div>
-        <div class="content">
-            <div class="content-header">
+    <header class="site-header">
+        <h1><a href="https://himenon.github.io/">技術の定点観測</a></h1>
+        <div class="sns-share">
 <a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
    class="twitter-share-button"
-   data-text="自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方"
-   data-via="himenoglyph"
+   data-text="自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方 - 技術の定点観測"
+   data-via="himenoglyph "
    data-related="himenoglyph"
    data-show-count="true">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </div>
+    </header>
+    <div class="container">
+        <div class="nav-layout site-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Django</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Django/Add new app/">DjangoにAppを新たに追加したときにやること</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Django/Introduction-of-Celery-Django/">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Django/Seperate-Django-Database/">Djangoで複数のデータベースを利用する</a></li></ul>
+</li><li ><span><b><u>Docker</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Docker/command/">Dockerコマンド</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Docker/pycharm/">PycharmでDockerを使う方法</a></li></ul>
+</li><li ><span><b><u>Firebase</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Auth-Error-Tips/">FirebaseのAuthで躓いたこと</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Firebase-Cloud-Functions/">FirebaseにおけるCloud Functions</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Firebase-Starter/">Firebaseことはじめ</a></li></ul>
+</li><li ><span><b><u>Flask</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Flask/Hello-Flask-Streamming-Content/">Flaskのストリーミングを利用してみる</a></li></ul>
+</li><li ><span><b><u>Frontend</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Frontend/settings/">lodash</a></li><li ><span><b><u>Es6</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Frontend/es6/usage-axios/">Axiosでasync/awaitを利用する</a></li></ul>
+</li><li ><span><b><u>Vuejs</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Frontend/vuejs/my-vue-setup/">Vueのセットアップ</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Frontend/vuejs/nuxtjs/">Nuxt.jsをやる</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Frontend/vuejs/ssr-cache-investigation/">VuejsのSSR(Server Side Rendering)のページ・部分キャッシュは何で実装できるか</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Frontend/vuejs/vuex-usage/">VuexのModuleの使い方</a></li></ul>
+</li></ul>
+</li><li ><span><b><u>GCP</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/GCP/Cloud-Function/">Cloud Function</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/GCP/GKE/">GKEのコマンド</a></li></ul>
+</li><li ><span><b><u>Infrastructure</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a></li></ul>
+</li><li ><span><b><u>MySQL</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/MySQL/character-code/">DockerのMySQLでUTF-8を使えるようにする</a></li></ul>
+</li><li ><span><b><u>Nodejs</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Nodejs/Request-library-description-for-json-value/">nodeのrequestライブラリの`json`オプションの取り扱いについて</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Nodejs/dynamic-import/">PackageのDynamic Import</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Nodejs/execute-async-mjs/">Module jsで非同期関数を実行する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Nodejs/manage-npm-package/">npmのpaackage管理について</a></li></ul>
+</li><li ><span><b><u>Poem</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Poem/Container-App-Directory-Management-Consideration/">コンテナアプリケーション作成時のディレクトリ成長設計の考察</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Poem/Container-Worker-Design/">コンテナ型のワーカーの設計（仮）</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Poem/TDD/">TDDポエム</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Poem/read-basic-knowledge-of-nosql/">NOSQLとは何か...</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Poem/static-site-generator/">静的サイトジェネレーターを選ぶとき、何を思ふ？</a></li></ul>
+</li><li ><span><b><u>Profile</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Profile/">Profileの目次</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Profile/github-activity/">Githubの活動状況</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Profile/skill/">スキルセット</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Profile/study-history/">参加した勉強会</a></li></ul>
+</li><li ><span><b><u>Tools</u></b></span></li><li>
+    <ul><li ><span><b><u>Cookiecutter</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Tools/Cookiecutter/usage/">自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方</a></li></ul>
+</li><li ><span><b><u>Git</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Tools/Git/git-tips/">Git Tips</a></li></ul>
+</li><li ><span><b><u>Github</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Tools/Github/Github-GraphQL/">GithubのGraphQLを利用する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Tools/Github/Github-Multi-Login-User/">Githubで複数ユーザーのログインをした時の対応</a></li></ul>
+</li><li ><span><b><u>Slack</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Tools/Slack/slack-library/">言語別Slack通知ライブラリ</a></li></ul>
+</li><li ><span><b><u>Zapier</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Tools/Zapier/zapier-development/">Zapierで利用可能なアプリをを時前で作成する</a></li></ul>
+</li></ul>
+</li><li ><span><b><u>Analytics</u></b></span></li><li>
+    <ul><li ><span><b><u>Jupyter</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/analytics/jupyter/change-jupyter-config-dir/">jupyter_notebook_config.pyの読み込み先を変更する</a></li></ul>
+</li><li ><span><b><u>Pandas</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/analytics/pandas/pandas-convert-column-to-datetime/">PandasのColumnをDateTimeに型変換する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/analytics/pandas/visualize-time/">時間データのビジュアライズ</a></li></ul>
+</li></ul>
+</li><li ><span><b><u>Event</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/event/2018-05-21-Cloud-Native/">[イベントレポート] Cloud Native Meetup Tokyo #1</a></li></ul>
+</li><li ><span><b><u>Kubernetes</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/Nginx access control for kubernetes/">Kubernetesに配置したNginxでアクセス制御する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/Shortcut-for-kubectl/">Kubernetesでよく使うコマンド（コピペ用）</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/cron-wake-up-down/">GKEをCronで起動・停止させる</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/error helm incompatible version/">Error: incompatible versions client[v2.8.2] server[v2.7.2]</a></li></ul>
+</li><li ><span><b><u>mongoDB</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/mongoDB/basic-query/">MongoDBの基本クエリ</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/mongoDB/basic-read-write/">mongo DBの基本的なRead Write</a></li></ul>
+</li><li ><span><b><u>Presentation</u></b></span></li><li>
+    <ul><li ><span><b><u>2018</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/presentation/2018/03-02-Yoidore-GCPUG-LT/">酔いどれGCPUG で発表してきました</a></li></ul>
+</li></ul>
+</li><li ><span><b><u>Python</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/test-know-how/">PythonのTest</a></li></ul>
+</li><li ><span><b><u>Raspberrypi</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/os-install/">RaspberrypiのOSインストール</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/purchace/">Raspberrypiのパーツを買った</a></li></ul>
+</li></ul></div>
+        <div class="content">
             <div class="content-body"><h1 id="cookiecutter">自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方<a class="headerlink" href="#cookiecutter" title="Permanent link">&para;</a></h1>
 <p id="created_at">作成日: <time datetime="2018-05-20T22:00">2018/05/20 22:00</time></p>
 
@@ -130,7 +191,7 @@ Jinja2の記法が利用できます。</p>
 cookiecutterはPythonで作成されていますが、テンプレートとするプロジェクトは言語を問いません。</p>
 <p>DEMOでプレビューするときや、ちょっとした検証をしたい時用の雛形を予め作っておくと時間の節約になります。</p></div>
         </div>
-        <div class="page-nav"><h2>ページ内目次</h2><ul>
+        <div class="nav-layout page-nav"><h2>ページ内目次</h2><ul>
     
     <li><a href="#cookiecutter">自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方</a></li>
     
@@ -145,8 +206,8 @@ cookiecutterはPythonで作成されていますが、テンプレートとす�
     
 </ul></div>
     </div>
-    <script src="/prism.js"></script>
-    <script src="/mermaid.min.js"></script>
+    <script src="/javascripts/prism.js"></script>
+    <script src="/javascripts/mermaid.min.js"></script>
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
