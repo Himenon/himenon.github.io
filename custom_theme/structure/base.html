@@ -8,24 +8,27 @@
     <title>{% if page and page.title and not page.is_homepage %}{{ page.title }} | {% endif %}{{ config.site_name }}</title>
     {%- endblock %}
     {% if page and page.is_homepage %}<meta name="description" content="{{ config.site_description }}">{% endif %}
+    <link rel="stylesheet" href="/stylesheets/reboot.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
-    <link rel="stylesheet" href="/pc.css">
-    <link rel="stylesheet" href="/tablet.css">
-    <link rel="stylesheet" href="/sp.css">
-    <link rel="stylesheet" href="/prism.css">
+    <link rel="stylesheet" href="/stylesheets/pc.css">
+    <link rel="stylesheet" href="/stylesheets/tablet.css">
+    <link rel="stylesheet" href="/stylesheets/sp.css">
+    <link rel="stylesheet" href="/stylesheets/prism.css">
 </head>
 <body>
-    <header class="site-header"><h1><a href="{{ config.site_url }}">{{ config.site_name }}</a></h1></header>
+    <header class="site-header">
+        <h1><a href="{{ config.site_url }}">{{ config.site_name }}</a></h1>
+        <div class="sns-share">{% include "structure/sns.html" %}</div>
+    </header>
     <div class="container">
-        <div class="site-nav"><h2>サイト内トピック</h2>{% include "site_nav.html" %}</div>
+        <div class="nav-layout site-nav"><h2>サイト内トピック</h2>{% include "structure/site_nav.html" %}</div>
         <div class="content">
-            <div class="content-header">{%- block content_header %}{%- endblock %}</div>
             <div class="content-body">{%- block content %}{%- endblock %}</div>
         </div>
-        <div class="page-nav"><h2>ページ内目次</h2>{% include "page_nav.html" %}</div>
+        <div class="nav-layout page-nav"><h2>ページ内目次</h2>{% include "structure/page_nav.html" %}</div>
     </div>
-    <script src="/prism.js"></script>
-    <script src="/mermaid.min.js"></script>
+    <script src="/javascripts/prism.js"></script>
+    <script src="/javascripts/mermaid.min.js"></script>
 {%- if config.google_analytics %}
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
