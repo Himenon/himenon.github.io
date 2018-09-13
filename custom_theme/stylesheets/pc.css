@@ -13,6 +13,7 @@ body {
     font-family: sans-serif;
     color: #333;
     background-color: #f3f3f3cf;
+    padding-bottom: 2em;
 }
 
 a {
@@ -77,6 +78,7 @@ h6:hover .headerlink {
     margin-bottom: 2em;
     padding: 0.3em 5vw;
     background-color: #FFF;
+    position: -webkit-sticky;
     position: sticky;
     top: 0;
     box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2);
@@ -85,12 +87,12 @@ h6:hover .headerlink {
 
 .site-header h1 {
     font-size: 1.1em;
-    padding-top: 0.2em;
+    padding-top: 4px;
     margin: 0;
 }
 
 .site-header .sns-share {
-    padding-top: 0.3em;
+    padding-top: 6px;
 }
 
 .site-nav {
