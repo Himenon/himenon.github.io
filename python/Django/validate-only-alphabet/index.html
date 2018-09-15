@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@himenoglyph" />
-<meta property="og:url" content="https://himenon.github.io/Django/Add new app/" />
-<meta property="og:title" content="DjangoにAppを新たに追加したときにやること - 技術の定点観測" />
+<meta property="og:url" content="https://himenon.github.io/python/Django/validate-only-alphabet/" />
+<meta property="og:title" content="DjangoでValidation アルファベットのみのバリデーションを実装する - 技術の定点観測" />
 <meta property="og:description" content="手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。" />
 <meta property="og:image" content="https://himenon.github.io/images/apple-touch-icon.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="https://himenon.github.io/images/miku.png">
@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://himenon.github.io/images/favicon-16x16.png">
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="theme-color" content="#ffffff">
-    <title>DjangoにAppを新たに追加したときにやること | 技術の定点観測</title>
+    <title>DjangoでValidation アルファベットのみのバリデーションを実装する | 技術の定点観測</title>
     
     <link rel="stylesheet" href="/stylesheets/reboot.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
@@ -29,21 +29,17 @@
         <h1><a href="https://himenon.github.io/">技術の定点観測</a></h1>
         <div class="sns-share"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
    class="twitter-share-button"
-   data-text="DjangoにAppを新たに追加したときにやること - 技術の定点観測"
+   data-text="DjangoでValidation アルファベットのみのバリデーションを実装する - 技術の定点観測"
    data-via="himenoglyph "
    data-related="himenoglyph"
    data-show-count="true">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
     </header>
     <div class="container">
-        <div class="nav-layout site-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Django</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Django/Add new app/">DjangoにAppを新たに追加したときにやること</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Django/Introduction-of-Celery-Django/">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Django/Seperate-Django-Database/">Djangoで複数のデータベースを利用する</a></li></ul>
-</li><li ><span><b><u>Docker</u></b></span></li><li>
+        <div class="nav-layout site-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Docker</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Docker/command/">Dockerコマンド</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Docker/pycharm/">PycharmでDockerを使う方法</a></li></ul>
 </li><li ><span><b><u>Firebase</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Auth-Error-Tips/">FirebaseのAuthで躓いたこと</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Firebase-Cloud-Functions/">FirebaseにおけるCloud Functions</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Firebase-Starter/">Firebaseことはじめ</a></li></ul>
-</li><li ><span><b><u>Flask</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Flask/Hello-Flask-Streamming-Content/">Flaskのストリーミングを利用してみる</a></li></ul>
 </li><li ><span><b><u>Frontend</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Frontend/settings/">lodash</a></li><li ><span><b><u>Es6</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Frontend/es6/usage-axios/">Axiosでasync/awaitを利用する</a></li></ul>
@@ -91,47 +87,35 @@
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/presentation/2018/03-02-Yoidore-GCPUG-LT/">酔いどれGCPUG で発表してきました</a></li></ul>
 </li></ul>
 </li><li ><span><b><u>Python</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/test-know-how/">PythonのTest</a></li></ul>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/test-know-how/">PythonのTest</a></li><li ><span><b><u>Django</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/Introduction-of-Celery-Django/">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/Seperate-Django-Database/">Djangoで複数のデータベースを利用する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/fixture/">fixtureを読み込む</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/initialize-new-app/">DjangoにAppを新たに追加したときにやること</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/show-many-to-many-admin-view/">DjangoでMany to ManyをAdmin画面のリストに表示する方法</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/signal/">DjangoのSignalの使い方</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/static-file/">Staticファイルの取扱</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/unix-socket-and-nginx/">DjangoとNginxのTips</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/validate-only-alphabet/">DjangoでValidation アルファベットのみのバリデーションを実装する</a></li></ul>
+</li><li ><span><b><u>Flask</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Flask/Hello-Flask-Streamming-Content/">Flaskのストリーミングを利用してみる</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Flask/tips/">FlaskのTips</a></li></ul>
+</li><li ><span><b><u>Mkdocs</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/mkdocs/tips/">MkDocsのtips</a></li></ul>
+</li></ul>
 </li><li ><span><b><u>Raspberrypi</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/os-install/">RaspberrypiのOSインストール</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/purchace/">Raspberrypiのパーツを買った</a></li></ul>
 </li></ul></div>
         <div class="content">
-            <div class="content-body"><h1 id="djangoapp">DjangoにAppを新たに追加したときにやること<a class="headerlink" href="#djangoapp" title="Permanent link">&para;</a></h1>
-<h2 id="urlpattern">urlpatternの追加<a class="headerlink" href="#urlpattern" title="Permanent link">&para;</a></h2>
-<pre><code class="python">urlpatterns = [
-    ....
-    url(r'^another/app/', include('another_app.urls')),
-] + static(settings.STATIC_ROOT, document_root=settings.STATIC_ROOT)
+            <div class="content-body"><h1 id="djangovalidation">DjangoでValidation アルファベットのみのバリデーションを実装する<a class="headerlink" href="#djangovalidation" title="Permanent link">&para;</a></h1>
+<ul>
+<li>作成日：2017年12月01日</li>
+<li>公開日：2018年09月15日</li>
+</ul>
+<pre><code class="python">from django.core.validators import RegexValidator
+
+alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 </code></pre>
 
-<h2 id="_1">ラベルとパスを付ける<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<pre><code class="python">from django.apps import AppConfig
-
-class AnotherAppConfig(AppConfig):
-    name = 'another_app'   # プロジェクトルートからのPath
-    label = 'another_app'  # プロジェクト内で固有のラベル
-</code></pre>
-
-<h2 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">&para;</a></h2>
-<h2 id="staticfiles_dirs">STATICFILES_DIRS<a class="headerlink" href="#staticfiles_dirs" title="Permanent link">&para;</a></h2>
-<p>Staticディレクトリを追加したいバア追加したい場合</p>
-<pre><code class="python">STATICFILES_DIRS [
-    # ....
-    'path/to/your/app/static'
-]
-</code></pre></div>
+<p><strong>参考</strong></p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/17165147/how-can-i-make-a-django-form-field-contain-only-alphanumeric-characters">https://stackoverflow.com/questions/17165147/how-can-i-make-a-django-form-field-contain-only-alphanumeric-characters</a></li>
+</ul></div>
         </div>
         <div class="nav-layout page-nav"><h2>ページ内目次</h2><ul>
     
-    <li><a href="#djangoapp">DjangoにAppを新たに追加したときにやること</a></li>
-    
-    <li><a href="#urlpattern">urlpatternの追加</a></li>
-    
-    <li><a href="#_1">ラベルとパスを付ける</a></li>
-    
-    <li><a href="#migration">Migration</a></li>
-    
-    <li><a href="#staticfiles_dirs">STATICFILES_DIRS</a></li>
+    <li><a href="#djangovalidation">DjangoでValidation アルファベットのみのバリデーションを実装する</a></li>
     
     
 </ul></div>

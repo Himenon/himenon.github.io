@@ -2,272 +2,312 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://himenon.github.io/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/pick-up-article/</loc>
-     <lastmod>2018-09-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://himenon.github.io/Django/Add new app/</loc>
-     <lastmod>2018-09-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://himenon.github.io/Django/Introduction-of-Celery-Django/</loc>
-     <lastmod>2018-09-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://himenon.github.io/Django/Seperate-Django-Database/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Docker/command/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Docker/pycharm/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Firebase/Auth-Error-Tips/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Firebase/Firebase-Cloud-Functions/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Firebase/Firebase-Starter/</loc>
-     <lastmod>2018-09-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://himenon.github.io/Flask/Hello-Flask-Streamming-Content/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Frontend/settings/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Frontend/es6/usage-axios/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Frontend/vuejs/my-vue-setup/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Frontend/vuejs/nuxtjs/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Frontend/vuejs/ssr-cache-investigation/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Frontend/vuejs/vuex-usage/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/GCP/Cloud-Function/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/GCP/GKE/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/MySQL/character-code/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Nodejs/Request-library-description-for-json-value/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Nodejs/dynamic-import/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Nodejs/execute-async-mjs/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Nodejs/manage-npm-package/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Poem/Container-App-Directory-Management-Consideration/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Poem/Container-Worker-Design/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Poem/TDD/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Poem/read-basic-knowledge-of-nosql/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Poem/static-site-generator/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Profile/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Profile/github-activity/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Profile/skill/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Profile/study-history/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Tools/Cookiecutter/usage/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Tools/Git/git-tips/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Tools/Github/Github-GraphQL/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Tools/Github/Github-Multi-Login-User/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Tools/Slack/slack-library/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/Tools/Zapier/zapier-development/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/analytics/jupyter/change-jupyter-config-dir/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/analytics/pandas/pandas-convert-column-to-datetime/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/analytics/pandas/visualize-time/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/event/2018-05-21-Cloud-Native/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/kubernetes/Nginx access control for kubernetes/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/kubernetes/Shortcut-for-kubectl/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/kubernetes/cron-wake-up-down/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/kubernetes/error helm incompatible version/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/mongoDB/basic-query/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/mongoDB/basic-read-write/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/presentation/2018/03-02-Yoidore-GCPUG-LT/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/python/test-know-how/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Django/Introduction-of-Celery-Django/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Django/Seperate-Django-Database/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Django/fixture/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Django/initialize-new-app/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Django/show-many-to-many-admin-view/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Django/signal/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Django/static-file/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Django/unix-socket-and-nginx/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Django/validate-only-alphabet/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Flask/Hello-Flask-Streamming-Content/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/Flask/tips/</loc>
+     <lastmod>2018-09-15</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://himenon.github.io/python/mkdocs/tips/</loc>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/raspberrypi/os-install/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://himenon.github.io/raspberrypi/purchace/</loc>
-     <lastmod>2018-09-14</lastmod>
+     <lastmod>2018-09-15</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

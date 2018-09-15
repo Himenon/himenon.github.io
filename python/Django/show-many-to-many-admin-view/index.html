@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@himenoglyph" />
-<meta property="og:url" content="https://himenon.github.io/Django/Seperate-Django-Database/" />
-<meta property="og:title" content="Djangoで複数のデータベースを利用する - 技術の定点観測" />
+<meta property="og:url" content="https://himenon.github.io/python/Django/show-many-to-many-admin-view/" />
+<meta property="og:title" content="DjangoでMany to ManyをAdmin画面のリストに表示する方法 - 技術の定点観測" />
 <meta property="og:description" content="手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。" />
 <meta property="og:image" content="https://himenon.github.io/images/apple-touch-icon.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="https://himenon.github.io/images/miku.png">
@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://himenon.github.io/images/favicon-16x16.png">
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="theme-color" content="#ffffff">
-    <title>Djangoで複数のデータベースを利用する | 技術の定点観測</title>
+    <title>DjangoでMany to ManyをAdmin画面のリストに表示する方法 | 技術の定点観測</title>
     
     <link rel="stylesheet" href="/stylesheets/reboot.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
@@ -29,21 +29,17 @@
         <h1><a href="https://himenon.github.io/">技術の定点観測</a></h1>
         <div class="sns-share"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
    class="twitter-share-button"
-   data-text="Djangoで複数のデータベースを利用する - 技術の定点観測"
+   data-text="DjangoでMany to ManyをAdmin画面のリストに表示する方法 - 技術の定点観測"
    data-via="himenoglyph "
    data-related="himenoglyph"
    data-show-count="true">Tweet</a>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
     </header>
     <div class="container">
-        <div class="nav-layout site-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Django</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Django/Add new app/">DjangoにAppを新たに追加したときにやること</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Django/Introduction-of-Celery-Django/">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Django/Seperate-Django-Database/">Djangoで複数のデータベースを利用する</a></li></ul>
-</li><li ><span><b><u>Docker</u></b></span></li><li>
+        <div class="nav-layout site-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Docker</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Docker/command/">Dockerコマンド</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Docker/pycharm/">PycharmでDockerを使う方法</a></li></ul>
 </li><li ><span><b><u>Firebase</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Auth-Error-Tips/">FirebaseのAuthで躓いたこと</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Firebase-Cloud-Functions/">FirebaseにおけるCloud Functions</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Firebase-Starter/">Firebaseことはじめ</a></li></ul>
-</li><li ><span><b><u>Flask</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Flask/Hello-Flask-Streamming-Content/">Flaskのストリーミングを利用してみる</a></li></ul>
 </li><li ><span><b><u>Frontend</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Frontend/settings/">lodash</a></li><li ><span><b><u>Es6</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Frontend/es6/usage-axios/">Axiosでasync/awaitを利用する</a></li></ul>
@@ -91,162 +87,65 @@
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/presentation/2018/03-02-Yoidore-GCPUG-LT/">酔いどれGCPUG で発表してきました</a></li></ul>
 </li></ul>
 </li><li ><span><b><u>Python</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/test-know-how/">PythonのTest</a></li></ul>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/test-know-how/">PythonのTest</a></li><li ><span><b><u>Django</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/Introduction-of-Celery-Django/">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/Seperate-Django-Database/">Djangoで複数のデータベースを利用する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/fixture/">fixtureを読み込む</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/initialize-new-app/">DjangoにAppを新たに追加したときにやること</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/show-many-to-many-admin-view/">DjangoでMany to ManyをAdmin画面のリストに表示する方法</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/signal/">DjangoのSignalの使い方</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/static-file/">Staticファイルの取扱</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/unix-socket-and-nginx/">DjangoとNginxのTips</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/validate-only-alphabet/">DjangoでValidation アルファベットのみのバリデーションを実装する</a></li></ul>
+</li><li ><span><b><u>Flask</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Flask/Hello-Flask-Streamming-Content/">Flaskのストリーミングを利用してみる</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Flask/tips/">FlaskのTips</a></li></ul>
+</li><li ><span><b><u>Mkdocs</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/mkdocs/tips/">MkDocsのtips</a></li></ul>
+</li></ul>
 </li><li ><span><b><u>Raspberrypi</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/os-install/">RaspberrypiのOSインストール</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/purchace/">Raspberrypiのパーツを買った</a></li></ul>
 </li></ul></div>
         <div class="content">
-            <div class="content-body"><h1 id="django">Djangoで複数のデータベースを利用する<a class="headerlink" href="#django" title="Permanent link">&para;</a></h1>
-<p id="updated_at">更新日: <time datetime="2018-04-16T01:00">2018/04/16</time></p>
+            <div class="content-body"><h1 id="djangomany_to_manyadmin">DjangoでMany to ManyをAdmin画面のリストに表示する方法<a class="headerlink" href="#djangomany_to_manyadmin" title="Permanent link">&para;</a></h1>
+<h2 id="_1">サンプルモデル<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<pre><code class="python">class PurchaseOrder(models.Model):
+    product = models.ManyToManyField('Product')
+    vendor = models.ForeignKey('VendorProfile')
+    dollar_amount = models.FloatField(verbose_name='Price')
 
-<p>ユーザー管理用のデータベースと、分析用のデータベースなどのように分離したいときがあります。
-Django 2.0のドキュメントでは<a href="https://docs.djangoproject.com/en/2.0/topics/db/multi-db/">Multiple databases</a>の章に説明があります。</p>
-<p>やることは4つ</p>
-<ol>
-<li><code>settings.py</code>の<code>DATABASES</code>に複数のDBの接続先を記入する</li>
-<li><code>settings.py</code>に<code>DATABASE_APPS_MAPPING</code>を定義し、アプリケーションごとにKV形式で接続先のDB名を記述する</li>
-<li><code>settings.py</code>に<code>DATABASE_ROUTERS</code>を定義し、接続するDBを振り分けるためのRouterの定義を配列形式で記述する</li>
-<li><code>DATABASE_ROUTERS</code>に定義されたrouterを用意する</li>
-</ol>
-<p>実際に具体例を示してみます。
-ここで示す具体例では、<code>DATABASE_APPS_MAPPING</code>に指定したとおりにデータベースが
-振り分けるという単純なことだけを達成します。</p>
-<p>ちょっと大雑把ではありますが、下記のようなディレクトリ構成を取っているものとします。
-<code>myapp</code>はdjangoのアプリケーションです。</p>
-<pre><code>myapp/
-├── myapp/settings.py
-├── manage.py
-└── routers.py
+class Product(models.Model):
+   products = models.CharField(max_length=256)
+
+   def __unicode__(self):
+       return self.products
 </code></pre>
 
-<h2 id="settingspy">settings.py<a class="headerlink" href="#settingspy" title="Permanent link">&para;</a></h2>
-<pre><code class="python"># myapp/settings.py
-from os import environ
+<h2 id="admin">Admin<a class="headerlink" href="#admin" title="Permanent link">&para;</a></h2>
+<h3 id="_2">正しい実装<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<pre><code class="python"># Adminの方に登録する
+class PurchaseOrderAdmin(admin.ModelAdmin):
+    fields = ['product', 'dollar_amount']
+    list_display = ('get_products', 'vendor')
 
-# 接続先データベースの定義
-DATABASES = {
-  'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
-        'USER': environ.get('DEFAULT_MYSQL_USER'),
-        'PASSWORD': environ.get('DEFAULT_MYSQL_PASSWORD'),
-        'HOST': environ.get('DEFAULT_DB_HOST', '127.0.0.1'),
-        'PORT': environ.get('DEFAULT_DB_PORT', '3306'),
-        'OPTIONS': {
-            'init_command': &quot;SET sql_mode='STRICT_TRANS_TABLES'&quot;,
-            'charset': 'utf8mb4',
-        },
-        'TEST': {
-            'CHARSET': 'utf8mb4',
-            'COLLATION': 'utf8mb4_general_ci',
-        },
-  },
-  'analytics': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydb',
-        'USER': environ.get('ANALYTICS_MYSQL_USER'),
-        'PASSWORD': environ.get('ANALYTICS_MYSQL_PASSWORD'),
-        'HOST': environ.get('ANALYTICS_DB_HOST', '127.0.0.1'),
-        'PORT': environ.get('ANALYTICS_DB_PORT', '3306'),
-        'OPTIONS': {
-            'init_command': &quot;SET sql_mode='STRICT_TRANS_TABLES'&quot;,
-            'charset': 'utf8mb4',
-        },
-        'TEST': {
-            'CHARSET': 'utf8mb4',
-            'COLLATION': 'utf8mb4_general_ci',
-        },
-  }
-}
-
-# アプリケーションごとの接続先DBのマッピング
-DATABASE_APPS_MAPPING = {
-    # defaultには管理系のTable
-    'admin'              : 'default',
-    'auth'               : 'default',
-    'contenttypes'       : 'default',
-    'sessions'           : 'default',
-    'messages'           : 'default',
-    'staticfiles'        : 'default',
-    'django_celery_beat' : 'default',
-    # analyticsには分析計のTable
-    'myapp'              : 'analytics',
-}
-
-# 利用するRouter, manage.pyから見ての相対パス
-DATABASE_ROUTERS = [
-    'router.DatabaseRouter',
-]
+    def get_products(self, obj):
+        return &quot;\n&quot;.join([p.products for p in obj.product.all()])
 </code></pre>
 
-<h2 id="database_routers">Database routers<a class="headerlink" href="#database_routers" title="Permanent link">&para;</a></h2>
-<p>以下の4つのメソッドが定義されたクラスを用意します。</p>
-<ul>
-<li><code>db_for_read</code></li>
-<li><code>db_for_write</code></li>
-<li><code>allow_relation</code></li>
-<li><code>allow_migrate</code></li>
-</ul>
-<p>参考: <a href="https://docs.djangoproject.com/en/2.0/topics/db/multi-db/#database-routers">Database routers</a></p>
-<p><code>router.DatabaseRouter</code>は次のように定義しています。</p>
-<pre><code class="python"># routers.py
-from myapp.settings import DATABASE_APPS_MAPPING
+<pre><code class="python"># Modelに登録する
+class PurchaseOrder(models.Model):
+    product = models.ManyToManyField('Product')
+    vendor = models.ForeignKey('VendorProfile')
+    dollar_amount = models.FloatField(verbose_name='Price')
 
-class DatabaseRouter(object):
-    def db_for_read(self, model, **hints):
-        if model._meta.app_label in DATABASE_APPS_MAPPING:
-            return DATABASE_APPS_MAPPING[model._meta.app_label]
-        return None
-
-    def db_for_write(self, model, **hints):
-        if model._meta.app_label in DATABASE_APPS_MAPPING:
-            return DATABASE_APPS_MAPPING[model._meta.app_label]
-        return None
-
-    def allow_relation(self, obj1, obj2, **hints):
-        db1 = DATABASE_APPS_MAPPING.get(obj1._meta.app_label)
-        db2 = DATABASE_APPS_MAPPING.get(obj2._meta.app_label)
-        if db1 and db2:
-            return db1 == db2
-        return None
-
-    def allow_migrate(self, db, app_label, model=None, **hints):
-        if db in DATABASE_APPS_MAPPING.values():
-            return DATABASE_APPS_MAPPING.get(app_label) == db
-        elif app_label in DATABASE_APPS_MAPPING:
-            return False
+    def get_products(self):
+        return &quot;\n&quot;.join([p.products for p in self.product.all()])
 </code></pre>
 
-<p>これで設定完了です</p>
-<h2 id="migration">Migration<a class="headerlink" href="#migration" title="Permanent link">&para;</a></h2>
-<p>Migrationはコマンドが変わります。
-通常、<code>./manage.py migrate</code>を行うと、<code>default</code>で指定されたDBに対してMigrationが実行されますが、
-今回は分離しているので、<code>--database</code>引数を用いて明示的に指定する必要があります。</p>
-<pre><code class="bash">$ ./manage.py migrate                          # defaultに対するMigration
-$ ./manage.py migrate --database=analytics     # analyticsに対するMigration
-</code></pre>
-
-<p>これでMigrationが実行されます。
-また、その他のコマンドでもDB単位で実行する必要があるので、注意が必要です。</p>
-<h2 id="_1">最後に<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>最近、Python界隈が分析系や深層学習などで騒がれていますが、
-データを蓄積するDBの管理の話が出てこないのが気になります。</p>
-<p>みなさん、どうやって管理しているのでしょう？
-分析基盤の担当の方がいらっしゃれば良いのですが、全員がそうではないと思いますので、
-この記事が一人で全部やらないといけないなぁ、と思っている人のところに届けばと思います。</p>
-<p>間違いがあればTwitterなどで報告してくれると修正いたします。</p></div>
+<h3 id="_3">間違い<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<pre><code class="python">class PurchaseOrderAdmin(admin.ModelAdmin):
+    fields = ['product', 'dollar_amount']
+    list_display = ('product', 'vendor')
+</code></pre></div>
         </div>
         <div class="nav-layout page-nav"><h2>ページ内目次</h2><ul>
     
-    <li><a href="#django">Djangoで複数のデータベースを利用する</a></li>
+    <li><a href="#djangomany_to_manyadmin">DjangoでMany to ManyをAdmin画面のリストに表示する方法</a></li>
     
-    <li><a href="#settingspy">settings.py</a></li>
+    <li><a href="#_1">サンプルモデル</a></li>
     
-    <li><a href="#database_routers">Database routers</a></li>
-    
-    <li><a href="#migration">Migration</a></li>
-    
-    <li><a href="#_1">最後に</a></li>
+    <li><a href="#admin">Admin</a></li>
     
     
 </ul></div>
