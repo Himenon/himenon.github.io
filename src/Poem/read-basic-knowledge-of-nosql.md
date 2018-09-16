@@ -9,7 +9,7 @@ NOSQLの知識が欲しかったので、ちょっと古いが次の本を読ん
 >- 作者: 本橋信也,河野達也,鶴見利章,太田洋
 >- 出版社/メーカー: リックテレコム
 >- 発売日: 2012/04/25
->- http://www.ric.co.jp/book/contents/book_887.html
+>- <http://www.ric.co.jp/book/contents/book_887.html>
 
 逆引き的に自分なりにまとめておく。
 
@@ -130,7 +130,7 @@ R + W > Nの場合には整合性が保証できる。
 
 整合性を確保する際に用いる手法の1つ。
 
-- http://www.atmarkit.co.jp/ait/articles/1211/05/news007_3.html
+- <http://www.atmarkit.co.jp/ait/articles/1211/05/news007_3.html>
 
 ### コンシステント・ハッシング(Consistent Hashing)
 

@@ -110,15 +110,15 @@ firestoreのUnitttest
 process.env.GCLOUD_PROJECT = 'xxxxxx'
 ```
 
-- https://github.com/firebase/functions-samples/issues/250
-- https://www.npmjs.com/package/cross-env
+- <https://github.com/firebase/functions-samples/issues/250>
+- <https://www.npmjs.com/package/cross-env>
 
 
 ## Cloud Functionの分割
 
 
-https://stackoverflow.com/questions/43486278/how-do-i-structure-cloud-functions-for-firebase-to-deploy-multiple-functions-fro
+<https://stackoverflow.com/questions/43486278/how-do-i-structure-cloud-functions-for-firebase-to-deploy-multiple-functions-fro>
 
 
-https://stackoverflow.com/questions/46818082/error-http-error-400-the-request-has-errors-firebase-firestore-cloud-function
+<https://stackoverflow.com/questions/46818082/error-http-error-400-the-request-has-errors-firebase-firestore-cloud-function>
 

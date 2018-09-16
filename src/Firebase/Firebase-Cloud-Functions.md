@@ -6,7 +6,7 @@
 
 Firestore: [NOSQLクラウドデータベース](https://firebase.google.com/docs/firestore/?hl=ja)
 
-- https://firebase.google.com/docs/functions/firestore-events?hl=ja 
+- <https://firebase.google.com/docs/functions/firestore-events?hl=ja>
 
 
 #### When:

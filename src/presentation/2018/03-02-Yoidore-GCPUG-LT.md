@@ -60,8 +60,8 @@ Podの構成を考えたり、開発環境と本番環境をどうやって切�
 
 Helmというkubernetesのパッケージマネージャーがあります。Emacsのhelmではありません(笑)。
 
-- https://github.com/kubernetes/helm
-- https://docs.helm.sh/
+- <https://github.com/kubernetes/helm>
+- <https://docs.helm.sh/>
 
 helmは何を解決してくれるかというと、設定ファイルをテンプレート化してくれるということです。
 
@@ -325,17 +325,17 @@ GKEとその他のサービス連携は
 
 GCPのアイコンセットと、draw.ioは知っておくと便利ですよ〜、というぐらいです。
 
-- https://cloud.google.com/icons/
-- https://about.draw.io/
+- <https://cloud.google.com/icons/>
+- <https://about.draw.io/>
 
 komposeはdocker-composeからkubernetesのマニフェストに移行する時に使う程度
 
-- https://github.com/kubernetes/kompose
+- <https://github.com/kubernetes/kompose>
 
 docker edge版を利用するとkubernetes環境がローカルに手に入るのも知っていれば、そうだね、という程度のもの。
 デフォルトでkubernetesが使えるのはうれしいですね。
 
-- https://www.docker.com/kubernetes
+- <https://www.docker.com/kubernetes>
 
 ### 4. 情報源
 
@@ -377,8 +377,8 @@ GCPはまだまだひよっこですが、初めて触ってるときにしか�
 
 **GCPUGの情報**
 
-- https://gcpug.jp/
-- https://gcpug-tokyo.connpass.com/
+- <https://gcpug.jp/>
+- <https://gcpug-tokyo.connpass.com/>
 
 
 
