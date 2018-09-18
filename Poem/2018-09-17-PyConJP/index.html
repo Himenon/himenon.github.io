@@ -111,6 +111,13 @@
 </ul>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/SCZtxR_lS10" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+<ul>
+<li>Pythonの型(typing)の話</li>
+<li>型の話は昨年も話があった(<a href="https://pycon.jp/2017/ja/schedule/presentation/13/">https://pycon.jp/2017/ja/schedule/presentation/13/</a>)</li>
+<li>Python 3.6以降ある</li>
+<li>Generic型の紹介</li>
+<li>mypyなど</li>
+</ul>
 <p><br></p>
 <h3 id="django_rest_framework_api">Django REST Framework におけるAPI実装プラクティス<a class="headerlink" href="#django_rest_framework_api" title="Permanent link">&para;</a></h3>
 <ul>
@@ -122,6 +129,9 @@
 <h3 id="_1">あなたと私いますぐパッケージン<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/_5HCH51-47Y" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+<ul>
+<li>最近のパッケージング事情についてPEPを交えながら話している</li>
+</ul>
 <p><br></p>
 <h3 id="python">Pythonを使ったハードウェア開発について<a class="headerlink" href="#python" title="Permanent link">&para;</a></h3>
 <ul>
@@ -131,13 +141,141 @@
 
 <p><br></p>
 <h3 id="rust_python">Rust と Python<a class="headerlink" href="#rust_python" title="Permanent link">&para;</a></h3>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/KznXoJUpzr4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KznXoJUpzr4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<h2 id="2">2日目ピックアップ<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0l75fLKUlqk" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<ul>
+<li>ユーザーにユーザー生放送をレコメンド<ul>
+<li>「類似生主」の問題に置き換える</li>
+<li>配信者の情報：テキスト情報「タイトル」「タグ」「番組情報」から取得</li>
+<li>視聴者の情報：生主の情報を視聴者の情報集合で表す<ul>
+<li>視聴者の好みから生主の好みを逆算</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>これらをトピックモデルの実装を行う。</p>
+<ul>
+<li>scikit-learnを利用<ul>
+<li>学習方法：batchにする</li>
+</ul>
+</li>
+<li>
+<p>CountVectorizerのパラメータを調整</p>
+<ul>
+<li>学習に適切な情報を前処理しておく</li>
+</ul>
+</li>
+<li>
+<p>タグツリー</p>
+<ul>
+<li>親子関係をシンプソン係数で弾く</li>
+<li>パフォーマンス</li>
+</ul>
+</li>
+<li>
+<p>検索履歴レコメンダー</p>
+<ul>
+<li>意思を持った検索を行う --&gt; 気の利いたコンテンツを出すことができるはず</li>
+<li>弱点：検索履歴を持たないユーザーには効果がない</li>
+</ul>
+</li>
+<li>
+<p>レコメンダーコーディネーター</p>
+<ul>
+<li>1層を挟む</li>
+<li>レコメンドのレシピを作る</li>
+</ul>
+</li>
+<li>
+<p>システムアーキテクチャ</p>
+<ul>
+<li>Kubernetes + DockerでAPIやバッチによる学習ジョブ</li>
+</ul>
+</li>
+</ul>
+<h4 id="_2">所感<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>レコメンド機能をどう作っていくかを、具体的な例から1つ上の抽象的な問題に置き換えて実装していくアプローチを紹介</li>
+<li>「検索レコメンド」、「別のおすすめの生主」をどの情報から行うか、"配信者"、"視聴者"の持っているパラメータから結果を導き出すアプローチ</li>
+<li>可動しているアーキテクチャ</li>
+<li>質問の内容が良い質問だったらしい（らしい、というのも専門領域ではないので、応答者の反応から）</li>
+</ul>
+<p><br></p>
+<h3 id="jvmpython3cafebabepy">JVM上で動くPython3処理系cafebabepyの実装詳解<a class="headerlink" href="#jvmpython3cafebabepy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://speakerdeck.com/yotchang4s/cafebabepy-pycon-jp-2018">https://speakerdeck.com/yotchang4s/cafebabepy-pycon-jp-2018</a></li>
+</ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/b17G_lja43g" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<p>cafebabepyとは</p>
+<ul>
+<li>JVM上で動くPython 3系の処理</li>
+<li>抽象構文木を作る（AST）<ul>
+<li>字句解析をする</li>
+</ul>
+</li>
+<li>具象構文木（ANTLR v4だより）</li>
+<li>ANTLAs v4<ul>
+<li>pa-sa-nokakutyou</li>
+</ul>
+</li>
+</ul>
+<h4 id="_3">所感<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Jythonの開発が止まっているので、Java runtimeで動くPython 3系がほしい</li>
+<li>自分の専門外であるので、言及するのが難しいが、Overviewがもう少し欲しかった印象。</li>
+<li>文章として残す文には構わないけれど、聞いている分にはだいぶ眠たくなってしまった。</li>
+</ul>
+<p><br></p>
+<h3 id="_4">複数アプリケーションのプロセスとログを管理するための新しいツールと手法<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="https://www.slideshare.net/yatsu/ss-115122584">https://www.slideshare.net/yatsu/ss-115122584</a></li>
+<li><a href="https://github.com/yatsu/jaffle">https://github.com/yatsu/jaffle</a></li>
+</ul>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/c_roSU7Q3co" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<ul>
+<li><a href="https://github.com/gorakhargosh/watchdog">gorakhargosh/watchdog</a>を利用した変更監視ツール</li>
+<li>複数プロセスの管理をしたいときに使う</li>
+<li>設定ファイルを書く必要がある</li>
+<li>Tornadoで実装されている</li>
+<li>JupyterのExtensionを開発するのが容易になる</li>
+<li>ログは正規表現で裁く</li>
+</ul>
+<h4 id="_5">所感<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p><a href="https://docs.docker.com/compose/">Docker Compose</a>や<a href="https://www.npmjs.com/package/npm-run-all">npm-run-all - npm</a>が
+すでにカバーしている領域が多かった印象でした。
+ログを正規表現で裁くのはshellでも十分かなと思いました。Google Cloud Consoleのようなインターフェースがローカルで用意できるのであればやる価値は十二分にあるなと。</p>
+<p><br></p>
+<h3 id="python_1">Python研修の話<a class="headerlink" href="#python_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>研修スケジュール</li>
+<li>研修内容<ul>
+<li>文法</li>
+<li>ドキュメントを投げるやり方はしない</li>
+<li>省略<ul>
+<li>DB接続/チーム開発/ユニットテスト</li>
+<li>まずは使い方から</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>カリキュラム選定方法</li>
+</ul></div>
         </div>
         <div class="nav-layout page-nav"><h2>ページ内目次</h2><ul>
     
     <li><a href="#pyconjp2018">PyConJP2018の個人レポート</a></li>
     
     <li><a href="#1">1日目ピックアップ</a></li>
+    
+    <li><a href="#2">2日目ピックアップ</a></li>
+    
+    <li><a href="#python_1">Python研修の話</a></li>
     
     
 </ul></div>
