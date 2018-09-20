@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@himenoglyph" />
-<meta property="og:url" content="https://himenon.github.io/JavaScript/Frontend/vuejs/nuxtjs/" />
-<meta property="og:title" content="Nuxt.jsをやる - 技術の定点観測" />
+<meta property="og:url" content="https://himenon.github.io/blog/Container-Worker-Design/" />
+<meta property="og:title" content="コンテナ型のワーカーの設計（仮） - 技術の定点観測" />
 <meta property="og:description" content="手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。" />
 <meta property="og:image" content="https://himenon.github.io/images/apple-touch-icon.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="https://himenon.github.io/images/miku.png">
@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://himenon.github.io/images/favicon-16x16.png">
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="theme-color" content="#ffffff">
-    <title>Nuxt.jsをやる | 技術の定点観測</title>
+    <title>コンテナ型のワーカーの設計（仮） | 技術の定点観測</title>
     
     <link rel="stylesheet" href="/stylesheets/reboot.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
@@ -29,7 +29,7 @@
         <h1><a href="https://himenon.github.io/">技術の定点観測</a></h1>
         <div class="sns-share"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
    class="twitter-share-button"
-   data-text="Nuxt.jsをやる - 技術の定点観測"
+   data-text="コンテナ型のワーカーの設計（仮） - 技術の定点観測"
    data-via="himenoglyph "
    data-related="himenoglyph"
    data-show-count="true">Tweet</a>
@@ -98,83 +98,23 @@
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/os-install/">RaspberrypiのOSインストール</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/purchace/">Raspberrypiのパーツを買った</a></li></ul>
 </li></ul></div>
         <div class="content">
-            <div class="content-body"><h1 id="nuxtjs">Nuxt.jsをやる<a class="headerlink" href="#nuxtjs" title="Permanent link">&para;</a></h1>
-<h2 id="_1">はじめに<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>オレの求めていたものはこれだった感はんぱない</p>
-<h2 id="_2">環境構築<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<pre><code>npm install 
-npm install -D pug
-npm install --save axios socket.io-client
-</code></pre>
-
-<h2 id="vuejsnuxtjsvuejs">Vue.jsをNuxt.jsのVue.jsの違うところ<a class="headerlink" href="#vuejsnuxtjsvuejs" title="Permanent link">&para;</a></h2>
-<h3 id="vuex">vuex<a class="headerlink" href="#vuex" title="Permanent link">&para;</a></h3>
-<h4 id="vuexstatefunction">vuexのstateがfunction<a class="headerlink" href="#vuexstatefunction" title="Permanent link">&para;</a></h4>
-<pre><code class="js">const state = {
-    # hogehgoe
-}
-</code></pre>
-
-<p>が</p>
-<pre><code class="js">const state = () =&gt; ({
-    # hogehoge
-});
-</code></pre>
-
-<p>になる。</p>
-<h4 id="modules">modulesの扱い<a class="headerlink" href="#modules" title="Permanent link">&para;</a></h4>
-<p>通常のVue.jsでは次のように、<code>mymodule.js</code>ファイルに分離された
-モジュールを登録していた。</p>
-<pre><code class="js">import Vuex from 'vuex'
-import Vue from 'vue'
-import mymodule from './mymodule'
-
-Vue.use(Vuex)
-
-export default new Vuex.Store({
-  modules: {
-    mymodule,
-  },
-  strict: process.env.NODE_ENV !== 'production'
-})
-</code></pre>
-
-<p>Nuxt.jsの場合、ファイル単位で既にモジュール化されるため、<code>mymodule.js</code>内で
-exportするだけでよくなった。</p>
-<pre><code class="js">// mymodulejs
-const state = () =&gt; ({}); // ここは標準のVue.jsと異なる
-const actions = {};
-const getters = {};
-const mutations = {};
-const computed = {};
-export default {
-    namespaced: true,
-    state,
-    actions,
-    getters,
-    mutations,
-    computed
-}
-</code></pre>
-
-<h3 id="computed">computed<a class="headerlink" href="#computed" title="Permanent link">&para;</a></h3>
+            <div class="content-body"><h1 id="_1">コンテナ型のワーカーの設計（仮）<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>ちょっと書く。どうやらライブラリでAkkaというものが在るらしい。</p>
 <ul>
-<li><a href="https://jp.vuejs.org/v2/guide/computed.html#%E7%AE%97%E5%87%BA%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3-vs-%E3%83%A1%E3%82%BD%E3%83%83%E3%83%89">算出プロパティ vs メソッド</a></li>
+<li><a href="https://github.com/akka/akka">akka/akka</a></li>
 </ul>
-<blockquote>
-<p>Date.now() はリアクティブな依存ではないため、次の算出プロパティは二度と更新されないことを意味します:</p>
-</blockquote>
-<p>リアクティブになっていない場合は例えmapGettersであっても、更新されない</p></div>
+<h2 id="_2">参考記事<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://ja.wikipedia.org/wiki/%E3%82%A2%E3%82%AF%E3%82%BF%E3%83%BC%E3%83%A2%E3%83%87%E3%83%AB">アクターモデル</a></li>
+<li><a href="https://dev.classmethod.jp/server-side/woker-on-akka-ecs/">Akka と Amazon ECS で構築するワーカー基盤：1万件のメッセージを処理させてみた - Developers.IO</a></li>
+<li><a href="https://docs.microsoft.com/ja-jp/azure/architecture/guide/architecture-styles/web-queue-worker">Web キュー ワーカーのアーキテクチャ スタイル - Microsoft Azure</a></li>
+</ul></div>
         </div>
         <div class="nav-layout page-nav"><h2>ページ内目次</h2><ul>
     
-    <li><a href="#nuxtjs">Nuxt.jsをやる</a></li>
+    <li><a href="#_1">コンテナ型のワーカーの設計（仮）</a></li>
     
-    <li><a href="#_1">はじめに</a></li>
-    
-    <li><a href="#_2">環境構築</a></li>
-    
-    <li><a href="#vuejsnuxtjsvuejs">Vue.jsをNuxt.jsのVue.jsの違うところ</a></li>
+    <li><a href="#_2">参考記事</a></li>
     
     
 </ul></div>
