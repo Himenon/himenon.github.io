@@ -7,7 +7,7 @@
 - [Convex Color Image Segmentation with Optimal Transport Distances](https://arxiv.org/pdf/1503.01986.pdf)
 - [Neural Color Transfer between Images](https://arxiv.org/pdf/1710.00756.pdf)
 
-## Amazon Web Service (AWS)
+## Amazon Web Services (AWS)
 
 - [AWS特有の運用イベントまとめ（非障害系）](https://dev.classmethod.jp/cloud/aws/operational-event-on-aws/)
 - [AWSのシステム構成情報を集めて構成図を自動生成してくれる「CloudMapper」、オープンソースで公開](http://www.publickey1.jp/blog/18/awscloudmapper.html)
