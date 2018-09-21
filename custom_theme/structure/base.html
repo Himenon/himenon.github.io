@@ -22,11 +22,11 @@
         <div class="sns-share">{% include "structure/sns.html" %}</div>
     </header>
     <div class="container">
-        <div class="nav-layout site-nav"><h2>サイト内トピック</h2>{% include "structure/site_nav.html" %}</div>
+        <div class="nav-layout left-nav"><h2>ページ内目次</h2>{% include "structure/page_nav.html" %}</div>
         <div class="content">
             <div class="content-body">{%- block content %}{%- endblock %}</div>
         </div>
-        <div class="nav-layout page-nav"><h2>ページ内目次</h2>{% include "structure/page_nav.html" %}</div>
+        <div class="nav-layout right-nav"><h2>サイト内トピック</h2>{% include "structure/site_nav.html" %}</div>
     </div>
     <script src="/javascripts/prism.js"></script>
     <script src="/javascripts/mermaid.min.js"></script>

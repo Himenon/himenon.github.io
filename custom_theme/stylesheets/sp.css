@@ -14,10 +14,11 @@
         width: 94vw;
         margin: 0;
     }
-    .site-nav {
+    .left-nav {
         flex-grow: 1;
+        top: 0;
         margin-bottom: 2em;
-        order: 3;
+        order: 1;
     }
     .content {
         flex-grow: 1;
@@ -25,10 +26,10 @@
         padding: 1em;
         order: 2;
     }
-    .page-nav {
+    .right-nav {
         flex-grow: 1;
         margin-bottom: 3.5em;
-        order: 1;
+        order: 3;
     }
 }
 /* @media screen and (min-width: 900px) {
