@@ -6,12 +6,12 @@
     .content {
         order: 1;
     }
-    .page-nav {
+    .right-nav {
         order: 2;
         position: unset;
         flex-shrink: 0;
     }
-    .site-nav {
+    .left-nav {
         order: 3;
         flex-shrink: 0;
         margin-top: 3em;
