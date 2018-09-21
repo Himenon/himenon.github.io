@@ -78,8 +78,7 @@ ws                   6.0.0   3.3.3   6.0.0  @compositor/gen
 <pre><code class="sh">yarn upgrade-interactive
 </code></pre>
 
-<p>結果として、<code>ws</code>に至っては3.3.3はバグ(ページリロード時にプロセスが死ぬ)があったが、6.0.0にしたら自然と修正された。
-<code>styled-system</code>は型があたり、むしろ保守性が向上した。</p>
+<p>結果として、<code>ws</code>に至っては3.3.3はバグ(ページリロード時にプロセスが死ぬ)があったが、6.0.0にしたら自然と修正された。<code>styled-system</code>は型があたり、むしろ保守性が向上した。</p>
 <h2 id="_2">型があたっていないのを解消<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <p>次の2つのライブラリの型があたっていないライブラリがあったので、型定義ファイルを用意しました。</p>
 <ul>
@@ -88,8 +87,8 @@ ws                   6.0.0   3.3.3   6.0.0  @compositor/gen
 </ul>
 <p>gray-matterは同種のPRが2つ投げらてているが、マージされていないので静観することにする。</p>
 <ul>
-<li>https://github.com/jonschlinkert/gray-matter/pull/77</li>
-<li>https://github.com/jonschlinkert/gray-matter/pull/74</li>
+<li><a href="https://github.com/jonschlinkert/gray-matter/pull/77">https://github.com/jonschlinkert/gray-matter/pull/77</a></li>
+<li><a href="https://github.com/jonschlinkert/gray-matter/pull/74">https://github.com/jonschlinkert/gray-matter/pull/74</a></li>
 </ul>
 <p>glamorに至っては、型定義ファイルが用意されているにもかかわらず、最新版(v2.20.40)をnpmリポジトリインストールすると
 <code>server.d.ts</code>が落ちてこない。ISSUEも上がっている。</p>
