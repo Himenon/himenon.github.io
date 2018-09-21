@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@himenoglyph" />
-<meta property="og:url" content="https://himenon.github.io/tools/Github/Github-Multi-Login-User/" />
-<meta property="og:title" content="Githubで複数ユーザーのログインをした時の対応 - 技術の定点観測" />
+<meta property="og:url" content="https://himenon.github.io/blog/2018-09-22-2/" />
+<meta property="og:title" content="cliを読む - genのコード解析 - 技術の定点観測" />
 <meta property="og:description" content="手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。" />
 <meta property="og:image" content="https://himenon.github.io/images/apple-touch-icon.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="https://himenon.github.io/images/miku.png">
@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://himenon.github.io/images/favicon-16x16.png">
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="theme-color" content="#ffffff">
-    <title>Githubで複数ユーザーのログインをした時の対応 | 技術の定点観測</title>
+    <title>cliを読む - genのコード解析 | 技術の定点観測</title>
     
     <link rel="stylesheet" href="/stylesheets/reboot.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
@@ -29,7 +29,7 @@
         <h1><a href="https://himenon.github.io/">技術の定点観測</a></h1>
         <div class="sns-share"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
    class="twitter-share-button"
-   data-text="Githubで複数ユーザーのログインをした時の対応 - 技術の定点観測"
+   data-text="cliを読む - genのコード解析 - 技術の定点観測"
    data-via="himenoglyph "
    data-related="himenoglyph"
    data-show-count="true">Tweet</a>
@@ -38,17 +38,78 @@
     <div class="container">
         <div class="nav-layout left-nav"><h2>ページ内目次</h2><ul>
     
-    <li><a href="#github">Githubで複数ユーザーのログインをした時の対応</a></li>
+    <li><a href="#cli_-_gen">cliを読む - genのコード解析</a></li>
+    
+    <li><a href="#_1">検証方法</a></li>
+    
+    <li><a href="#clits">cli.ts</a></li>
+    
+    <li><a href="#package">依存Package</a></li>
     
     
 </ul></div>
         <div class="content">
-            <div class="content-body"><h1 id="github">Githubで複数ユーザーのログインをした時の対応<a class="headerlink" href="#github" title="Permanent link">&para;</a></h1>
-<p>よくある。いろいろと設定するのが面倒くさいので、remoteに下記のフォーマットで追加して、一気に行く</p>
-<pre><code>git remote add github https://[username]@github.com/[username]/[repo].git
+            <div class="content-body"><h1 id="cli_-_gen">cliを読む - genのコード解析<a class="headerlink" href="#cli_-_gen" title="Permanent link">&para;</a></h1>
+<ul>
+<li>Created at 2018/09/22 03:45</li>
+</ul>
+<p><a href="https://github.com/c8r/gen">gen</a>を実際に読んでみようと思います。</p>
+<h2 id="_1">検証方法<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>デバッグ方法は、紹介しようと思ったら、良い記事が合ったのでそれを下記してください。</p>
+<ul>
+<li><a href="https://blog.hiroppy.me/entry/nodejs-performance">Node.jsのアプリケーションデバッグ・改善方法をおさらいする - 技術探し</a></li>
+</ul>
+<p>vscodeでやる方法もあります。</p>
+<h2 id="clits">cli.ts<a class="headerlink" href="#clits" title="Permanent link">&para;</a></h2>
+<p>cliを叩くところから</p>
+<pre><code>/lib/cli.js examples -Do --port 9000 --library glamorous
 </code></pre>
 
-<p>https://Himenon@github.com/Himenon/nuxt-firebase-auth.git</p></div>
+<p>最初に<code>meow</code>が動いて、</p>
+<pre><code class="ts">const cli = meow(helpMessage, options)
+</code></pre>
+
+<p>入力された設定の読み込み、</p>
+<pre><code class="ts">// cliから入力された第一引数をlocalDirnameに格納, なければcliを叩いた位置
+const [localDirname = process.cwd()] = cli.input
+// https://github.com/sindresorhus/read-pkg-up
+// localDirnameから最も近い位置にあるpackage.jsonをreadする
+const userPkg = readPkgUp.sync({ cwd: localDirname }) || {} 
+// ここに型を当てておいたほうが良さそう
+const localOpts = {
+  // https://github.com/sindresorhus/dot-prop
+  // . でobjectを探索
+  ...dot.get(userPkg, 'pkg.gen'),
+  // meowで定義したoptionsを展開
+  ...cli.flags,
+  // 出力ディレクトリを指定
+  outDir: path.join(process.cwd(), cli.flags.outDir || ''),
+}
+</code></pre>
+
+<p>dev-serverかhtmlの生成か</p>
+<pre><code class="ts">if (localOpts.dev) {
+  // 開発サーバーの立ち上げ
+  server(localDirname, localOpts)
+} else {
+  // 静的サイトの生成
+  create(localDirname, localOpts)
+}
+</code></pre>
+
+<p>ざっくりとこんな感じ。</p>
+<h2 id="package">依存Package<a class="headerlink" href="#package" title="Permanent link">&para;</a></h2>
+<p>ざっくりと5つ</p>
+<ul>
+<li><a href="https://github.com/sindresorhus/meow">https://github.com/sindresorhus/meow</a></li>
+<li><a href="https://github.com/sindresorhus/dot-prop">https://github.com/sindresorhus/dot-prop</a></li>
+<li><a href="https://github.com/sindresorhus/meow">https://github.com/sindresorhus/meow</a></li>
+<li><a href="https://github.com/sindresorhus/opn">https://github.com/sindresorhus/opn</a></li>
+<li><a href="https://github.com/sindresorhus/read-pkg-up">https://github.com/sindresorhus/read-pkg-up</a></li>
+</ul>
+<p>ん？同じ作者 ... !</p>
+<p>にゃー</p>
+<p>寝よう</p></div>
         </div>
         <div class="nav-layout right-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Infrastructure</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a></li></ul>
