@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@himenoglyph" />
-<meta property="og:url" content="https://himenon.github.io/python/Django/signal/" />
-<meta property="og:title" content="DjangoのSignalの使い方 - 技術の定点観測" />
+<meta property="og:url" content="https://himenon.github.io/blog/2018-09-22-3/" />
+<meta property="og:title" content="serverを読む - genのコード解析 - 技術の定点観測" />
 <meta property="og:description" content="手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。" />
 <meta property="og:image" content="https://himenon.github.io/images/apple-touch-icon.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="https://himenon.github.io/images/miku.png">
@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://himenon.github.io/images/favicon-16x16.png">
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="theme-color" content="#ffffff">
-    <title>DjangoのSignalの使い方 | 技術の定点観測</title>
+    <title>serverを読む - genのコード解析 | 技術の定点観測</title>
     
     <link rel="stylesheet" href="/stylesheets/reboot.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
@@ -29,7 +29,7 @@
         <h1><a href="https://himenon.github.io/">技術の定点観測</a></h1>
         <div class="sns-share"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
    class="twitter-share-button"
-   data-text="DjangoのSignalの使い方 - 技術の定点観測"
+   data-text="serverを読む - genのコード解析 - 技術の定点観測"
    data-via="himenoglyph "
    data-related="himenoglyph"
    data-show-count="true">Tweet</a>
@@ -38,31 +38,109 @@
     <div class="container">
         <div class="nav-layout left-nav"><h2>ページ内目次</h2><ul>
     
-    <li><a href="#djangosignal">DjangoのSignalの使い方</a></li>
+    <li><a href="#server_-_gen">serverを読む - genのコード解析</a></li>
+    
+    <li><a href="#serverts">server.ts</a></li>
     
     
 </ul></div>
         <div class="content">
-            <div class="content-body"><h1 id="djangosignal">DjangoのSignalの使い方<a class="headerlink" href="#djangosignal" title="Permanent link">&para;</a></h1>
+            <div class="content-body"><h1 id="server_-_gen">serverを読む - genのコード解析<a class="headerlink" href="#server_-_gen" title="Permanent link">&para;</a></h1>
+<p><img alt="参照関係" src="../images/madge-gen.png" /></p>
 <ul>
-<li>作成日：2017年11月06日</li>
-<li>公開日：2018年09月15日</li>
+<li>Created at 2018/09/22 03:45</li>
 </ul>
-<p>いわゆるイベントフック</p>
-<pre><code class="python">@receiver(pre_save, sender=JobOffer)
-def before_save_handler(sender, instance, **kwargs):
-    print(&quot;保存前に呼び出されている&quot;)
+<p>引き続き<a href="https://github.com/c8r/gen">gen</a>を実際に読む。</p>
+<h2 id="serverts">server.ts<a class="headerlink" href="#serverts" title="Permanent link">&para;</a></h2>
+<p>serverの主な役割はこうだ</p>
+<ul>
+<li>File System Watchの立ち上げ（ファイルの変更監視）</li>
+<li>WebSocket Serverの立ち上げ</li>
+<li>HTTPサーバーの立ち上げ</li>
+<li>HTTPサーバーが返すresponseの作成</li>
+</ul>
+<pre><code class="ts">const start = async (dirname: string, opts: Options) =&gt; {
+  // 利用可能なポートを探す
+  const socketPort: number = await portfinder.getPortPromise()
+  // 定義だけ
+  let socket: WebSocket
+  // 初回に表示するページの取得
+  let gPages = await getPages(dirname, opts)
 
+  // ファイルの変更監視
+  const watcher: chokidar.FSWatcher = chokidar.watch(dirname, {
+    depth: 1,
+    ignoreInitial: true,
+    ignored: '!*.(jsx|md|json)',
+  })
 
-@receiver(post_save, sender=JobOffer)
-def after_save_handler(sender, instance, **kwargs):
-    print(&quot;保存後に呼び出されれる&quot;)
+  // WebSocketサーバーの立ち上げ
+  const socketServer = new WebSocket.Server({ port: socketPort })
+
+  // 接続時にsocket渡す
+  socketServer.on('connection', (res: WebSocket) =&gt; {
+    // 最後に接続したものだけ更新の対象とする
+    socket = res
+  })
+
+  // 更新時に得られたsocketに対してpayloadを投げる
+  const update = async () =&gt; {
+    if (!socket) {
+      return
+    }
+    gPages = await getPages(dirname, opts)
+    socket.send(JSON.stringify({ reload: true }))
+  }
+  // 省略
+}
+
+export { start as server }
 </code></pre>
 
-<ul>
-<li><a href="https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html">https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html</a></li>
-<li><a href="https://www.ibm.com/developerworks/jp/opensource/library/os-django-admin/index.html">https://www.ibm.com/developerworks/jp/opensource/library/os-django-admin/index.html</a></li>
-</ul></div>
+<p>続きは、HTTPサーバー部分</p>
+<pre><code class="ts">const start = async (dirname: string, opts: Options) =&gt; {
+    // 中略
+  const app = http.createServer((req: http.IncomingMessage, res: http.ServerResponse) =&gt; {
+    if (!req.url) {
+      return
+    }
+    const { pathname } = url.parse(req.url)
+    if (!pathname) {
+      return
+    }
+    // URIとディレクトリ名を結合することで、ファイル名を生成する
+    const filepath = path.join(dirname, pathname)
+    // ローカルディレクトリに存在しているかどうか確認
+    if (fs.existsSync(filepath) &amp;&amp; fs.statSync(filepath).isFile()) {
+      fs.createReadStream(filepath).pipe(res)
+      return
+    }
+
+    // `/`終わりの場合はindexでに変換する
+    const name = pathname === '/' ? 'index' : pathname.replace(/^\//, '').replace(/\/$/, '')
+    const page = gPages.find((localPage: any) =&gt; localPage.name === name)
+
+    if (!page) {
+      res.write('page not found: ' + pathname)
+      res.end()
+      return
+    }
+    // レンダリングするページをレスポンスに含める
+    res.write(page.html)
+    // hot reloadをかける用のscriptを最後尾に追加する
+    res.write(makeScript(socketPort))
+    res.end()
+  })
+
+  try {
+    const server = await app.listen(socketPort + 2)
+    return server
+  } catch (err) {
+    console.log(err)
+    throw err
+  }
+}
+</code></pre></div>
         </div>
         <div class="nav-layout right-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Infrastructure</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a></li></ul>

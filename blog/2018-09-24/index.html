@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@himenoglyph" />
-<meta property="og:url" content="https://himenon.github.io/python/Django/signal/" />
-<meta property="og:title" content="DjangoのSignalの使い方 - 技術の定点観測" />
+<meta property="og:url" content="https://himenon.github.io/blog/2018-09-24/" />
+<meta property="og:title" content="genの改修作業中に見つけたコード - 技術の定点観測" />
 <meta property="og:description" content="手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。" />
 <meta property="og:image" content="https://himenon.github.io/images/apple-touch-icon.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="https://himenon.github.io/images/miku.png">
@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://himenon.github.io/images/favicon-16x16.png">
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="theme-color" content="#ffffff">
-    <title>DjangoのSignalの使い方 | 技術の定点観測</title>
+    <title>genの改修作業中に見つけたコード | 技術の定点観測</title>
     
     <link rel="stylesheet" href="/stylesheets/reboot.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
@@ -29,7 +29,7 @@
         <h1><a href="https://himenon.github.io/">技術の定点観測</a></h1>
         <div class="sns-share"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
    class="twitter-share-button"
-   data-text="DjangoのSignalの使い方 - 技術の定点観測"
+   data-text="genの改修作業中に見つけたコード - 技術の定点観測"
    data-via="himenoglyph "
    data-related="himenoglyph"
    data-show-count="true">Tweet</a>
@@ -38,31 +38,74 @@
     <div class="container">
         <div class="nav-layout left-nav"><h2>ページ内目次</h2><ul>
     
-    <li><a href="#djangosignal">DjangoのSignalの使い方</a></li>
+    <li><a href="#gen">genの改修作業中に見つけたコード</a></li>
     
     
 </ul></div>
         <div class="content">
-            <div class="content-body"><h1 id="djangosignal">DjangoのSignalの使い方<a class="headerlink" href="#djangosignal" title="Permanent link">&para;</a></h1>
+            <div class="content-body"><h1 id="gen">genの改修作業中に見つけたコード<a class="headerlink" href="#gen" title="Permanent link">&para;</a></h1>
 <ul>
-<li>作成日：2017年11月06日</li>
-<li>公開日：2018年09月15日</li>
+<li>Created at 2018/09/24 23:50</li>
 </ul>
-<p>いわゆるイベントフック</p>
-<pre><code class="python">@receiver(pre_save, sender=JobOffer)
-def before_save_handler(sender, instance, **kwargs):
-    print(&quot;保存前に呼び出されている&quot;)
+<p>まだ型を当てている最中。途中、おもしろい箇所を見つけた。
+CSS in JSのライブラリとして、二種類あるのだけれど、それをうまく切り替えていた部分があった。</p>
+<ul>
+<li><a href="https://github.com/paypal/glamorous">paypal/glamorous</a></li>
+<li><a href="https://github.com/styled-components/styled-components">styled-components/styled-components</a></li>
+</ul>
+<p>glamorousの方はもうメンテナンスされていないので、styled-componentsを使うほうが良いのだが、コード中に切り替えポイントがあった。</p>
+<pre><code class="ts">// createComponent.ts
+const componentCreators: { [key: string]: (comp: any, lib: any) =&gt; React.ComponentClass } = {
+  glamorous: ({ name, type, style, props, system = [] }: GlamorousOptions, lib: object) =&gt; {
+    // todo: DRY up
+    const tag = lib[type] || type
+    const funcs = getFunctions(system)
+    const Comp = glamorous(tag)(style, ...funcs)
 
+    Comp.defaultProps = props
+    Comp.displayName = name
 
-@receiver(post_save, sender=JobOffer)
-def after_save_handler(sender, instance, **kwargs):
-    print(&quot;保存後に呼び出されれる&quot;)
+    return Comp
+  },
+  'styled-components': ({ name, type, style, props, system = [] }: StyledOptions, lib: object) =&gt; {
+    const tag = lib[type] || type
+    const funcs = getFunctions(system)
+    // @ts-ignore
+    const Comp = styled(tag)([], style, ...funcs)
+
+    Comp.defaultProps = props
+    Comp.displayName = name
+
+    return Comp
+  },
+}
 </code></pre>
 
-<ul>
-<li><a href="https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html">https://simpleisbetterthancomplex.com/tutorial/2016/07/28/how-to-create-django-signals.html</a></li>
-<li><a href="https://www.ibm.com/developerworks/jp/opensource/library/os-django-admin/index.html">https://www.ibm.com/developerworks/jp/opensource/library/os-django-admin/index.html</a></li>
-</ul></div>
+<p>使う側は、<code>createComponent</code>でwarpしておいて、</p>
+<pre><code class="ts">const createComponent = (opts: Options2) =&gt; (comp: ComponentConfig, lib: object): null | React.ComponentClass =&gt; {
+  if (isExternal(comp)) {
+    return null
+  }
+  if (isComposite(comp)) {
+    return createComposite(comp, lib)
+  }
+  if (!comp.name || !comp.type || !comp.style) {
+    return null
+  }
+
+  const library = opts.library || 'styled-components'
+  // 利用するfunctionを指定する
+  const sx = componentCreators[library]
+  return sx(comp, lib)
+}
+</code></pre>
+
+<p>オプションのフラグで使うライブラリを切り替える。
+使う側は、Factoryメソッド自体を受けとって、それの内部実装を知らずにメソッドを利用することができるようになる。</p>
+<pre><code class="ts">const create = createComponent(opts)
+</code></pre>
+
+<p>なるほど〜。</p></div>
         </div>
         <div class="nav-layout right-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Infrastructure</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a></li></ul>
