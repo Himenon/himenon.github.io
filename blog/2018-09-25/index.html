@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="twitter:card" content="summary" />
 <meta name="twitter:site" content="@himenoglyph" />
-<meta property="og:url" content="https://himenon.github.io/profile/study-history/" />
-<meta property="og:title" content="参加した勉強会 - 技術の定点観測" />
+<meta property="og:url" content="https://himenon.github.io/blog/2018-09-25/" />
+<meta property="og:title" content="作業工程を振り返っておく - 技術の定点観測" />
 <meta property="og:description" content="手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。" />
 <meta property="og:image" content="https://himenon.github.io/images/apple-touch-icon.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="https://himenon.github.io/images/miku.png">
@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="https://himenon.github.io/images/favicon-16x16.png">
 <meta name="msapplication-TileColor" content="#2d89ef">
 <meta name="theme-color" content="#ffffff">
-    <title>参加した勉強会 | 技術の定点観測</title>
+    <title>作業工程を振り返っておく | 技術の定点観測</title>
     
     <link rel="stylesheet" href="/stylesheets/reboot.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
@@ -29,7 +29,7 @@
         <h1><a href="https://himenon.github.io/">技術の定点観測</a></h1>
         <div class="sns-share"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
    class="twitter-share-button"
-   data-text="参加した勉強会 - 技術の定点観測"
+   data-text="作業工程を振り返っておく - 技術の定点観測"
    data-via="himenoglyph "
    data-related="himenoglyph"
    data-show-count="true">Tweet</a>
@@ -38,48 +38,37 @@
     <div class="container">
         <div class="nav-layout left-nav"><h2>ページ内目次</h2><ul>
     
-    <li><a href="#_1">参加した勉強会</a></li>
-    
-    <li><a href="#_2">勉強会系</a></li>
+    <li><a href="#_1">作業工程を振り返っておく</a></li>
     
     
 </ul></div>
         <div class="content">
-            <div class="content-body"><h1 id="_1">参加した勉強会<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p id="created_at">作成日: <time datetime="2018-03-28T01:28">2018/03/28</time></p>
-
-<h2 id="_2">勉強会系<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>参加予定</p>
+            <div class="content-body"><h1 id="_1">作業工程を振り返っておく<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <ul>
-<li>2018/05/19 DjangoCongress JP 2018 (Day 1 カンファレンスデー)</li>
+<li>Created at 2018/09/25 23:50</li>
 </ul>
-<h3 id="2018">2018年<a class="headerlink" href="#2018" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/Himenon/gen/pull/1">こいつ</a>の型を当てるときの作業工程について振り返っておく。</p>
+<p>事前準備</p>
 <ol>
-<li>03/08 Kubernetes Meetup Tokyo #10</li>
-<li>03/02 酔いどれGCPUG<ul>
-<li>LT発表しました → <a href="/presentation/2018/03-02-Yoidore-GCPUG-LT/">発表後のブログ</a></li>
-</ul>
-</li>
-<li>02/21 【サポーターズCoLab勉強会】GKEで学ぶKubernetes入門</li>
-<li>02/16 Docker Meetup Tokyo #21</li>
-<li>02/10 Cookpad TechConf 2018</li>
+<li>現バージョンの挙動を確認する</li>
+<li>テストを確認する</li>
 </ol>
-<h3 id="2017">2017年<a class="headerlink" href="#2017" title="Permanent link">&para;</a></h3>
+<p>typescriptの導入</p>
 <ol>
-<li>12/20 市ヶ谷Geek★Night #16 Kubernetes Christmas!</li>
-<li>12/11 pyspa 忘年会 in 品川 (2017)</li>
-<li>12/07 【サポーターズ勉強会】システムを構築するときに気をつける10のこと</li>
-<li>12/06 【サポーターズ勉強会】明日から使えるKubernetes入門</li>
-<li>12/04 Live2D Creators Conference alive 2017</li>
-<li>11/25-26 東京Node学園祭2017</li>
-<li>10/08 PHPカンファレンス2017</li>
-<li>09/08-09 PyCon JP 2017</li>
-<li>08/22 【増枠！】【初心者歓迎】第2回PythonのWebスタートアップを詳しく語る会【5社登壇！】</li>
-<li>08/18 ネットワークの自動化、何つかう？～自動化ツール紹介～　APC勉強会＃30(2回目)</li>
-<li>07/11 けーすた！ #2 - Case Study ! Lightning Talk -</li>
-<li>06/09 【勉強会】Docker入門</li>
-<li>05/28 Android Bazaar and Conference 2017 Spring JINS MEME DEVELOPER HANDS-ON in ABC 2017</li>
-</ol></div>
+<li>tsconfigを入れる</li>
+<li>package.jsonでこれまでのフローが壊れないようにscriptsの中身だけ記述する</li>
+<li>tslintを導入する。そもそもlinterが走っていないので、<code>tslint:recommended</code>で通す</li>
+<li>ひたすらanyか<code>ts-ignore</code>を当てて、コンパイルが通るまで頑張る</li>
+<li>通ってから、<code>require</code>を<code>import</code>に書き換える</li>
+<li><code>shallow-variable</code>を潰す</li>
+<li><code>yarn upgrade-interactive</code>で最新まで持っていく</li>
+<li>まだ<code>any</code>なので、事前準備で確認した項目が通るように型を当てていく</li>
+<li>型を<code>types.ts</code>に一時的に集約していく</li>
+<li>objectのkeyをmapped typesで展開できるように工夫する</li>
+<li>ひたすら型を解決していく</li>
+<li>ライブラリ系で躓いたらRelease Noteを熟読する</li>
+</ol>
+<p>いまは12番目</p></div>
         </div>
         <div class="nav-layout right-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Infrastructure</u></b></span></li><li>
     <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a></li></ul>
