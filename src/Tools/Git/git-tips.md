@@ -12,7 +12,7 @@ git: 'credential-manager' is not a git command. See 'git --help'.
 ## Alias
 
 
-```
+```conf
 [alias]
 	st = status
 	bl = blame
