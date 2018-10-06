@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@himenoglyph" />
+<meta property="og:url" content="https://himenon.github.io/JavaScript/Frontend/vuejs/my-vue-setup/" />
+<meta property="og:title" content="Vueのセットアップ - 技術の定点観測" />
+<meta property="og:description" content="手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。" />
+<meta property="og:image" content="https://himenon.github.io/images/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="https://himenon.github.io/images/miku.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://himenon.github.io/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://himenon.github.io/images/favicon-16x16.png">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#ffffff">
+    <title>Vueのセットアップ | 技術の定点観測</title>
+    
+    <link rel="stylesheet" href="/stylesheets/reboot.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
+    <link rel="stylesheet" href="/stylesheets/pc.css">
+    <link rel="stylesheet" href="/stylesheets/tablet.css">
+    <link rel="stylesheet" href="/stylesheets/sp.css">
+    <link rel="stylesheet" href="/stylesheets/prism.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1><a href="https://himenon.github.io/">技術の定点観測</a></h1>
+        <div class="sns-share"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+   class="twitter-share-button"
+   data-text="Vueのセットアップ - 技術の定点観測"
+   data-via="himenoglyph "
+   data-related="himenoglyph"
+   data-show-count="true">Tweet</a>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
+    </header>
+    <div class="container">
+        <div class="nav-layout left-nav"><h2>ページ内目次</h2><ul>
+    
+    <li><a href="#vue">Vueのセットアップ</a></li>
+    
+    <li><a href="#vuex">vuex</a></li>
+    
+    <li><a href="#pug">pug</a></li>
+    
+    <li><a href="#axios">axios</a></li>
+    
+    <li><a href="#socketio">socket.io</a></li>
+    
+    <li><a href="#sass">sass</a></li>
+    
+    
+</ul></div>
+        <div class="content">
+            <div class="content-body"><h1 id="vue">Vueのセットアップ<a class="headerlink" href="#vue" title="Permanent link">&para;</a></h1>
+<p id="created_at">作成日: <time datetime="2018-03-15T22:40">2018/03/15 22:40</time></p>
+
+<p id="updated_at">更新日: <time datetime="2018-03-24T01:47">2018/03/24 01:47</time></p>
+
+<h2 id="vuex">vuex<a class="headerlink" href="#vuex" title="Permanent link">&para;</a></h2>
+<p>Vue.jsの状態管理パターン + ライブラリ</p>
+<pre><code class="bash">$ npm install vuex --save
+</code></pre>
+
+<ul>
+<li><a href="https://vuex.vuejs.org/">https://vuex.vuejs.org/</a></li>
+<li><a href="https://www.npmjs.com/package/vuex">https://www.npmjs.com/package/vuex</a></li>
+</ul>
+<h2 id="pug">pug<a class="headerlink" href="#pug" title="Permanent link">&para;</a></h2>
+<p>テンプレートエンジンJadeの後継</p>
+<pre><code class="bash">$ npm install pug
+</code></pre>
+
+<ul>
+<li><a href="https://www.npmjs.com/package/pug">https://www.npmjs.com/package/pug</a></li>
+</ul>
+<h2 id="axios">axios<a class="headerlink" href="#axios" title="Permanent link">&para;</a></h2>
+<p>非同期ライブラリ</p>
+<pre><code class="bash">$ npm install axios
+</code></pre>
+
+<ul>
+<li><a href="https://www.npmjs.com/package/axios">https://www.npmjs.com/package/axios</a></li>
+<li><a href="https://github.com/axios/axios">https://github.com/axios/axios</a></li>
+</ul>
+<h2 id="socketio">socket.io<a class="headerlink" href="#socketio" title="Permanent link">&para;</a></h2>
+<p>Socketライブラリ</p>
+<pre><code class="bash">$ npm install socket-client
+</code></pre>
+
+<ul>
+<li><a href="https://www.npmjs.com/package/socket.io-client">https://www.npmjs.com/package/socket.io-client</a></li>
+</ul>
+<h2 id="sass">sass<a class="headerlink" href="#sass" title="Permanent link">&para;</a></h2>
+<p>CSSプリプロセッサ</p>
+<pre><code class="bash">$ npm install vue-style-loader
+$ npm install sass-loader node-sass --save-dev
+</code></pre>
+
+<ul>
+<li><a href="https://github.com/vuejs/vue-loader/blob/master/docs/ja/configurations/pre-processors.md">https://github.com/vuejs/vue-loader/blob/master/docs/ja/configurations/pre-processors.md</a></li>
+<li><a href="https://www.npmjs.com/package/sass-loader">https://www.npmjs.com/package/sass-loader</a></li>
+<li><a href="https://www.npmjs.com/package/node-sass">https://www.npmjs.com/package/node-sass</a></li>
+</ul></div>
+        </div>
+        <div class="nav-layout right-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Docker</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Docker/command/">Dockerコマンド</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Docker/pycharm/">PycharmでDockerを使う方法</a></li></ul>
+</li><li ><span><b><u>Firebase</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Auth-Error-Tips/">FirebaseのAuthで躓いたこと</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Firebase-Cloud-Functions/">FirebaseにおけるCloud Functions</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Firebase-Starter/">Firebaseことはじめ</a></li></ul>
+</li><li ><span><b><u>GCP</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/GCP/Cloud-Function/">Cloud Function</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/GCP/GKE/">GKEのコマンド</a></li></ul>
+</li><li ><span><b><u>Infrastructure</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a></li></ul>
+</li><li ><span><b><u>JavaScript</u></b></span></li><li>
+    <ul><li ><span><b><u>Frontend</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/settings/">lodash</a></li><li ><span><b><u>Es6</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/es6/usage-axios/">Axiosでasync/awaitを利用する</a></li></ul>
+</li><li ><span><b><u>Vuejs</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/vuejs/my-vue-setup/">Vueのセットアップ</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/vuejs/nuxtjs/">Nuxt.jsをやる</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/vuejs/ssr-cache-investigation/">VuejsのSSR(Server Side Rendering)のページ・部分キャッシュは何で実装できるか</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/vuejs/vuex-usage/">VuexのModuleの使い方</a></li></ul>
+</li></ul>
+</li><li ><span><b><u>NodeJS</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/NodeJS/Request-library-description-for-json-value/">nodeのrequestライブラリの`json`オプションの取り扱いについて</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/NodeJS/dynamic-import/">PackageのDynamic Import</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/NodeJS/execute-async-mjs/">Module jsで非同期関数を実行する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/NodeJS/get-collect-domain-name/">JavaScriptで正確なドメイン名をパースすには？</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/NodeJS/manage-npm-package/">npmのpaackage管理について</a></li></ul>
+</li></ul>
+</li><li ><span><b><u>MySQL</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/MySQL/character-code/">DockerのMySQLでUTF-8を使えるようにする</a></li></ul>
+</li><li ><span><b><u>Blog</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-17-PyConJP/">PyConJP2018の個人レポート</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-20/">genというライブラリを書き直している</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-22-2/">cliを読む - genのコード解析</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-22-3/">serverを読む - genのコード解析</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-22/">genといライブラリの改修作業の進捗</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-24/">genの改修作業中に見つけたコード</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-25/">作業工程を振り返っておく</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-26/">Kubeflow Meetup #1に行ってきた</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/Container-App-Directory-Management-Consideration/">コンテナアプリケーション作成時のディレクトリ成長設計の考察</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/Container-Worker-Design/">コンテナ型のワーカーの設計（仮）</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/TDD/">TDDポエム</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/read-basic-knowledge-of-nosql/">NOSQLとは何か...</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/static-site-generator/">静的サイトジェネレーターを選ぶとき、何を思ふ？</a></li></ul>
+</li><li ><span><b><u>Event</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/event/2018-05-21-Cloud-Native/">[イベントレポート] Cloud Native Meetup Tokyo #1</a></li></ul>
+</li><li ><span><b><u>Kubernetes</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/Nginx access control for kubernetes/">Kubernetesに配置したNginxでアクセス制御する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/Shortcut-for-kubectl/">Kubernetesでよく使うコマンド（コピペ用）</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/cron-wake-up-down/">GKEをCronで起動・停止させる</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/error helm incompatible version/">Error: incompatible versions client[v2.8.2] server[v2.7.2]</a></li></ul>
+</li><li ><span><b><u>Mongo db</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/mongo-db/basic-query/">MongoDBの基本クエリ</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/mongo-db/basic-read-write/">mongo DBの基本的なRead Write</a></li></ul>
+</li><li ><span><b><u>Presentation</u></b></span></li><li>
+    <ul><li ><span><b><u>2018</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/presentation/2018/03-02-Yoidore-GCPUG-LT/">酔いどれGCPUG で発表してきました</a></li></ul>
+</li></ul>
+</li><li ><span><b><u>Profile</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/profile/">Profileの目次</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/profile/github-activity/">Githubの活動状況</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/profile/skill/">スキルセット</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/profile/study-history/">参加した勉強会</a></li></ul>
+</li><li ><span><b><u>Python</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/test-know-how/">PythonのTest</a></li><li ><span><b><u>Django</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/Introduction-of-Celery-Django/">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/Seperate-Django-Database/">Djangoで複数のデータベースを利用する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/fixture/">fixtureを読み込む</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/initialize-new-app/">DjangoにAppを新たに追加したときにやること</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/show-many-to-many-admin-view/">DjangoでMany to ManyをAdmin画面のリストに表示する方法</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/signal/">DjangoのSignalの使い方</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/static-file/">Staticファイルの取扱</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/unix-socket-and-nginx/">DjangoとNginxのTips</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/validate-only-alphabet/">DjangoでValidation アルファベットのみのバリデーションを実装する</a></li></ul>
+</li><li ><span><b><u>Flask</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Flask/Hello-Flask-Streamming-Content/">Flaskのストリーミングを利用してみる</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Flask/tips/">FlaskのTips</a></li></ul>
+</li><li ><span><b><u>Jupyter</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/jupyter/change-jupyter-config-dir/">jupyter_notebook_config.pyの読み込み先を変更する</a></li></ul>
+</li><li ><span><b><u>Mkdocs</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/mkdocs/tips/">MkDocsのtips</a></li></ul>
+</li><li ><span><b><u>Pandas</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/pandas/pandas-convert-column-to-datetime/">PandasのColumnをDateTimeに型変換する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/pandas/visualize-time/">時間データのビジュアライズ</a></li></ul>
+</li></ul>
+</li><li ><span><b><u>Raspberrypi</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/os-install/">RaspberrypiのOSインストール</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/purchace/">Raspberrypiのパーツを買った</a></li></ul>
+</li><li ><span><b><u>Tools</u></b></span></li><li>
+    <ul><li ><span><b><u>Cookiecutter</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Cookiecutter/usage/">自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方</a></li></ul>
+</li><li ><span><b><u>Git</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Git/git-tips/">Git Tips</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Git/version-match/">Gitの最新のCommitメッセージに対する正規表現</a></li></ul>
+</li><li ><span><b><u>Github</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Github/Github-GraphQL/">GithubのGraphQLを利用する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Github/Github-Multi-Login-User/">GitHubで複数ユーザーのログインをした時の対応</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Github/GrqphQL-Python/">GithubのGraphQLをPython 3で叩くサンプルコード</a></li></ul>
+</li><li ><span><b><u>Slack</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Slack/slack-library/">言語別Slack通知ライブラリ</a></li></ul>
+</li><li ><span><b><u>Zapier</u></b></span></li><li>
+    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Zapier/zapier-development/">Zapierで利用可能なアプリをを時前で作成する</a></li></ul>
+</li></ul>
+</li></ul></div>
+    </div>
+    <script src="/javascripts/prism.js"></script>
+    <script src="/javascripts/mermaid.min.js"></script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-55455343-7', 'himenon.github.io');
+ga('send', 'pageview');
+</script>
+</body>
+</html>
