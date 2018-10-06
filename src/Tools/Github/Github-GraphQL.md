@@ -80,7 +80,7 @@ curl -H "Authorization: token $OAUTH_TOKEN" https://api.github.com/repos/$OWNER/
 - Object
 - Mutations
 
-OBjects
+Objects
 
 
 ### 
