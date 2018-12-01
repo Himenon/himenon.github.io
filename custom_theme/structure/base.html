@@ -11,22 +11,20 @@
     {% if page and page.is_homepage %}<meta name="description" content="{{ config.site_description }}">{% endif %}
     <link rel="stylesheet" href="/stylesheets/reboot.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
-    <link rel="stylesheet" href="/stylesheets/pc.css">
-    <link rel="stylesheet" href="/stylesheets/tablet.css">
-    <link rel="stylesheet" href="/stylesheets/sp.css">
     <link rel="stylesheet" href="/stylesheets/prism.css">
+    <link rel="stylesheet" href="/stylesheets/all.css">
 </head>
 <body>
+    <div id="wrapper">
     <header class="site-header">
         <h1><a href="{{ config.site_url }}">{{ config.site_name }}</a></h1>
         <div class="sns-share">{% include "structure/sns.html" %}</div>
     </header>
     <div class="container">
-        <div class="nav-layout left-nav"><h2>ページ内目次</h2>{% include "structure/page_nav.html" %}</div>
         <div class="content">
             <div class="content-body">{%- block content %}{%- endblock %}</div>
         </div>
-        <div class="nav-layout right-nav"><h2>サイト内トピック</h2>{% include "structure/site_nav.html" %}</div>
+    </div>
     </div>
     <script src="/javascripts/prism.js"></script>
     <script src="/javascripts/mermaid.min.js"></script>
