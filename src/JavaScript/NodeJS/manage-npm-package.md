@@ -1,4 +1,4 @@
-# npmのpaackage管理について
+# npmのpackage管理について
 
 公式ドキュメント：<https://docs.npmjs.com/cli/>
 

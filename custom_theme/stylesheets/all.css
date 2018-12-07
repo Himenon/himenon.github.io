@@ -1,5 +1,5 @@
 * {
-  color: #FFF;
+  color: #333;
 }
 
 body, html {
@@ -14,7 +14,13 @@ body {
   width: 90%;
   max-width: 960px;
   margin: 0 auto;
-  background-color: #4a4a4a;
-  height: 100%;
+  min-height: 100%;
+  background-color: #FFFFFF;
   padding: 30px;
+}
+
+.container .nav-layout {
+  margin-top: 3em;
+  border-top: dotted 1px #333;
+  padding: 1em;
 }
