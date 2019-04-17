@@ -1,0 +1,59 @@
+{
+  "global": {
+    "lang": "ja",
+    "title": "観測所",
+    "description": "自作の静的サイトジェネレーターの技術ブログです。開発中の技術ノウハウや、考えを書く予定です。",
+    "keywords": "静的サイトジェネレーター,NodeJS,React,generator",
+    "copyright": "@Himenon",
+    "viewport": {
+      "initial-scale": 1.0,
+      "minimum-scale": 0.5,
+      "user-scalable": "no"
+    },
+    "thirdParty": {
+      "googleAnalytics": {
+        "ua": "UA-55455343-7"
+      }
+    },
+    "js": [],
+    "css": [],
+    "link": [
+      {
+        "rel": "apple-touch-icon",
+        "sizes": "180x180",
+        "href": "/assets/images/favicon/apple-touch-icon.png"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "32x32",
+        "href": "/assets/images/favicon/favicon-32x32.png"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "16x16",
+        "href": "/assets/images/favicon/favicon-16x16.png"
+      },
+      {
+        "rel": "manifest",
+        "href": "/assets/images/favicon/site.webmanifest"
+      }
+    ]
+  },
+  "baseUrl": "https://himenon.github.io",
+  "baseUri": "/",
+  "source": "./src",
+  "layoutFile": "./parts/template/template.js",
+  "customComponentsFile": "./parts/components/components.js",
+  "blacklist": {
+    "extensions": [".html", ".json", ".mdx"]
+  },
+  "port": 9000,
+  "plugins": [
+    {
+      "name": "MetaPlugin",
+      "resolve": "./parts/plugins"
+    }
+  ]
+}

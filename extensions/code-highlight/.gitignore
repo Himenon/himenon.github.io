@@ -1,6 +1,0 @@
-build
-dist
-MANIFEST
-*.pyc
-*.egg-info
-.*_cache

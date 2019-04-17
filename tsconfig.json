@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "esnext",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "experimentalDecorators": true,
+    "removeComments": true,
+    "composite": false,
+    "sourceMap": false,
+    "allowJs": false,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "baseUrl": "./",
+    "declaration": false
+  },
+  "include": [
+    "parts/**/*.ts",
+    "parts/**/*.tsx",
+  ],
+  "exclude": [
+    "./node_modules",
+    "./lib",
+    "jest"
+  ],
+  "ordered-imports": [
+    true,
+    {
+      "import-sources-order": "any",
+      "named-imports-order": "case-insensitive"
+    }
+  ]
+}
