@@ -24,7 +24,11 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "baseUrl": "./",
-    "declaration": false
+    "declaration": false,
+    "typeRoots": [
+      "parts/types",
+      "node_modules/@types"
+    ]
   },
   "include": [
     "parts/**/*.ts",

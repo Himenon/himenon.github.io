@@ -1,8 +1,5 @@
-// tslint:disable-next-line:no-reference
-/// <reference path="../../node_modules/@custom-site/custom-site/typings/@custom-site/index.d.ts"/>
-
-import { ExternalLink } from "@custom-site/page";
-import { PluginFunctionMap } from "@custom-site/plugin";
+import { ExternalLink } from "@custom-site/interfaces/lib/page";
+import { PluginFunctionMap } from "@custom-site/interfaces/lib/plugin";
 import urljoin = require("url-join");
 
 const pretty = require('pretty');

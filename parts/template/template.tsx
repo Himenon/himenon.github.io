@@ -1,7 +1,5 @@
-// tslint:disable-next-line:no-reference
-/// <reference path="../../node_modules/@custom-site/custom-site//typings/@custom-site/index.d.ts" />
 import * as React from "react";
-import { PostProps } from "@custom-site/page";
+import { PostProps } from "@custom-site/interfaces/lib/page";
 
 const headerContent = (props: PostProps): React.ReactElement<any> => {
   return (

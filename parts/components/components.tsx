@@ -1,7 +1,4 @@
-// tslint:disable-next-line:no-reference
-/// <reference path="../../node_modules/@custom-site/custom-site/typings/@mdx-js/index.d.ts"/>
-
-import { CustomComponents } from "@mdx-js/tag";
+import { CustomComponents } from "@mdx-js/react";
 import * as Prism from "prismjs";
 import * as React from "react";
 
