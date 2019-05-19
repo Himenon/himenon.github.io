@@ -1,6 +1,6 @@
 # NOSQLとは何か... 
 
-<p id="created_at">作成日: <time datetime="2018-02-24T23:00">2018/02/24</time></p>
+<p id="created_at">作成日: <time dateTime="2018-02-24T23:00">2018/02/24</time></p>
 
 NOSQLの知識が欲しかったので、ちょっと古いが次の本を読んだ。
 

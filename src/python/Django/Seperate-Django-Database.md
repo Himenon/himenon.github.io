@@ -1,6 +1,6 @@
 # Djangoで複数のデータベースを利用する
 
-<p id="updated_at">更新日: <time datetime="2018-04-16T01:00">2018/04/16</time></p>
+<p id="updated_at">更新日: <time dateTime="2018-04-16T01:00">2018/04/16</time></p>
 
 ユーザー管理用のデータベースと、分析用のデータベースなどのように分離したいときがあります。
 Django 2.0のドキュメントでは[Multiple databases](https://docs.djangoproject.com/en/2.0/topics/db/multi-db/)の章に説明があります。

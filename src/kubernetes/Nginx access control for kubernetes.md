@@ -1,6 +1,6 @@
 # Kubernetesに配置したNginxでアクセス制御する
 
-<p id="created_at">作成日: <time datetime="2018-02-19T01:30">2018/02/19</time></p>
+<p id="created_at">作成日: <time dateTime="2018-02-19T01:30">2018/02/19</time></p>
 
 ## TL;DR
 

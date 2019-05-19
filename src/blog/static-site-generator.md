@@ -1,6 +1,6 @@
 # 静的サイトジェネレーターを選ぶとき、何を思ふ？
 
-<p id="created_at">作成日: <time datetime="2018-02-14T01:30">2018/02/14</time></p>
+<p id="created_at">作成日: <time dateTime="2018-02-14T01:30">2018/02/14</time></p>
 
 [StaticGen](https://www.staticgen.com/)というサイトでいろいろと紹介されていますね。
 

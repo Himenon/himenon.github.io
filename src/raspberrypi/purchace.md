@@ -1,7 +1,7 @@
 # Raspberrypiのパーツを買った
 
-<p id="created_at">作成日: <time datetime="2018-09-08T23:00">2018/09/08 23:00</time></p>
-<p id="updated_at">更新日: <time datetime="2018-09-08T23:00">2018/09/08 23:00</time></p>
+<p id="created_at">作成日: <time dateTime="2018-09-08T23:00">2018/09/08 23:00</time></p>
+<p id="updated_at">更新日: <time dateTime="2018-09-08T23:00">2018/09/08 23:00</time></p>
 
 家にRaspberry Pi 2 Model Bが2年ほど眠っていたので、それを利用するために周辺部品を買った。
 

@@ -22,7 +22,7 @@ Sun Mar 25 09:10:42 +0000 2018
 %a %b %d %H:%M:%S +0000 %Y
 ```
 
-- [Going from twitter date to Python datetime date - StackOverflow]( https://stackoverflow.com/questions/7703865/going-from-twitter-date-to-python-datetime-date)
+- [Going from twitter date to Python dateTime date - StackOverflow]( https://stackoverflow.com/questions/7703865/going-from-twitter-date-to-python-dateTime-date)
 
 ## Timezoneの変更
 

@@ -1,6 +1,6 @@
 # Error: incompatible versions client[v2.8.2] server[v2.7.2]
 
-<p id="created_at">作成日: <time datetime="2018-03-19T22:30">2018/03/19</time></p>
+<p id="created_at">作成日: <time dateTime="2018-03-19T22:30">2018/03/19</time></p>
 
 ```bash
 $ helm install stable/redis

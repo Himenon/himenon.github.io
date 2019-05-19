@@ -1,6 +1,6 @@
 # VuejsのSSR(Server Side Rendering)のページ・部分キャッシュは何で実装できるか
 
-<p id="created_at">作成日: <time datetime="2018-03-14T02:20">2018/03/14</time></p>
+<p id="created_at">作成日: <time dateTime="2018-03-14T02:20">2018/03/14</time></p>
 
 vuejsで遊んでいてふと疑問に思ったので調べてみた。
 

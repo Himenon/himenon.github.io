@@ -1,6 +1,6 @@
 # 複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする
 
-<p id="created_at">作成日: <time datetime="2018-02-19T01:00">2018/02/19</time></p>
+<p id="created_at">作成日: <time dateTime="2018-02-19T01:00">2018/02/19</time></p>
 
 {!infrastructure/images/reverse-proxy-architecture-including-oauth2_proxy.svg!}
 
@@ -121,7 +121,7 @@ redirect_urlsはどこに・誰が登録しますか？
 
 理想のフローは次のような手順です(ざっくり)
 
-<div class="mermaid">
+<div className="mermaid">
 sequenceDiagram
   Browser->>Nginx: request(a.example.com)
   Nginx->>oauth2_proxy: proxy(proxy.example.com/oauth2/auth)

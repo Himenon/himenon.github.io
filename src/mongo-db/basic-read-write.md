@@ -6,7 +6,7 @@
 
 ```python
 from pymongo import MongoClient
-from datetime import datetime as dt
+from dateTime import dateTime as dt
 
 client = MongoClient('localhost', 27017)
 
@@ -40,7 +40,7 @@ collection.insert_many(bulk_data)
 
 ```python
 from pymongo import MongoClient
-from datetime import datetime as dt
+from dateTime import dateTime as dt
 
 client = MongoClient('localhost', 27017)
 

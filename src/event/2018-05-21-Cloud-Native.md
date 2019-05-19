@@ -1,7 +1,7 @@
 # [イベントレポート] Cloud Native Meetup Tokyo #1
 
-<p id="created_at">作成日: <time datetime="2018-05-22T00:00">2018/05/22 00:00</time></p>
-<p id="updated_at">更新日: <time datetime="2018-05-22T23:50">2018/05/23 23:50</time></p>
+<p id="created_at">作成日: <time dateTime="2018-05-22T00:00">2018/05/22 00:00</time></p>
+<p id="updated_at">更新日: <time dateTime="2018-05-22T23:50">2018/05/23 23:50</time></p>
 
 ※特にガチ目にまとめるわけじゃないです。
 独断と偏見で端折って書きます。
@@ -18,7 +18,8 @@
 
 ## with NATS with Kubernetesの世界へ
 
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/8H2FNvFZYEcmKJ" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/hayahitokawamitsu/with-nats-with-kubernetes" title="with NATS with Kubernetesの世界へ" target="_blank">with NATS with Kubernetesの世界へ</a> </strong> from <strong><a href="https://www.slideshare.net/hayahitokawamitsu" target="_blank">Hosei uni, Faculty of Computer and Information Sciences</a></strong> </div>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/8H2FNvFZYEcmKJ" width={595} height={485} frameBorder={0} marginWidth={0} marginHeight={0} scrolling="no" style={{border: '1px solid #CCC', borderWidth: '1px', marginBottom: '5px', maxWidth: '100%'}} allowFullScreen> </iframe>
+<div style={{marginBottom: '5px'}}> <strong> <a href="//www.slideshare.net/hayahitokawamitsu/with-nats-with-kubernetes" title="with NATS with Kubernetesの世界へ" target="_blank">with NATS with Kubernetesの世界へ</a> </strong> from <strong><a href="https://www.slideshare.net/hayahitokawamitsu" target="_blank">Hosei uni, Faculty of Computer and Information Sciences</a></strong> </div>
 
 Hayahito Kawamitsuさんから。
 
@@ -56,7 +57,7 @@ Hayahito Kawamitsuさんから。
 
 ## Fluent Bit vs Fluentd 1.x
 
-<iframe src="//www.slideshare.net/slideshow/embed_code/key/hzVjSMXIbMY5Bp" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/seiyamizuno35/fluentd12-fluent-bit-97985725" title="Fluentd1.2 &amp; Fluent Bit" target="_blank">Fluentd1.2 &amp; Fluent Bit</a> </strong> from <strong><a href="https://www.slideshare.net/seiyamizuno35" target="_blank">Seiya Mizuno</a></strong> </div>
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/hzVjSMXIbMY5Bp" width={595} height={485} frameBorder={0} marginWidth={0} marginHeight={0} scrolling="no" style={{border: '1px solid #CCC', borderWidth: '1px', marginBottom: '5px', maxWidth: '100%'}} allowFullScreen> </iframe><div style={{marginBottom: '5px'}}> <strong> <a href="//www.slideshare.net/seiyamizuno35/fluentd12-fluent-bit-97985725" title="Fluentd1.2 & Fluent Bit" target="_blank">Fluentd1.2 &amp; Fluent Bit</a> </strong> from <strong><a href="https://www.slideshare.net/seiyamizuno35" target="_blank">Seiya Mizuno</a></strong> </div>
 
 Mizuno Seiyaさんから。
 
@@ -66,8 +67,8 @@ Fluentdの内部のお話からFluent Bitの話。
 
 マサカリ歓迎、とのことだったので実況のTwiterにfluentdの中の人から飛んでたのを補足。
 
-<blockquote class="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">fluentdとfluent-bitの使い分けはこんな感じですね &gt; <a href="https://t.co/4M1cqDkqpX">https://t.co/4M1cqDkqpX</a> <a href="https://twitter.com/hashtag/cloudnativejp?src=hash&amp;ref_src=twsrc%5Etfw">#cloudnativejp</a></p>&mdash; SKSの申し子 (@repeatedly) <a href="https://twitter.com/repeatedly/status/998519530669277185?ref_src=twsrc%5Etfw">2018年5月21日</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote className="twitter-tweet" data-lang="ja"><p lang="ja" dir="ltr">fluentdとfluent-bitの使い分けはこんな感じですね &gt; <a href="https://t.co/4M1cqDkqpX">https://t.co/4M1cqDkqpX</a> <a href="https://twitter.com/hashtag/cloudnativejp?src=hash&amp;ref_src=twsrc%5Etfw">#cloudnativejp</a></p>&mdash; SKSの申し子 (@repeatedly) <a href="https://twitter.com/repeatedly/status/998519530669277185?ref_src=twsrc%5Etfw">2018年5月21日</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charSet="utf-8"></script>
 
 こういうの、発表する側、聞く側とってもためになるので嬉しいです。
 
@@ -78,7 +79,7 @@ Fluentdの内部のお話からFluent Bitの話。
 
 ## サービスメッシュと仲間たち 〜Istio & Conduit〜
 
-<script async class="speakerdeck-embed" data-id="d49488e5b2064e0486f96071ad6882fc" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+<script async className="speakerdeck-embed" data-id="d49488e5b2064e0486f96071ad6882fc" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
 
 [@amsy810](https://twitter.com/amsy810)さんから。
 
