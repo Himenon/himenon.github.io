@@ -1,6 +1,6 @@
 # スキルセット
 
-<p id="created_at">作成日: <time datetime="2018-03-27T02:00">2018/03/27</time></p>
+<p id="created_at">作成日: <time dateTime="2018-03-27T02:00">2018/03/27</time></p>
 
 **学習フェーズ**
 

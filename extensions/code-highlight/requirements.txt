@@ -1,5 +1,0 @@
-markdown
-pytest
-pytest-runner
-pytest-watch
-pylint

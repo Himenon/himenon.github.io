@@ -1,6 +1,6 @@
 # Kubernetesに配置したNginxでアクセス制御する
 
-<p id="created_at">作成日: <time datetime="2018-02-19T01:30">2018/02/19</time></p>
+<p id="created_at">作成日: <time dateTime="2018-02-19T01:30">2018/02/19</time></p>
 
 ## TL;DR
 
@@ -17,8 +17,8 @@ Serviceの設定の場合
 service.spec.externalTrafficPolicy = Local
 ```
 
-- Services | Kubernetes<br/><https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer>
-- Using Source IP | Kubernetes<br/><https://kubernetes.io/docs/tutorials/services/source-ip/>
+- Services | Kubernetes<https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer>
+- Using Source IP | Kubernetes<https://kubernetes.io/docs/tutorials/services/source-ip/>
 
 ## 背景
 

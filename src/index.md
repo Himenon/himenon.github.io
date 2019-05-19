@@ -2,7 +2,7 @@
 
 このブログのスター数
 
-<iframe src="https://ghbtns.com/github-btn.html?user=Himenon&repo=himenon.github.io&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe> 
+<iframe src="https://ghbtns.com/github-btn.html?user=Himenon&repo=himenon.github.io&type=watch&count=true" allowtransparency="true" frameBorder="0" scrolling="0" width="110" height="20"></iframe> 
 
 1つでも役に立った、と思ったらスターが欲しいです。
 

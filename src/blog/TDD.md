@@ -1,7 +1,7 @@
 # TDDポエム
 
-<p id="created_at">作成日: <time datetime="2018-05-22T23:50">2018/05/22 23:50</time></p>
-<p id="updated_at">更新日: <time datetime="2018-05-22T23:50">2018/05/22 23:50</time></p>
+<p id="created_at">作成日: <time dateTime="2018-05-22T23:50">2018/05/22 23:50</time></p>
+<p id="updated_at">更新日: <time dateTime="2018-05-22T23:50">2018/05/22 23:50</time></p>
 
 テスト駆動開発 Kent Beck, 和田卓人 訳
 

@@ -1,6 +1,6 @@
 # 参加した勉強会
 
-<p id="created_at">作成日: <time datetime="2018-03-28T01:28">2018/03/28</time></p>
+<p id="created_at">作成日: <time dateTime="2018-03-28T01:28">2018/03/28</time></p>
 
 ## 勉強会系
 

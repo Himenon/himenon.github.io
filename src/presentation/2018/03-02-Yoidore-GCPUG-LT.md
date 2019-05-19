@@ -1,9 +1,9 @@
 # 酔いどれGCPUG で発表してきました
 
-<p id="created_at">作成日: <time datetime="2018-03-04T14:00">2018/03/04</time></p>
-<p id="updated_at">更新日: <time datetime="2018-03-07T12:00">2018/03/07</time></p>
+<p id="created_at">作成日: <time dateTime="2018-03-04T14:00">2018/03/04</time></p>
+<p id="updated_at">更新日: <time dateTime="2018-03-07T12:00">2018/03/07</time></p>
 
-<script async class="speakerdeck-embed" data-id="f50568a9df364fd3836f1167e1b3b96b" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+<script async className="speakerdeck-embed" data-id="f50568a9df364fd3836f1167e1b3b96b" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
 
 ## はじめに
 
