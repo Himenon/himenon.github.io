@@ -94,7 +94,7 @@ JSON、BSOM、XMLといったデータ記述書式で記されたドキュメン
 
 ### BASE
 
-> BASEとは、「アプリケーションは基本的にどんなときでも動き(Basicallly Available)、常に整合性を保つ必要はないが(Soft-state)、結果として整合性がとれる状態に至る(Eventual Consistency)という特性」<br />
+> BASEとは、「アプリケーションは基本的にどんなときでも動き(Basicallly Available)、常に整合性を保つ必要はないが(Soft-state)、結果として整合性がとれる状態に至る(Eventual Consistency)という特性」
 > p83
 
 - **B**asically **A**vailable
@@ -178,7 +178,7 @@ SS Tableの数を少なくする。
 ### Hadoop MapReduce
 
 > 複数のサーバーを用いて、大量のデータを並列分散処理するプログラミングのためのソフトウェア
-> ある一定期間のデータを集めた上で一括処理するために用いられる。<br />
+> ある一定期間のデータを集めた上で一括処理するために用いられる。
 > p121
 
 ### HDFS(Hadoop Distributed File System)
