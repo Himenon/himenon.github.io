@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const urljoin = require("url-join");
-const pretty = require('pretty');
+const pretty = require("pretty");
 const getOgImageSource = (globalLinks) => {
     if (!globalLinks) {
         return;
@@ -39,23 +39,23 @@ exports.onGenerateMetaData = payload => {
                 },
                 {
                     property: "og:url",
-                    content: currentPageAbsolutePath
+                    content: currentPageAbsolutePath,
                 },
                 {
                     property: "og:description",
-                    content: page.metaData.description
+                    content: page.metaData.description,
                 },
                 {
                     property: "og:image",
-                    content: urljoin(payload.site.baseUrl, imageUrl || "")
+                    content: urljoin(payload.site.baseUrl, imageUrl || ""),
                 },
-            ]
-        }
+            ],
+        },
     };
     return payload;
 };
-exports.onAfterRenderPage = (payload) => {
+exports.onAfterRenderPage = payload => {
     return {
-        html: pretty(payload.html)
+        html: pretty(payload.html),
     };
 };
