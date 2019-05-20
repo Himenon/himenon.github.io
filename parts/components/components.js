@@ -25,15 +25,15 @@ exports.generateCustomComponents = () => {
                 highlightHtml = Prism.highlight(code, grammar, lang);
             }
             if (!lang || !grammar) {
-                return React.createElement("pre", null,
-                    React.createElement("code", Object.assign({}, props)));
+                return (React.createElement("pre", null,
+                    React.createElement("code", Object.assign({}, props))));
             }
             const newProps = {
                 ...props,
                 children: undefined,
                 dangerouslySetInnerHTML: {
-                    __html: highlightHtml || ""
-                }
+                    __html: highlightHtml || "",
+                },
             };
             return (React.createElement("pre", { className: props.className },
                 React.createElement("code", Object.assign({}, newProps))));

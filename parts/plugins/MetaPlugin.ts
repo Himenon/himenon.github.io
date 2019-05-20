@@ -2,7 +2,7 @@ import { ExternalLink } from "@custom-site/interfaces/lib/page";
 import { PluginFunctionMap } from "@custom-site/interfaces/lib/plugin";
 import urljoin = require("url-join");
 
-const pretty = require('pretty');
+const pretty = require("pretty");
 
 const getOgImageSource = (globalLinks: ExternalLink["globalLinks"]): string | undefined => {
   if (!globalLinks) {
@@ -13,12 +13,12 @@ const getOgImageSource = (globalLinks: ExternalLink["globalLinks"]): string | un
       return false;
     }
     return item.rel === "apple-touch-icon";
-  })
+  });
   if (result && typeof result !== "string") {
     return result.href;
   }
   return;
-}
+};
 
 export const onGenerateMetaData: PluginFunctionMap["onGenerateMetaData"] = payload => {
   const page = payload.page;
@@ -42,25 +42,24 @@ export const onGenerateMetaData: PluginFunctionMap["onGenerateMetaData"] = paylo
         },
         {
           property: "og:url",
-          content: currentPageAbsolutePath
+          content: currentPageAbsolutePath,
         },
         {
           property: "og:description",
-          content: page.metaData.description
+          content: page.metaData.description,
         },
         {
           property: "og:image",
-          content: urljoin(payload.site.baseUrl, imageUrl || "")
+          content: urljoin(payload.site.baseUrl, imageUrl || ""),
         },
-      ]
-    }
+      ],
+    },
   };
   return payload;
 };
 
-
-export const onAfterRenderPage: PluginFunctionMap["onAfterRenderPage"] = (payload) => {
+export const onAfterRenderPage: PluginFunctionMap["onAfterRenderPage"] = payload => {
   return {
-    html: pretty(payload.html)
-  }
-}
+    html: pretty(payload.html),
+  };
+};

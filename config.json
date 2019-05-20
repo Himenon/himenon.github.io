@@ -1,9 +1,9 @@
 {
   "global": {
     "lang": "ja",
-    "title": "観測所",
-    "description": "自作の静的サイトジェネレーターの技術ブログです。開発中の技術ノウハウや、考えを書く予定です。",
-    "keywords": "静的サイトジェネレーター,NodeJS,React,generator",
+    "title": "himenon.github.io",
+    "description": "@Himenonの備忘録",
+    "keywords": "nodejs,typescript,python",
     "copyright": "@Himenon",
     "viewport": {
       "initial-scale": 1.0,

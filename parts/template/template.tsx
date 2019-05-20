@@ -1,20 +1,21 @@
-import * as React from "react";
 import { PostProps } from "@custom-site/interfaces/lib/page";
+import * as React from "react";
 
-const headerContent = (props: PostProps): React.ReactElement<any> => {
+// const IndexList = (props: Index[]) => {
+//   props.map(prop => {
+//     return <li key={prop.uri}>{prop.title}</li>
+//   })
+// }
+
+const Header = (props: PostProps): React.ReactElement<any> => {
   return (
-  <div id="header">
-    <div className="wrapper">
-      <a href={props.site.baseUri} className="btn">{props.site.title}</a>
-      <ul className="nav">
-        <li className="downloads"><a href="https://github.com/custom-site/custom-site" className="btn">Github</a></li>
-      </ul>
+    <div id="header">
+      <h1>{props.site.title}</h1>
     </div>
-  </div>
   );
-}
+};
 
-const mainContent = (props: PostProps, content?: React.ReactNode): React.ReactElement<any> => {
+const Main = ({ props, content }: { props: PostProps; content?: React.ReactNode }): React.ReactElement<any> => {
   return (
     <div className="wrapper">
       <section>
@@ -22,14 +23,14 @@ const mainContent = (props: PostProps, content?: React.ReactNode): React.ReactEl
         {content}
       </section>
     </div>
-  )
-}
+  );
+};
 
 const wrappedContent = (props: PostProps, content?: React.ReactNode): React.ReactElement<any> => {
   return (
     <body>
-      {headerContent(props)}
-      {mainContent(props, content)}
+      <Header {...props} />
+      <Main {...{ props, content }} />
     </body>
   );
 };
