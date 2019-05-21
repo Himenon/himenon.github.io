@@ -301,6 +301,13 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/recursive-readdir@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@types/recursive-readdir/-/recursive-readdir-2.2.0.tgz#b39cd5474fd58ea727fe434d5c68b7a20ba9121c"
+  integrity sha512-HGk753KRu2N4mWduovY4BLjYq4jTOL29gV2OfGdGxHcPSWGFkC5RRIdk+VTs5XmYd7MVAD+JwKrcb5+5Y7FOCg==
+  dependencies:
+    "@types/node" "*"
+
 "@types/resolve-pkg@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/resolve-pkg/-/resolve-pkg-2.0.0.tgz#ff3172048ce8ee15d3fba27dc6670c60bbb5bc3c"
@@ -835,6 +842,11 @@ currently-unhandled@^0.4.1:
   integrity sha1-mI3zP+qxke95mmE2nddsF635V+o=
   dependencies:
     array-find-index "^1.0.1"
+
+dayjs@^1.8.14:
+  version "1.8.14"
+  resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.8.14.tgz#43e4f62830c2c3342c3fcd25934dc9162dbe6f38"
+  integrity sha512-AVhDmRTe541iWirnoeFSSDDGvCT6HWaNQ4z2WmmzXMGZj6ph6ydao2teKq/eUtR43GPJXlYFD+C/SotG1P9wUQ==
 
 debug@^2.2.0:
   version "2.6.9"

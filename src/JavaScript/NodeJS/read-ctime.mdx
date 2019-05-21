@@ -1,0 +1,12 @@
+
+
+```typescript
+import * as fs from "fs";
+import * as path from "path";
+
+const filename = path.resolve(__dirname, "README.md");
+
+const result = fs.statSync(filename);
+
+console.log(result);
+```
