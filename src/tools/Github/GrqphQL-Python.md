@@ -1,3 +1,9 @@
+---
+title: "GithubのGraphQLをPython 3で叩くサンプルコード"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # GithubのGraphQLをPython 3で叩くサンプルコード
 
 * requestsライブラリで直に叩く

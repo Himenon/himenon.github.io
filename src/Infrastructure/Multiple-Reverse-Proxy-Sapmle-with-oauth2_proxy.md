@@ -1,3 +1,9 @@
+---
+title: "複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # 複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする
 
 <p id="created_at">作成日: <time dateTime="2018-02-19T01:00">2018/02/19</time></p>

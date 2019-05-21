@@ -1,3 +1,9 @@
+---
+title: "Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する
 
 <p id="created_at">作成日: <time dateTime="2018-03-12T01:40">2018/03/12</time></p>

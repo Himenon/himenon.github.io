@@ -6,10 +6,15 @@ require("prismjs/components/prism-typescript.min.js");
 require("prismjs/components/prism-jsx.min.js");
 require("prismjs/components/prism-tsx.min.js");
 require("prismjs/components/prism-json.min.js");
+require("prismjs/components/prism-yaml.min.js");
+require("prismjs/components/prism-bash.js");
+require("prismjs/components/prism-markdown.min.js");
+require("prismjs/components/prism-python.min.js");
+require("prismjs/components/prism-bash.min.js");
 const SUPPORT_LANGUAGES = Object.keys(Prism.languages);
 const getLanguageDefinition = (lang) => {
     if (SUPPORT_LANGUAGES.includes(lang)) {
-        return Prism.languages.extend[lang];
+        return Prism.languages[lang];
     }
     return null;
 };
@@ -25,15 +30,15 @@ exports.generateCustomComponents = () => {
                 highlightHtml = Prism.highlight(code, grammar, lang);
             }
             if (!lang || !grammar) {
-                return React.createElement("pre", null,
-                    React.createElement("code", Object.assign({}, props)));
+                return (React.createElement("pre", null,
+                    React.createElement("code", Object.assign({}, props))));
             }
             const newProps = {
                 ...props,
                 children: undefined,
                 dangerouslySetInnerHTML: {
-                    __html: highlightHtml || ""
-                }
+                    __html: highlightHtml || "",
+                },
             };
             return (React.createElement("pre", { className: props.className },
                 React.createElement("code", Object.assign({}, newProps))));

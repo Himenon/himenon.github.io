@@ -1,3 +1,9 @@
+---
+title: "fixtureを読み込む"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # fixtureを読み込む
 
 - http://cortyuming.hateblo.jp/entry/20130824/p1

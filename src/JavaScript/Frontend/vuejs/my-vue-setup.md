@@ -1,3 +1,9 @@
+---
+title: "Vueのセットアップ"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # Vueのセットアップ
 
 <p id="created_at">作成日: <time dateTime="2018-03-15T22:40">2018/03/15 22:40</time></p>

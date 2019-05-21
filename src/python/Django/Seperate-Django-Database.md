@@ -1,3 +1,9 @@
+---
+title: "Djangoで複数のデータベースを利用する"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # Djangoで複数のデータベースを利用する
 
 <p id="updated_at">更新日: <time dateTime="2018-04-16T01:00">2018/04/16</time></p>

@@ -1,3 +1,9 @@
+---
+title: "VuejsのSSR(Server Side Rendering)のページ・部分キャッシュは何で実装できるか"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # VuejsのSSR(Server Side Rendering)のページ・部分キャッシュは何で実装できるか
 
 <p id="created_at">作成日: <time dateTime="2018-03-14T02:20">2018/03/14</time></p>

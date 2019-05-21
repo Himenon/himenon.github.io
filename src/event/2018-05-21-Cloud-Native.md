@@ -1,3 +1,9 @@
+---
+title: "[イベントレポート] Cloud Native Meetup Tokyo #1"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # [イベントレポート] Cloud Native Meetup Tokyo #1
 
 <p id="created_at">作成日: <time dateTime="2018-05-22T00:00">2018/05/22 00:00</time></p>

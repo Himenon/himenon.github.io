@@ -1,0 +1,42 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1.2em;
+}
+
+p, pre {
+  margin-bottom: 1.5em;
+}
+
+#nav-bar {
+  height: 38px;
+  color: #ffffff;
+  font-size: 1.2em;
+  background: #4A365B;
+  padding: 0 5% 0 5%;
+}
+
+#nav-bar a {
+  color: #FFF;
+  text-decoration: none;
+}
+
+#site-header {
+  height: 78px;
+  color: #FFF;
+  font-size: 2.4empx;
+  background-color: rgb(68, 68, 68);
+  padding: 0 5% 0 5%;
+}
+
+.wrapper {
+  padding-left: 185px;
+  padding-right: 185px;
+  padding-top: 2em;
+  margin-bottom: 5em;
+}

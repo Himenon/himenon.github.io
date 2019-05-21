@@ -1,3 +1,9 @@
+---
+title: "DjangoでMany to ManyをAdmin画面のリストに表示する方法"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # DjangoでMany to ManyをAdmin画面のリストに表示する方法
 
 

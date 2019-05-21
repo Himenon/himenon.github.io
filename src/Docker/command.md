@@ -1,30 +1,31 @@
-# Dockerコマンド
-
-* Created at 2018/09/13 04:00
+---
+title: Dockerコマンド
+createdAt: 2018/09/13 04:00
+---
 
 使っているときは、こんなの覚えているし（笑）
 と思っていたんですが、3か月使わなくなって忘れてしまったので、メモ帳から取り出します。
 
 ## プロセスの確認
 
-```sh
+```bash
 docker ps
 ```
 
-```sh
+```bash
 docker-compose ps
 ```
 
 ## コマンドの実行
 
-```sh
+```bash
 docker exec -it [container id] [command]
 
 # ユーザーを指定
 docker exec -it --user [desired_user] [container id] [command]
 ```
 
-```sh
+```bash
 # 起動していない場合
 docker-compose run [container name] [command]
 
@@ -34,7 +35,7 @@ docker-compose exec [container name] [command]
 
 ### 検証用に一発コマンドでpureな環境に入る
 
-```sh
+```bash
 docker run -it --rm alpine:3.3 /bin/sh
 docker run -it --rm centos:7 /bin/bash
 docker run -it --rm ubuntu:14.04 /bin/bash
@@ -47,7 +48,7 @@ docker run -it --rm ubuntu:14.04 /bin/bash
 
 ### すべてのdocker psを停止
 
-```sh
+```bash
 # bash, zsh
 docker stop $(docker ps -a -q)
 
@@ -57,7 +58,7 @@ docker stop (docker ps -a -q)
 
 ### コンテナの削除
 
-```sh
+```bash
 docker rmi `docker images -q`
 docker rm -f `docker ps -a -q`
 
@@ -67,7 +68,7 @@ docker rm -f (docker ps -a -q)
 
 ### Docker psのNoneを消す
 
-```sh
+```bash
 # bash
 docker rmi $(docker images -f "dangling=true" -q)
 
@@ -79,7 +80,7 @@ docker images | awk '/<none/{print $3}' | xargs docker rmi
 
 ### docker-composeの場合
 
-```sh
+```bash
 docker-compose stop
 docker-compose rm
 ```
@@ -94,13 +95,13 @@ docker-compose rm
 
 現在いるディレクトリをサクッとコンテナにマウントして検証したいとき。
 
-```sh
+```bash
 docker run  -v $(pwd):/work -w=/work -it [image name] [command]
 ```
 
 #### 自前で用意したくないとき
 
-```sh
+```bash
 docker volume create [volume name]
 ```
 
@@ -140,7 +141,7 @@ https://docs.docker.com/engine/reference/commandline/ps/#filtering
 
 ### --formatコマンド
 
-```sh
+```bash
 # NAME CONTAINER_ID IMAGE
 docker ps --format "table {{.Names}}\t{{.ID}}\t{{.Image}}"
 

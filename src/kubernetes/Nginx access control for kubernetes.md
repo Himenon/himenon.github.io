@@ -1,3 +1,9 @@
+---
+title: "Kubernetesに配置したNginxでアクセス制御する"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # Kubernetesに配置したNginxでアクセス制御する
 
 <p id="created_at">作成日: <time dateTime="2018-02-19T01:30">2018/02/19</time></p>
