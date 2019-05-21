@@ -1,5 +1,6 @@
-# PandasのColumnをDateTimeに型変換する
-
+---
+title: PandasのColumnをDateTimeに型変換する
+---
 
 ## to_datetimeを利用する
 
@@ -14,11 +15,11 @@ strftimeのリファレンスを読みながら調整
 
 **Twitterの場合**
 
-```
+```bash
 Sun Mar 25 09:10:42 +0000 2018
 ```
 
-```
+```bash
 %a %b %d %H:%M:%S +0000 %Y
 ```
 

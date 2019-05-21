@@ -13,6 +13,8 @@ require("prismjs/components/prism-json.min.js");
 require("prismjs/components/prism-yaml.min.js");
 require("prismjs/components/prism-bash.js");
 require("prismjs/components/prism-markdown.min.js");
+require("prismjs/components/prism-python.min.js");
+require("prismjs/components/prism-bash.min.js");
 
 const SUPPORT_LANGUAGES = Object.keys(Prism.languages);
 
