@@ -1,3 +1,7 @@
+---
+title: CeleryのPeriodic Tasksを使う方法
+---
+
 # CeleryのPeriodic Tasksを使う方法
 
 ## settings.pyのロード

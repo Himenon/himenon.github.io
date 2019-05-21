@@ -1,23 +1,24 @@
 # himenon.github.io
 
+## Setup
+
+```
+yarn
+```
 
 ## Up
 
 ```bash
-docker-compose up
+yarn run server
 ```
 
 ## Build
 
 ```bash
-docker-compose run server mkdocs build --clean
+yarn run build
 ```
 
 ## Deploy
-
-```bash
-mkdocs gh-deploy --remote-branch master
-```
 
 ## Author
 
