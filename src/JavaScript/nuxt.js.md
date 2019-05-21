@@ -1,4 +1,6 @@
-# Nuxt.jsを読む
+---
+title: Nuxt.jsを読む
+---
 
 ## 予備知識
 

@@ -1,12 +1,42 @@
+---
+title: NodeJSのfsライブラリでファイルの作成日を取得する
+description: fs.statもしくはfs.statSyncを利用することでctimeを取得することができる。
+---
 
+## 単純なスクリプト
 
 ```typescript
 import * as fs from "fs";
 import * as path from "path";
 
 const filename = path.resolve(__dirname, "README.md");
-
 const result = fs.statSync(filename);
-
 console.log(result);
 ```
+
+## src以下にあるファイルを走査して、作成日などを取得するスクリプト
+
+```typescript
+import * as fs from "fs";
+import * as path from "path";
+import * as recursive from "recursive-readdir";
+
+const main = async () => {
+  const basepath = path.resolve(__dirname, "src");
+  const allFiles = await recursive(basepath);
+  const searchExtensions = [".md"];
+  const fileList = allFiles.filter(filename => searchExtensions.includes(path.extname(filename)));
+  fileList.forEach(filename => {
+    const { ctime, mtime, atime } = fs.statSync(filename);
+    console.log({ filename, ctime, mtime, atime });
+  });
+};
+
+(async () => {
+  await main();
+})();
+```
+
+## Reference
+
+- [File System \| Node\.js v12\.2\.0 Documentation](https://nodejs.org/api/fs.html#fs_class_fs_stats)
