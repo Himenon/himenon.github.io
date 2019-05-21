@@ -1,5 +1,6 @@
 import { Index, PostProps } from "@custom-site/interfaces/lib/page";
 import * as React from "react";
+import * as dayjs from "dayjs";
 
 const IndexList = ({ props: indexes }: { props: Index[] }) => {
   const total = indexes.length;
@@ -7,7 +8,6 @@ const IndexList = ({ props: indexes }: { props: Index[] }) => {
     return (
       <tr key={item.uri}>
         <td>{total - idx}</td>
-        <td>2019/05/21</td>
         <td key={item.uri}>
           <a href={item.uri} rel="noopener" target="_blank">
             {item.title}
@@ -20,7 +20,7 @@ const IndexList = ({ props: indexes }: { props: Index[] }) => {
     <table>
       <thead>
         <td>Back Number</td>
-        <td>Created At</td>
+        <td>Posted at</td>
         <td>Title</td>
       </thead>
       <tbody>{items}</tbody>
@@ -29,6 +29,7 @@ const IndexList = ({ props: indexes }: { props: Index[] }) => {
 };
 
 const Header = (props: PostProps): React.ReactElement<any> => {
+  const postDate: string = dayjs((props.page.metaData as any).createdAt).format("YYYY-MM-DD hh:mm:ss");
   return (
     <div>
       <nav id="nav-bar">
@@ -37,6 +38,10 @@ const Header = (props: PostProps): React.ReactElement<any> => {
       <header id="site-header">
         <h1>{props.page.metaData.title}</h1>
         <p>{props.page.metaData.description}</p>
+        <p>
+          <span>投稿日</span>
+          <time>{postDate}</time>
+        </p>
       </header>
     </div>
   );

@@ -5,7 +5,7 @@ import * as recursive from "recursive-readdir";
 
 const generateHeaderInfo = (title: string, ctime: Date, mtime: Date): string => {
   return `---
-title: ${title}
+title: "${title}"
 createdAt: ${dayjs(ctime).format("YYYY-MM-DD hh:mm:ss")}
 updatedAt: ${dayjs(mtime).format("YYYY-MM-DD hh:mm:ss")}
 ---

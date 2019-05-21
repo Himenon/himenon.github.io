@@ -1,3 +1,9 @@
+---
+title: "RaspberrypiのOSインストール"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # RaspberrypiのOSインストール
 
 <p id="created_at">作成日: <time dateTime="2018-09-09T00:00">2018/09/09 00:00</time></p>

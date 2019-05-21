@@ -1,3 +1,9 @@
+---
+title: "Module jsで非同期関数を実行する"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # Module jsで非同期関数を実行する
 
 TwitterのOAuth認証を試したい時などでこの欲求は生じる

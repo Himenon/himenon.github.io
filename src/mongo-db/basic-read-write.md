@@ -1,3 +1,9 @@
+---
+title: "mongo DBの基本的なRead Write"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # mongo DBの基本的なRead Write
 
 ## Python

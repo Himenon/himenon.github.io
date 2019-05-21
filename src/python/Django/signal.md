@@ -1,3 +1,9 @@
+---
+title: "DjangoのSignalの使い方"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # DjangoのSignalの使い方
 
 * 作成日：2017年11月06日

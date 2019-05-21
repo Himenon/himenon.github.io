@@ -1,3 +1,9 @@
+---
+title: "Error: incompatible versions client[v2.8.2] server[v2.7.2]"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # Error: incompatible versions client[v2.8.2] server[v2.7.2]
 
 <p id="created_at">作成日: <time dateTime="2018-03-19T22:30">2018/03/19</time></p>

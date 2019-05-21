@@ -1,3 +1,9 @@
+---
+title: "DjangoにAppを新たに追加したときにやること"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # DjangoにAppを新たに追加したときにやること
 
 ## urlpatternの追加

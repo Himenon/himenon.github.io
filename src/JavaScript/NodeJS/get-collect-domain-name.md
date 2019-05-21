@@ -1,3 +1,9 @@
+---
+title: "JavaScriptで正確なドメイン名をパースすには？"
+createdAt: 2019-05-21 10:46:07
+updatedAt: 2019-05-21 10:46:07
+---
+
 # JavaScriptで正確なドメイン名をパースすには？
 
 <https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string>
