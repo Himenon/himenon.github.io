@@ -201,11 +201,3 @@ SS Tableの数を少なくする。
 
 抽出された情報を集約し、一塊のデータとして出力する役割
 
-
-
-## TODO
-
-図の挿入
-
-{!assets/doc-templates/last-message.md.tpl!}
-

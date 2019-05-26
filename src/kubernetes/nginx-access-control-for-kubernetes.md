@@ -37,5 +37,3 @@ Serviceの`Type=LoadBalancer`のみを指定して、その他の設定をデフ
 `service.spec.externalTrafficPolicy `の値は`Cluster`が指定されます。
 
 これは、エンドポイントに送信される送信元のIPアドレスが**Cluster IP**になっており、アクセスログを見てみると、Cluster IPからアクセスされているのが分かります。
-
-{!assets/doc-templates/last-message.md.tpl!}
