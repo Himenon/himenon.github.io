@@ -1,15 +1,10 @@
 ---
-title: "DjangoとNginxのTips"
+title: "DjangoでNginxのUnix Socketを利用する"
 createdAt: 2018-09-15 11:55:29
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# DjangoとNginxのTips
-
-* 作成日：2017年12月06日
-* 公開日：2018年09月15日
-
-## Unix Sockertを使う
+## Unix Socketを使う
 
 ```nginx
 upstream blog_app_server {
@@ -72,7 +67,6 @@ uWsgi: GateWay, Interface
 - [PEP 333 -- Python Web Server Gateway Interface v1.0](https://www.python.org/dev/peps/pep-0333/)
 
 ### 参考
-
 
 - [Flask + uWSGI + Nginx でハローワールドするまで @ さくらのVPS (CentOS 6.6)](https://qiita.com/morinokami/items/e0efb2ae2aa04a1b148b)
 - [1台のサーバ上にDockerを使って複数サービス運用してみる](https://qiita.com/hacoten/items/0fb1a44390e1af35b50c)

@@ -4,8 +4,6 @@ createdAt: 2018-04-16 01:54:44
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# Module jsで非同期関数を実行する
-
 TwitterのOAuth認証を試したい時などでこの欲求は生じる
 
 ```js

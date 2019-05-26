@@ -4,8 +4,6 @@ createdAt: 2018-03-30 08:41:08
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# GKEをCronで起動・停止させる
-
 **目標:*
 
 Google Kubernetes Engine を平日の朝9:00に起動して、18:00に停止させるようにします。

@@ -4,8 +4,6 @@ createdAt: 2018-03-24 02:23:34
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# コンテナ型のワーカーの設計（仮）
-
 ちょっと書く。どうやらライブラリでAkkaというものが在るらしい。
 
 - [akka/akka](https://github.com/akka/akka)

@@ -4,8 +4,6 @@ createdAt: 2018-02-19 01:22:10
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# 複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする
-
 <p id="created_at">作成日: <time dateTime="2018-02-19T01:00">2018/02/19</time></p>
 
 {!infrastructure/images/reverse-proxy-architecture-including-oauth2_proxy.svg!}

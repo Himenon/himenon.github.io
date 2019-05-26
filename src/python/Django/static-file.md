@@ -1,13 +1,8 @@
 ---
-title: "Staticファイルの取扱"
+title: "Djangoにおける静的ファイルの探索がコケたときのエラー"
 createdAt: 2018-09-15 11:55:29
 updatedAt: 2019-05-21 11:22:01
 ---
-
-# Staticファイルの取扱
-
-* 作成日：2017年12月07日
-* 公開日：2018年09月15日
 
 ```
 root@f363e9217eab:/django# ./manage.py collectstatic

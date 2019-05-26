@@ -4,8 +4,6 @@ createdAt: 2018-03-30 01:32:34
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# Githubの活動状況
-
 ## 最近力を入れているもの
 
 - [Himenon/hakka-py](https://github.com/Himenon/hakka-py)

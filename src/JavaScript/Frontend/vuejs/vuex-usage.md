@@ -4,11 +4,6 @@ createdAt: 2018-03-22 02:19:41
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# VuexのModuleの使い方
-
-<p id="created_at">作成日: <time dateTime="2018-03-15T22:40">2018/03/15 22:40</time></p>
-<p id="updated_at">更新日: <time dateTime="2018-03-24T01:47">2018/03/24 01:47</time></p>
-
 ## ディレクトリ構成
 
 ```

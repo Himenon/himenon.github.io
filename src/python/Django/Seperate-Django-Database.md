@@ -1,12 +1,8 @@
 ---
-title: "Djangoで複数のデータベースを利用する"
+title: "Djangoでデータベースを分割して利用する"
 createdAt: 2018-04-16 01:54:44
 updatedAt: 2019-05-21 11:22:01
 ---
-
-# Djangoで複数のデータベースを利用する
-
-<p id="updated_at">更新日: <time dateTime="2018-04-16T01:00">2018/04/16</time></p>
 
 ユーザー管理用のデータベースと、分析用のデータベースなどのように分離したいときがあります。
 Django 2.0のドキュメントでは[Multiple databases](https://docs.djangoproject.com/en/2.0/topics/db/multi-db/)の章に説明があります。

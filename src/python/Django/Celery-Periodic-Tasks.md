@@ -1,10 +1,8 @@
 ---
-title: "CeleryのPeriodic Tasksを使う方法"
+title: "CeleryのPeriodic Tasksを使う"
 createdAt: 2018-03-07 07:16:19
 updatedAt: 2019-05-22 01:08:17
 ---
-
-# CeleryのPeriodic Tasksを使う方法
 
 ## settings.pyのロード
 
@@ -16,7 +14,6 @@ proj/
     settings/
         __init__.py
 ```
-
 
 また、
 
