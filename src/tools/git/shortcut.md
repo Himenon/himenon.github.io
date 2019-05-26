@@ -1,5 +1,5 @@
 ---
-title: "Git Tips"
+title: "ローカルのgitに登録しているショートカット"
 createdAt: 2018-04-12 06:04:47
 updatedAt: 2019-05-21 11:22:01
 ---
@@ -7,7 +7,7 @@ updatedAt: 2019-05-21 11:22:01
 # Git Tips
 
 
-```
+```bash
 git: 'credential-manager' is not a git command. See 'git --help'.
 ```
 
@@ -26,7 +26,7 @@ origin  git@github.com:Himenon/himenon.github.io.git (push)
 
 のとき、新しくローカルのブランチ`pr-2`にPRを持ってくるときのコマンドは
 
-```
+```bash
 git fetch origin pull/2/head:pr-2
 ```
 
@@ -34,7 +34,7 @@ git fetch origin pull/2/head:pr-2
 
 Aliasを貼るならば、Clone Pull Requestの頭文字を取ってきて、`cpr`とします。Pull RequestをClonseするときは、レビューするときなど関心が非常に高いので、チェックアウトも自動的に済ませておくと作業効率があがります。
 
-```sh
+```bash
 cpr = "!f() { git fetch $1 pull/$2/head:pr-$2; git checkout pr-$2; };f"
 ```
 
@@ -42,7 +42,7 @@ cpr = "!f() { git fetch $1 pull/$2/head:pr-$2; git checkout pr-$2; };f"
 
 ## Alias
 
-```conf
+```bash
 [alias]
 	st = status
 	bl = blame
