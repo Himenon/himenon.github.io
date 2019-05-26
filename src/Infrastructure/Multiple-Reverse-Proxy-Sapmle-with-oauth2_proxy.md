@@ -1,7 +1,7 @@
 ---
 title: "複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする"
-createdAt: 2019-05-21 10:46:07
-updatedAt: 2019-05-21 10:46:07
+createdAt: 2018-02-19 01:22:10
+updatedAt: 2019-05-21 11:22:01
 ---
 
 # 複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする

@@ -70,14 +70,19 @@ pre[class*="language-"] {
   margin: 0;
 }
 
-#posted-at {
+#article-time {
   text-align: right;
   font-size: 0.8em;
   margin: 0;
 }
 
 #posted-at__label {
-  margin-right: 1em;
+  margin-right: 0.5em;
+}
+
+#created-at__label {
+  margin-left: 1.5em;
+  margin-right: 0.5em;
 }
 
 .wrapper {

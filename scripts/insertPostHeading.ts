@@ -28,12 +28,8 @@ const updateHeaderInfo = async (filename: string) => {
   const fileData = fs.readFileSync(filename, { encoding: "utf-8" });
   const header = matter(fileData);
   const title: string = "title" in header.data ? header.data.title : getTitleFromPlainData(fileData, filename);
-  if (header.data.updatedAt && header.data.updatedAt.getTime() === latestCommitDate.getTime()) {
-    console.log("Skip");
-  } else {
-    const newHeaderInfo = generateHeaderInfo(title, firstCommitDate, latestCommitDate);
-    fs.writeFileSync(filename, newHeaderInfo + header.content, { encoding: "utf-8" });
-  }
+  const newHeaderInfo = generateHeaderInfo(title, firstCommitDate, latestCommitDate);
+  fs.writeFileSync(filename, newHeaderInfo + header.content, { encoding: "utf-8" });
 };
 
 const main = async () => {

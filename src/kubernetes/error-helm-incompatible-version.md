@@ -1,7 +1,7 @@
 ---
 title: "Error: incompatible versions client[v2.8.2] server[v2.7.2]"
-createdAt: 2019-05-21 10:46:07
-updatedAt: 2019-05-21 10:46:07
+createdAt: 2018-03-22 02:19:41
+updatedAt: 2019-05-22 01:08:17
 ---
 
 # Error: incompatible versions client[v2.8.2] server[v2.7.2]

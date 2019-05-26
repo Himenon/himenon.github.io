@@ -1,7 +1,7 @@
 ---
 title: "JavaScriptで正確なドメイン名をパースすには？"
-createdAt: 2019-05-21 10:46:07
-updatedAt: 2019-05-21 10:46:07
+createdAt: 2018-09-16 12:45:00
+updatedAt: 2019-05-21 11:22:01
 ---
 
 # JavaScriptで正確なドメイン名をパースすには？

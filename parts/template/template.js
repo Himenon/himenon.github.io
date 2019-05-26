@@ -18,7 +18,8 @@ const IndexList = ({ props: indexes }) => {
         React.createElement("tbody", null, items)));
 };
 const Header = (props) => {
-    const postDate = dayjs(props.page.metaData.createdAt).format("YYYY-MM-DD hh:mm:ss");
+    const postedAt = dayjs(props.page.metaData.createdAt).format("YYYY-MM-DD hh:mm:ss");
+    const updatedAt = dayjs(props.page.metaData.updatedAt).format("YYYY-MM-DD hh:mm:ss");
     return (React.createElement("div", null,
         React.createElement("nav", { id: "nav-bar" },
             React.createElement("div", { id: "nav-bar-container" },
@@ -27,9 +28,11 @@ const Header = (props) => {
             React.createElement("div", { id: "site-header-container" },
                 React.createElement("h1", { id: "page-title" }, props.page.metaData.title),
                 props.page.metaData.description && React.createElement("p", { id: "page-description" }, props.page.metaData.description),
-                React.createElement("p", { id: "posted-at" },
+                React.createElement("p", { id: "article-time" },
                     React.createElement("span", { id: "posted-at__label" }, "\u6295\u7A3F\u65E5"),
-                    React.createElement("time", null, postDate))))));
+                    React.createElement("time", null, postedAt),
+                    React.createElement("span", { id: "created-at__label" }, "\u66F4\u65B0\u65E5"),
+                    React.createElement("time", null, updatedAt))))));
 };
 const Main = ({ props, content }) => {
     return (React.createElement("div", { className: "wrapper" },

@@ -1,5 +1,7 @@
 ---
-title: PandasのColumnをDateTimeに型変換する
+title: "PandasのColumnをDateTimeに型変換する"
+createdAt: 2018-03-26 01:22:30
+updatedAt: 2019-05-21 09:35:05
 ---
 
 ## to_datetimeを利用する
