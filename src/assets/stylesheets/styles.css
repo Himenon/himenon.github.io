@@ -89,6 +89,7 @@ pre[class*="language-"] {
 #post-articles {
   border: 1px solid #333;
   border-collapse: collapse;
+  width: 100%;
 }
 
 #post-articles td {
