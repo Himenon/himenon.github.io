@@ -1,32 +1,39 @@
 import * as dayjs from "dayjs";
 import * as fs from "fs";
+import * as matter from "gray-matter";
 import * as path from "path";
 import * as recursive from "recursive-readdir";
 import { getFileStat } from "./getFileStat";
 
-const generateHeaderInfo = (title: string, ctime: Date, mtime: Date): string => {
+const rootPath = process.cwd();
+const basepath = path.resolve(rootPath, "src");
+
+const generateHeaderInfo = (title: string, createdAt: Date, updatedAt: Date): string => {
   return `---
 title: "${title}"
-createdAt: ${dayjs(ctime).format("YYYY-MM-DD hh:mm:ss")}
-updatedAt: ${dayjs(mtime).format("YYYY-MM-DD hh:mm:ss")}
+createdAt: ${dayjs(createdAt).format("YYYY-MM-DD hh:mm:ss")}
+updatedAt: ${dayjs(updatedAt).format("YYYY-MM-DD hh:mm:ss")}
 ---
 `;
 };
 
-const rootPath = process.cwd();
-const basepath = path.resolve(rootPath, "src");
+const getTitleFromPlainData = (data: string, filename: string): string => {
+  const lines = data.split("\n");
+  return lines.length > 0 && lines[0].match(/^# /) ? lines[0].substring("# ".length) : path.relative(basepath, filename);
+};
 
 const updateHeaderInfo = async (filename: string) => {
   console.log(filename);
   const { firstCommitDate, latestCommitDate } = await getFileStat(rootPath, filename);
   const fileData = fs.readFileSync(filename, { encoding: "utf-8" });
-  const lines = fileData.split("\n");
-  const title = lines.length > 0 && lines[0].match(/^# /) ? lines[0].substring("# ".length) : path.relative(basepath, filename);
-  const headerInfo = generateHeaderInfo(title, firstCommitDate, latestCommitDate);
-  // if (lines.length > 0 && lines[0].match(/^# /)) {
-  //   fs.writeFileSync(filename, headerInfo + "\n" + fileData, { encoding: "utf-8" });
-  // }
-  console.log(headerInfo);
+  const header = matter(fileData);
+  const title: string = "title" in header.data ? header.data.title : getTitleFromPlainData(fileData, filename);
+  if (header.data.updatedAt && header.data.updatedAt.getTime() === latestCommitDate.getTime()) {
+    console.log("Skip");
+  } else {
+    const newHeaderInfo = generateHeaderInfo(title, firstCommitDate, latestCommitDate);
+    fs.writeFileSync(filename, newHeaderInfo + header.content, { encoding: "utf-8" });
+  }
 };
 
 const main = async () => {
