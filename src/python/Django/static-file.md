@@ -1,7 +1,7 @@
 ---
 title: "Staticファイルの取扱"
-createdAt: 2019-05-21 10:46:07
-updatedAt: 2019-05-21 10:46:07
+createdAt: 2018-09-15 11:55:29
+updatedAt: 2019-05-21 11:22:01
 ---
 
 # Staticファイルの取扱

@@ -1,5 +1,7 @@
 ---
-title: Nuxt.jsを読む
+title: "Nuxt.jsを読む"
+createdAt: 2018-04-11 06:37:06
+updatedAt: 2019-05-22 01:08:17
 ---
 
 ## 予備知識

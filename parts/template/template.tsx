@@ -30,7 +30,8 @@ const IndexList = ({ props: indexes }: { props: Index[] }) => {
 };
 
 const Header = (props: PostProps): React.ReactElement<any> => {
-  const postDate: string = dayjs((props.page.metaData as any).createdAt).format("YYYY-MM-DD hh:mm:ss");
+  const postedAt: string = dayjs((props.page.metaData as any).createdAt).format("YYYY-MM-DD hh:mm:ss");
+  const updatedAt: string = dayjs((props.page.metaData as any).updatedAt).format("YYYY-MM-DD hh:mm:ss");
   return (
     <div>
       <nav id="nav-bar">
@@ -42,9 +43,11 @@ const Header = (props: PostProps): React.ReactElement<any> => {
         <div id="site-header-container">
           <h1 id="page-title">{props.page.metaData.title}</h1>
           {props.page.metaData.description && <p id="page-description">{props.page.metaData.description}</p>}
-          <p id="posted-at">
+          <p id="article-time">
             <span id="posted-at__label">投稿日</span>
-            <time>{postDate}</time>
+            <time>{postedAt}</time>
+            <span id="created-at__label">更新日</span>
+            <time>{updatedAt}</time>
           </p>
         </div>
       </header>

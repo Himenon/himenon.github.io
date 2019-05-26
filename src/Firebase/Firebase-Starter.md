@@ -1,7 +1,7 @@
 ---
 title: "Firebaseことはじめ"
-createdAt: 2019-05-21 10:46:07
-updatedAt: 2019-05-21 10:46:07
+createdAt: 2018-04-03 05:57:04
+updatedAt: 2019-05-21 11:22:01
 ---
 
 # Firebaseことはじめ

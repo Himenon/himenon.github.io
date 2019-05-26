@@ -1,7 +1,7 @@
 ---
 title: "VuexのModuleの使い方"
-createdAt: 2019-05-21 10:46:07
-updatedAt: 2019-05-21 10:46:07
+createdAt: 2018-03-22 02:19:41
+updatedAt: 2019-05-21 11:22:01
 ---
 
 # VuexのModuleの使い方

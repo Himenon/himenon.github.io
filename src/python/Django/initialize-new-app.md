@@ -1,7 +1,7 @@
 ---
 title: "DjangoにAppを新たに追加したときにやること"
-createdAt: 2019-05-21 10:46:07
-updatedAt: 2019-05-21 10:46:07
+createdAt: 2018-03-06 06:50:19
+updatedAt: 2019-05-21 11:22:01
 ---
 
 # DjangoにAppを新たに追加したときにやること
