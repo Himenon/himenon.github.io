@@ -29,9 +29,9 @@ exports.generateCustomComponents = () => {
             if (grammar) {
                 highlightHtml = Prism.highlight(code, grammar, lang);
             }
-            if (!lang || !grammar) {
-                return (React.createElement("pre", null,
-                    React.createElement("code", Object.assign({}, props))));
+            if (!grammar) {
+                return (React.createElement("pre", { className: "language-plain" },
+                    React.createElement("code", Object.assign({ className: "language-plain" }, props))));
             }
             const newProps = {
                 ...props,

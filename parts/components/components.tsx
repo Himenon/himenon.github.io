@@ -36,10 +36,10 @@ export const generateCustomComponents: ExternalCustomComponent["generateCustomCo
       if (grammar) {
         highlightHtml = Prism.highlight(code, grammar, lang);
       }
-      if (!lang || !grammar) {
+      if (!grammar) {
         return (
-          <pre>
-            <code {...props} />
+          <pre className={"language-plain"}>
+            <code className={"language-plain"} {...props} />
           </pre>
         );
       }

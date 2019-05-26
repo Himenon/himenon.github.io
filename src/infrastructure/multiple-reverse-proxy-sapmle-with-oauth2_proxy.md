@@ -135,9 +135,3 @@ sequenceDiagram
 </div>
 
 これが解決できたらまた更新しようと思います。
-
-{!assets/doc-templates/last-message.md.tpl!}
-
-
-
-
