@@ -4,11 +4,6 @@ createdAt: 2018-05-22 01:01:01
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# [イベントレポート] Cloud Native Meetup Tokyo #1
-
-<p id="created_at">作成日: <time dateTime="2018-05-22T00:00">2018/05/22 00:00</time></p>
-<p id="updated_at">更新日: <time dateTime="2018-05-22T23:50">2018/05/23 23:50</time></p>
-
 ※特にガチ目にまとめるわけじゃないです。
 独断と偏見で端折って書きます。
 

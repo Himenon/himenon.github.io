@@ -1,10 +1,8 @@
 ---
-title: "fixtureを読み込む"
+title: "Djangoでfixtureを読み込む"
 createdAt: 2018-09-15 11:55:29
 updatedAt: 2019-05-21 11:22:01
 ---
-
-# fixtureを読み込む
 
 - http://cortyuming.hateblo.jp/entry/20130824/p1
 - http://django-testing-docs.readthedocs.io/en/latest/fixtures.html
@@ -16,13 +14,9 @@ python manage.py loaddata "$p"
 
 ## データベースが異なる場合は指定する必要がある
 
-* 作成日：2017年08月156日
-* 公開日：2018年09月15日
-
 ```bash
 python manage.py loaddata ./another/app/fixtures/init_data.yaml --database target_db
 ```
-
 
 ## autofixture
 

@@ -4,8 +4,6 @@ createdAt: 2018-04-03 02:19:33
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# lodash
-
 ```
 npm install lodash
 ```

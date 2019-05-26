@@ -4,8 +4,6 @@ createdAt: 2018-04-16 01:54:44
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# FirebaseのAuthで躓いたこと
-
 ## signInAndRetrieveDataWithCredential failed: First argument "credential" must be a valid credential.  Dismiss
 
 ![figure](./images/firebase-auth-error.png)

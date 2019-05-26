@@ -4,8 +4,6 @@ createdAt: 2018-03-06 06:50:19
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# DjangoにAppを新たに追加したときにやること
-
 ## urlpatternの追加
 
 ```python

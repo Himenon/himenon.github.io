@@ -4,10 +4,6 @@ createdAt: 2018-09-13 04:13:53
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# DockerのMySQLでUTF-8を使えるようにする
-
-* Created at 2018/09/13 04:00
-
 DockerでMySQLを使うときは、文字コードに気をつけて作成すること。
 下記のDockerfileであれば、確実に日本語環境が整う。
 `docker-compose`は気をつけること。mysqldのコマンドは叩かないように

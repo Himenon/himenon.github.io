@@ -4,8 +4,6 @@ createdAt: 2018-04-03 05:57:04
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# Firebaseことはじめ
-
 ## 事前準備
 
 <https://firebase.google.com/docs/cli/>

@@ -4,10 +4,6 @@ createdAt: 2018-03-12 01:39:51
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する
-
-<p id="created_at">作成日: <time dateTime="2018-03-12T01:40">2018/03/12</time></p>
-
 ## はじめに
 
 Django 2.0に対して、Celery 4を導入してみたので、その時の知見を書く。

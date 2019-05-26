@@ -4,8 +4,6 @@ createdAt: 2018-05-19 11:53:45
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# npmのpackage管理について
-
 公式ドキュメント：<https://docs.npmjs.com/cli/>
 
 ## packageのアップデート

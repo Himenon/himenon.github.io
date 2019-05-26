@@ -4,10 +4,6 @@ createdAt: 2018-02-15 03:17:18
 updatedAt: 2019-05-22 01:08:17
 ---
 
-# Kubernetesに配置したNginxでアクセス制御する
-
-<p id="created_at">作成日: <time dateTime="2018-02-19T01:30">2018/02/19</time></p>
-
 ## TL;DR
 
 コマンドの場合
