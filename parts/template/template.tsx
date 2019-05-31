@@ -9,7 +9,7 @@ const IndexList = ({ props: indexes }: { props: Index[] }) => {
       <tr key={item.uri}>
         <td>{total - idx}</td>
         <td key={item.uri}>
-          <a href={item.uri} rel="noopener" target="_blank">
+          <a href={item.uri} rel="noopener">
             {item.title}
           </a>
         </td>

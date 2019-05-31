@@ -1,5 +1,5 @@
 ---
-title: "RaspberrypiのOSインストール"
+title: "RaspberrypiにOSインストールする"
 createdAt: 2018-09-09 07:40:37
 updatedAt: 2019-05-21 11:22:01
 ---

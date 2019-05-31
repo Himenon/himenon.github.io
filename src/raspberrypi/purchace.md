@@ -4,11 +4,6 @@ createdAt: 2018-09-08 11:47:50
 updatedAt: 2019-05-21 11:22:01
 ---
 
-# Raspberrypiのパーツを買った
-
-<p id="created_at">作成日: <time dateTime="2018-09-08T23:00">2018/09/08 23:00</time></p>
-<p id="updated_at">更新日: <time dateTime="2018-09-08T23:00">2018/09/08 23:00</time></p>
-
 家にRaspberry Pi 2 Model Bが2年ほど眠っていたので、それを利用するために周辺部品を買った。
 
 ![購入パーツ](images/photo_001.jpg)

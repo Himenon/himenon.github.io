@@ -4,8 +4,6 @@ createdAt: 2018-02-14 02:24:48
 updatedAt: 2019-05-21 11:22:01
 ---
 
-<p id="created_at">作成日: <time dateTime="2018-02-14T01:30">2018/02/14</time></p>
-
 [StaticGen](https://www.staticgen.com/)というサイトでいろいろと紹介されていますね。
 
 好みのものを選ぶと良いのですが、通常のブログと違い、運用に手間がかかります。

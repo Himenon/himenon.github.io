@@ -6,7 +6,9 @@ updatedAt: 2019-05-22 01:08:17
 
 ## Project Interpreterの設定
 
-`Preference > Project: [Project Name] > Project Interpreter`
+```
+Preference > Project: [Project Name] > Project Interpreter
+```
 
 1. 歯車を押す
 2. **Add Remote** を選択
@@ -19,7 +21,9 @@ updatedAt: 2019-05-22 01:08:17
 
 ## Python Consoleの設定
 
-`Preference > Project: [Project Name] > Build, Execution, Deployment > Console > Python Console`
+```
+Preference > Project: [Project Name] > Build, Execution, Deployment > Console > Python Console
+```
 
 1. **Python interpreter** のドロップダウンを開く  
 2. `Remote Python` が出てきているので、選択

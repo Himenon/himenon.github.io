@@ -1,5 +1,5 @@
 ---
-title: "スキルセット"
+title: "スキルセット(2018年3月 更新）"
 createdAt: 2018-03-27 02:40:39
 updatedAt: 2019-05-21 11:22:01
 ---
@@ -100,7 +100,6 @@ wxpythonでGUIの基本的な部分は学んだ。
 - pyzmq
 - redis
 - requests
-- scikit-learn
 - scipy
 - Scrapy
 - scrapy-djangoitem
@@ -193,6 +192,7 @@ iOSのリリースはしていない。macOSに関してはGithubからダウン
     - <https://github.com/Himenon/VideoStreaming>
     - <https://github.com/Himenon/Timer>: Releaseからダウンロードできる
     - <https://github.com/Himenon/Seal2Imag>
+
 
 ####　パッケージ管理
 

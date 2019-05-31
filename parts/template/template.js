@@ -8,7 +8,7 @@ const IndexList = ({ props: indexes }) => {
         return (React.createElement("tr", { key: item.uri },
             React.createElement("td", null, total - idx),
             React.createElement("td", { key: item.uri },
-                React.createElement("a", { href: item.uri, rel: "noopener", target: "_blank" }, item.title))));
+                React.createElement("a", { href: item.uri, rel: "noopener" }, item.title))));
     });
     return (React.createElement("table", { id: "post-articles" },
         React.createElement("thead", null,

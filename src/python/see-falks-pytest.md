@@ -1,20 +1,9 @@
 ---
-title: "PythonのTest"
+title: "Flaskのpytestのコードを少しだけ覗いてみる"
 createdAt: 2018-03-30 04:56:23
-updatedAt: 2019-05-21 11:22:01
+updatedAt: 2019-05-31 23:50:47
 ---
-
-# PythonのTest
-
-## pytest.mark
-
-### pytest.mark.skip
-
-- <https://docs.pytest.org/en/latest/skipping.html>
-
-## pytest.fixture
-
-### Flaskのテストコードより
+## Flaskのテストコードより
 
 `unittest.TestCase`のsetUpやtearDownを使って、テスト対象のインスタンスを使いまわすやり方があるが、
 単純にインスタンスがほしいというだけの場合がある。
@@ -51,7 +40,6 @@ def test_options_work(app, client):
     assert sorted(rv.allow) == ['GET', 'HEAD', 'OPTIONS', 'POST']
     assert rv.data == b''
 ```
-
 
 **ドキュメント**
 

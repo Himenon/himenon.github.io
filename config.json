@@ -2,8 +2,8 @@
   "global": {
     "lang": "ja",
     "title": "himenon.github.io",
-    "description": "@Himenonの備忘録",
-    "keywords": "nodejs,typescript,python",
+    "description": "早くが画面から出たい人の備忘録。",
+    "keywords": "nodejs,typescript,python,himenon,web,frontend",
     "copyright": "@Himenon",
     "viewport": {
       "initial-scale": 1.0,
