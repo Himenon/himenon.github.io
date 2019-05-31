@@ -1,146 +1,318 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@himenoglyph" />
-<meta property="og:url" content="https://himenon.github.io/" />
-<meta property="og:title" content="Hey! - 技術の定点観測" />
-<meta property="og:description" content="手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。" />
-<meta property="og:image" content="https://himenon.github.io/images/apple-touch-icon.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="https://himenon.github.io/images/miku.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://himenon.github.io/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://himenon.github.io/images/favicon-16x16.png">
-<meta name="msapplication-TileColor" content="#2d89ef">
-<meta name="theme-color" content="#ffffff">
-    <title>技術の定点観測</title>
-    <meta name="description" content="手を動かして実践したことの内容の集積場です。真似して学んでいくスタンス。楽しんでやる。">
-    <link rel="stylesheet" href="/stylesheets/reboot.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/default.min.css">
-    <link rel="stylesheet" href="/stylesheets/pc.css">
-    <link rel="stylesheet" href="/stylesheets/tablet.css">
-    <link rel="stylesheet" href="/stylesheets/sp.css">
-    <link rel="stylesheet" href="/stylesheets/prism.css">
-</head>
-<body>
-    <header class="site-header">
-        <h1><a href="https://himenon.github.io/">技術の定点観測</a></h1>
-        <div class="sns-share"><a href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-   class="twitter-share-button"
-   data-text="Hey! - 技術の定点観測"
-   data-via="himenoglyph "
-   data-related="himenoglyph"
-   data-show-count="true">Tweet</a>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></div>
-    </header>
-    <div class="container">
-        <div class="nav-layout left-nav"><h2>ページ内目次</h2><ul>
-    
-    <li><a href="#hey">Hey!</a></li>
-    
-    <li><a href="#_1">このサイトについて</a></li>
-    
-    <li><a href="#_2">注意点</a></li>
-    
-    <li><a href="#sns">SNS</a></li>
-    
-    
-</ul></div>
-        <div class="content">
-            <div class="content-body"><h1 id="hey">Hey!<a class="headerlink" href="#hey" title="Permanent link">&para;</a></h1>
-<p>このブログのスター数</p>
-<iframe src="https://ghbtns.com/github-btn.html?user=Himenon&repo=himenon.github.io&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+<html>
 
-<p>1つでも役に立った、と思ったらスターが欲しいです。</p>
-<h2 id="_1">このサイトについて<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>時々、技術的なことについて書いていきまます。
-誤字脱字や間違いなどがあれば、お気軽にSNSなどでコメントください。</p>
-<p>Githubにソースを公開しているので、PRを投げていただけると嬉しいです。
-<a href="https://github.com/Himenon/himenon.github.io/">https://github.com/Himenon/himenon.github.io/</a></p>
-<h2 id="_2">注意点<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>このサイトの構造は定期的にメンテナンスを加えています。
-URLがコロコロ変わる可能性があるので、SEO的にはよくありませんが、
-整理しながらでもないと、気持ち悪いので、その辺は諦めています。</p>
-<h2 id="sns">SNS<a class="headerlink" href="#sns" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Twitter: <a href="https://twitter.com/">@himenoglyph</a></li>
-<li>Github: <a href="https://github.com/Himenon">@Himenon</a></li>
-</ul>
-<p>誤植や質問があれば、ぜひぜひ気軽にコメントを投げて下さい。</p></div>
-        </div>
-        <div class="nav-layout right-nav"><h2>サイト内トピック</h2><ul><li  class="most-deep-item" ><span><b><u>Hey!</u></b></span></li><li  class="most-deep-item" ><a href="https://himenon.github.io/pick-up-article/">Pick Up Article</a></li><li ><span><b><u>Docker</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Docker/command/">Dockerコマンド</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Docker/pycharm/">PycharmでDockerを使う方法</a></li></ul>
-</li><li ><span><b><u>Firebase</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Auth-Error-Tips/">FirebaseのAuthで躓いたこと</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Firebase-Cloud-Functions/">FirebaseにおけるCloud Functions</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/Firebase/Firebase-Starter/">Firebaseことはじめ</a></li></ul>
-</li><li ><span><b><u>GCP</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/GCP/Cloud-Function/">Cloud Function</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/GCP/GKE/">GKEのコマンド</a></li></ul>
-</li><li ><span><b><u>Infrastructure</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/Infrastructure/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a></li></ul>
-</li><li ><span><b><u>JavaScript</u></b></span></li><li>
-    <ul><li ><span><b><u>Frontend</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/settings/">lodash</a></li><li ><span><b><u>Es6</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/es6/usage-axios/">Axiosでasync/awaitを利用する</a></li></ul>
-</li><li ><span><b><u>Vuejs</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/vuejs/my-vue-setup/">Vueのセットアップ</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/vuejs/nuxtjs/">Nuxt.jsをやる</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/vuejs/ssr-cache-investigation/">VuejsのSSR(Server Side Rendering)のページ・部分キャッシュは何で実装できるか</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/Frontend/vuejs/vuex-usage/">VuexのModuleの使い方</a></li></ul>
-</li></ul>
-</li><li ><span><b><u>NodeJS</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/NodeJS/Request-library-description-for-json-value/">nodeのrequestライブラリの`json`オプションの取り扱いについて</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/NodeJS/dynamic-import/">PackageのDynamic Import</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/NodeJS/execute-async-mjs/">Module jsで非同期関数を実行する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/NodeJS/get-collect-domain-name/">JavaScriptで正確なドメイン名をパースすには？</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/JavaScript/NodeJS/manage-npm-package/">npmのpaackage管理について</a></li></ul>
-</li></ul>
-</li><li ><span><b><u>MySQL</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/MySQL/character-code/">DockerのMySQLでUTF-8を使えるようにする</a></li></ul>
-</li><li ><span><b><u>Blog</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-17-PyConJP/">PyConJP2018の個人レポート</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-20/">genというライブラリを書き直している</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-22-2/">cliを読む - genのコード解析</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-22-3/">serverを読む - genのコード解析</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-22/">genといライブラリの改修作業の進捗</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-24/">genの改修作業中に見つけたコード</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-25/">作業工程を振り返っておく</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/2018-09-26/">Kubeflow Meetup #1に行ってきた</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/Container-App-Directory-Management-Consideration/">コンテナアプリケーション作成時のディレクトリ成長設計の考察</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/Container-Worker-Design/">コンテナ型のワーカーの設計（仮）</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/TDD/">TDDポエム</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/read-basic-knowledge-of-nosql/">NOSQLとは何か...</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/blog/static-site-generator/">静的サイトジェネレーターを選ぶとき、何を思ふ？</a></li></ul>
-</li><li ><span><b><u>Event</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/event/2018-05-21-Cloud-Native/">[イベントレポート] Cloud Native Meetup Tokyo #1</a></li></ul>
-</li><li ><span><b><u>Kubernetes</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/Nginx access control for kubernetes/">Kubernetesに配置したNginxでアクセス制御する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/Shortcut-for-kubectl/">Kubernetesでよく使うコマンド（コピペ用）</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/cron-wake-up-down/">GKEをCronで起動・停止させる</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/kubernetes/error helm incompatible version/">Error: incompatible versions client[v2.8.2] server[v2.7.2]</a></li></ul>
-</li><li ><span><b><u>Mongo db</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/mongo-db/basic-query/">MongoDBの基本クエリ</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/mongo-db/basic-read-write/">mongo DBの基本的なRead Write</a></li></ul>
-</li><li ><span><b><u>Presentation</u></b></span></li><li>
-    <ul><li ><span><b><u>2018</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/presentation/2018/03-02-Yoidore-GCPUG-LT/">酔いどれGCPUG で発表してきました</a></li></ul>
-</li></ul>
-</li><li ><span><b><u>Profile</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/profile/">Profileの目次</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/profile/github-activity/">Githubの活動状況</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/profile/skill/">スキルセット</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/profile/study-history/">参加した勉強会</a></li></ul>
-</li><li ><span><b><u>Python</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/test-know-how/">PythonのTest</a></li><li ><span><b><u>Django</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/Introduction-of-Celery-Django/">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/Seperate-Django-Database/">Djangoで複数のデータベースを利用する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/fixture/">fixtureを読み込む</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/initialize-new-app/">DjangoにAppを新たに追加したときにやること</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/show-many-to-many-admin-view/">DjangoでMany to ManyをAdmin画面のリストに表示する方法</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/signal/">DjangoのSignalの使い方</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/static-file/">Staticファイルの取扱</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/unix-socket-and-nginx/">DjangoとNginxのTips</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Django/validate-only-alphabet/">DjangoでValidation アルファベットのみのバリデーションを実装する</a></li></ul>
-</li><li ><span><b><u>Flask</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Flask/Hello-Flask-Streamming-Content/">Flaskのストリーミングを利用してみる</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/Flask/tips/">FlaskのTips</a></li></ul>
-</li><li ><span><b><u>Jupyter</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/jupyter/change-jupyter-config-dir/">jupyter_notebook_config.pyの読み込み先を変更する</a></li></ul>
-</li><li ><span><b><u>Mkdocs</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/mkdocs/tips/">MkDocsのtips</a></li></ul>
-</li><li ><span><b><u>Pandas</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/python/pandas/pandas-convert-column-to-datetime/">PandasのColumnをDateTimeに型変換する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/python/pandas/visualize-time/">時間データのビジュアライズ</a></li></ul>
-</li></ul>
-</li><li ><span><b><u>Raspberrypi</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/os-install/">RaspberrypiのOSインストール</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/raspberrypi/purchace/">Raspberrypiのパーツを買った</a></li></ul>
-</li><li ><span><b><u>Tools</u></b></span></li><li>
-    <ul><li ><span><b><u>Cookiecutter</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Cookiecutter/usage/">自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方</a></li></ul>
-</li><li ><span><b><u>Git</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Git/git-tips/">Git Tips</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Git/version-match/">Gitの最新のCommitメッセージに対する正規表現</a></li></ul>
-</li><li ><span><b><u>Github</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Github/Github-GraphQL/">GithubのGraphQLを利用する</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Github/Github-Multi-Login-User/">GitHubで複数ユーザーのログインをした時の対応</a></li><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Github/GrqphQL-Python/">GithubのGraphQLをPython 3で叩くサンプルコード</a></li></ul>
-</li><li ><span><b><u>Slack</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Slack/slack-library/">言語別Slack通知ライブラリ</a></li></ul>
-</li><li ><span><b><u>Zapier</u></b></span></li><li>
-    <ul><li  class="most-deep-item" ><a href="https://himenon.github.io/tools/Zapier/zapier-development/">Zapierで利用可能なアプリをを時前で作成する</a></li></ul>
-</li></ul>
-</li></ul></div>
-    </div>
-    <script src="/javascripts/prism.js"></script>
-    <script src="/javascripts/mermaid.min.js"></script>
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-55455343-7', 'himenon.github.io');
-ga('send', 'pageview');
-</script>
-</body>
+  <head lang="ja">
+    <title>目次</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="nodejs,typescript,python,himenon,web,frontend" />
+    <meta name="description" content="早くが画面から出たい人の備忘録。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="目次" />
+    <meta property="og:url" content="https://himenon.github.io" />
+    <meta property="og:description" content="早くが画面から出たい人の備忘録。" />
+    <meta property="og:image" content="https://himenon.github.io" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?519bb" rel="stylesheet" />
+    <link href="/lib/prism.css?26bad" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?22fd7" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;目次&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-02-14T02:24:48.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T01:17:48.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;目次&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;&quot;,&quot;content&quot;:&quot;\nこのブログのスター数: &lt;iframe src=\&quot;https://ghbtns.com/github-btn.html?user=Himenon&amp;repo=himenon.github.io&amp;type=watch&amp;count=true\&quot; allowtransparency=\&quot;true\&quot; frameBorder=\&quot;0\&quot; scrolling=\&quot;0\&quot; width=\&quot;110\&quot; height=\&quot;20\&quot;&gt;&lt;/iframe&gt; \n\n## このサイトについて\n\n時々、技術的なことについて書いていきまます。\n誤字脱字や間違いなどがあれば、お気軽にSNSなどでコメントください。\n\nGithubにソースを公開しているので、PRを投げていただけると嬉しいです。\n&lt;https://github.com/Himenon/himenon.github.io/&gt;\n\n## 注意点\n\nこのサイトの構造は定期的にメンテナンスを加えています。\nURLがコロコロ変わる可能性があるので、SEO的にはよくありませんが、\n整理しながらでもないと、気持ち悪いので、その辺は諦めています。\n\n## SNS\n\n- Twitter: [@himenoglyph](https://twitter.com/)\n- Github: [@Himenon](https://github.com/Himenon)\n\n誤植や質問があれば、ぜひぜひ気軽にコメントを投げて下さい。\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;目次&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-02-14T02:24:48.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T01:17:48.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;目次&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;ext&quot;:&quot;.mdx&quot;,&quot;filename&quot;:&quot;src/index.mdx&quot;,&quot;name&quot;:&quot;index&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;目次\&quot;\ncreatedAt: 2018-02-14 02:24:48\nupdatedAt: 2019-05-21 01:17:48\n---\n\nこのブログのスター数: &lt;iframe src=\&quot;https://ghbtns.com/github-btn.html?user=Himenon&amp;repo=himenon.github.io&amp;type=watch&amp;count=true\&quot; allowtransparency=\&quot;true\&quot; frameBorder=\&quot;0\&quot; scrolling=\&quot;0\&quot; width=\&quot;110\&quot; height=\&quot;20\&quot;&gt;&lt;/iframe&gt; \n\n## このサイトについて\n\n時々、技術的なことについて書いていきまます。\n誤字脱字や間違いなどがあれば、お気軽にSNSなどでコメントください。\n\nGithubにソースを公開しているので、PRを投げていただけると嬉しいです。\n&lt;https://github.com/Himenon/himenon.github.io/&gt;\n\n## 注意点\n\nこのサイトの構造は定期的にメンテナンスを加えています。\nURLがコロコロ変わる可能性があるので、SEO的にはよくありませんが、\n整理しながらでもないと、気持ち悪いので、その辺は諦めています。\n\n## SNS\n\n- Twitter: [@himenoglyph](https://twitter.com/)\n- Github: [@Himenon](https://github.com/Himenon)\n\n誤植や質問があれば、ぜひぜひ気軽にコメントを投げて下さい。\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">目次</h1>
+            <p id="page-description">早くが画面から出たい人の備忘録。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2018-02-14 11:24:48</time><span id="created-at__label">更新日</span><time>2019-05-21 10:17:48</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <p>このブログのスター数: <iframe src="https://ghbtns.com/github-btn.html?user=Himenon&amp;repo=himenon.github.io&amp;type=watch&amp;count=true" allowtransparency="true" frameBorder="0" scrolling="0" width="110" height="20"></iframe> </p>
+          <h2>このサイトについて</h2>
+          <p>時々、技術的なことについて書いていきまます。
+            誤字脱字や間違いなどがあれば、お気軽にSNSなどでコメントください。</p>
+          <p>Githubにソースを公開しているので、PRを投げていただけると嬉しいです。
+            <a href="https://github.com/Himenon/himenon.github.io/">https://github.com/Himenon/himenon.github.io/</a></p>
+          <h2>注意点</h2>
+          <p>このサイトの構造は定期的にメンテナンスを加えています。
+            URLがコロコロ変わる可能性があるので、SEO的にはよくありませんが、
+            整理しながらでもないと、気持ち悪いので、その辺は諦めています。</p>
+          <h2>SNS</h2>
+          <ul>
+            <li>Twitter: <a href="https://twitter.com/">@himenoglyph</a></li>
+            <li>Github: <a href="https://github.com/Himenon">@Himenon</a></li>
+          </ul>
+          <p>誤植や質問があれば、ぜひぜひ気軽にコメントを投げて下さい。</p>
+        </section>
+        <table id="post-articles">
+          <thead>
+            <tr>
+              <td>Back Number</td>
+              <td>Title</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>58</td>
+              <td><a href="" rel="noopener">目次</a></td>
+            </tr>
+            <tr>
+              <td>57</td>
+              <td><a href="/event/2018-05-21-cloud-native" rel="noopener">[イベントレポート] Cloud Native Meetup Tokyo #1</a></td>
+            </tr>
+            <tr>
+              <td>56</td>
+              <td><a href="/event/2018-10-13-abema-tv" rel="noopener">AbemaTV Developerカンファレンス</a></td>
+            </tr>
+            <tr>
+              <td>55</td>
+              <td><a href="/javascript/dynamic-import" rel="noopener">PackageのDynamic Import</a></td>
+            </tr>
+            <tr>
+              <td>54</td>
+              <td><a href="/javascript/get-collect-domain-name" rel="noopener">JavaScriptで正確なドメイン名をパースするには？</a></td>
+            </tr>
+            <tr>
+              <td>53</td>
+              <td><a href="/javascript/manage-npm-package" rel="noopener">npmのpackage管理について</a></td>
+            </tr>
+            <tr>
+              <td>52</td>
+              <td><a href="/javascript/read-ctime" rel="noopener">NodeJSのfsライブラリでファイルの作成日を取得する</a></td>
+            </tr>
+            <tr>
+              <td>51</td>
+              <td><a href="/javascript/request-library-description-for-json-value" rel="noopener">nodeのrequestライブラリの`json`オプションの取り扱いについて</a></td>
+            </tr>
+            <tr>
+              <td>50</td>
+              <td><a href="/kubernetes/cron-wake-up-down" rel="noopener">GKEをCronで起動・停止させる</a></td>
+            </tr>
+            <tr>
+              <td>49</td>
+              <td><a href="/kubernetes/error-helm-incompatible-version" rel="noopener">Error: incompatible versions client[v2.8.2] server[v2.7.2]</a></td>
+            </tr>
+            <tr>
+              <td>48</td>
+              <td><a href="/kubernetes/nginx-access-control-for-kubernetes" rel="noopener">Kubernetesに配置したNginxでアクセス制御する</a></td>
+            </tr>
+            <tr>
+              <td>47</td>
+              <td><a href="/kubernetes/shortcut-for-kubectl" rel="noopener">Kubernetesでよく使うコマンド（コピペ用）</a></td>
+            </tr>
+            <tr>
+              <td>46</td>
+              <td><a href="/mongo-db/basic-query" rel="noopener">MongoDBの基本クエリ</a></td>
+            </tr>
+            <tr>
+              <td>45</td>
+              <td><a href="/mongo-db/basic-read-write" rel="noopener">mongo DBの基本的なRead Write</a></td>
+            </tr>
+            <tr>
+              <td>44</td>
+              <td><a href="/mysql/character-code" rel="noopener">DockerのMySQLでUTF-8を使えるようにする</a></td>
+            </tr>
+            <tr>
+              <td>43</td>
+              <td><a href="/presentation/2018-03-02-yoidore-gcpug-lt" rel="noopener">2018年3月2日 酔いどれGCPUG で発表してきました</a></td>
+            </tr>
+            <tr>
+              <td>42</td>
+              <td><a href="/profile/github-activity" rel="noopener">Githubの活動状況</a></td>
+            </tr>
+            <tr>
+              <td>41</td>
+              <td><a href="/profile" rel="noopener">Profileの目次</a></td>
+            </tr>
+            <tr>
+              <td>40</td>
+              <td><a href="/profile/skill" rel="noopener">スキルセット(2018年3月 更新）</a></td>
+            </tr>
+            <tr>
+              <td>39</td>
+              <td><a href="/profile/study-history" rel="noopener">2018年に参加した勉強会</a></td>
+            </tr>
+            <tr>
+              <td>38</td>
+              <td><a href="/docker/command" rel="noopener">Dockerで利用するコマンド例</a></td>
+            </tr>
+            <tr>
+              <td>37</td>
+              <td><a href="/docker/pycharm" rel="noopener">DockerをPycharmで使う</a></td>
+            </tr>
+            <tr>
+              <td>36</td>
+              <td><a href="/blog/2018-09-17-pyconjp" rel="noopener">PyConJP2018の個人レポート</a></td>
+            </tr>
+            <tr>
+              <td>35</td>
+              <td><a href="/blog/2018-09-20" rel="noopener">genというライブラリを書き直している</a></td>
+            </tr>
+            <tr>
+              <td>34</td>
+              <td><a href="/blog/2018-09-22-2" rel="noopener">cliを読む - genのコード解析</a></td>
+            </tr>
+            <tr>
+              <td>33</td>
+              <td><a href="/blog/2018-09-22-3" rel="noopener">serverを読む - genのコード解析</a></td>
+            </tr>
+            <tr>
+              <td>32</td>
+              <td><a href="/blog/2018-09-22" rel="noopener">genといライブラリの改修作業の進捗</a></td>
+            </tr>
+            <tr>
+              <td>31</td>
+              <td><a href="/blog/2018-09-24" rel="noopener">genの改修作業中に見つけたコード</a></td>
+            </tr>
+            <tr>
+              <td>30</td>
+              <td><a href="/blog/2018-09-25" rel="noopener">作業工程を振り返っておく</a></td>
+            </tr>
+            <tr>
+              <td>29</td>
+              <td><a href="/blog/2018-09-26" rel="noopener">Kubeflow Meetup #1に行ってきた</a></td>
+            </tr>
+            <tr>
+              <td>28</td>
+              <td><a href="/blog/container-app-directory-management-consideration" rel="noopener">コンテナアプリケーション作成時のディレクトリ成長設計の考察</a></td>
+            </tr>
+            <tr>
+              <td>27</td>
+              <td><a href="/blog/static-site-generator" rel="noopener">静的サイトジェネレーターを選ぶとき、何を思ふ？</a></td>
+            </tr>
+            <tr>
+              <td>26</td>
+              <td><a href="/infrastructure/multiple-reverse-proxy-sapmle-with-oauth2_proxy" rel="noopener">複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする</a></td>
+            </tr>
+            <tr>
+              <td>25</td>
+              <td><a href="/raspberrypi/os-install" rel="noopener">RaspberrypiにOSインストールする</a></td>
+            </tr>
+            <tr>
+              <td>24</td>
+              <td><a href="/raspberrypi/purchace" rel="noopener">Raspberrypiのパーツを買った</a></td>
+            </tr>
+            <tr>
+              <td>23</td>
+              <td><a href="/tools/cookiecutter/usage" rel="noopener">自作のファイルテンプレート(雛形)を生成するCookiecutterの使い方</a></td>
+            </tr>
+            <tr>
+              <td>22</td>
+              <td><a href="/tools/git/shortcut" rel="noopener">ローカルのgitに登録しているショートカット</a></td>
+            </tr>
+            <tr>
+              <td>21</td>
+              <td><a href="/tools/git/version-match" rel="noopener">Gitの最新のCommitメッセージに対する正規表現</a></td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td><a href="/tools/github/github-graphql" rel="noopener">GithubのGraphQLを利用する</a></td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td><a href="/tools/github/github-multi-login-user" rel="noopener">GitHubで複数ユーザーのログインをした時の対応</a></td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td><a href="/tools/slack/slack-library" rel="noopener">言語別Slack通知ライブラリ</a></td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td><a href="/tools/zapier/zapier-development" rel="noopener">Zapierで利用可能なアプリをを時前で作成する</a></td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td><a href="/python/see-falks-pytest" rel="noopener">Flaskのpytestのコードを少しだけ覗いてみる</a></td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td><a href="/python/pandas/pandas-convert-column-to-datetime" rel="noopener">PandasのColumnをDateTimeに型変換する</a></td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td><a href="/python/pandas/visualize-time" rel="noopener">時間のデータを可視化しているリンクをまとめる</a></td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td><a href="/python/jupyter/change-jupyter-config-dir" rel="noopener">jupyter_notebook_config.pyの読み込み先を変更する</a></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td><a href="/python/django/celery-periodic-tasks" rel="noopener">CeleryのPeriodic Tasksを使う</a></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td><a href="/python/django/fixture" rel="noopener">Djangoでfixtureを読み込む</a></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td><a href="/python/django/initialize-new-app" rel="noopener">DjangoにAppを新たに追加したときにやること</a></td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td><a href="/python/django/introduction-of-celery-django" rel="noopener">Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する</a></td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td><a href="/python/django/seperate-django-database" rel="noopener">Djangoでデータベースを分割して利用する</a></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td><a href="/python/django/show-many-to-many-admin-view" rel="noopener">DjangoでMany to ManyをAdmin画面のリストに表示する</a></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td><a href="/python/django/signal" rel="noopener">Djangoの保存まと保存後のSignalでメッセージを出す</a></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td><a href="/python/django/static-file" rel="noopener">Djangoにおける静的ファイルの探索がコケたときのエラー</a></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td><a href="/python/django/unix-socket-and-nginx" rel="noopener">DjangoでNginxのUnix Socketを利用する</a></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td><a href="/python/django/validate-only-alphabet" rel="noopener">DjangoでValidation アルファベットのみのバリデーションを実装する</a></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td><a href="/python/flask/hello-flask-streamming-content" rel="noopener">Flaskのストリーミングを利用してみる</a></td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td><a href="/python/flask/release-v1.0-check" rel="noopener">Flaskのv1.0のリリースで変わったこと</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </body>
+  </body>
+
 </html>

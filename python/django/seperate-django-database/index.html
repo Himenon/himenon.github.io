@@ -1,0 +1,188 @@
+<html>
+
+  <head lang="ja">
+    <title>Djangoでデータベースを分割して利用する</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="nodejs,typescript,python,himenon,web,frontend" />
+    <meta name="description" content="早くが画面から出たい人の備忘録。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="Djangoでデータベースを分割して利用する" />
+    <meta property="og:url" content="https://himenon.github.io/python/django/seperate-django-database" />
+    <meta property="og:description" content="早くが画面から出たい人の備忘録。" />
+    <meta property="og:image" content="https://himenon.github.io" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?9d6a4" rel="stylesheet" />
+    <link href="/lib/prism.css?6435f" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?8dead" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;Djangoでデータベースを分割して利用する&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-04-16T01:54:44.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T11:22:01.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;Djangoでデータベースを分割して利用する&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/python/django/seperate-django-database&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/python/django/seperate-django-database&quot;,&quot;content&quot;:&quot;\nユーザー管理用のデータベースと、分析用のデータベースなどのように分離したいときがあります。\nDjango 2.0のドキュメントでは[Multiple databases](https://docs.djangoproject.com/en/2.0/topics/db/multi-db/)の章に説明があります。\n\nやることは4つ\n\n1. `settings.py`の`DATABASES`に複数のDBの接続先を記入する\n1. `settings.py`に`DATABASE_APPS_MAPPING`を定義し、アプリケーションごとにKV形式で接続先のDB名を記述する\n1. `settings.py`に`DATABASE_ROUTERS`を定義し、接続するDBを振り分けるためのRouterの定義を配列形式で記述する\n1. `DATABASE_ROUTERS`に定義されたrouterを用意する\n\n実際に具体例を示してみます。\nここで示す具体例では、`DATABASE_APPS_MAPPING`に指定したとおりにデータベースが\n振り分けるという単純なことだけを達成します。\n\nちょっと大雑把ではありますが、下記のようなディレクトリ構成を取っているものとします。\n`myapp`はdjangoのアプリケーションです。\n\n```\nmyapp/\n├── myapp/settings.py\n├── manage.py\n└── routers.py\n```\n\n## settings.py\n\n```python\n# myapp/settings.py\nfrom os import environ\n\n# 接続先データベースの定義\nDATABASES = {\n  &#x27;default&#x27;: {\n        &#x27;ENGINE&#x27;: &#x27;django.db.backends.mysql&#x27;,\n        &#x27;NAME&#x27;: &#x27;mydb&#x27;,\n        &#x27;USER&#x27;: environ.get(&#x27;DEFAULT_MYSQL_USER&#x27;),\n        &#x27;PASSWORD&#x27;: environ.get(&#x27;DEFAULT_MYSQL_PASSWORD&#x27;),\n        &#x27;HOST&#x27;: environ.get(&#x27;DEFAULT_DB_HOST&#x27;, &#x27;127.0.0.1&#x27;),\n        &#x27;PORT&#x27;: environ.get(&#x27;DEFAULT_DB_PORT&#x27;, &#x27;3306&#x27;),\n        &#x27;OPTIONS&#x27;: {\n            &#x27;init_command&#x27;: \&quot;SET sql_mode=&#x27;STRICT_TRANS_TABLES&#x27;\&quot;,\n            &#x27;charset&#x27;: &#x27;utf8mb4&#x27;,\n        },\n        &#x27;TEST&#x27;: {\n            &#x27;CHARSET&#x27;: &#x27;utf8mb4&#x27;,\n            &#x27;COLLATION&#x27;: &#x27;utf8mb4_general_ci&#x27;,\n        },\n  },\n  &#x27;analytics&#x27;: {\n        &#x27;ENGINE&#x27;: &#x27;django.db.backends.mysql&#x27;,\n        &#x27;NAME&#x27;: &#x27;mydb&#x27;,\n        &#x27;USER&#x27;: environ.get(&#x27;ANALYTICS_MYSQL_USER&#x27;),\n        &#x27;PASSWORD&#x27;: environ.get(&#x27;ANALYTICS_MYSQL_PASSWORD&#x27;),\n        &#x27;HOST&#x27;: environ.get(&#x27;ANALYTICS_DB_HOST&#x27;, &#x27;127.0.0.1&#x27;),\n        &#x27;PORT&#x27;: environ.get(&#x27;ANALYTICS_DB_PORT&#x27;, &#x27;3306&#x27;),\n        &#x27;OPTIONS&#x27;: {\n            &#x27;init_command&#x27;: \&quot;SET sql_mode=&#x27;STRICT_TRANS_TABLES&#x27;\&quot;,\n            &#x27;charset&#x27;: &#x27;utf8mb4&#x27;,\n        },\n        &#x27;TEST&#x27;: {\n            &#x27;CHARSET&#x27;: &#x27;utf8mb4&#x27;,\n            &#x27;COLLATION&#x27;: &#x27;utf8mb4_general_ci&#x27;,\n        },\n  }\n}\n\n# アプリケーションごとの接続先DBのマッピング\nDATABASE_APPS_MAPPING = {\n    # defaultには管理系のTable\n    &#x27;admin&#x27;              : &#x27;default&#x27;,\n    &#x27;auth&#x27;               : &#x27;default&#x27;,\n    &#x27;contenttypes&#x27;       : &#x27;default&#x27;,\n    &#x27;sessions&#x27;           : &#x27;default&#x27;,\n    &#x27;messages&#x27;           : &#x27;default&#x27;,\n    &#x27;staticfiles&#x27;        : &#x27;default&#x27;,\n    &#x27;django_celery_beat&#x27; : &#x27;default&#x27;,\n    # analyticsには分析計のTable\n    &#x27;myapp&#x27;              : &#x27;analytics&#x27;,\n}\n\n# 利用するRouter, manage.pyから見ての相対パス\nDATABASE_ROUTERS = [\n    &#x27;router.DatabaseRouter&#x27;,\n]\n```\n\n## Database routers\n\n以下の4つのメソッドが定義されたクラスを用意します。\n\n- `db_for_read`\n- `db_for_write`\n- `allow_relation`\n- `allow_migrate`\n\n参考: [Database routers](https://docs.djangoproject.com/en/2.0/topics/db/multi-db/#database-routers)\n\n`router.DatabaseRouter`は次のように定義しています。\n\n```python\n# routers.py\nfrom myapp.settings import DATABASE_APPS_MAPPING\n\nclass DatabaseRouter(object):\n    def db_for_read(self, model, **hints):\n        if model._meta.app_label in DATABASE_APPS_MAPPING:\n            return DATABASE_APPS_MAPPING[model._meta.app_label]\n        return None\n\n    def db_for_write(self, model, **hints):\n        if model._meta.app_label in DATABASE_APPS_MAPPING:\n            return DATABASE_APPS_MAPPING[model._meta.app_label]\n        return None\n\n    def allow_relation(self, obj1, obj2, **hints):\n        db1 = DATABASE_APPS_MAPPING.get(obj1._meta.app_label)\n        db2 = DATABASE_APPS_MAPPING.get(obj2._meta.app_label)\n        if db1 and db2:\n            return db1 == db2\n        return None\n\n    def allow_migrate(self, db, app_label, model=None, **hints):\n        if db in DATABASE_APPS_MAPPING.values():\n            return DATABASE_APPS_MAPPING.get(app_label) == db\n        elif app_label in DATABASE_APPS_MAPPING:\n            return False\n```\n\nこれで設定完了です\n\n## Migration\n\nMigrationはコマンドが変わります。\n通常、`./manage.py migrate`を行うと、`default`で指定されたDBに対してMigrationが実行されますが、\n今回は分離しているので、`--database`引数を用いて明示的に指定する必要があります。\n\n```bash\n$ ./manage.py migrate                          # defaultに対するMigration\n$ ./manage.py migrate --database=analytics     # analyticsに対するMigration\n```\n\nこれでMigrationが実行されます。\nまた、その他のコマンドでもDB単位で実行する必要があるので、注意が必要です。\n\n\n## 最後に\n\n最近、Python界隈が分析系や深層学習などで騒がれていますが、\nデータを蓄積するDBの管理の話が出てこないのが気になります。\n\nみなさん、どうやって管理しているのでしょう？\n分析基盤の担当の方がいらっしゃれば良いのですが、全員がそうではないと思いますので、\nこの記事が一人で全部やらないといけないなぁ、と思っている人のところに届けばと思います。\n\n間違いがあればTwitterなどで報告してくれると修正いたします。\n\n\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;Djangoでデータベースを分割して利用する&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-04-16T01:54:44.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T11:22:01.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;Djangoでデータベースを分割して利用する&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/python/django/seperate-django-database&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/python/django/seperate-django-database.md&quot;,&quot;name&quot;:&quot;python/django/seperate-django-database&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;Djangoでデータベースを分割して利用する\&quot;\ncreatedAt: 2018-04-16 01:54:44\nupdatedAt: 2019-05-21 11:22:01\n---\n\nユーザー管理用のデータベースと、分析用のデータベースなどのように分離したいときがあります。\nDjango 2.0のドキュメントでは[Multiple databases](https://docs.djangoproject.com/en/2.0/topics/db/multi-db/)の章に説明があります。\n\nやることは4つ\n\n1. `settings.py`の`DATABASES`に複数のDBの接続先を記入する\n1. `settings.py`に`DATABASE_APPS_MAPPING`を定義し、アプリケーションごとにKV形式で接続先のDB名を記述する\n1. `settings.py`に`DATABASE_ROUTERS`を定義し、接続するDBを振り分けるためのRouterの定義を配列形式で記述する\n1. `DATABASE_ROUTERS`に定義されたrouterを用意する\n\n実際に具体例を示してみます。\nここで示す具体例では、`DATABASE_APPS_MAPPING`に指定したとおりにデータベースが\n振り分けるという単純なことだけを達成します。\n\nちょっと大雑把ではありますが、下記のようなディレクトリ構成を取っているものとします。\n`myapp`はdjangoのアプリケーションです。\n\n```\nmyapp/\n├── myapp/settings.py\n├── manage.py\n└── routers.py\n```\n\n## settings.py\n\n```python\n# myapp/settings.py\nfrom os import environ\n\n# 接続先データベースの定義\nDATABASES = {\n  &#x27;default&#x27;: {\n        &#x27;ENGINE&#x27;: &#x27;django.db.backends.mysql&#x27;,\n        &#x27;NAME&#x27;: &#x27;mydb&#x27;,\n        &#x27;USER&#x27;: environ.get(&#x27;DEFAULT_MYSQL_USER&#x27;),\n        &#x27;PASSWORD&#x27;: environ.get(&#x27;DEFAULT_MYSQL_PASSWORD&#x27;),\n        &#x27;HOST&#x27;: environ.get(&#x27;DEFAULT_DB_HOST&#x27;, &#x27;127.0.0.1&#x27;),\n        &#x27;PORT&#x27;: environ.get(&#x27;DEFAULT_DB_PORT&#x27;, &#x27;3306&#x27;),\n        &#x27;OPTIONS&#x27;: {\n            &#x27;init_command&#x27;: \&quot;SET sql_mode=&#x27;STRICT_TRANS_TABLES&#x27;\&quot;,\n            &#x27;charset&#x27;: &#x27;utf8mb4&#x27;,\n        },\n        &#x27;TEST&#x27;: {\n            &#x27;CHARSET&#x27;: &#x27;utf8mb4&#x27;,\n            &#x27;COLLATION&#x27;: &#x27;utf8mb4_general_ci&#x27;,\n        },\n  },\n  &#x27;analytics&#x27;: {\n        &#x27;ENGINE&#x27;: &#x27;django.db.backends.mysql&#x27;,\n        &#x27;NAME&#x27;: &#x27;mydb&#x27;,\n        &#x27;USER&#x27;: environ.get(&#x27;ANALYTICS_MYSQL_USER&#x27;),\n        &#x27;PASSWORD&#x27;: environ.get(&#x27;ANALYTICS_MYSQL_PASSWORD&#x27;),\n        &#x27;HOST&#x27;: environ.get(&#x27;ANALYTICS_DB_HOST&#x27;, &#x27;127.0.0.1&#x27;),\n        &#x27;PORT&#x27;: environ.get(&#x27;ANALYTICS_DB_PORT&#x27;, &#x27;3306&#x27;),\n        &#x27;OPTIONS&#x27;: {\n            &#x27;init_command&#x27;: \&quot;SET sql_mode=&#x27;STRICT_TRANS_TABLES&#x27;\&quot;,\n            &#x27;charset&#x27;: &#x27;utf8mb4&#x27;,\n        },\n        &#x27;TEST&#x27;: {\n            &#x27;CHARSET&#x27;: &#x27;utf8mb4&#x27;,\n            &#x27;COLLATION&#x27;: &#x27;utf8mb4_general_ci&#x27;,\n        },\n  }\n}\n\n# アプリケーションごとの接続先DBのマッピング\nDATABASE_APPS_MAPPING = {\n    # defaultには管理系のTable\n    &#x27;admin&#x27;              : &#x27;default&#x27;,\n    &#x27;auth&#x27;               : &#x27;default&#x27;,\n    &#x27;contenttypes&#x27;       : &#x27;default&#x27;,\n    &#x27;sessions&#x27;           : &#x27;default&#x27;,\n    &#x27;messages&#x27;           : &#x27;default&#x27;,\n    &#x27;staticfiles&#x27;        : &#x27;default&#x27;,\n    &#x27;django_celery_beat&#x27; : &#x27;default&#x27;,\n    # analyticsには分析計のTable\n    &#x27;myapp&#x27;              : &#x27;analytics&#x27;,\n}\n\n# 利用するRouter, manage.pyから見ての相対パス\nDATABASE_ROUTERS = [\n    &#x27;router.DatabaseRouter&#x27;,\n]\n```\n\n## Database routers\n\n以下の4つのメソッドが定義されたクラスを用意します。\n\n- `db_for_read`\n- `db_for_write`\n- `allow_relation`\n- `allow_migrate`\n\n参考: [Database routers](https://docs.djangoproject.com/en/2.0/topics/db/multi-db/#database-routers)\n\n`router.DatabaseRouter`は次のように定義しています。\n\n```python\n# routers.py\nfrom myapp.settings import DATABASE_APPS_MAPPING\n\nclass DatabaseRouter(object):\n    def db_for_read(self, model, **hints):\n        if model._meta.app_label in DATABASE_APPS_MAPPING:\n            return DATABASE_APPS_MAPPING[model._meta.app_label]\n        return None\n\n    def db_for_write(self, model, **hints):\n        if model._meta.app_label in DATABASE_APPS_MAPPING:\n            return DATABASE_APPS_MAPPING[model._meta.app_label]\n        return None\n\n    def allow_relation(self, obj1, obj2, **hints):\n        db1 = DATABASE_APPS_MAPPING.get(obj1._meta.app_label)\n        db2 = DATABASE_APPS_MAPPING.get(obj2._meta.app_label)\n        if db1 and db2:\n            return db1 == db2\n        return None\n\n    def allow_migrate(self, db, app_label, model=None, **hints):\n        if db in DATABASE_APPS_MAPPING.values():\n            return DATABASE_APPS_MAPPING.get(app_label) == db\n        elif app_label in DATABASE_APPS_MAPPING:\n            return False\n```\n\nこれで設定完了です\n\n## Migration\n\nMigrationはコマンドが変わります。\n通常、`./manage.py migrate`を行うと、`default`で指定されたDBに対してMigrationが実行されますが、\n今回は分離しているので、`--database`引数を用いて明示的に指定する必要があります。\n\n```bash\n$ ./manage.py migrate                          # defaultに対するMigration\n$ ./manage.py migrate --database=analytics     # analyticsに対するMigration\n```\n\nこれでMigrationが実行されます。\nまた、その他のコマンドでもDB単位で実行する必要があるので、注意が必要です。\n\n\n## 最後に\n\n最近、Python界隈が分析系や深層学習などで騒がれていますが、\nデータを蓄積するDBの管理の話が出てこないのが気になります。\n\nみなさん、どうやって管理しているのでしょう？\n分析基盤の担当の方がいらっしゃれば良いのですが、全員がそうではないと思いますので、\nこの記事が一人で全部やらないといけないなぁ、と思っている人のところに届けばと思います。\n\n間違いがあればTwitterなどで報告してくれると修正いたします。\n\n\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">Djangoでデータベースを分割して利用する</h1>
+            <p id="page-description">早くが画面から出たい人の備忘録。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2018-04-16 10:54:44</time><span id="created-at__label">更新日</span><time>2019-05-21 08:22:01</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <p>ユーザー管理用のデータベースと、分析用のデータベースなどのように分離したいときがあります。
+            Django 2.0のドキュメントでは<a href="https://docs.djangoproject.com/en/2.0/topics/db/multi-db/">Multiple databases</a>の章に説明があります。</p>
+          <p>やることは4つ</p>
+          <ol>
+            <li><code>settings.py</code>の<code>DATABASES</code>に複数のDBの接続先を記入する</li>
+            <li><code>settings.py</code>に<code>DATABASE_APPS_MAPPING</code>を定義し、アプリケーションごとにKV形式で接続先のDB名を記述する</li>
+            <li><code>settings.py</code>に<code>DATABASE_ROUTERS</code>を定義し、接続するDBを振り分けるためのRouterの定義を配列形式で記述する</li>
+            <li><code>DATABASE_ROUTERS</code>に定義されたrouterを用意する</li>
+          </ol>
+          <p>実際に具体例を示してみます。
+            ここで示す具体例では、<code>DATABASE_APPS_MAPPING</code>に指定したとおりにデータベースが
+            振り分けるという単純なことだけを達成します。</p>
+          <p>ちょっと大雑把ではありますが、下記のようなディレクトリ構成を取っているものとします。
+            <code>myapp</code>はdjangoのアプリケーションです。</p><pre class="language-plain"><code class="language-plain">myapp/
+├── myapp/settings.py
+├── manage.py
+└── routers.py
+</code></pre>
+          <h2>settings.py</h2><pre class="language-python"><code class="language-python"><span class="token comment"># myapp/settings.py</span>
+<span class="token keyword">from</span> os <span class="token keyword">import</span> environ
+
+<span class="token comment"># 接続先データベースの定義</span>
+DATABASES <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token string">'default'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">'ENGINE'</span><span class="token punctuation">:</span> <span class="token string">'django.db.backends.mysql'</span><span class="token punctuation">,</span>
+        <span class="token string">'NAME'</span><span class="token punctuation">:</span> <span class="token string">'mydb'</span><span class="token punctuation">,</span>
+        <span class="token string">'USER'</span><span class="token punctuation">:</span> environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'DEFAULT_MYSQL_USER'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'PASSWORD'</span><span class="token punctuation">:</span> environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'DEFAULT_MYSQL_PASSWORD'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'HOST'</span><span class="token punctuation">:</span> environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'DEFAULT_DB_HOST'</span><span class="token punctuation">,</span> <span class="token string">'127.0.0.1'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'PORT'</span><span class="token punctuation">:</span> environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'DEFAULT_DB_PORT'</span><span class="token punctuation">,</span> <span class="token string">'3306'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'OPTIONS'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'init_command'</span><span class="token punctuation">:</span> <span class="token string">"SET sql_mode='STRICT_TRANS_TABLES'"</span><span class="token punctuation">,</span>
+            <span class="token string">'charset'</span><span class="token punctuation">:</span> <span class="token string">'utf8mb4'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">'TEST'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'CHARSET'</span><span class="token punctuation">:</span> <span class="token string">'utf8mb4'</span><span class="token punctuation">,</span>
+            <span class="token string">'COLLATION'</span><span class="token punctuation">:</span> <span class="token string">'utf8mb4_general_ci'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token string">'analytics'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">'ENGINE'</span><span class="token punctuation">:</span> <span class="token string">'django.db.backends.mysql'</span><span class="token punctuation">,</span>
+        <span class="token string">'NAME'</span><span class="token punctuation">:</span> <span class="token string">'mydb'</span><span class="token punctuation">,</span>
+        <span class="token string">'USER'</span><span class="token punctuation">:</span> environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'ANALYTICS_MYSQL_USER'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'PASSWORD'</span><span class="token punctuation">:</span> environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'ANALYTICS_MYSQL_PASSWORD'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'HOST'</span><span class="token punctuation">:</span> environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'ANALYTICS_DB_HOST'</span><span class="token punctuation">,</span> <span class="token string">'127.0.0.1'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'PORT'</span><span class="token punctuation">:</span> environ<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">'ANALYTICS_DB_PORT'</span><span class="token punctuation">,</span> <span class="token string">'3306'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token string">'OPTIONS'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'init_command'</span><span class="token punctuation">:</span> <span class="token string">"SET sql_mode='STRICT_TRANS_TABLES'"</span><span class="token punctuation">,</span>
+            <span class="token string">'charset'</span><span class="token punctuation">:</span> <span class="token string">'utf8mb4'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token string">'TEST'</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">'CHARSET'</span><span class="token punctuation">:</span> <span class="token string">'utf8mb4'</span><span class="token punctuation">,</span>
+            <span class="token string">'COLLATION'</span><span class="token punctuation">:</span> <span class="token string">'utf8mb4_general_ci'</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment"># アプリケーションごとの接続先DBのマッピング</span>
+DATABASE_APPS_MAPPING <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token comment"># defaultには管理系のTable</span>
+    <span class="token string">'admin'</span>              <span class="token punctuation">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
+    <span class="token string">'auth'</span>               <span class="token punctuation">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
+    <span class="token string">'contenttypes'</span>       <span class="token punctuation">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
+    <span class="token string">'sessions'</span>           <span class="token punctuation">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
+    <span class="token string">'messages'</span>           <span class="token punctuation">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
+    <span class="token string">'staticfiles'</span>        <span class="token punctuation">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
+    <span class="token string">'django_celery_beat'</span> <span class="token punctuation">:</span> <span class="token string">'default'</span><span class="token punctuation">,</span>
+    <span class="token comment"># analyticsには分析計のTable</span>
+    <span class="token string">'myapp'</span>              <span class="token punctuation">:</span> <span class="token string">'analytics'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment"># 利用するRouter, manage.pyから見ての相対パス</span>
+DATABASE_ROUTERS <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">'router.DatabaseRouter'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
+</code></pre>
+          <h2>Database routers</h2>
+          <p>以下の4つのメソッドが定義されたクラスを用意します。</p>
+          <ul>
+            <li><code>db_for_read</code></li>
+            <li><code>db_for_write</code></li>
+            <li><code>allow_relation</code></li>
+            <li><code>allow_migrate</code></li>
+          </ul>
+          <p>参考: <a href="https://docs.djangoproject.com/en/2.0/topics/db/multi-db/#database-routers">Database routers</a></p>
+          <p><code>router.DatabaseRouter</code>は次のように定義しています。</p><pre class="language-python"><code class="language-python"><span class="token comment"># routers.py</span>
+<span class="token keyword">from</span> myapp<span class="token punctuation">.</span>settings <span class="token keyword">import</span> DATABASE_APPS_MAPPING
+
+<span class="token keyword">class</span> <span class="token class-name">DatabaseRouter</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">db_for_read</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> model<span class="token punctuation">,</span> <span class="token operator">**</span>hints<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> model<span class="token punctuation">.</span>_meta<span class="token punctuation">.</span>app_label <span class="token keyword">in</span> DATABASE_APPS_MAPPING<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> DATABASE_APPS_MAPPING<span class="token punctuation">[</span>model<span class="token punctuation">.</span>_meta<span class="token punctuation">.</span>app_label<span class="token punctuation">]</span>
+        <span class="token keyword">return</span> <span class="token boolean">None</span>
+
+    <span class="token keyword">def</span> <span class="token function">db_for_write</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> model<span class="token punctuation">,</span> <span class="token operator">**</span>hints<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> model<span class="token punctuation">.</span>_meta<span class="token punctuation">.</span>app_label <span class="token keyword">in</span> DATABASE_APPS_MAPPING<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> DATABASE_APPS_MAPPING<span class="token punctuation">[</span>model<span class="token punctuation">.</span>_meta<span class="token punctuation">.</span>app_label<span class="token punctuation">]</span>
+        <span class="token keyword">return</span> <span class="token boolean">None</span>
+
+    <span class="token keyword">def</span> <span class="token function">allow_relation</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obj1<span class="token punctuation">,</span> obj2<span class="token punctuation">,</span> <span class="token operator">**</span>hints<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        db1 <span class="token operator">=</span> DATABASE_APPS_MAPPING<span class="token punctuation">.</span>get<span class="token punctuation">(</span>obj1<span class="token punctuation">.</span>_meta<span class="token punctuation">.</span>app_label<span class="token punctuation">)</span>
+        db2 <span class="token operator">=</span> DATABASE_APPS_MAPPING<span class="token punctuation">.</span>get<span class="token punctuation">(</span>obj2<span class="token punctuation">.</span>_meta<span class="token punctuation">.</span>app_label<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> db1 <span class="token keyword">and</span> db2<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> db1 <span class="token operator">==</span> db2
+        <span class="token keyword">return</span> <span class="token boolean">None</span>
+
+    <span class="token keyword">def</span> <span class="token function">allow_migrate</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> db<span class="token punctuation">,</span> app_label<span class="token punctuation">,</span> model<span class="token operator">=</span><span class="token boolean">None</span><span class="token punctuation">,</span> <span class="token operator">**</span>hints<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> db <span class="token keyword">in</span> DATABASE_APPS_MAPPING<span class="token punctuation">.</span>values<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> DATABASE_APPS_MAPPING<span class="token punctuation">.</span>get<span class="token punctuation">(</span>app_label<span class="token punctuation">)</span> <span class="token operator">==</span> db
+        <span class="token keyword">elif</span> app_label <span class="token keyword">in</span> DATABASE_APPS_MAPPING<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token boolean">False</span>
+</code></pre>
+          <p>これで設定完了です</p>
+          <h2>Migration</h2>
+          <p>Migrationはコマンドが変わります。
+            通常、<code>./manage.py migrate</code>を行うと、<code>default</code>で指定されたDBに対してMigrationが実行されますが、
+            今回は分離しているので、<code>--database</code>引数を用いて明示的に指定する必要があります。</p><pre class="language-bash"><code class="language-bash">$ ./manage.py migrate                          <span class="token comment"># defaultに対するMigration</span>
+$ ./manage.py migrate --database<span class="token operator">=</span>analytics     <span class="token comment"># analyticsに対するMigration</span>
+</code></pre>
+          <p>これでMigrationが実行されます。
+            また、その他のコマンドでもDB単位で実行する必要があるので、注意が必要です。</p>
+          <h2>最後に</h2>
+          <p>最近、Python界隈が分析系や深層学習などで騒がれていますが、
+            データを蓄積するDBの管理の話が出てこないのが気になります。</p>
+          <p>みなさん、どうやって管理しているのでしょう？
+            分析基盤の担当の方がいらっしゃれば良いのですが、全員がそうではないと思いますので、
+            この記事が一人で全部やらないといけないなぁ、と思っている人のところに届けばと思います。</p>
+          <p>間違いがあればTwitterなどで報告してくれると修正いたします。</p>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>

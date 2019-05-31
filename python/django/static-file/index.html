@@ -1,0 +1,110 @@
+<html>
+
+  <head lang="ja">
+    <title>Djangoにおける静的ファイルの探索がコケたときのエラー</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="nodejs,typescript,python,himenon,web,frontend" />
+    <meta name="description" content="早くが画面から出たい人の備忘録。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="Djangoにおける静的ファイルの探索がコケたときのエラー" />
+    <meta property="og:url" content="https://himenon.github.io/python/django/static-file" />
+    <meta property="og:description" content="早くが画面から出たい人の備忘録。" />
+    <meta property="og:image" content="https://himenon.github.io" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?9d6a4" rel="stylesheet" />
+    <link href="/lib/prism.css?6435f" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?8dead" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;Djangoにおける静的ファイルの探索がコケたときのエラー&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-09-15T11:55:29.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T11:22:01.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;Djangoにおける静的ファイルの探索がコケたときのエラー&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/python/django/static-file&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/python/django/static-file&quot;,&quot;content&quot;:&quot;\n```\nroot@f363e9217eab:/django# ./manage.py collectstatic\n\nYou have requested to collect static files at the destination\nlocation as specified in your settings.\n\nThis will overwrite existing files!\nAre you sure you want to do this?\n\nType &#x27;yes&#x27; to continue, or &#x27;no&#x27; to cancel: yes\nTraceback (most recent call last):\n  File \&quot;./manage.py\&quot;, line 20, in &lt;module&gt;\n    execute_from_command_line(sys.argv)\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/core/management/__init__.py\&quot;, line 364, in execute_from_command_line\n    utility.execute()\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/core/management/__init__.py\&quot;, line 356, in execute\n    self.fetch_command(subcommand).run_from_argv(self.argv)\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/core/management/base.py\&quot;, line 283, in run_from_argv\n    self.execute(*args, **cmd_options)\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/core/management/base.py\&quot;, line 330, in execute\n    output = self.handle(*args, **options)\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py\&quot;, line 199, in handle\n    collected = self.collect()\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py\&quot;, line 124, in collect\n    handler(path, prefixed_path, storage)\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py\&quot;, line 354, in copy_file\n    if not self.delete_file(path, prefixed_path, source_storage):\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py\&quot;, line 260, in delete_file\n    if self.storage.exists(prefixed_path):\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/core/files/storage.py\&quot;, line 392, in exists\n    return os.path.exists(self.path(name))\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/storage.py\&quot;, line 50, in path\n    raise ImproperlyConfigured(\&quot;You&#x27;re using the staticfiles app \&quot;\ndjango.core.exceptions.ImproperlyConfigured: You&#x27;re using the staticfiles app without having set the STATIC_ROOT setting to a filesystem path.\n```\n\n```python\nimport os\nROOT_PATH = os.path.dirname(__file__)\n\nSTATICFILES_DIRS = [os.path.join(ROOT_PATH, &#x27;static&#x27;)]\n```\n\n[Django 静的ファイル (static) 関係の設定まとめ](https://qiita.com/aion/items/add0c983150a2a1e100d)\n\n&gt; The reason that STATICFILES_DIRS wants a filesystem path is that it needs to know where the files live in the operating system (so things like manage.py collectstatic are possible). The STATIC_URL setting is for webserver paths, and that&#x27;s what it uses to show to the user in the admin or the {% static %} tag or whatever. STATICFILES_DIRS is server-side only and never shows up in any rendered templates or anything.\n\n※まとまってない\n\nDjangoを本番環境にデプロイするとき、静的ファイル関係の設定でいろいろはまったので、まとめる。\n基本的に以下の5つあるようだが、上から3つだけ使用していたので、それらに関してまとめる。\nちなみに以下のそれぞれの定数はsetting.pyで設定する。\n\n```\nSTATIC_ROOT\nSTATIC_URL\nSTATICFILES_DIRS (Prefixes (optional))\nSTATICFILES_STORAGE\nSTATICFILES_FINDERS\n```\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;Djangoにおける静的ファイルの探索がコケたときのエラー&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-09-15T11:55:29.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T11:22:01.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;Djangoにおける静的ファイルの探索がコケたときのエラー&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/python/django/static-file&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/python/django/static-file.md&quot;,&quot;name&quot;:&quot;python/django/static-file&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;Djangoにおける静的ファイルの探索がコケたときのエラー\&quot;\ncreatedAt: 2018-09-15 11:55:29\nupdatedAt: 2019-05-21 11:22:01\n---\n\n```\nroot@f363e9217eab:/django# ./manage.py collectstatic\n\nYou have requested to collect static files at the destination\nlocation as specified in your settings.\n\nThis will overwrite existing files!\nAre you sure you want to do this?\n\nType &#x27;yes&#x27; to continue, or &#x27;no&#x27; to cancel: yes\nTraceback (most recent call last):\n  File \&quot;./manage.py\&quot;, line 20, in &lt;module&gt;\n    execute_from_command_line(sys.argv)\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/core/management/__init__.py\&quot;, line 364, in execute_from_command_line\n    utility.execute()\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/core/management/__init__.py\&quot;, line 356, in execute\n    self.fetch_command(subcommand).run_from_argv(self.argv)\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/core/management/base.py\&quot;, line 283, in run_from_argv\n    self.execute(*args, **cmd_options)\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/core/management/base.py\&quot;, line 330, in execute\n    output = self.handle(*args, **options)\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py\&quot;, line 199, in handle\n    collected = self.collect()\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py\&quot;, line 124, in collect\n    handler(path, prefixed_path, storage)\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py\&quot;, line 354, in copy_file\n    if not self.delete_file(path, prefixed_path, source_storage):\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py\&quot;, line 260, in delete_file\n    if self.storage.exists(prefixed_path):\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/core/files/storage.py\&quot;, line 392, in exists\n    return os.path.exists(self.path(name))\n  File \&quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/storage.py\&quot;, line 50, in path\n    raise ImproperlyConfigured(\&quot;You&#x27;re using the staticfiles app \&quot;\ndjango.core.exceptions.ImproperlyConfigured: You&#x27;re using the staticfiles app without having set the STATIC_ROOT setting to a filesystem path.\n```\n\n```python\nimport os\nROOT_PATH = os.path.dirname(__file__)\n\nSTATICFILES_DIRS = [os.path.join(ROOT_PATH, &#x27;static&#x27;)]\n```\n\n[Django 静的ファイル (static) 関係の設定まとめ](https://qiita.com/aion/items/add0c983150a2a1e100d)\n\n&gt; The reason that STATICFILES_DIRS wants a filesystem path is that it needs to know where the files live in the operating system (so things like manage.py collectstatic are possible). The STATIC_URL setting is for webserver paths, and that&#x27;s what it uses to show to the user in the admin or the {% static %} tag or whatever. STATICFILES_DIRS is server-side only and never shows up in any rendered templates or anything.\n\n※まとまってない\n\nDjangoを本番環境にデプロイするとき、静的ファイル関係の設定でいろいろはまったので、まとめる。\n基本的に以下の5つあるようだが、上から3つだけ使用していたので、それらに関してまとめる。\nちなみに以下のそれぞれの定数はsetting.pyで設定する。\n\n```\nSTATIC_ROOT\nSTATIC_URL\nSTATICFILES_DIRS (Prefixes (optional))\nSTATICFILES_STORAGE\nSTATICFILES_FINDERS\n```\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">Djangoにおける静的ファイルの探索がコケたときのエラー</h1>
+            <p id="page-description">早くが画面から出たい人の備忘録。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2018-09-15 08:55:29</time><span id="created-at__label">更新日</span><time>2019-05-21 08:22:01</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section><pre class="language-plain"><code class="language-plain">root@f363e9217eab:/django# ./manage.py collectstatic
+
+You have requested to collect static files at the destination
+location as specified in your settings.
+
+This will overwrite existing files!
+Are you sure you want to do this?
+
+Type &#x27;yes&#x27; to continue, or &#x27;no&#x27; to cancel: yes
+Traceback (most recent call last):
+  File &quot;./manage.py&quot;, line 20, in &lt;module&gt;
+    execute_from_command_line(sys.argv)
+  File &quot;/usr/local/lib/python3.6/site-packages/django/core/management/__init__.py&quot;, line 364, in execute_from_command_line
+    utility.execute()
+  File &quot;/usr/local/lib/python3.6/site-packages/django/core/management/__init__.py&quot;, line 356, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File &quot;/usr/local/lib/python3.6/site-packages/django/core/management/base.py&quot;, line 283, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File &quot;/usr/local/lib/python3.6/site-packages/django/core/management/base.py&quot;, line 330, in execute
+    output = self.handle(*args, **options)
+  File &quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py&quot;, line 199, in handle
+    collected = self.collect()
+  File &quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py&quot;, line 124, in collect
+    handler(path, prefixed_path, storage)
+  File &quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py&quot;, line 354, in copy_file
+    if not self.delete_file(path, prefixed_path, source_storage):
+  File &quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/management/commands/collectstatic.py&quot;, line 260, in delete_file
+    if self.storage.exists(prefixed_path):
+  File &quot;/usr/local/lib/python3.6/site-packages/django/core/files/storage.py&quot;, line 392, in exists
+    return os.path.exists(self.path(name))
+  File &quot;/usr/local/lib/python3.6/site-packages/django/contrib/staticfiles/storage.py&quot;, line 50, in path
+    raise ImproperlyConfigured(&quot;You&#x27;re using the staticfiles app &quot;
+django.core.exceptions.ImproperlyConfigured: You&#x27;re using the staticfiles app without having set the STATIC_ROOT setting to a filesystem path.
+</code></pre><pre class="language-python"><code class="language-python"><span class="token keyword">import</span> os
+ROOT_PATH <span class="token operator">=</span> os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span>
+
+STATICFILES_DIRS <span class="token operator">=</span> <span class="token punctuation">[</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>ROOT_PATH<span class="token punctuation">,</span> <span class="token string">'static'</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+</code></pre>
+          <p><a href="https://qiita.com/aion/items/add0c983150a2a1e100d">Django 静的ファイル (static) 関係の設定まとめ</a></p>
+          <blockquote>
+            <p>The reason that STATICFILES_DIRS wants a filesystem path is that it needs to know where the files live in the operating system (so things like manage.py collectstatic are possible). The STATIC_URL setting is for webserver paths, and that&#x27;s what it uses to show to the user in the admin or the {% static %} tag or whatever. STATICFILES_DIRS is server-side only and never shows up in any rendered templates or anything.</p>
+          </blockquote>
+          <p>※まとまってない</p>
+          <p>Djangoを本番環境にデプロイするとき、静的ファイル関係の設定でいろいろはまったので、まとめる。
+            基本的に以下の5つあるようだが、上から3つだけ使用していたので、それらに関してまとめる。
+            ちなみに以下のそれぞれの定数はsetting.pyで設定する。</p><pre class="language-plain"><code class="language-plain">STATIC_ROOT
+STATIC_URL
+STATICFILES_DIRS (Prefixes (optional))
+STATICFILES_STORAGE
+STATICFILES_FINDERS
+</code></pre>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>

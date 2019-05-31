@@ -1,0 +1,88 @@
+<html>
+
+  <head lang="ja">
+    <title>Error: incompatible versions client[v2.8.2] server[v2.7.2]</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="nodejs,typescript,python,himenon,web,frontend" />
+    <meta name="description" content="早くが画面から出たい人の備忘録。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="Error: incompatible versions client[v2.8.2] server[v2.7.2]" />
+    <meta property="og:url" content="https://himenon.github.io/kubernetes/error-helm-incompatible-version" />
+    <meta property="og:description" content="早くが画面から出たい人の備忘録。" />
+    <meta property="og:image" content="https://himenon.github.io" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?aa390" rel="stylesheet" />
+    <link href="/lib/prism.css?c4d0b" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?a89e9" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;Error: incompatible versions client[v2.8.2] server[v2.7.2]&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-03-22T02:19:41.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-22T01:08:17.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;Error: incompatible versions client[v2.8.2] server[v2.7.2]&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/kubernetes/error-helm-incompatible-version&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/kubernetes/error-helm-incompatible-version&quot;,&quot;content&quot;:&quot;\n&lt;p id=\&quot;created_at\&quot;&gt;作成日: &lt;time dateTime=\&quot;2018-03-19T22:30\&quot;&gt;2018/03/19&lt;/time&gt;&lt;/p&gt;\n\n```bash\n$ helm install stable/redis\nError: incompatible versions client[v2.8.2] server[v2.7.2]\n```\n\nどうやらVersionがClientとServerで異なるようである。\n\n```bash\n$ helm version\nClient: &amp;version.Version{SemVer:\&quot;v2.8.2\&quot;, GitCommit:\&quot;a80231648a1473929271764b920a8e346f6de844\&quot;, GitTreeState:\&quot;clean\&quot;}\nServer: &amp;version.Version{SemVer:\&quot;v2.7.2\&quot;, GitCommit:\&quot;8478fb4fc723885b155c924d1c8c410b7a9444e6\&quot;, GitTreeState:\&quot;clean\&quot;}\n```\n\n## 再度helm initしてみる\n\n```bash\n$ helm init\n$HELM_HOME has been configured at /Users/himepro/.helm.\nWarning: Tiller is already installed in the cluster.\n(Use --client-only to suppress this message, or --upgrade to upgrade Tiller to the current version.)\nHappy Helming!\n```\n\nインストールされてるから、Tillerのバージョンを上げろって言われた。\n\n## Versionのupgrade\n\n```bash\n$ helm init --upgrade\n$HELM_HOME has been configured at /Users/himepro/.helm.\n\nTiller (the Helm server-side component) has been upgraded to the current version.\nHappy Helming!\n```\n\nサーバー側のバージョンが上がった模様。\n確認してみる。\n\n\n```bash\n$ helm version\nClient: &amp;version.Version{SemVer:\&quot;v2.8.2\&quot;, GitCommit:\&quot;a80231648a1473929271764b920a8e346f6de844\&quot;, GitTreeState:\&quot;clean\&quot;}\nServer: &amp;version.Version{SemVer:\&quot;v2.8.2\&quot;, GitCommit:\&quot;a80231648a1473929271764b920a8e346f6de844\&quot;, GitTreeState:\&quot;clean\&quot;\n```\n\nおしまい。\n\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;Error: incompatible versions client[v2.8.2] server[v2.7.2]&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-03-22T02:19:41.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-22T01:08:17.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;Error: incompatible versions client[v2.8.2] server[v2.7.2]&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/kubernetes/error-helm-incompatible-version&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/kubernetes/error-helm-incompatible-version.md&quot;,&quot;name&quot;:&quot;kubernetes/error-helm-incompatible-version&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;Error: incompatible versions client[v2.8.2] server[v2.7.2]\&quot;\ncreatedAt: 2018-03-22 02:19:41\nupdatedAt: 2019-05-22 01:08:17\n---\n\n&lt;p id=\&quot;created_at\&quot;&gt;作成日: &lt;time dateTime=\&quot;2018-03-19T22:30\&quot;&gt;2018/03/19&lt;/time&gt;&lt;/p&gt;\n\n```bash\n$ helm install stable/redis\nError: incompatible versions client[v2.8.2] server[v2.7.2]\n```\n\nどうやらVersionがClientとServerで異なるようである。\n\n```bash\n$ helm version\nClient: &amp;version.Version{SemVer:\&quot;v2.8.2\&quot;, GitCommit:\&quot;a80231648a1473929271764b920a8e346f6de844\&quot;, GitTreeState:\&quot;clean\&quot;}\nServer: &amp;version.Version{SemVer:\&quot;v2.7.2\&quot;, GitCommit:\&quot;8478fb4fc723885b155c924d1c8c410b7a9444e6\&quot;, GitTreeState:\&quot;clean\&quot;}\n```\n\n## 再度helm initしてみる\n\n```bash\n$ helm init\n$HELM_HOME has been configured at /Users/himepro/.helm.\nWarning: Tiller is already installed in the cluster.\n(Use --client-only to suppress this message, or --upgrade to upgrade Tiller to the current version.)\nHappy Helming!\n```\n\nインストールされてるから、Tillerのバージョンを上げろって言われた。\n\n## Versionのupgrade\n\n```bash\n$ helm init --upgrade\n$HELM_HOME has been configured at /Users/himepro/.helm.\n\nTiller (the Helm server-side component) has been upgraded to the current version.\nHappy Helming!\n```\n\nサーバー側のバージョンが上がった模様。\n確認してみる。\n\n\n```bash\n$ helm version\nClient: &amp;version.Version{SemVer:\&quot;v2.8.2\&quot;, GitCommit:\&quot;a80231648a1473929271764b920a8e346f6de844\&quot;, GitTreeState:\&quot;clean\&quot;}\nServer: &amp;version.Version{SemVer:\&quot;v2.8.2\&quot;, GitCommit:\&quot;a80231648a1473929271764b920a8e346f6de844\&quot;, GitTreeState:\&quot;clean\&quot;\n```\n\nおしまい。\n\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">Error: incompatible versions client[v2.8.2] server[v2.7.2]</h1>
+            <p id="page-description">早くが画面から出たい人の備忘録。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2018-03-22 11:19:41</time><span id="created-at__label">更新日</span><time>2019-05-22 10:08:17</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <p>
+            <p id="created_at">作成日: <time dateTime="2018-03-19T22:30">2018/03/19</time></p>
+          </p><pre class="language-bash"><code class="language-bash">$ helm <span class="token function">install</span> stable/redis
+Error: incompatible versions client<span class="token punctuation">[</span>v2.8.2<span class="token punctuation">]</span> server<span class="token punctuation">[</span>v2.7.2<span class="token punctuation">]</span>
+</code></pre>
+          <p>どうやらVersionがClientとServerで異なるようである。</p><pre class="language-bash"><code class="language-bash">$ helm version
+Client: <span class="token operator">&amp;</span>version.Version<span class="token punctuation">{</span>SemVer:<span class="token string">"v2.8.2"</span>, GitCommit:<span class="token string">"a80231648a1473929271764b920a8e346f6de844"</span>, GitTreeState:<span class="token string">"clean"</span><span class="token punctuation">}</span>
+Server: <span class="token operator">&amp;</span>version.Version<span class="token punctuation">{</span>SemVer:<span class="token string">"v2.7.2"</span>, GitCommit:<span class="token string">"8478fb4fc723885b155c924d1c8c410b7a9444e6"</span>, GitTreeState:<span class="token string">"clean"</span><span class="token punctuation">}</span>
+</code></pre>
+          <h2>再度helm initしてみる</h2><pre class="language-bash"><code class="language-bash">$ helm init
+<span class="token variable">$HELM_HOME</span> has been configured at /Users/himepro/.helm.
+Warning: Tiller is already installed <span class="token keyword">in</span> the cluster.
+<span class="token punctuation">(</span>Use --client-only to suppress this message, or --upgrade to upgrade Tiller to the current version.<span class="token punctuation">)</span>
+Happy Helming<span class="token operator">!</span>
+</code></pre>
+          <p>インストールされてるから、Tillerのバージョンを上げろって言われた。</p>
+          <h2>Versionのupgrade</h2><pre class="language-bash"><code class="language-bash">$ helm init --upgrade
+<span class="token variable">$HELM_HOME</span> has been configured at /Users/himepro/.helm.
+
+Tiller <span class="token punctuation">(</span>the Helm server-side component<span class="token punctuation">)</span> has been upgraded to the current version.
+Happy Helming<span class="token operator">!</span>
+</code></pre>
+          <p>サーバー側のバージョンが上がった模様。
+            確認してみる。</p><pre class="language-bash"><code class="language-bash">$ helm version
+Client: <span class="token operator">&amp;</span>version.Version<span class="token punctuation">{</span>SemVer:<span class="token string">"v2.8.2"</span>, GitCommit:<span class="token string">"a80231648a1473929271764b920a8e346f6de844"</span>, GitTreeState:<span class="token string">"clean"</span><span class="token punctuation">}</span>
+Server: <span class="token operator">&amp;</span>version.Version<span class="token punctuation">{</span>SemVer:<span class="token string">"v2.8.2"</span>, GitCommit:<span class="token string">"a80231648a1473929271764b920a8e346f6de844"</span>, GitTreeState:<span class="token string">"clean"</span>
+</code></pre>
+          <p>おしまい。</p>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>

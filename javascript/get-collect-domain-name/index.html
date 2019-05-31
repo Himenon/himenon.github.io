@@ -1,0 +1,99 @@
+<html>
+
+  <head lang="ja">
+    <title>JavaScriptで正確なドメイン名をパースするには？</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="nodejs,typescript,python,himenon,web,frontend" />
+    <meta name="description" content="早くが画面から出たい人の備忘録。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="JavaScriptで正確なドメイン名をパースするには？" />
+    <meta property="og:url" content="https://himenon.github.io/javascript/get-collect-domain-name" />
+    <meta property="og:description" content="早くが画面から出たい人の備忘録。" />
+    <meta property="og:image" content="https://himenon.github.io" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?aa390" rel="stylesheet" />
+    <link href="/lib/prism.css?c4d0b" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?a89e9" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;JavaScriptで正確なドメイン名をパースするには？&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-09-16T12:45:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T11:22:01.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;JavaScriptで正確なドメイン名をパースするには？&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/get-collect-domain-name&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/javascript/get-collect-domain-name&quot;,&quot;content&quot;:&quot;\n&lt;https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string&gt;\n\n```javascript\nfunction extractHostname(url) {\n    var hostname;\n    //find &amp; remove protocol (http, ftp, etc.) and get hostname\n\n    if (url.indexOf(\&quot;://\&quot;) &gt; -1) {\n        hostname = url.split(&#x27;/&#x27;)[2];\n    }\n    else {\n        hostname = url.split(&#x27;/&#x27;)[0];\n    }\n\n    //find &amp; remove port number\n    hostname = hostname.split(&#x27;:&#x27;)[0];\n    //find &amp; remove \&quot;?\&quot;\n    hostname = hostname.split(&#x27;?&#x27;)[0];\n\n    return hostname;\n}\n\n\nfunction extractRootDomain(url) {\n    var domain = extractHostname(url), // 大事\n        splitArr = domain.split(&#x27;.&#x27;),\n        arrLen = splitArr.length;\n\n    //extracting the root domain here\n    //if there is a subdomain \n    if (arrLen &gt; 2) {\n        domain = splitArr[arrLen - 2] + &#x27;.&#x27; + splitArr[arrLen - 1];\n        //check to see if it&#x27;s using a Country Code Top Level Domain (ccTLD) (i.e. \&quot;.me.uk\&quot;)\n        // 二文字のドメインがないことを利用して、co.jpとかを判定している\n        if (splitArr[arrLen - 1].length == 2 &amp;&amp; splitArr[arrLen - 1].length == 2) {\n            //this is using a ccTLD\n            domain = splitArr[arrLen - 3] + &#x27;.&#x27; + domain;\n        }\n    }\n    return domain;\n}\n```&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;JavaScriptで正確なドメイン名をパースするには？&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-09-16T12:45:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T11:22:01.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;JavaScriptで正確なドメイン名をパースするには？&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/get-collect-domain-name&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/javascript/get-collect-domain-name.md&quot;,&quot;name&quot;:&quot;javascript/get-collect-domain-name&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;JavaScriptで正確なドメイン名をパースするには？\&quot;\ncreatedAt: 2018-09-16 12:45:00\nupdatedAt: 2019-05-21 11:22:01\n---\n\n&lt;https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string&gt;\n\n```javascript\nfunction extractHostname(url) {\n    var hostname;\n    //find &amp; remove protocol (http, ftp, etc.) and get hostname\n\n    if (url.indexOf(\&quot;://\&quot;) &gt; -1) {\n        hostname = url.split(&#x27;/&#x27;)[2];\n    }\n    else {\n        hostname = url.split(&#x27;/&#x27;)[0];\n    }\n\n    //find &amp; remove port number\n    hostname = hostname.split(&#x27;:&#x27;)[0];\n    //find &amp; remove \&quot;?\&quot;\n    hostname = hostname.split(&#x27;?&#x27;)[0];\n\n    return hostname;\n}\n\n\nfunction extractRootDomain(url) {\n    var domain = extractHostname(url), // 大事\n        splitArr = domain.split(&#x27;.&#x27;),\n        arrLen = splitArr.length;\n\n    //extracting the root domain here\n    //if there is a subdomain \n    if (arrLen &gt; 2) {\n        domain = splitArr[arrLen - 2] + &#x27;.&#x27; + splitArr[arrLen - 1];\n        //check to see if it&#x27;s using a Country Code Top Level Domain (ccTLD) (i.e. \&quot;.me.uk\&quot;)\n        // 二文字のドメインがないことを利用して、co.jpとかを判定している\n        if (splitArr[arrLen - 1].length == 2 &amp;&amp; splitArr[arrLen - 1].length == 2) {\n            //this is using a ccTLD\n            domain = splitArr[arrLen - 3] + &#x27;.&#x27; + domain;\n        }\n    }\n    return domain;\n}\n```&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">JavaScriptで正確なドメイン名をパースするには？</h1>
+            <p id="page-description">早くが画面から出たい人の備忘録。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2018-09-16 09:45:00</time><span id="created-at__label">更新日</span><time>2019-05-21 08:22:01</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <p><a href="https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string">https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string</a></p><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">extractHostname</span><span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> hostname<span class="token punctuation">;</span>
+    <span class="token comment">//find &amp; remove protocol (http, ftp, etc.) and get hostname</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>url<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token string">"://"</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        hostname <span class="token operator">=</span> url<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span> <span class="token punctuation">{</span>
+        hostname <span class="token operator">=</span> url<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//find &amp; remove port number</span>
+    hostname <span class="token operator">=</span> hostname<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">':'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">//find &amp; remove "?"</span>
+    hostname <span class="token operator">=</span> hostname<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'?'</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> hostname<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">function</span> <span class="token function">extractRootDomain</span><span class="token punctuation">(</span><span class="token parameter">url</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">var</span> domain <span class="token operator">=</span> <span class="token function">extractHostname</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// 大事</span>
+        splitArr <span class="token operator">=</span> domain<span class="token punctuation">.</span><span class="token function">split</span><span class="token punctuation">(</span><span class="token string">'.'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        arrLen <span class="token operator">=</span> splitArr<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+
+    <span class="token comment">//extracting the root domain here</span>
+    <span class="token comment">//if there is a subdomain </span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>arrLen <span class="token operator">></span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        domain <span class="token operator">=</span> splitArr<span class="token punctuation">[</span>arrLen <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">'.'</span> <span class="token operator">+</span> splitArr<span class="token punctuation">[</span>arrLen <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment">//check to see if it's using a Country Code Top Level Domain (ccTLD) (i.e. ".me.uk")</span>
+        <span class="token comment">// 二文字のドメインがないことを利用して、co.jpとかを判定している</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>splitArr<span class="token punctuation">[</span>arrLen <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">2</span> <span class="token operator">&amp;&amp;</span> splitArr<span class="token punctuation">[</span>arrLen <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">.</span>length <span class="token operator">==</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">//this is using a ccTLD</span>
+            domain <span class="token operator">=</span> splitArr<span class="token punctuation">[</span>arrLen <span class="token operator">-</span> <span class="token number">3</span><span class="token punctuation">]</span> <span class="token operator">+</span> <span class="token string">'.'</span> <span class="token operator">+</span> domain<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> domain<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>

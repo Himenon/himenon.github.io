@@ -1,0 +1,99 @@
+<html>
+
+  <head lang="ja">
+    <title>PackageのDynamic Import</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="nodejs,typescript,python,himenon,web,frontend" />
+    <meta name="description" content="早くが画面から出たい人の備忘録。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="PackageのDynamic Import" />
+    <meta property="og:url" content="https://himenon.github.io/javascript/dynamic-import" />
+    <meta property="og:description" content="早くが画面から出たい人の備忘録。" />
+    <meta property="og:image" content="https://himenon.github.io" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?aa390" rel="stylesheet" />
+    <link href="/lib/prism.css?c4d0b" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?a89e9" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;PackageのDynamic Import&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-04-16T01:54:44.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T11:22:01.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;PackageのDynamic Import&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/dynamic-import&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/javascript/dynamic-import&quot;,&quot;content&quot;:&quot;\n昨今のjsでpackageのimportと言えば、\njsファイルの最上位に次のような形式でmoduleをimportします。\n\n```js\nimport * as someModule from &#x27;./dir/someModule.js&#x27;;\n```\n\nこれを、dynamic importする場合どの様になるか。\n\n\n```js\nconst someModule = import(&#x27;./dir/someModule.js&#x27;)\n```\n\nと、書きたいところだが、この場合someModuleにはPromiseが渡るので、\n次のように書く。\n\n```js\n(async () =&gt; {\n  const someModule = await import(&#x27;./dir/someModule.js&#x27;)\n})();\n```\n\n## 具体例\n\nこれで目的は達成されるが、このような場面があるか？\nはい、あります。\n\n例えば、テスト実行前に、ライブラリのimportが必要な場合があります。\nテスト戦隊として必要な場合もあれば、不必要な場合もあります。\n\n例として、FirebaseのCloud Functionを挙げてみると、\n`requrie`を用いて書かれたテストで\n\n```js\nvar adminInitStub;\nbefore(() =&gt; {\n  admin =  require(&#x27;firebase-admin&#x27;);\n  adminInitStub = sinon.stub(admin, &#x27;initializeApp&#x27;);\n  // 省略\n});\n```\n\nがあります。これをES6で記述すると、\n\n```js\nlet adminInitStub;\nbefore(async () =&gt; {\n  admin = await import(&#x27;firebase-admin&#x27;);\n  adminInitStub = sinon.stub(admin, &#x27;initializeApp&#x27;);\n  // 省略\n});\n```\n\nとなります。Nodeのバージョンによっては、\nそのまま`require`を使ったほうが良い場合もあるので、全部が全部async/awaitの方が良い、\nということはありません。\n\nただ、手法として知っておくと良いでしょう。\n\n\n参考\n\n- [ES proposal: import() – dynamically importing ES modules](http://2ality.com/2017/01/import-operator.html)\n- [Cloud Functions の単体テスト - Firebase](https://firebase.google.com/docs/functions/unit-testing?hl=ja)\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;PackageのDynamic Import&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-04-16T01:54:44.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T11:22:01.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;PackageのDynamic Import&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/dynamic-import&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/javascript/dynamic-import.md&quot;,&quot;name&quot;:&quot;javascript/dynamic-import&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;PackageのDynamic Import\&quot;\ncreatedAt: 2018-04-16 01:54:44\nupdatedAt: 2019-05-21 11:22:01\n---\n\n昨今のjsでpackageのimportと言えば、\njsファイルの最上位に次のような形式でmoduleをimportします。\n\n```js\nimport * as someModule from &#x27;./dir/someModule.js&#x27;;\n```\n\nこれを、dynamic importする場合どの様になるか。\n\n\n```js\nconst someModule = import(&#x27;./dir/someModule.js&#x27;)\n```\n\nと、書きたいところだが、この場合someModuleにはPromiseが渡るので、\n次のように書く。\n\n```js\n(async () =&gt; {\n  const someModule = await import(&#x27;./dir/someModule.js&#x27;)\n})();\n```\n\n## 具体例\n\nこれで目的は達成されるが、このような場面があるか？\nはい、あります。\n\n例えば、テスト実行前に、ライブラリのimportが必要な場合があります。\nテスト戦隊として必要な場合もあれば、不必要な場合もあります。\n\n例として、FirebaseのCloud Functionを挙げてみると、\n`requrie`を用いて書かれたテストで\n\n```js\nvar adminInitStub;\nbefore(() =&gt; {\n  admin =  require(&#x27;firebase-admin&#x27;);\n  adminInitStub = sinon.stub(admin, &#x27;initializeApp&#x27;);\n  // 省略\n});\n```\n\nがあります。これをES6で記述すると、\n\n```js\nlet adminInitStub;\nbefore(async () =&gt; {\n  admin = await import(&#x27;firebase-admin&#x27;);\n  adminInitStub = sinon.stub(admin, &#x27;initializeApp&#x27;);\n  // 省略\n});\n```\n\nとなります。Nodeのバージョンによっては、\nそのまま`require`を使ったほうが良い場合もあるので、全部が全部async/awaitの方が良い、\nということはありません。\n\nただ、手法として知っておくと良いでしょう。\n\n\n参考\n\n- [ES proposal: import() – dynamically importing ES modules](http://2ality.com/2017/01/import-operator.html)\n- [Cloud Functions の単体テスト - Firebase](https://firebase.google.com/docs/functions/unit-testing?hl=ja)\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">PackageのDynamic Import</h1>
+            <p id="page-description">早くが画面から出たい人の備忘録。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2018-04-16 10:54:44</time><span id="created-at__label">更新日</span><time>2019-05-21 08:22:01</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <p>昨今のjsでpackageのimportと言えば、
+            jsファイルの最上位に次のような形式でmoduleをimportします。</p><pre class="language-js"><code class="language-js"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> someModule <span class="token keyword">from</span> <span class="token string">'./dir/someModule.js'</span><span class="token punctuation">;</span>
+</code></pre>
+          <p>これを、dynamic importする場合どの様になるか。</p><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> someModule <span class="token operator">=</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./dir/someModule.js'</span><span class="token punctuation">)</span>
+</code></pre>
+          <p>と、書きたいところだが、この場合someModuleにはPromiseが渡るので、
+            次のように書く。</p><pre class="language-js"><code class="language-js"><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> someModule <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'./dir/someModule.js'</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+          <h2>具体例</h2>
+          <p>これで目的は達成されるが、このような場面があるか？
+            はい、あります。</p>
+          <p>例えば、テスト実行前に、ライブラリのimportが必要な場合があります。
+            テスト戦隊として必要な場合もあれば、不必要な場合もあります。</p>
+          <p>例として、FirebaseのCloud Functionを挙げてみると、
+            <code>requrie</code>を用いて書かれたテストで</p><pre class="language-js"><code class="language-js"><span class="token keyword">var</span> adminInitStub<span class="token punctuation">;</span>
+<span class="token function">before</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  admin <span class="token operator">=</span>  <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'firebase-admin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  adminInitStub <span class="token operator">=</span> sinon<span class="token punctuation">.</span><span class="token function">stub</span><span class="token punctuation">(</span>admin<span class="token punctuation">,</span> <span class="token string">'initializeApp'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 省略</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+          <p>があります。これをES6で記述すると、</p><pre class="language-js"><code class="language-js"><span class="token keyword">let</span> adminInitStub<span class="token punctuation">;</span>
+<span class="token function">before</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  admin <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token keyword">import</span><span class="token punctuation">(</span><span class="token string">'firebase-admin'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  adminInitStub <span class="token operator">=</span> sinon<span class="token punctuation">.</span><span class="token function">stub</span><span class="token punctuation">(</span>admin<span class="token punctuation">,</span> <span class="token string">'initializeApp'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 省略</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+          <p>となります。Nodeのバージョンによっては、
+            そのまま<code>require</code>を使ったほうが良い場合もあるので、全部が全部async/awaitの方が良い、
+            ということはありません。</p>
+          <p>ただ、手法として知っておくと良いでしょう。</p>
+          <p>参考</p>
+          <ul>
+            <li><a href="http://2ality.com/2017/01/import-operator.html">ES proposal: import() – dynamically importing ES modules</a></li>
+            <li><a href="https://firebase.google.com/docs/functions/unit-testing?hl=ja">Cloud Functions の単体テスト - Firebase</a></li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>

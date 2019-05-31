@@ -1,0 +1,92 @@
+<html>
+
+  <head lang="ja">
+    <title>DjangoでMany to ManyをAdmin画面のリストに表示する</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="nodejs,typescript,python,himenon,web,frontend" />
+    <meta name="description" content="早くが画面から出たい人の備忘録。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="DjangoでMany to ManyをAdmin画面のリストに表示する" />
+    <meta property="og:url" content="https://himenon.github.io/python/django/show-many-to-many-admin-view" />
+    <meta property="og:description" content="早くが画面から出たい人の備忘録。" />
+    <meta property="og:image" content="https://himenon.github.io" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?9d6a4" rel="stylesheet" />
+    <link href="/lib/prism.css?6435f" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?8dead" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;DjangoでMany to ManyをAdmin画面のリストに表示する&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-09-15T11:55:29.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T11:22:01.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;DjangoでMany to ManyをAdmin画面のリストに表示する&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/python/django/show-many-to-many-admin-view&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/python/django/show-many-to-many-admin-view&quot;,&quot;content&quot;:&quot;\n## サンプルモデル\n\n```python\nclass PurchaseOrder(models.Model):\n    product = models.ManyToManyField(&#x27;Product&#x27;)\n    vendor = models.ForeignKey(&#x27;VendorProfile&#x27;)\n    dollar_amount = models.FloatField(verbose_name=&#x27;Price&#x27;)\n\nclass Product(models.Model):\n   products = models.CharField(max_length=256)\n\n   def __unicode__(self):\n       return self.products\n```\n\n## Admin\n\n### 正しい実装\n\n```python\n# Adminの方に登録する\nclass PurchaseOrderAdmin(admin.ModelAdmin):\n    fields = [&#x27;product&#x27;, &#x27;dollar_amount&#x27;]\n    list_display = (&#x27;get_products&#x27;, &#x27;vendor&#x27;)\n\n    def get_products(self, obj):\n        return \&quot;\\n\&quot;.join([p.products for p in obj.product.all()])\n```\n\n```python\n# Modelに登録する\nclass PurchaseOrder(models.Model):\n    product = models.ManyToManyField(&#x27;Product&#x27;)\n    vendor = models.ForeignKey(&#x27;VendorProfile&#x27;)\n    dollar_amount = models.FloatField(verbose_name=&#x27;Price&#x27;)\n\n    def get_products(self):\n        return \&quot;\\n\&quot;.join([p.products for p in self.product.all()])\n```\n\n### 間違い\n\n```python\nclass PurchaseOrderAdmin(admin.ModelAdmin):\n    fields = [&#x27;product&#x27;, &#x27;dollar_amount&#x27;]\n    list_display = (&#x27;product&#x27;, &#x27;vendor&#x27;)\n```\n\n\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;DjangoでMany to ManyをAdmin画面のリストに表示する&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[],&quot;createdAt&quot;:&quot;2018-09-15T11:55:29.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-05-21T11:22:01.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;DjangoでMany to ManyをAdmin画面のリストに表示する&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/python/django/show-many-to-many-admin-view&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早くが画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/python/django/show-many-to-many-admin-view.md&quot;,&quot;name&quot;:&quot;python/django/show-many-to-many-admin-view&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;DjangoでMany to ManyをAdmin画面のリストに表示する\&quot;\ncreatedAt: 2018-09-15 11:55:29\nupdatedAt: 2019-05-21 11:22:01\n---\n\n## サンプルモデル\n\n```python\nclass PurchaseOrder(models.Model):\n    product = models.ManyToManyField(&#x27;Product&#x27;)\n    vendor = models.ForeignKey(&#x27;VendorProfile&#x27;)\n    dollar_amount = models.FloatField(verbose_name=&#x27;Price&#x27;)\n\nclass Product(models.Model):\n   products = models.CharField(max_length=256)\n\n   def __unicode__(self):\n       return self.products\n```\n\n## Admin\n\n### 正しい実装\n\n```python\n# Adminの方に登録する\nclass PurchaseOrderAdmin(admin.ModelAdmin):\n    fields = [&#x27;product&#x27;, &#x27;dollar_amount&#x27;]\n    list_display = (&#x27;get_products&#x27;, &#x27;vendor&#x27;)\n\n    def get_products(self, obj):\n        return \&quot;\\n\&quot;.join([p.products for p in obj.product.all()])\n```\n\n```python\n# Modelに登録する\nclass PurchaseOrder(models.Model):\n    product = models.ManyToManyField(&#x27;Product&#x27;)\n    vendor = models.ForeignKey(&#x27;VendorProfile&#x27;)\n    dollar_amount = models.FloatField(verbose_name=&#x27;Price&#x27;)\n\n    def get_products(self):\n        return \&quot;\\n\&quot;.join([p.products for p in self.product.all()])\n```\n\n### 間違い\n\n```python\nclass PurchaseOrderAdmin(admin.ModelAdmin):\n    fields = [&#x27;product&#x27;, &#x27;dollar_amount&#x27;]\n    list_display = (&#x27;product&#x27;, &#x27;vendor&#x27;)\n```\n\n\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早くが画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">DjangoでMany to ManyをAdmin画面のリストに表示する</h1>
+            <p id="page-description">早くが画面から出たい人の備忘録。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2018-09-15 08:55:29</time><span id="created-at__label">更新日</span><time>2019-05-21 08:22:01</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h2>サンプルモデル</h2><pre class="language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">PurchaseOrder</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    product <span class="token operator">=</span> models<span class="token punctuation">.</span>ManyToManyField<span class="token punctuation">(</span><span class="token string">'Product'</span><span class="token punctuation">)</span>
+    vendor <span class="token operator">=</span> models<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span><span class="token string">'VendorProfile'</span><span class="token punctuation">)</span>
+    dollar_amount <span class="token operator">=</span> models<span class="token punctuation">.</span>FloatField<span class="token punctuation">(</span>verbose_name<span class="token operator">=</span><span class="token string">'Price'</span><span class="token punctuation">)</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Product</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+   products <span class="token operator">=</span> models<span class="token punctuation">.</span>CharField<span class="token punctuation">(</span>max_length<span class="token operator">=</span><span class="token number">256</span><span class="token punctuation">)</span>
+
+   <span class="token keyword">def</span> <span class="token function">__unicode__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+       <span class="token keyword">return</span> self<span class="token punctuation">.</span>products
+</code></pre>
+          <h2>Admin</h2>
+          <h3>正しい実装</h3><pre class="language-python"><code class="language-python"><span class="token comment"># Adminの方に登録する</span>
+<span class="token keyword">class</span> <span class="token class-name">PurchaseOrderAdmin</span><span class="token punctuation">(</span>admin<span class="token punctuation">.</span>ModelAdmin<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    fields <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'product'</span><span class="token punctuation">,</span> <span class="token string">'dollar_amount'</span><span class="token punctuation">]</span>
+    list_display <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'get_products'</span><span class="token punctuation">,</span> <span class="token string">'vendor'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">get_products</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> obj<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">"\n"</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span>p<span class="token punctuation">.</span>products <span class="token keyword">for</span> p <span class="token keyword">in</span> obj<span class="token punctuation">.</span>product<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre><pre class="language-python"><code class="language-python"><span class="token comment"># Modelに登録する</span>
+<span class="token keyword">class</span> <span class="token class-name">PurchaseOrder</span><span class="token punctuation">(</span>models<span class="token punctuation">.</span>Model<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    product <span class="token operator">=</span> models<span class="token punctuation">.</span>ManyToManyField<span class="token punctuation">(</span><span class="token string">'Product'</span><span class="token punctuation">)</span>
+    vendor <span class="token operator">=</span> models<span class="token punctuation">.</span>ForeignKey<span class="token punctuation">(</span><span class="token string">'VendorProfile'</span><span class="token punctuation">)</span>
+    dollar_amount <span class="token operator">=</span> models<span class="token punctuation">.</span>FloatField<span class="token punctuation">(</span>verbose_name<span class="token operator">=</span><span class="token string">'Price'</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">def</span> <span class="token function">get_products</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> <span class="token string">"\n"</span><span class="token punctuation">.</span>join<span class="token punctuation">(</span><span class="token punctuation">[</span>p<span class="token punctuation">.</span>products <span class="token keyword">for</span> p <span class="token keyword">in</span> self<span class="token punctuation">.</span>product<span class="token punctuation">.</span><span class="token builtin">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+          <h3>間違い</h3><pre class="language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">PurchaseOrderAdmin</span><span class="token punctuation">(</span>admin<span class="token punctuation">.</span>ModelAdmin<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    fields <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">'product'</span><span class="token punctuation">,</span> <span class="token string">'dollar_amount'</span><span class="token punctuation">]</span>
+    list_display <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token string">'product'</span><span class="token punctuation">,</span> <span class="token string">'vendor'</span><span class="token punctuation">)</span>
+</code></pre>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
