@@ -86,6 +86,7 @@ pre[class*="language-"] {
 }
 
 .wrapper {
+  width: 86%;
   max-width: 960px;
   padding-top: 2em;
   margin: 0 auto 5em auto;
