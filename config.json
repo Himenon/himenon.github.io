@@ -2,7 +2,7 @@
   "global": {
     "lang": "ja",
     "title": "himenon.github.io",
-    "description": "早くが画面から出たい人の備忘録。",
+    "description": "早く画面から出たい人の備忘録。",
     "keywords": "nodejs,typescript,python,himenon,web,frontend",
     "copyright": "@Himenon",
     "viewport": {
@@ -21,7 +21,25 @@
       "./node_modules/prismjs/themes/prism.css",
       "/assets/stylesheets/styles.css"
     ],
-    "link": []
+    "link": [
+      {
+        "rel": "apple-touch-icon",
+        "sizes": "180x180",
+        "href": "assets/images/miku.png"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "32x32",
+        "href": "assets/images/favicon-32x32.png"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "16x16",
+        "href": "assets/images/favicon-16x16.png"
+      }
+    ]
   },
   "baseUrl": "https://himenon.github.io",
   "baseUri": "/",
@@ -29,7 +47,7 @@
   "layoutFile": "./parts/template/template.js",
   "customComponentsFile": "./parts/components/components.js",
   "blacklist": {
-    "extensions": [".html", ".json", ".mdx"]
+    "extensions": [".html", ".json", ".mdx", ".md"]
   },
   "port": 9000,
   "plugins": [
