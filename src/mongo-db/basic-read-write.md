@@ -1,5 +1,7 @@
 ---
-title: "mongo DBの基本的なRead Write"
+title: "pythonで利用するmongo DBの基本的なRead Write"
+description: "pythonでmongoDBを利用するときに最初に動作確認で叩きそうなコマンド"
+tags: "python,mongodb"
 createdAt: 2018-03-26 01:22:30
 updatedAt: 2019-05-21 11:22:01
 ---

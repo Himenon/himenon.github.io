@@ -1,5 +1,7 @@
 ---
-title: "PackageのDynamic Import"
+title: "JavaScript（NodeJS）ののDynamic Import"
+description: "NodeJSで他のモジュールを動的にインポートするときの書き方。"
+tags: "nodejs,dynamic import,動的インポート"
 createdAt: 2018-04-16 01:54:44
 updatedAt: 2019-05-21 11:22:01
 ---
@@ -32,7 +34,7 @@ const someModule = import('./dir/someModule.js')
 これで目的は達成されるが、このような場面があるか？
 はい、あります。
 
-例えば、テスト実行前に、ライブラリのimportが必要な場合があります。
+たとえば、テスト実行前に、ライブラリのimportをする場合があります。
 テスト戦隊として必要な場合もあれば、不必要な場合もあります。
 
 例として、FirebaseのCloud Functionを挙げてみると、

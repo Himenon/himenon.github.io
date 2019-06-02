@@ -1,5 +1,7 @@
 ---
 title: "2018年に参加した勉強会"
+description: "2018年における@Himenonが参加した勉強会などのまとめ"
+tags: "github,profile,activity"
 createdAt: 2018-03-28 08:24:48
 updatedAt: 2019-05-21 11:22:01
 ---
@@ -13,11 +15,11 @@ updatedAt: 2019-05-21 11:22:01
 ### 2018年
 
 1. 03/08 Kubernetes Meetup Tokyo #10
-1. 03/02 酔いどれGCPUG
+2. 03/02 酔いどれGCPUG
     - LT発表しました → [発表後のブログ](/presentation/2018/03-02-Yoidore-GCPUG-LT/)
-1. 02/21 【サポーターズCoLab勉強会】GKEで学ぶKubernetes入門
-1. 02/16 Docker Meetup Tokyo #21
-1. 02/10 Cookpad TechConf 2018
+3. 02/21 【サポーターズCoLab勉強会】GKEで学ぶKubernetes入門
+4. 02/16 Docker Meetup Tokyo #21
+5. 02/10 Cookpad TechConf 2018
 
 ### 2017年
 

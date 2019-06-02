@@ -1,5 +1,7 @@
 ---
 title: "GithubのGraphQLを利用する"
+description: "試してみた"
+tags: "github,graphql"
 createdAt: 2018-03-22 06:08:32
 updatedAt: 2019-05-21 11:22:01
 ---

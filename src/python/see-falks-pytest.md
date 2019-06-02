@@ -1,8 +1,11 @@
 ---
 title: "Flaskのpytestのコードを少しだけ覗いてみる"
+description: "Flaskのテストコードを垣間見る"
+tags: "python,flask,test"
 createdAt: 2018-03-30 04:56:23
 updatedAt: 2019-05-31 23:50:47
 ---
+
 ## Flaskのテストコードより
 
 `unittest.TestCase`のsetUpやtearDownを使って、テスト対象のインスタンスを使いまわすやり方があるが、

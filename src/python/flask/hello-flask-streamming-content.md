@@ -1,5 +1,7 @@
 ---
 title: "Flaskのストリーミングを利用してみる"
+description: "ジェネレーターを利用して文字列のストリーミングを試す"
+tags: "python,flask,streaming"
 createdAt: 2018-03-09 11:40:20
 updatedAt: 2019-05-21 11:22:01
 ---

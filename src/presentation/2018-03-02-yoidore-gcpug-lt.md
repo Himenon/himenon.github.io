@@ -1,5 +1,7 @@
 ---
 title: "2018年3月2日 酔いどれGCPUG で発表してきました"
+description: "GKEを数ヶ月扱ってきた中で、最初に見ておくと良かったね、というものをまとめました"
+tags: "gke,google kubernetes engine,発表"
 createdAt: 2018-03-04 04:44:15
 updatedAt: 2019-05-21 11:22:01
 ---
@@ -8,7 +10,7 @@ updatedAt: 2019-05-21 11:22:01
 
 ## はじめに
 
-「GKE始めるにあたって 最初に知っておきたかったこと」というタイトルで発表しました。
+「GKE始めるにあたって最初に知っておきたかったこと」というタイトルで発表しました。
 
 ※ GKE = Google Kubernetes Engine
 

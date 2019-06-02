@@ -1,5 +1,7 @@
 ---
 title: "DjangoでNginxのUnix Socketを利用する"
+description: "Unix socketでDjangoを公開する"
+tags: "python,django,nginx,unix-socket"
 createdAt: 2018-09-15 11:55:29
 updatedAt: 2019-05-21 11:22:01
 ---

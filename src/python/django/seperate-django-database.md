@@ -1,5 +1,7 @@
 ---
 title: "Djangoでデータベースを分割して利用する"
+description: "複数のデータベースへの参照をDjangoで構築する"
+tags: "python,django,database,separate"
 createdAt: 2018-04-16 01:54:44
 updatedAt: 2019-05-21 11:22:01
 ---
@@ -10,9 +12,9 @@ Django 2.0のドキュメントでは[Multiple databases](https://docs.djangopro
 やることは4つ
 
 1. `settings.py`の`DATABASES`に複数のDBの接続先を記入する
-1. `settings.py`に`DATABASE_APPS_MAPPING`を定義し、アプリケーションごとにKV形式で接続先のDB名を記述する
-1. `settings.py`に`DATABASE_ROUTERS`を定義し、接続するDBを振り分けるためのRouterの定義を配列形式で記述する
-1. `DATABASE_ROUTERS`に定義されたrouterを用意する
+2. `settings.py`に`DATABASE_APPS_MAPPING`を定義し、アプリケーションごとにKV形式で接続先のDB名を記述する
+3. `settings.py`に`DATABASE_ROUTERS`を定義し、接続するDBを振り分けるためのRouterの定義を配列形式で記述する
+4. `DATABASE_ROUTERS`に定義されたrouterを用意する
 
 実際に具体例を示してみます。
 ここで示す具体例では、`DATABASE_APPS_MAPPING`に指定したとおりにデータベースが

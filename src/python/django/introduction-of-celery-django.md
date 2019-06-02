@@ -1,5 +1,7 @@
 ---
 title: "Django 2.0にCelery 4.0を導入し、WEBの管理画面でCronを管理する"
+description: "管理画面つきCron Jobの指定"
+tags: "celery,python,django"
 createdAt: 2018-03-12 01:39:51
 updatedAt: 2019-05-21 11:22:01
 ---
