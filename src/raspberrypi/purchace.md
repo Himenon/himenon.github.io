@@ -1,5 +1,7 @@
 ---
 title: "Raspberrypiのパーツを買った"
+description: "買ってみた"
+tags: "raspberrypi"
 createdAt: 2018-09-08 11:47:50
 updatedAt: 2019-05-21 11:22:01
 ---

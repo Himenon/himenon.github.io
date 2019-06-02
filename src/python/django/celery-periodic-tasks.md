@@ -1,5 +1,7 @@
 ---
 title: "CeleryのPeriodic Tasksを使う"
+description: "定期的なタスク（Periodic Task）の使い方についてまとめました。"
+tags: "celery,python.celery,periodic task,定期実行"
 createdAt: 2018-03-07 07:16:19
 updatedAt: 2019-05-22 01:08:17
 ---

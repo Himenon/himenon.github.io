@@ -1,5 +1,7 @@
 ---
 title: "Kubernetesに配置したNginxでアクセス制御する"
+description: "NginxのPodを置いてバランシングする話"
+tags: "nginx,kubernetes,container"
 createdAt: 2018-02-15 03:17:18
 updatedAt: 2019-05-22 01:08:17
 ---
@@ -27,7 +29,7 @@ service.spec.externalTrafficPolicy = Local
 NginxをL7ロードバランサー兼、リバースプロキシとして利用していて、
 Nginxでリクエスト元のIPアドレスを制限したい時があります。
 
-例えば、社内からアクセスはできるが、社外からは不可にするなどです。
+たとえば、社内からアクセスはできるが、社外からは不可にするなどです。
 
 ## 検証
 

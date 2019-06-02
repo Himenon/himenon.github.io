@@ -1,5 +1,7 @@
 ---
 title: "jupyter_notebook_config.pyの読み込み先を変更する"
+description: "jupyter notebookの設定"
+tags: "python,jupyter,notebook"
 createdAt: 2018-03-26 01:22:30
 updatedAt: 2019-05-21 11:22:01
 ---

@@ -1,5 +1,7 @@
 ---
-title: "MongoDBの基本クエリ"
+title: "復習用MongoDBの基本クエリ"
+description: "簡易的な復習用にわかり易い例をメモしておく"
+tags: "mongodb"
 createdAt: 2018-03-26 01:22:30
 updatedAt: 2019-05-21 11:22:01
 ---
@@ -11,10 +13,6 @@ db.client.find({
     'text': {'$regex': 'hello'}
 })
 ```
-
-
-## 配列
-
 
 ### 長さ
 

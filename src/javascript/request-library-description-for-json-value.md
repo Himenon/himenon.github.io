@@ -1,5 +1,7 @@
 ---
-title: "nodeのrequestライブラリの`json`オプションの取り扱いについて"
+title: "nodeのrequestライブラリの`json`オプションの取り扱いについて調べてみた"
+description: "json:trueの指定をしてもPOST時にjson化されないらしい？"
+tags: "javascript,library,requests"
 createdAt: 2018-04-09 03:32:29
 updatedAt: 2019-05-21 11:22:01
 ---
@@ -14,7 +16,7 @@ updatedAt: 2019-05-21 11:22:01
 
 ## 簡単に調べてみた
 
-知人が、nodeのHTTP Clientである[reuqest](https://github.com/request/request)をPOST時に利用したときに、
+nodeのHTTP Clientである[request](https://github.com/request/request)をPOST時に利用したとき、
 `json: true`のoptionがあるけど、`body`がjsonかされないっていう話を聞いたので、調べてみた。
 
 - [https://stackoverflow.com/questions/27190447/pass-json-to-http-post-request](https://stackoverflow.com/questions/27190447/pass-json-to-http-post-request)
