@@ -1,7 +1,7 @@
 ---
 title: "GKEをCronで起動・停止させる"
 description: "GKEを平日の朝9:00に起動して、18:00に停止させるようにcronを仕込む"
-tags: "kubernetes,cron,start and stop"
+keywords: "kubernetes,cron,start and stop"
 createdAt: 2018-03-30 08:41:08
 updatedAt: 2019-05-21 11:22:01
 ---

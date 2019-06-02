@@ -1,7 +1,7 @@
 ---
 title: "nodeのrequestライブラリの`json`オプションの取り扱いについて調べてみた"
 description: "json:trueの指定をしてもPOST時にjson化されないらしい？"
-tags: "javascript,library,requests"
+keywords: "javascript,library,requests"
 createdAt: 2018-04-09 03:32:29
 updatedAt: 2019-05-21 11:22:01
 ---

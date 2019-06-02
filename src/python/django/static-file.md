@@ -1,7 +1,7 @@
 ---
 title: "Djangoにおける静的ファイルの探索がコケたときのエラー"
 description: "静的ファイルの探索エラー"
-tags: "python,django,static file"
+keywords: "python,django,static file"
 createdAt: 2018-09-15 11:55:29
 updatedAt: 2019-05-21 11:22:01
 ---

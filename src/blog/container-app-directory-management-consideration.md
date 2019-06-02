@@ -1,7 +1,7 @@
 ---
 title: "コンテナーアプリケーション作成時のディレクトリ成長設計の考察"
 description: "コンテナーを利用したアプリケーションを作成するときのディレクトリ設計について考えてみた。"
-tags: "docker,kubernetes,container,thinking,考察"
+keywords: "docker,kubernetes,container,thinking,考察"
 createdAt: 2018-03-16 02:28:23
 updatedAt: 2019-05-21 11:22:01
 ---

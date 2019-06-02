@@ -1,7 +1,7 @@
 ---
 title: "URLからJavaScriptでドメイン名を抽出するには？"
 description: "与えられた文字列から、文字列操作でドメイン名だけを抽出する"
-tags: "javascript,ドメイン名,抽出"
+keywords: "javascript,ドメイン名,抽出"
 createdAt: 2018-09-16 12:45:00
 updatedAt: 2019-05-21 11:22:01
 ---

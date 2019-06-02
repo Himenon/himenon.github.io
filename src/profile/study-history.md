@@ -1,7 +1,7 @@
 ---
 title: "2018年に参加した勉強会"
 description: "2018年における@Himenonが参加した勉強会などのまとめ"
-tags: "github,profile,activity"
+keywords: "github,profile,activity"
 createdAt: 2018-03-28 08:24:48
 updatedAt: 2019-05-21 11:22:01
 ---

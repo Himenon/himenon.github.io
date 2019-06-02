@@ -1,7 +1,7 @@
 ---
 title: "DjangoでMany to ManyをAdmin画面のリストに表示する"
 description: "多対多の関係を持つデータベースを管理画面に表示する"
-tags: "python,django,database,many-to-many"
+keywords: "python,django,database,many-to-many"
 createdAt: 2018-09-15 11:55:29
 updatedAt: 2019-05-21 11:22:01
 ---

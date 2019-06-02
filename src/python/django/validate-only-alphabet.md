@@ -1,7 +1,7 @@
 ---
 title: "DjangoでValidation アルファベットのみのバリデーションを実装する"
 description: "バリデーションメモ"
-tags: "python,django,alphabet,validation"
+keywords: "python,django,alphabet,validation"
 createdAt: 2018-09-15 11:55:29
 updatedAt: 2019-05-21 11:22:01
 ---

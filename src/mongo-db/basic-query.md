@@ -1,7 +1,7 @@
 ---
 title: "復習用MongoDBの基本クエリ"
 description: "簡易的な復習用にわかり易い例をメモしておく"
-tags: "mongodb"
+keywords: "mongodb"
 createdAt: 2018-03-26 01:22:30
 updatedAt: 2019-05-21 11:22:01
 ---

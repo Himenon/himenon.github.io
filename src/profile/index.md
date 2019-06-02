@@ -1,7 +1,7 @@
 ---
 title: "2018年のプロフィール"
 description: "2018年における@Himenonのプロフィール目次"
-tags: "github,profile,activity"
+keywords: "github,profile,activity"
 createdAt: 2018-03-30 01:32:34
 updatedAt: 2019-05-21 11:22:01
 ---

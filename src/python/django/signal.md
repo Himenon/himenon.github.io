@@ -1,7 +1,7 @@
 ---
 title: "Djangoの保存まと保存後のSignalでメッセージを出す"
 description: "データベースの保存前・保存後に処理をフックさせる"
-tags: "python,django,database,signal"
+keywords: "python,django,database,signal"
 createdAt: 2018-09-15 11:55:29
 updatedAt: 2019-05-21 11:22:01
 ---

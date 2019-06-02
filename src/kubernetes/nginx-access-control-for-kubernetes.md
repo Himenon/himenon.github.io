@@ -1,7 +1,7 @@
 ---
 title: "Kubernetesに配置したNginxでアクセス制御する"
 description: "NginxのPodを置いてバランシングする話"
-tags: "nginx,kubernetes,container"
+keywords: "nginx,kubernetes,container"
 createdAt: 2018-02-15 03:17:18
 updatedAt: 2019-05-22 01:08:17
 ---

@@ -1,7 +1,7 @@
 ---
 title: "静的サイトジェネレーターの選定時に考えること"
 description: "様々な静的サイトジェネレーターの中から自分にあった静的サイトジェネレーターをどうやって探すのか考えてみた。"
-tags: "static site generator,静的サイトジェネレーター,技術選定"
+keywords: "static site generator,静的サイトジェネレーター,技術選定"
 createdAt: 2018-02-14 02:24:48
 updatedAt: 2019-05-21 11:22:01
 ---

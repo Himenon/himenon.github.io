@@ -1,7 +1,7 @@
 ---
 title: "Gitの最新のCommitメッセージに対する正規表現"
 description: "最新のコミットメッセージをgrepする場合のコマンド"
-tags: "git,grep"
+keywords: "git,grep"
 createdAt: 2018-10-05 01:25:44
 updatedAt: 2019-05-21 11:22:01
 ---

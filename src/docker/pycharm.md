@@ -1,5 +1,7 @@
 ---
 title: "DockerをPycharmで使う"
+description: "バックグラウンドでDocker内部のPythonを参照するように設定する"
+keywords: "docker,pycharm"
 createdAt: 2018-09-13 04:13:53
 updatedAt: 2019-05-22 01:08:17
 ---

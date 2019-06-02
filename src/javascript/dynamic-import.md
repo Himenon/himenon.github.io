@@ -1,7 +1,7 @@
 ---
 title: "JavaScript（NodeJS）ののDynamic Import"
 description: "NodeJSで他のモジュールを動的にインポートするときの書き方。"
-tags: "nodejs,dynamic import,動的インポート"
+keywords: "nodejs,dynamic import,動的インポート"
 createdAt: 2018-04-16 01:54:44
 updatedAt: 2019-05-21 11:22:01
 ---

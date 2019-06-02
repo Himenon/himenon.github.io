@@ -1,7 +1,7 @@
 ---
 title: "DjangoにAppを新たに追加したときにやること"
 description: "新しくアプリを追加するときに設定する事項"
-tags: "python,django"
+keywords: "python,django"
 createdAt: 2018-03-06 06:50:19
 updatedAt: 2019-05-21 11:22:01
 ---

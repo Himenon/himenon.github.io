@@ -1,5 +1,7 @@
 ---
 title: "Dockerで利用するコマンド例"
+description: "コピペで動くコマンドを書き連ねる"
+keywords: "docker,shortcut"
 createdAt: 2018-09-13 04:06:08
 updatedAt: 2019-05-21 09:35:05
 ---

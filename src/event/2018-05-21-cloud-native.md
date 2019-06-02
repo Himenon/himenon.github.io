@@ -1,7 +1,7 @@
 ---
 title: "Cloud Native Meetup Tokyo #1に行ってきた"
 description: "Cloud Native Meetup Tokyo #1に参加してきたときのメモ"
-tags: "cloud,meetup,Cloud Native Meetup,Tokyo"
+keywords: "cloud,meetup,Cloud Native Meetup,Tokyo"
 createdAt: 2018-05-22 01:01:01
 updatedAt: 2019-05-21 11:22:01
 ---

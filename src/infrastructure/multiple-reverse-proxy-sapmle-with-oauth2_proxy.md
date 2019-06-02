@@ -1,7 +1,7 @@
 ---
 title: "複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする"
 description: "oauth2_proxyを複数のリバースプロキシ先に対応させてみた。"
-tags: "oauth2_proxy,nginx,oauth"
+keywords: "oauth2_proxy,nginx,oauth"
 createdAt: 2018-02-19 01:22:10
 updatedAt: 2019-05-21 11:22:01
 ---

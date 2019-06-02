@@ -1,7 +1,7 @@
 ---
 title: "2018年3月2日 酔いどれGCPUG で発表してきました"
 description: "GKEを数ヶ月扱ってきた中で、最初に見ておくと良かったね、というものをまとめました"
-tags: "gke,google kubernetes engine,発表"
+keywords: "gke,google kubernetes engine,発表"
 createdAt: 2018-03-04 04:44:15
 updatedAt: 2019-05-21 11:22:01
 ---

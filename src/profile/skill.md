@@ -1,7 +1,7 @@
 ---
 title: "2018年3月時点のスキルセット"
 description: "2018年における@Himenonのスキルセット"
-tags: "github,profile,activity,skill"
+keywords: "github,profile,activity,skill"
 createdAt: 2018-03-27 02:40:39
 updatedAt: 2019-05-21 11:22:01
 ---

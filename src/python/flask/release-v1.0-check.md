@@ -1,7 +1,7 @@
 ---
 title: "Flaskのv1.0のリリースで変わったこと"
 description: "リリースノートのメモ。"
-tags: "python,flask,release note"
+keywords: "python,flask,release note"
 createdAt: 2018-05-03 11:47:53
 updatedAt: 2019-05-22 01:08:17
 ---

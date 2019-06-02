@@ -218,7 +218,7 @@ declare module "@custom-site/page" {
   export interface Index {
     uri: string;
     title: string;
-    tags: string[];
+    keywords: string[];
   }
 
   export interface PostProps {

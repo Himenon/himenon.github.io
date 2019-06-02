@@ -1,7 +1,7 @@
 ---
 title: "ローカルのgitに登録しているショートカット"
 description: "git configに書いておくもの"
-tags: "git,shortcut"
+keywords: "git,shortcut"
 createdAt: 2018-04-12 06:04:47
 updatedAt: 2019-05-21 11:22:01
 ---
