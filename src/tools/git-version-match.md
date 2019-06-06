@@ -10,7 +10,7 @@ updatedAt: 2019-05-21 11:22:01
 
 ## バージョン情報などに引っ掛けてなにかしたいとき用
 
-```sh
+```bash
 # /bin/sh
 
 COMMIT_MSG=`git log -1 --oneline | awk '{print $2 }'`

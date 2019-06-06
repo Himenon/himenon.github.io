@@ -17,11 +17,11 @@ updatedAt: 2019-05-21 11:22:01
 
 図で説明すると、次のようになります。
 
-![CookieCutterのアーキテクチャ](cookiecutter-architecture.svg)
+![CookieCutterのアーキテクチャ](./cookiecutter-architecture.svg)
 
-- プロジェクトの雛形: Githubリポジトリ or ローカル
-- 雛形に挿入する値: cookiecutter利用者に委ねられる。デフォルトはインタラクティブに入力。
-- Project Layout: 出力結果。
+- プロジェクトの雛形：GitHubリポジトリかローカル
+- 雛形に挿入する値：cookiecutter利用者へ委ねられる。デフォルトはインタラクティブに入力
+- Project Layout：出力結果
 
 ## 使い方
 
@@ -29,7 +29,7 @@ updatedAt: 2019-05-21 11:22:01
 
 もっともシンプルなコマンドは、引数にテンプレートのURLもしくは相対パスを指定することです。
 
-Pythonのパッケージを作る際のボイラープレートで試してみます([audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage))。
+Pythonのパッケージを作る際のボイラープレートで試してみます（[audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage)）。
 
 ```bash
 $ cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git
@@ -37,7 +37,7 @@ $ cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git
 
 ![CookieCutterを実行したときの画像](cookiecutter-sample.png)
 
-対話式に聞かれた後に、プロジェクトレイアウトが生成されます。
+対話式に聞かれた後、プロジェクトレイアウトが生成されます。
 
 ### Help
 
@@ -79,7 +79,7 @@ Jinja2の記法が利用できます。
 
 ### 速攻サンプル
 
-最もシンプルなテンプレートを作成してみます。
+もっともシンプルなテンプレートを作成してみます。
 
 ```
 simple-template/
@@ -109,26 +109,26 @@ cookiecutterで自作テンプレートを作るときは、次のルールを�
 
 1. 変数の定義は`cookiecutter.json`に書く。
     - 利用可能な型は、String, List, Dictionaryです。
-2. 変数を展開する場所では`{{cookiecutter.xxx}}`のように、Jinja2のテンプレートが展開できる記法で記述し、`cookiecutter`のメンバ変数として展開できるようにしておく。
+2. 変数を展開する場所では`{{cookiecutter.xxx}}`のように、Jinja2のテンプレートが展開できる記法で記述し、`cookiecutter`のメンバー変数として展開できるようにしておく。
     - 展開時に、条件分岐を行ったり、for-loopを利用することも可能です。
 
 
 詳しい説明は[Advanced Usage - cookiecutter](https://cookiecutter.readthedocs.io/en/latest/advanced/index.html)に載っています。
 
-また、既に公開されているcookiecutter用のテンプレートを見てみることもお勧めします。
+また、すで公開されているcookiecutter用のテンプレートを見てみることもオススメします。
 
 - [cookiecutter.json - audreyr/cookiecutter-pypackage](https://github.com/audreyr/cookiecutter-pypackage/blob/master/cookiecutter.json)
 
 ## 公開する
 
-とてもシンプルな答えはGithubやBitbucketにホスティングすることです。
+とてもシンプルな答えはGitHubやBitbucketにホスティングすることです。
 
 ## 最後に
 
 作っては捨て、という大量生産大量消費の時代にもってこいなパッケージとなっております。
 cookiecutterはPythonで作成されていますが、テンプレートとするプロジェクトは言語を問いません。
 
-DEMOでプレビューするときや、ちょっとした検証をしたい時用の雛形を予め作っておくと時間の節約になります。
+DEMOでプレビューするときや、ちょっとした検証をしたい時用の雛形をあらかじめ作っておくと時間の節約になります。
 
 
 
