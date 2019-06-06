@@ -9,17 +9,20 @@ updatedAt: 2019-05-21 09:35:05
 使っているときは、こんなの覚えているし（笑）
 と思っていたんですが、3か月使わなくなって忘れてしまったので、メモ帳から取り出します。
 
-## プロセスの確認
+## 起動中のコンテナプロセスの確認
 
 ```bash
 docker ps
+# sizeも表示する場合
+docker ps -s
 ```
 
 ```bash
 docker-compose ps
 ```
 
-## コマンドの実行
+
+## コンテナ内でコマンドの実行
 
 ```bash
 docker exec -it [container id] [command]
@@ -94,7 +97,7 @@ docker-compose rm
 
 開発環境で、MySQLとかのバックアップ撮っておきたいなというとき。
 
-#### Mountする
+#### コンテナにホストのディレクトリをマウントする
 
 現在いるディレクトリをサクッとコンテナにマウントして検証したいとき。
 
@@ -102,7 +105,7 @@ docker-compose rm
 docker run  -v $(pwd):/work -w=/work -it [image name] [command]
 ```
 
-#### 自前で用意したくないとき
+#### 自前でVolumeを用意したくないとき
 
 ```bash
 docker volume create [volume name]
@@ -133,8 +136,7 @@ docker-composeを使っている場合
 - https://docs.docker.com/compose/reference/envvars/
 - https://suin.io/535
 
-
-個人的には、direnvで事足りている
+開発時はdirenvを利用することをオススメします。
 
 - https://github.com/direnv/direnv
 
