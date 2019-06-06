@@ -1,0 +1,81 @@
+<html>
+
+  <head lang="ja">
+    <title>fish shellで過去に入力した履歴を削除する</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="fish,shell,history,delete,履歴,削除" />
+    <meta name="description" content="平文でパスワードを入力した場合など、履歴を消したい場合に利用します。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="fish shellで過去に入力した履歴を削除する" />
+    <meta property="og:url" content="https://himenon.github.io/tools/fish-history" />
+    <meta property="og:description" content="平文でパスワードを入力した場合など、履歴を消したい場合に利用します。" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?c759f" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?2a254" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?e6367" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?f3c28" rel="stylesheet" />
+    <link href="/lib/prism.css?b179c" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?48dbc" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;fish shellで過去に入力した履歴を削除する&quot;,&quot;description&quot;:&quot;平文でパスワードを入力した場合など、履歴を消したい場合に利用します。&quot;,&quot;keywords&quot;:&quot;fish,shell,history,delete,履歴,削除&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-06-07T00:33:20.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-06-07T00:33:20.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;fish shellで過去に入力した履歴を削除する&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/tools/fish-history&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;平文でパスワードを入力した場合など、履歴を消したい場合に利用します。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/tools/fish-history&quot;,&quot;content&quot;:&quot;\n## 特定の履歴を検索して削除する\n\nfish shellを利用している場合、`history`コマンドが利用できます。\nこれを利用することで、特定の履歴だけ削除できます。\n\n`password`という文字列を含むコマンドを探索します。\n\n```bash\nhistory search --contains \&quot;password\&quot;\n```\n\n`password`という文字列を含む履歴を削除します。\n\n```bash\nhistory delete --contains \&quot;password\&quot;\n```\n\n## 全履歴削除する\n\n```bash\nhistory clear\n```\n\n## 履歴ファイル\n\nデフォルトは以下の場所にあります。\n\n```bash\n~/.local/share/fish/fish_history\n```\n\nこれを消すとこれまでの補完が効かなくなります。\n言い換えれば、このファイルを変更すれば独自の補完を先に作ることが可能です。\n\n## 参考\n\n* https://fishshell.com/docs/current/commands.html#history\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;fish shellで過去に入力した履歴を削除する&quot;,&quot;description&quot;:&quot;平文でパスワードを入力した場合など、履歴を消したい場合に利用します。&quot;,&quot;keywords&quot;:&quot;fish,shell,history,delete,履歴,削除&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-06-07T00:33:20.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-06-07T00:33:20.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;fish shellで過去に入力した履歴を削除する&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/tools/fish-history&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;平文でパスワードを入力した場合など、履歴を消したい場合に利用します。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/tools/fish-history.md&quot;,&quot;name&quot;:&quot;tools/fish-history&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;fish shellで過去に入力した履歴を削除する\&quot;\ndescription: \&quot;平文でパスワードを入力した場合など、履歴を消したい場合に利用します。\&quot;\nkeywords: \&quot;fish,shell,history,delete,履歴,削除\&quot;\ncreatedAt: 2019-06-07 00:33:20\nupdatedAt: 2019-06-07 00:33:20\n---\n\n## 特定の履歴を検索して削除する\n\nfish shellを利用している場合、`history`コマンドが利用できます。\nこれを利用することで、特定の履歴だけ削除できます。\n\n`password`という文字列を含むコマンドを探索します。\n\n```bash\nhistory search --contains \&quot;password\&quot;\n```\n\n`password`という文字列を含む履歴を削除します。\n\n```bash\nhistory delete --contains \&quot;password\&quot;\n```\n\n## 全履歴削除する\n\n```bash\nhistory clear\n```\n\n## 履歴ファイル\n\nデフォルトは以下の場所にあります。\n\n```bash\n~/.local/share/fish/fish_history\n```\n\nこれを消すとこれまでの補完が効かなくなります。\n言い換えれば、このファイルを変更すれば独自の補完を先に作ることが可能です。\n\n## 参考\n\n* https://fishshell.com/docs/current/commands.html#history\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">fish shellで過去に入力した履歴を削除する</h1>
+            <p id="page-description">平文でパスワードを入力した場合など、履歴を消したい場合に利用します。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2019-06-07 09:33:20</time><span id="created-at__label">更新日</span><time>2019-06-07 09:33:20</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h2>特定の履歴を検索して削除する</h2>
+          <p>fish shellを利用している場合、<code>history</code>コマンドが利用できます。
+            これを利用することで、特定の履歴だけ削除できます。</p>
+          <p><code>password</code>という文字列を含むコマンドを探索します。</p><pre class="language-bash"><code class="language-bash"><span class="token function">history</span> search --contains <span class="token string">"password"</span>
+</code></pre>
+          <p><code>password</code>という文字列を含む履歴を削除します。</p><pre class="language-bash"><code class="language-bash"><span class="token function">history</span> delete --contains <span class="token string">"password"</span>
+</code></pre>
+          <h2>全履歴削除する</h2><pre class="language-bash"><code class="language-bash"><span class="token function">history</span> <span class="token function">clear</span>
+</code></pre>
+          <h2>履歴ファイル</h2>
+          <p>デフォルトは以下の場所にあります。</p><pre class="language-bash"><code class="language-bash">~/.local/share/fish/fish_history
+</code></pre>
+          <p>これを消すとこれまでの補完が効かなくなります。
+            言い換えれば、このファイルを変更すれば独自の補完を先に作ることが可能です。</p>
+          <h2>参考</h2>
+          <ul>
+            <li><a href="https://fishshell.com/docs/current/commands.html#history">https://fishshell.com/docs/current/commands.html#history</a></li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
