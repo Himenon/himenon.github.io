@@ -1,6 +1,6 @@
 ---
 title: "Docker Registry API v2を利用してtag、manifest、imageの情報を取得する"
-description: "Docker imageの情報を整理利用するときに役立ちます。"
+description: "Docker imageの情報を整理するときに利用します。"
 keywords: "docker,image,tag,manifest,api,sample,fish,bash"
 createdAt: 2019-06-07 13:26:00
 updatedAt: 2019-06-10 01:03:54

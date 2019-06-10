@@ -6,7 +6,7 @@
 yarn
 ```
 
-## Up
+## Server
 
 ```bash
 yarn run server
@@ -19,6 +19,10 @@ yarn run build
 ```
 
 ## Deploy
+
+```
+yarn run publish
+```
 
 ## Author
 
