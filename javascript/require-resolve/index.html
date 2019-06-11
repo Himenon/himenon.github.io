@@ -1,0 +1,185 @@
+<html>
+
+  <head lang="ja">
+    <title>NodeJSのrequireがどのファイルを探索しているのかを調べる</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="nodejs,require,resolve,module" />
+    <meta name="description" content="`require.resolve`を使えば良いでしょう。requireが参照するディレクトリや、moduleが見つからない場合の対処方法を紹介します。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="NodeJSのrequireがどのファイルを探索しているのかを調べる" />
+    <meta property="og:url" content="https://himenon.github.io/javascript/require-resolve" />
+    <meta property="og:description" content="`require.resolve`を使えば良いでしょう。requireが参照するディレクトリや、moduleが見つからない場合の対処方法を紹介します。" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?300eb" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?17aeb" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?5bb2a" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?f3eab" rel="stylesheet" />
+    <link href="/lib/prism.css?31989" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?3f43a" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;NodeJSのrequireがどのファイルを探索しているのかを調べる&quot;,&quot;description&quot;:&quot;`require.resolve`を使えば良いでしょう。requireが参照するディレクトリや、moduleが見つからない場合の対処方法を紹介します。&quot;,&quot;keywords&quot;:&quot;nodejs,require,resolve,module&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-06-11T22:37:07.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-06-11T22:37:07.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;NodeJSのrequireがどのファイルを探索しているのかを調べる&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/require-resolve&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;`require.resolve`を使えば良いでしょう。requireが参照するディレクトリや、moduleが見つからない場合の対処方法を紹介します。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/javascript/require-resolve&quot;,&quot;content&quot;:&quot;\n## `require`したモジュールがどこを参照しているのかを把握する\n\nたとえば、`require(\&quot;eslint\&quot;)`がどこに保存されている`eslint`を探しているのか表示する方法は、\nシェルでNodeを立ち上げると\n\n```bash\n$ node\n&gt; require.resolve(\&quot;eslint\&quot;);\n&#x27;/project/node_modules/eslint/lib/api.js&#x27;\n```\n\nと出力されます。これは成功する例ですが、`node`が探索する範囲に`eslint`がインストールされていない場合は次のようなエラーを吐きます。\n\n```bash\n$ node\n&gt; require.resolve(\&quot;eslint\&quot;)\n{ Error: Cannot find module &#x27;eslint&#x27;\n    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:582:15)\n    at Function.resolve (internal/modules/cjs/helpers.js:30:19) code: &#x27;MODULE_NOT_FOUND&#x27; }\n```\n\n* https://nodejs.org/api/modules.html#modules_require_resolve_request_options\n\n## requireが探索する`node_modules`の順序\n\n原因の究明をする場合に利用します。\n\n### `require.resolve.paths`\n\n```bash\n$ node\n&gt; require.resolve.paths(\&quot;eslint\&quot;)\n[ &#x27;/workspace/project/repl/node_modules&#x27;,\n  &#x27;/workspace/project/node_modules&#x27;,\n  &#x27;/workspace/node_modules&#x27;,\n  &#x27;/node_modules&#x27;,\n  &#x27;/workspace/project/.node_modules&#x27;,\n  &#x27;/workspace/project/.node_libraries&#x27;,\n  &#x27;/workspace/project/.nodebrew/node/v10.15.3/lib/node&#x27;,\n  &#x27;/workspace/project/.node_modules&#x27;,\n  &#x27;/workspace/project/.node_libraries&#x27;,\n  &#x27;/workspace/project/.nodebrew/node/v10.15.3/lib/node&#x27; ]\n```\n\n* https://nodejs.org/api/modules.html#modules_require_resolve_paths_request\n\n### `_nodeModulePaths`\n\nエラーログでよく見るメソッドなので、一度叩いて挙動を確かめておくのも良いでしょう。\n\n```bash\n$ node\n&gt; const Module = require(\&quot;module\&quot;);\n&gt; Module._nodeModulePaths(process.cwd());\n[ &#x27;/workspace/project/my-package/nest-package/node_modules&#x27;,\n  &#x27;/workspace/project/my-package/node_modules&#x27;,\n  &#x27;/workspace/project/node_modules&#x27;,\n  &#x27;/workspace/node_modules&#x27;,\n  &#x27;/node_modules&#x27; ]\n```\n\n* [resolve-from](https://www.npmjs.com/package/resolve-from)中で登場します。\n  * https://github.com/sindresorhus/resolve-from/blob/master/index.js#L32\n\n## 現在位置から探索できるモジュール以外のモジュールを呼び出す\n\nたとえば次のようなディレクトリ構成の場合\n\n```\n.\n├── another\n│   └ \&quot;@here\&quot;\n└── himenon.github.io\n    └── node_modules\n        └── @custom-site\n            └── cli\n                └── lib\n                    └── index.js\n```\n\n`@here`の位置`himenon.github.io/node_modules`にあるパッケージを参照してみます。\n\n```javascript\n// process.cwd() &lt;-- &#x27;/workspace/another\n\nconst path = require(\&quot;path\&quot;);\nconst Module = require(\&quot;module\&quot;);\nconst moduleName = \&quot;@custom-site/cli\&quot;;\nconst extNodeModulePath = path.resolve(process.cwd(), \&quot;../himenon.github.io/node_modules\&quot;);\nconst filename = path.normalize(path.join(extNodeModulePath || \&quot;\&quot;, moduleName));\n\nModule._resolveFilename(moduleName, {\n  id: filename,\n  filename: filename,\n  paths: [extNodeModulePath],\n});\n// 結果\n// &#x27;/workspace/himenon.github.io/node_modules/@custom-site/cli/lib/index.js&#x27;\n//　得られた結果を require(\&quot;絶対パス\&quot;) とすると呼び出すことができます\n```\n\nほとんどやることはないと思いますが、使用しているライブラリが独自拡張している場合に遭遇することはありえます。\n\n* [resolve-from](https://www.npmjs.com/package/resolve-from)中で登場します。\n    * https://github.com/sindresorhus/resolve-from/blob/a0bba4b4487cf0c98af85a0d0e4b6b6cef953478/index.js#L29-L33\n\n## moduleが見つからない場合\n\nmoduleが見つからない場合の対処方法を紹介します。\n\n### `node_modules`を消してインストールし直す\n\nnode_modulesの容量が大きくない場合に即解決するでしょう。\n\n```bash\nrm -rf node_modules\n# yarn\nyarn install\n# npm\nnpm install\n```\n\n### git cloneし直す\n\nできる場合はやるとよいかもしれません。\nただし、作業中のブランチがあるような場合は気をつけてください。\n\n### `yarn check`\n\n`yarn.lock`とローカルにインストールされたパッケージのバージョン整合性を確かめましょう。\nそこそこ時間がかかるので、`node_modules`ごと消したほうが早い場合もあります。\n\n```bash\nyarn check\n```\n\n* https://yarnpkg.com/lang/ja/docs/cli/check/\n\n### cacheを消す\n\n```bash\nnpm cache clean\nnpm i\n```\nもしくは\n```bash\nyarn cache clean\nyarn install\n```\n\n### パッケージ側のexports漏れ\n\n`exports`していない場合は同頑張っても`require`できません。\n\n### パッケージに梱包されていない\n\npackage.jsonに`files`のプロパティがあります。ここにはパッケージとして同封するファイルを記述します。\nここに記載のないものはインストール時にはダウンロードされません。\nたまにOSSとかであるのでPRを投げてあげましょう。\n\n* https://docs.npmjs.com/files/package.json#files\n\n## 参考\n\n* https://gist.github.com/branneman/8048520\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;NodeJSのrequireがどのファイルを探索しているのかを調べる&quot;,&quot;description&quot;:&quot;`require.resolve`を使えば良いでしょう。requireが参照するディレクトリや、moduleが見つからない場合の対処方法を紹介します。&quot;,&quot;keywords&quot;:&quot;nodejs,require,resolve,module&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-06-11T22:37:07.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-06-11T22:37:07.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;NodeJSのrequireがどのファイルを探索しているのかを調べる&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/require-resolve&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;`require.resolve`を使えば良いでしょう。requireが参照するディレクトリや、moduleが見つからない場合の対処方法を紹介します。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/javascript/require-resolve.md&quot;,&quot;name&quot;:&quot;javascript/require-resolve&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;NodeJSのrequireがどのファイルを探索しているのかを調べる\&quot;\ndescription: \&quot;`require.resolve`を使えば良いでしょう。requireが参照するディレクトリや、moduleが見つからない場合の対処方法を紹介します。\&quot;\nkeywords: \&quot;nodejs,require,resolve,module\&quot;\ncreatedAt: 2019-06-11 22:37:07\nupdatedAt: 2019-06-11 22:37:07\n---\n\n## `require`したモジュールがどこを参照しているのかを把握する\n\nたとえば、`require(\&quot;eslint\&quot;)`がどこに保存されている`eslint`を探しているのか表示する方法は、\nシェルでNodeを立ち上げると\n\n```bash\n$ node\n&gt; require.resolve(\&quot;eslint\&quot;);\n&#x27;/project/node_modules/eslint/lib/api.js&#x27;\n```\n\nと出力されます。これは成功する例ですが、`node`が探索する範囲に`eslint`がインストールされていない場合は次のようなエラーを吐きます。\n\n```bash\n$ node\n&gt; require.resolve(\&quot;eslint\&quot;)\n{ Error: Cannot find module &#x27;eslint&#x27;\n    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:582:15)\n    at Function.resolve (internal/modules/cjs/helpers.js:30:19) code: &#x27;MODULE_NOT_FOUND&#x27; }\n```\n\n* https://nodejs.org/api/modules.html#modules_require_resolve_request_options\n\n## requireが探索する`node_modules`の順序\n\n原因の究明をする場合に利用します。\n\n### `require.resolve.paths`\n\n```bash\n$ node\n&gt; require.resolve.paths(\&quot;eslint\&quot;)\n[ &#x27;/workspace/project/repl/node_modules&#x27;,\n  &#x27;/workspace/project/node_modules&#x27;,\n  &#x27;/workspace/node_modules&#x27;,\n  &#x27;/node_modules&#x27;,\n  &#x27;/workspace/project/.node_modules&#x27;,\n  &#x27;/workspace/project/.node_libraries&#x27;,\n  &#x27;/workspace/project/.nodebrew/node/v10.15.3/lib/node&#x27;,\n  &#x27;/workspace/project/.node_modules&#x27;,\n  &#x27;/workspace/project/.node_libraries&#x27;,\n  &#x27;/workspace/project/.nodebrew/node/v10.15.3/lib/node&#x27; ]\n```\n\n* https://nodejs.org/api/modules.html#modules_require_resolve_paths_request\n\n### `_nodeModulePaths`\n\nエラーログでよく見るメソッドなので、一度叩いて挙動を確かめておくのも良いでしょう。\n\n```bash\n$ node\n&gt; const Module = require(\&quot;module\&quot;);\n&gt; Module._nodeModulePaths(process.cwd());\n[ &#x27;/workspace/project/my-package/nest-package/node_modules&#x27;,\n  &#x27;/workspace/project/my-package/node_modules&#x27;,\n  &#x27;/workspace/project/node_modules&#x27;,\n  &#x27;/workspace/node_modules&#x27;,\n  &#x27;/node_modules&#x27; ]\n```\n\n* [resolve-from](https://www.npmjs.com/package/resolve-from)中で登場します。\n  * https://github.com/sindresorhus/resolve-from/blob/master/index.js#L32\n\n## 現在位置から探索できるモジュール以外のモジュールを呼び出す\n\nたとえば次のようなディレクトリ構成の場合\n\n```\n.\n├── another\n│   └ \&quot;@here\&quot;\n└── himenon.github.io\n    └── node_modules\n        └── @custom-site\n            └── cli\n                └── lib\n                    └── index.js\n```\n\n`@here`の位置`himenon.github.io/node_modules`にあるパッケージを参照してみます。\n\n```javascript\n// process.cwd() &lt;-- &#x27;/workspace/another\n\nconst path = require(\&quot;path\&quot;);\nconst Module = require(\&quot;module\&quot;);\nconst moduleName = \&quot;@custom-site/cli\&quot;;\nconst extNodeModulePath = path.resolve(process.cwd(), \&quot;../himenon.github.io/node_modules\&quot;);\nconst filename = path.normalize(path.join(extNodeModulePath || \&quot;\&quot;, moduleName));\n\nModule._resolveFilename(moduleName, {\n  id: filename,\n  filename: filename,\n  paths: [extNodeModulePath],\n});\n// 結果\n// &#x27;/workspace/himenon.github.io/node_modules/@custom-site/cli/lib/index.js&#x27;\n//　得られた結果を require(\&quot;絶対パス\&quot;) とすると呼び出すことができます\n```\n\nほとんどやることはないと思いますが、使用しているライブラリが独自拡張している場合に遭遇することはありえます。\n\n* [resolve-from](https://www.npmjs.com/package/resolve-from)中で登場します。\n    * https://github.com/sindresorhus/resolve-from/blob/a0bba4b4487cf0c98af85a0d0e4b6b6cef953478/index.js#L29-L33\n\n## moduleが見つからない場合\n\nmoduleが見つからない場合の対処方法を紹介します。\n\n### `node_modules`を消してインストールし直す\n\nnode_modulesの容量が大きくない場合に即解決するでしょう。\n\n```bash\nrm -rf node_modules\n# yarn\nyarn install\n# npm\nnpm install\n```\n\n### git cloneし直す\n\nできる場合はやるとよいかもしれません。\nただし、作業中のブランチがあるような場合は気をつけてください。\n\n### `yarn check`\n\n`yarn.lock`とローカルにインストールされたパッケージのバージョン整合性を確かめましょう。\nそこそこ時間がかかるので、`node_modules`ごと消したほうが早い場合もあります。\n\n```bash\nyarn check\n```\n\n* https://yarnpkg.com/lang/ja/docs/cli/check/\n\n### cacheを消す\n\n```bash\nnpm cache clean\nnpm i\n```\nもしくは\n```bash\nyarn cache clean\nyarn install\n```\n\n### パッケージ側のexports漏れ\n\n`exports`していない場合は同頑張っても`require`できません。\n\n### パッケージに梱包されていない\n\npackage.jsonに`files`のプロパティがあります。ここにはパッケージとして同封するファイルを記述します。\nここに記載のないものはインストール時にはダウンロードされません。\nたまにOSSとかであるのでPRを投げてあげましょう。\n\n* https://docs.npmjs.com/files/package.json#files\n\n## 参考\n\n* https://gist.github.com/branneman/8048520\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">NodeJSのrequireがどのファイルを探索しているのかを調べる</h1>
+            <p id="page-description">`require.resolve`を使えば良いでしょう。requireが参照するディレクトリや、moduleが見つからない場合の対処方法を紹介します。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2019-06-12 07:37:07</time><span id="created-at__label">更新日</span><time>2019-06-12 07:37:07</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h2><code>require</code>したモジュールがどこを参照しているのかを把握する</h2>
+          <p>たとえば、<code>require(&quot;eslint&quot;)</code>がどこに保存されている<code>eslint</code>を探しているのか表示する方法は、
+            シェルでNodeを立ち上げると</p><pre class="language-bash"><code class="language-bash">$ node
+<span class="token operator">></span> require.resolve<span class="token punctuation">(</span><span class="token string">"eslint"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token string">'/project/node_modules/eslint/lib/api.js'</span>
+</code></pre>
+          <p>と出力されます。これは成功する例ですが、<code>node</code>が探索する範囲に<code>eslint</code>がインストールされていない場合は次のようなエラーを吐きます。</p><pre class="language-bash"><code class="language-bash">$ node
+<span class="token operator">></span> require.resolve<span class="token punctuation">(</span><span class="token string">"eslint"</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span> Error: Cannot <span class="token function">find</span> module <span class="token string">'eslint'</span>
+    at Function.Module._resolveFilename <span class="token punctuation">(</span>internal/modules/cjs/loader.js:582:15<span class="token punctuation">)</span>
+    at Function.resolve <span class="token punctuation">(</span>internal/modules/cjs/helpers.js:30:19<span class="token punctuation">)</span> code: <span class="token string">'MODULE_NOT_FOUND'</span> <span class="token punctuation">}</span>
+</code></pre>
+          <ul>
+            <li><a href="https://nodejs.org/api/modules.html#modules_require_resolve_request_options">https://nodejs.org/api/modules.html#modules_require_resolve_request_options</a></li>
+          </ul>
+          <h2>requireが探索する<code>node_modules</code>の順序</h2>
+          <p>原因の究明をする場合に利用します。</p>
+          <h3><code>require.resolve.paths</code></h3><pre class="language-bash"><code class="language-bash">$ node
+<span class="token operator">></span> require.resolve.paths<span class="token punctuation">(</span><span class="token string">"eslint"</span><span class="token punctuation">)</span>
+<span class="token punctuation">[</span> <span class="token string">'/workspace/project/repl/node_modules'</span>,
+  <span class="token string">'/workspace/project/node_modules'</span>,
+  <span class="token string">'/workspace/node_modules'</span>,
+  <span class="token string">'/node_modules'</span>,
+  <span class="token string">'/workspace/project/.node_modules'</span>,
+  <span class="token string">'/workspace/project/.node_libraries'</span>,
+  <span class="token string">'/workspace/project/.nodebrew/node/v10.15.3/lib/node'</span>,
+  <span class="token string">'/workspace/project/.node_modules'</span>,
+  <span class="token string">'/workspace/project/.node_libraries'</span>,
+  <span class="token string">'/workspace/project/.nodebrew/node/v10.15.3/lib/node'</span> <span class="token punctuation">]</span>
+</code></pre>
+          <ul>
+            <li><a href="https://nodejs.org/api/modules.html#modules_require_resolve_paths_request">https://nodejs.org/api/modules.html#modules_require_resolve_paths_request</a></li>
+          </ul>
+          <h3><code>_nodeModulePaths</code></h3>
+          <p>エラーログでよく見るメソッドなので、一度叩いて挙動を確かめておくのも良いでしょう。</p><pre class="language-bash"><code class="language-bash">$ node
+<span class="token operator">></span> const Module <span class="token operator">=</span> require<span class="token punctuation">(</span><span class="token string">"module"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">></span> Module._nodeModulePaths<span class="token punctuation">(</span>process.cwd<span class="token punctuation">(</span><span class="token punctuation">))</span><span class="token punctuation">;</span>
+<span class="token punctuation">[</span> <span class="token string">'/workspace/project/my-package/nest-package/node_modules'</span>,
+  <span class="token string">'/workspace/project/my-package/node_modules'</span>,
+  <span class="token string">'/workspace/project/node_modules'</span>,
+  <span class="token string">'/workspace/node_modules'</span>,
+  <span class="token string">'/node_modules'</span> <span class="token punctuation">]</span>
+</code></pre>
+          <ul>
+            <li><a href="https://www.npmjs.com/package/resolve-from">resolve-from</a>中で登場します。<ul>
+                <li><a href="https://github.com/sindresorhus/resolve-from/blob/master/index.js#L32">https://github.com/sindresorhus/resolve-from/blob/master/index.js#L32</a></li>
+              </ul>
+            </li>
+          </ul>
+          <h2>現在位置から探索できるモジュール以外のモジュールを呼び出す</h2>
+          <p>たとえば次のようなディレクトリ構成の場合</p><pre class="language-plain"><code class="language-plain">.
+├── another
+│   └ &quot;@here&quot;
+└── himenon.github.io
+    └── node_modules
+        └── @custom-site
+            └── cli
+                └── lib
+                    └── index.js
+</code></pre>
+          <p><code>@here</code>の位置<code>himenon.github.io/node_modules</code>にあるパッケージを参照してみます。</p><pre class="language-javascript"><code class="language-javascript"><span class="token comment">// process.cwd() &lt;-- '/workspace/another</span>
+
+<span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"path"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> Module <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"module"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> moduleName <span class="token operator">=</span> <span class="token string">"@custom-site/cli"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> extNodeModulePath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>process<span class="token punctuation">.</span><span class="token function">cwd</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"../himenon.github.io/node_modules"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> filename <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">normalize</span><span class="token punctuation">(</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span>extNodeModulePath <span class="token operator">||</span> <span class="token string">""</span><span class="token punctuation">,</span> moduleName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+Module<span class="token punctuation">.</span><span class="token function">_resolveFilename</span><span class="token punctuation">(</span>moduleName<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  id<span class="token punctuation">:</span> filename<span class="token punctuation">,</span>
+  filename<span class="token punctuation">:</span> filename<span class="token punctuation">,</span>
+  paths<span class="token punctuation">:</span> <span class="token punctuation">[</span>extNodeModulePath<span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 結果</span>
+<span class="token comment">// '/workspace/himenon.github.io/node_modules/@custom-site/cli/lib/index.js'</span>
+<span class="token comment">//　得られた結果を require("絶対パス") とすると呼び出すことができます</span>
+</code></pre>
+          <p>ほとんどやることはないと思いますが、使用しているライブラリが独自拡張している場合に遭遇することはありえます。</p>
+          <ul>
+            <li><a href="https://www.npmjs.com/package/resolve-from">resolve-from</a>中で登場します。<ul>
+                <li><a href="https://github.com/sindresorhus/resolve-from/blob/a0bba4b4487cf0c98af85a0d0e4b6b6cef953478/index.js#L29-L33">https://github.com/sindresorhus/resolve-from/blob/a0bba4b4487cf0c98af85a0d0e4b6b6cef953478/index.js#L29-L33</a></li>
+              </ul>
+            </li>
+          </ul>
+          <h2>moduleが見つからない場合</h2>
+          <p>moduleが見つからない場合の対処方法を紹介します。</p>
+          <h3><code>node_modules</code>を消してインストールし直す</h3>
+          <p>node_modulesの容量が大きくない場合に即解決するでしょう。</p><pre class="language-bash"><code class="language-bash"><span class="token function">rm</span> -rf node_modules
+<span class="token comment"># yarn</span>
+<span class="token function">yarn</span> <span class="token function">install</span>
+<span class="token comment"># npm</span>
+<span class="token function">npm</span> <span class="token function">install</span>
+</code></pre>
+          <h3>git cloneし直す</h3>
+          <p>できる場合はやるとよいかもしれません。
+            ただし、作業中のブランチがあるような場合は気をつけてください。</p>
+          <h3><code>yarn check</code></h3>
+          <p><code>yarn.lock</code>とローカルにインストールされたパッケージのバージョン整合性を確かめましょう。
+            そこそこ時間がかかるので、<code>node_modules</code>ごと消したほうが早い場合もあります。</p><pre class="language-bash"><code class="language-bash"><span class="token function">yarn</span> check
+</code></pre>
+          <ul>
+            <li><a href="https://yarnpkg.com/lang/ja/docs/cli/check/">https://yarnpkg.com/lang/ja/docs/cli/check/</a></li>
+          </ul>
+          <h3>cacheを消す</h3><pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> cache clean
+<span class="token function">npm</span> i
+</code></pre>
+          <p>もしくは</p><pre class="language-bash"><code class="language-bash"><span class="token function">yarn</span> cache clean
+<span class="token function">yarn</span> <span class="token function">install</span>
+</code></pre>
+          <h3>パッケージ側のexports漏れ</h3>
+          <p><code>exports</code>していない場合は同頑張っても<code>require</code>できません。</p>
+          <h3>パッケージに梱包されていない</h3>
+          <p>package.jsonに<code>files</code>のプロパティがあります。ここにはパッケージとして同封するファイルを記述します。
+            ここに記載のないものはインストール時にはダウンロードされません。
+            たまにOSSとかであるのでPRを投げてあげましょう。</p>
+          <ul>
+            <li><a href="https://docs.npmjs.com/files/package.json#files">https://docs.npmjs.com/files/package.json#files</a></li>
+          </ul>
+          <h2>参考</h2>
+          <ul>
+            <li><a href="https://gist.github.com/branneman/8048520">https://gist.github.com/branneman/8048520</a></li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
