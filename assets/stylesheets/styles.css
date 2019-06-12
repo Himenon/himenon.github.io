@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 1.2em;
 }
@@ -49,10 +53,10 @@ pre[class*="language-"] {
 }
 
 #site-header {
-  height: 6em; /* > 0.8 L 1 + 1 */
+  min-height: 6em; /* > 0.8 L 1 + 1 */
   color: #FFF;
   background-color: rgb(68, 68, 68);
-  padding: 0.6em 5% 0 5%;
+  padding: 0.6em 5% 0.6em 5%;
 }
 
 #site-header-container {
@@ -62,12 +66,13 @@ pre[class*="language-"] {
 
 #page-title {
   font-size: 1.2em;
-  margin-bottom: 0.1em;
+  margin-bottom: 0.4em;
 }
 
 #page-description {
   font-size: 0.9em;
   margin: 0;
+  margin-bottom: 0.6em;
 }
 
 #article-time {
