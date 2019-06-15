@@ -5,3 +5,4 @@ buildcache
 *.js
 *.log
 .env*
+data/
