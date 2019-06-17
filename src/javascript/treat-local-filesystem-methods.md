@@ -63,8 +63,8 @@ export const readJson = <T>(filename: string): T | undefined => {
 };
 
 /** 指定した拡張子の再帰的なファイルのコピー. */
-export const copyFiles = async (source: string, destination: string, extensions: string[]) => {
-  await fs.copy(source, destination, {
+export const copyFiles = (source: string, destination: string, extensions: string[]) => {
+  fs.copy(source, destination, {
     filter: (targetPath: string) => {
       return isDirectory(targetPath) || extensions.includes(path.extname(targetPath));
     },

@@ -116,6 +116,16 @@ Module._resolveFilename(moduleName, {
 
 moduleが見つからない場合の対処方法を紹介します。
 
+### 対象のモジュールの`package.json`に"main"が設定されていることを確認する
+
+```json
+{
+    "main": "index.js"
+}
+```
+
+などの表記がない場合はエラーになります。
+
 ### `node_modules`を消してインストールし直す
 
 node_modulesの容量が大きくない場合に即解決するでしょう。
