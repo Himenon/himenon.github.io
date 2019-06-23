@@ -1,5 +1,5 @@
 ---
-title: "yarn installが遅くなっている原因の調査方法"
+title: "yarn installが遅い原因の調査方法"
 description: "プロジェクトが依存するパッケージに比例して線形にインストール時間が増えていることが期待します。"
 keywords: "yarn,npm,install,slow,cache,キャッシュ,計測,遅い"
 createdAt: 2019-06-12 22:59:00
@@ -110,16 +110,17 @@ set key font ",11"
 # grid表示
 set grid
 
-set title "yarn install --frozen-lockfileのインストール時間の推移"
-set xlabel "Installed packages (num)"
-set ylabel "Installed total time (sec)"
+set title "yarn install --frozen-lockfileの実行タスク数と所要時間の推移"
+set xlabel "Number of tasks executed"
+set ylabel "Task run time (sec)"
 # プロットする
 plot "cache-install.dat" title "use cache" with line linewidth 2, "nocache-install.dat" title "no cache" with line linewidth 2
+
 ```
 
 これを実行すると次のような結果が得られます。
 
-![yarn install時間の比較](./images/yarn-install-time.svg)
+![yarn install --frozen-lockfileの実行タスク数と所要時間の推移](./images/yarn-install-time.svg)
 
 #### gnuplotの参考
 
@@ -127,6 +128,12 @@ plot "cache-install.dat" title "use cache" with line linewidth 2, "nocache-insta
 * [gnuplot – キー/凡例の大きさを調整する \- コードログ](https://codeday.me/jp/qa/20190121/169312.html)
 * [gnuplotの凡例がグラフと重なる \- コードログ](https://codeday.me/jp/qa/20190121/170005.html)
 
-### 考察
+### 比較・考察
+
+* キャッシュなしの場合は前半10秒弱をネットワーク経由のダウンロードに要する
+* ダウンロード後はキャッシュありの場合と同じような遷移をする
+
+
+
 
 
