@@ -133,7 +133,61 @@ plot "cache-install.dat" title "use cache" with line linewidth 2, "nocache-insta
 * キャッシュなしの場合は前半10秒弱をネットワーク経由のダウンロードに要する
 * ダウンロード後はキャッシュありの場合と同じような遷移をする
 
+## 使い所
 
+実際に遭遇した事例で紹介します。
 
+### node-sass@4.2.0のインストール時間が遅い
 
+`node-sass@4.2.0`のインストールに要する時間をプロットしてみます。
 
+![node-sass@4.2.0を含んだyarn installの実行タスク数と所要時間の推移](./images/yarn-install-with-node-sass-time.svg)
+
+明らかにおかしいですね。
+吐き出されたログを調査してみると、以下の場所で時間がかかっていました。
+
+```
+verbose 5.348 Downloading binary from https://github.com/sass/node-sass/releases/download/v4.2.0/darwin-x64-64_binding.node
+Cannot download "https://github.com/sass/node-sass/releases/download/v4.2.0/darwin-x64-64_binding.node": 
+
+HTTP error 404 Not Found
+
+Hint: If github.com is not accessible in your location
+      try setting a proxy via HTTP_PROXY, e.g. 
+
+      export HTTP_PROXY=http://example.com:1234
+
+or configure npm proxy via
+
+      npm config set proxy http://example.com:8080
+verbose 111.63 Building: /username/.nodebrew/node/v10.15.3/bin/node
+```
+
+node-sass@4.2.0は今回インストールしたマシン用にバイナリが用意されていないため、ソースコードからビルドし直す様になっています。
+あまりにも非効率なので、ダウンロード先を切り替えることができないかコードを調査します。
+package.jsonの`install`や`postinstall`（参考：<https://docs.npmjs.com/misc/scripts>）あたりからたどっていくと、
+
+```javascript
+function getBinaryUrl() {
+  var site = getArgument('--sass-binary-site') ||
+             process.env.SASS_BINARY_SITE  ||
+             process.env.npm_config_sass_binary_site ||
+             (pkg.nodeSassConfig && pkg.nodeSassConfig.binarySite) ||
+             'https://github.com/sass/node-sass/releases/download';
+
+  return [site, 'v' + pkg.version, getBinaryName()].join('/');
+}
+```
+
+https://github.com/sass/node-sass/blob/1e76d99164a112a8895c668af795594a35dcdca6/lib/extensions.js#L231-L239
+
+というコードにあたり、環境変数に`SASS_BINARY_SITE`を指定してあげればダウンロードの向き先を変更することができるようです。
+`node-sass/vendor/darwin-x64-64/binding.node`というようなディレクトリにバイナリが生成されているので、
+ファイル名のパターンだけ気をつけてホスティングすれば、バイナリのビルドではなく、ダウンロードのみになり時間が短縮できます。
+
+## まとめ
+
+* `yarn install`の時間が長い場合に原因を調査するためのプロット方法を紹介した。
+* yarnのcacheの時短効果の有効性を可視化した。
+* `node-sass@4.2.0`のインストール時間（実質ビルド時間）が長い事例を紹介した。
+* JavaScriptのパッケージは芋づる式に大量のパッケージがダウンロードされるため、ボトルネックとなっている部分を「人間がわかるレベル」で調査する方法の一例を示した。
