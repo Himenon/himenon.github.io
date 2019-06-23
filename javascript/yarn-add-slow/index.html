@@ -1,0 +1,192 @@
+<html>
+
+  <head lang="ja">
+    <title>yarn installが遅い原因の調査方法</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="yarn,npm,install,slow,cache,キャッシュ,計測,遅い" />
+    <meta name="description" content="プロジェクトが依存するパッケージに比例して線形にインストール時間が増えていることが期待します。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="yarn installが遅い原因の調査方法" />
+    <meta property="og:url" content="https://himenon.github.io/javascript/yarn-add-slow" />
+    <meta property="og:description" content="プロジェクトが依存するパッケージに比例して線形にインストール時間が増えていることが期待します。" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?1975e" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?e6638" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?3c7fa" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?83d86" rel="stylesheet" />
+    <link href="/lib/prism.css?c1d9b" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?3e6bd" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;yarn installが遅い原因の調査方法&quot;,&quot;description&quot;:&quot;プロジェクトが依存するパッケージに比例して線形にインストール時間が増えていることが期待します。&quot;,&quot;keywords&quot;:&quot;yarn,npm,install,slow,cache,キャッシュ,計測,遅い&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-06-12T22:59:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-06-12T22:59:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;yarn installが遅い原因の調査方法&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/yarn-add-slow&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;プロジェクトが依存するパッケージに比例して線形にインストール時間が増えていることが期待します。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/javascript/yarn-add-slow&quot;,&quot;content&quot;:&quot;\n## はじめに\n\nnpmもしくはyarnのインストール時間が明らかに遅くなっていく場合があります。\n早くする方法としては、まずcacheを有効にすることですが効かないパッケージも存在します。\nそのようなパッケージをあぶり出すにはどうしたらよいか、というのが今回のお題です。\n\nnpm/yarn系の依存するパッケージ数は大抵の場合、人間が把握しきれない量です。\nその中から原因をすぐに特定することは困難であるため、人間か理解できる範囲まで情報を絞り込む必要があります。\n今回、インストールのログから情報を精査し、ボトルネックとなっている部分を浮き彫りにする方法を紹介します。\n\n## yarnのcacheの有無を比較する\n\n当サイト（[github - himenon.github.io](https://github.com/Himenon/himenon.github.io)）は`yarn`を利用しているので、\nこれを題材に話を進めます。\n\nまずはキャッシュの有無でのインストール時間を比較してみます。\n\n### cache dirの設定\n\n```bash\n# bash\nyarn config set cache-dir $(pwd)/private_cache\n# fish shell\nyarn config set cache-dir (pwd)/private_cache\n```\n\n### 計測用のデータ収集\n\nキャッシュ無しの場合を最初に実行します。\n\n```bash\nrm -rf node_modules\nyarn --verbose &gt;&gt; data/nocache-install.log\n```\n\n一度yarn installを実行すると設置した`cache-dir`にキャッシュが生成されるます。\n次にキャッシュ有りの場合を実行します。\n\n```bash\nrm -rf node_modules\nyarn --verbose &gt;&gt; data/cache-install.log\n```\n\nこれで2種類のログデータが生成されました。\n\n### ログデータから時間を抽出\n\nログデータを見て見ると、\n\n```\nverbose 1.089 Selecting \&quot;@babel/core@7.4.4\&quot; \nverbose 1.089 Selecting \&quot;@babel/core@7.4.4\&quot; \nverbose 1.089 Selecting \&quot;react@16.8.6\&quot; at l\nverbose 1.09 Selecting \&quot;react@16.8.6\&quot; at l\nverbose 1.09 Selecting \&quot;typescript@3.4.3\&quot; at l\nverbose 1.09 Selecting \&quot;@babel/core@7.4.4\&quot; \nverbose 1.09 Selecting \&quot;@babel/core@7.4.4\&quot; \nverbose 1.09 Selecting \&quot;eslint@5.16.0\&quot; at l\n```\n\nというようなデータがひたすら並んでいるので、`verbose`でgrepして2列目を抽出すれば時間が収集できます。\n\n```bash\ncat data/cache-install.log | grep verbose | awk &#x27;{print $2}&#x27; &gt; data/cache-install.dat\ncat data/nocache-install.log | grep verbose | awk &#x27;{print $2}&#x27; &gt; data/nocache-install.dat\n```\n\n※適当な文字列が混入した場合（エラー時など）は手動で消せばよいです。\n\n### グラフ化\n\ngnuplotでやります。（最近はPythonが流行りっぽいですが、gnuplotで必要十分です）\nスプレッドシートでも可能です。ただデータ量が多いので高速に処理するならローカルマシンで動作するようなものが楽でしょう。\n\n```bash\ncd data\ngnuplot\n```\n\n以下のコードを`plot.gp`などのように保存し、`load \&quot;plot.gp\&quot;`とインタプリタに入力することも可能です。\nもちろん、逐次入力して出力を確認することも可能です。\n\n```bash\n# フォントサイズの調整\nset tics font \&quot;Sanserif,11\&quot; \nset title font\&quot;Sanserif,14\&quot;\nset xlabel font\&quot;Sanserif,14\&quot;\nset ylabel font\&quot;Sanserif1,14\&quot;\n\n# 余白の設定\nset lmargin 10\nset rmargin 10\nset tmargin 5\nset bmargin 5\nset key font \&quot;.8\&quot;\n\n# 判例の位置\nset key left top\n# 判例のフォントサイズ\nset key font \&quot;,11\&quot;\n\n# grid表示\nset grid\n\nset title \&quot;yarn install --frozen-lockfileの実行タスク数と所要時間の推移\&quot;\nset xlabel \&quot;Number of tasks executed\&quot;\nset ylabel \&quot;Task run time (sec)\&quot;\n# プロットする\nplot \&quot;cache-install.dat\&quot; title \&quot;use cache\&quot; with line linewidth 2, \&quot;nocache-install.dat\&quot; title \&quot;no cache\&quot; with line linewidth 2\n\n```\n\nこれを実行すると次のような結果が得られます。\n\n![yarn install --frozen-lockfileの実行タスク数と所要時間の推移](./images/yarn-install-time.svg)\n\n#### gnuplotの参考\n\n* [Gnuplotに関するいろいろメモ](http://www.eng.kagawa-u.ac.jp/~haruna/memo/gnuplot/gnutips.html)\n* [gnuplot – キー/凡例の大きさを調整する \\- コードログ](https://codeday.me/jp/qa/20190121/169312.html)\n* [gnuplotの凡例がグラフと重なる \\- コードログ](https://codeday.me/jp/qa/20190121/170005.html)\n\n### 比較・考察\n\n* キャッシュなしの場合は前半10秒弱をネットワーク経由のダウンロードに要する\n* ダウンロード後はキャッシュありの場合と同じような遷移をする\n\n## 使い所\n\n実際に遭遇した事例で紹介します。\n\n### node-sass@4.2.0のインストール時間が遅い\n\n`node-sass@4.2.0`のインストールに要する時間をプロットしてみます。\n\n![node-sass@4.2.0を含んだyarn installの実行タスク数と所要時間の推移](./images/yarn-install-with-node-sass-time.svg)\n\n明らかにおかしいですね。\n吐き出されたログを調査してみると、以下の場所で時間がかかっていました。\n\n```\nverbose 5.348 Downloading binary from https://github.com/sass/node-sass/releases/download/v4.2.0/darwin-x64-64_binding.node\nCannot download \&quot;https://github.com/sass/node-sass/releases/download/v4.2.0/darwin-x64-64_binding.node\&quot;: \n\nHTTP error 404 Not Found\n\nHint: If github.com is not accessible in your location\n      try setting a proxy via HTTP_PROXY, e.g. \n\n      export HTTP_PROXY=http://example.com:1234\n\nor configure npm proxy via\n\n      npm config set proxy http://example.com:8080\nverbose 111.63 Building: /username/.nodebrew/node/v10.15.3/bin/node\n```\n\nnode-sass@4.2.0は今回インストールしたマシン用にバイナリが用意されていないため、ソースコードからビルドし直す様になっています。\nあまりにも非効率なので、ダウンロード先を切り替えることができないかコードを調査します。\npackage.jsonの`install`や`postinstall`（参考：&lt;https://docs.npmjs.com/misc/scripts&gt;）あたりからたどっていくと、\n\n```javascript\nfunction getBinaryUrl() {\n  var site = getArgument(&#x27;--sass-binary-site&#x27;) ||\n             process.env.SASS_BINARY_SITE  ||\n             process.env.npm_config_sass_binary_site ||\n             (pkg.nodeSassConfig &amp;&amp; pkg.nodeSassConfig.binarySite) ||\n             &#x27;https://github.com/sass/node-sass/releases/download&#x27;;\n\n  return [site, &#x27;v&#x27; + pkg.version, getBinaryName()].join(&#x27;/&#x27;);\n}\n```\n\nhttps://github.com/sass/node-sass/blob/1e76d99164a112a8895c668af795594a35dcdca6/lib/extensions.js#L231-L239\n\nというコードにあたり、環境変数に`SASS_BINARY_SITE`を指定してあげればダウンロードの向き先を変更することができるようです。\n`node-sass/vendor/darwin-x64-64/binding.node`というようなディレクトリにバイナリが生成されているので、\nファイル名のパターンだけ気をつけてホスティングすれば、バイナリのビルドではなく、ダウンロードのみになり時間が短縮できます。\n\n## まとめ\n\n* `yarn install`の時間が長い場合に原因を調査するためのプロット方法を紹介した。\n* yarnのcacheの時短効果の有効性を可視化した。\n* `node-sass@4.2.0`のインストール時間（実質ビルド時間）が長い事例を紹介した。\n* JavaScriptのパッケージは芋づる式に大量のパッケージがダウンロードされるため、ボトルネックとなっている部分を「人間がわかるレベル」で調査する方法の一例を示した。\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;yarn installが遅い原因の調査方法&quot;,&quot;description&quot;:&quot;プロジェクトが依存するパッケージに比例して線形にインストール時間が増えていることが期待します。&quot;,&quot;keywords&quot;:&quot;yarn,npm,install,slow,cache,キャッシュ,計測,遅い&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-06-12T22:59:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-06-12T22:59:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;yarn installが遅い原因の調査方法&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/yarn-add-slow&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;プロジェクトが依存するパッケージに比例して線形にインストール時間が増えていることが期待します。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/javascript/yarn-add-slow.md&quot;,&quot;name&quot;:&quot;javascript/yarn-add-slow&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;yarn installが遅い原因の調査方法\&quot;\ndescription: \&quot;プロジェクトが依存するパッケージに比例して線形にインストール時間が増えていることが期待します。\&quot;\nkeywords: \&quot;yarn,npm,install,slow,cache,キャッシュ,計測,遅い\&quot;\ncreatedAt: 2019-06-12 22:59:00\nupdatedAt: 2019-06-12 22:59:00\n---\n\n## はじめに\n\nnpmもしくはyarnのインストール時間が明らかに遅くなっていく場合があります。\n早くする方法としては、まずcacheを有効にすることですが効かないパッケージも存在します。\nそのようなパッケージをあぶり出すにはどうしたらよいか、というのが今回のお題です。\n\nnpm/yarn系の依存するパッケージ数は大抵の場合、人間が把握しきれない量です。\nその中から原因をすぐに特定することは困難であるため、人間か理解できる範囲まで情報を絞り込む必要があります。\n今回、インストールのログから情報を精査し、ボトルネックとなっている部分を浮き彫りにする方法を紹介します。\n\n## yarnのcacheの有無を比較する\n\n当サイト（[github - himenon.github.io](https://github.com/Himenon/himenon.github.io)）は`yarn`を利用しているので、\nこれを題材に話を進めます。\n\nまずはキャッシュの有無でのインストール時間を比較してみます。\n\n### cache dirの設定\n\n```bash\n# bash\nyarn config set cache-dir $(pwd)/private_cache\n# fish shell\nyarn config set cache-dir (pwd)/private_cache\n```\n\n### 計測用のデータ収集\n\nキャッシュ無しの場合を最初に実行します。\n\n```bash\nrm -rf node_modules\nyarn --verbose &gt;&gt; data/nocache-install.log\n```\n\n一度yarn installを実行すると設置した`cache-dir`にキャッシュが生成されるます。\n次にキャッシュ有りの場合を実行します。\n\n```bash\nrm -rf node_modules\nyarn --verbose &gt;&gt; data/cache-install.log\n```\n\nこれで2種類のログデータが生成されました。\n\n### ログデータから時間を抽出\n\nログデータを見て見ると、\n\n```\nverbose 1.089 Selecting \&quot;@babel/core@7.4.4\&quot; \nverbose 1.089 Selecting \&quot;@babel/core@7.4.4\&quot; \nverbose 1.089 Selecting \&quot;react@16.8.6\&quot; at l\nverbose 1.09 Selecting \&quot;react@16.8.6\&quot; at l\nverbose 1.09 Selecting \&quot;typescript@3.4.3\&quot; at l\nverbose 1.09 Selecting \&quot;@babel/core@7.4.4\&quot; \nverbose 1.09 Selecting \&quot;@babel/core@7.4.4\&quot; \nverbose 1.09 Selecting \&quot;eslint@5.16.0\&quot; at l\n```\n\nというようなデータがひたすら並んでいるので、`verbose`でgrepして2列目を抽出すれば時間が収集できます。\n\n```bash\ncat data/cache-install.log | grep verbose | awk &#x27;{print $2}&#x27; &gt; data/cache-install.dat\ncat data/nocache-install.log | grep verbose | awk &#x27;{print $2}&#x27; &gt; data/nocache-install.dat\n```\n\n※適当な文字列が混入した場合（エラー時など）は手動で消せばよいです。\n\n### グラフ化\n\ngnuplotでやります。（最近はPythonが流行りっぽいですが、gnuplotで必要十分です）\nスプレッドシートでも可能です。ただデータ量が多いので高速に処理するならローカルマシンで動作するようなものが楽でしょう。\n\n```bash\ncd data\ngnuplot\n```\n\n以下のコードを`plot.gp`などのように保存し、`load \&quot;plot.gp\&quot;`とインタプリタに入力することも可能です。\nもちろん、逐次入力して出力を確認することも可能です。\n\n```bash\n# フォントサイズの調整\nset tics font \&quot;Sanserif,11\&quot; \nset title font\&quot;Sanserif,14\&quot;\nset xlabel font\&quot;Sanserif,14\&quot;\nset ylabel font\&quot;Sanserif1,14\&quot;\n\n# 余白の設定\nset lmargin 10\nset rmargin 10\nset tmargin 5\nset bmargin 5\nset key font \&quot;.8\&quot;\n\n# 判例の位置\nset key left top\n# 判例のフォントサイズ\nset key font \&quot;,11\&quot;\n\n# grid表示\nset grid\n\nset title \&quot;yarn install --frozen-lockfileの実行タスク数と所要時間の推移\&quot;\nset xlabel \&quot;Number of tasks executed\&quot;\nset ylabel \&quot;Task run time (sec)\&quot;\n# プロットする\nplot \&quot;cache-install.dat\&quot; title \&quot;use cache\&quot; with line linewidth 2, \&quot;nocache-install.dat\&quot; title \&quot;no cache\&quot; with line linewidth 2\n\n```\n\nこれを実行すると次のような結果が得られます。\n\n![yarn install --frozen-lockfileの実行タスク数と所要時間の推移](./images/yarn-install-time.svg)\n\n#### gnuplotの参考\n\n* [Gnuplotに関するいろいろメモ](http://www.eng.kagawa-u.ac.jp/~haruna/memo/gnuplot/gnutips.html)\n* [gnuplot – キー/凡例の大きさを調整する \\- コードログ](https://codeday.me/jp/qa/20190121/169312.html)\n* [gnuplotの凡例がグラフと重なる \\- コードログ](https://codeday.me/jp/qa/20190121/170005.html)\n\n### 比較・考察\n\n* キャッシュなしの場合は前半10秒弱をネットワーク経由のダウンロードに要する\n* ダウンロード後はキャッシュありの場合と同じような遷移をする\n\n## 使い所\n\n実際に遭遇した事例で紹介します。\n\n### node-sass@4.2.0のインストール時間が遅い\n\n`node-sass@4.2.0`のインストールに要する時間をプロットしてみます。\n\n![node-sass@4.2.0を含んだyarn installの実行タスク数と所要時間の推移](./images/yarn-install-with-node-sass-time.svg)\n\n明らかにおかしいですね。\n吐き出されたログを調査してみると、以下の場所で時間がかかっていました。\n\n```\nverbose 5.348 Downloading binary from https://github.com/sass/node-sass/releases/download/v4.2.0/darwin-x64-64_binding.node\nCannot download \&quot;https://github.com/sass/node-sass/releases/download/v4.2.0/darwin-x64-64_binding.node\&quot;: \n\nHTTP error 404 Not Found\n\nHint: If github.com is not accessible in your location\n      try setting a proxy via HTTP_PROXY, e.g. \n\n      export HTTP_PROXY=http://example.com:1234\n\nor configure npm proxy via\n\n      npm config set proxy http://example.com:8080\nverbose 111.63 Building: /username/.nodebrew/node/v10.15.3/bin/node\n```\n\nnode-sass@4.2.0は今回インストールしたマシン用にバイナリが用意されていないため、ソースコードからビルドし直す様になっています。\nあまりにも非効率なので、ダウンロード先を切り替えることができないかコードを調査します。\npackage.jsonの`install`や`postinstall`（参考：&lt;https://docs.npmjs.com/misc/scripts&gt;）あたりからたどっていくと、\n\n```javascript\nfunction getBinaryUrl() {\n  var site = getArgument(&#x27;--sass-binary-site&#x27;) ||\n             process.env.SASS_BINARY_SITE  ||\n             process.env.npm_config_sass_binary_site ||\n             (pkg.nodeSassConfig &amp;&amp; pkg.nodeSassConfig.binarySite) ||\n             &#x27;https://github.com/sass/node-sass/releases/download&#x27;;\n\n  return [site, &#x27;v&#x27; + pkg.version, getBinaryName()].join(&#x27;/&#x27;);\n}\n```\n\nhttps://github.com/sass/node-sass/blob/1e76d99164a112a8895c668af795594a35dcdca6/lib/extensions.js#L231-L239\n\nというコードにあたり、環境変数に`SASS_BINARY_SITE`を指定してあげればダウンロードの向き先を変更することができるようです。\n`node-sass/vendor/darwin-x64-64/binding.node`というようなディレクトリにバイナリが生成されているので、\nファイル名のパターンだけ気をつけてホスティングすれば、バイナリのビルドではなく、ダウンロードのみになり時間が短縮できます。\n\n## まとめ\n\n* `yarn install`の時間が長い場合に原因を調査するためのプロット方法を紹介した。\n* yarnのcacheの時短効果の有効性を可視化した。\n* `node-sass@4.2.0`のインストール時間（実質ビルド時間）が長い事例を紹介した。\n* JavaScriptのパッケージは芋づる式に大量のパッケージがダウンロードされるため、ボトルネックとなっている部分を「人間がわかるレベル」で調査する方法の一例を示した。\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">yarn installが遅い原因の調査方法</h1>
+            <p id="page-description">プロジェクトが依存するパッケージに比例して線形にインストール時間が増えていることが期待します。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2019-06-13 07:59:00</time><span id="created-at__label">更新日</span><time>2019-06-13 07:59:00</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h2>はじめに</h2>
+          <p>npmもしくはyarnのインストール時間が明らかに遅くなっていく場合があります。
+            早くする方法としては、まずcacheを有効にすることですが効かないパッケージも存在します。
+            そのようなパッケージをあぶり出すにはどうしたらよいか、というのが今回のお題です。</p>
+          <p>npm/yarn系の依存するパッケージ数は大抵の場合、人間が把握しきれない量です。
+            その中から原因をすぐに特定することは困難であるため、人間か理解できる範囲まで情報を絞り込む必要があります。
+            今回、インストールのログから情報を精査し、ボトルネックとなっている部分を浮き彫りにする方法を紹介します。</p>
+          <h2>yarnのcacheの有無を比較する</h2>
+          <p>当サイト（<a href="https://github.com/Himenon/himenon.github.io">github - himenon.github.io</a>）は<code>yarn</code>を利用しているので、
+            これを題材に話を進めます。</p>
+          <p>まずはキャッシュの有無でのインストール時間を比較してみます。</p>
+          <h3>cache dirの設定</h3><pre class="language-bash"><code class="language-bash"><span class="token comment"># bash</span>
+<span class="token function">yarn</span> config <span class="token keyword">set</span> cache-dir <span class="token variable"><span class="token variable">$(</span><span class="token function">pwd</span><span class="token variable">)</span></span>/private_cache
+<span class="token comment"># fish shell</span>
+<span class="token function">yarn</span> config <span class="token keyword">set</span> cache-dir <span class="token punctuation">(</span>pwd<span class="token punctuation">)</span>/private_cache
+</code></pre>
+          <h3>計測用のデータ収集</h3>
+          <p>キャッシュ無しの場合を最初に実行します。</p><pre class="language-bash"><code class="language-bash"><span class="token function">rm</span> -rf node_modules
+<span class="token function">yarn</span> --verbose <span class="token operator">>></span> data/nocache-install.log
+</code></pre>
+          <p>一度yarn installを実行すると設置した<code>cache-dir</code>にキャッシュが生成されるます。
+            次にキャッシュ有りの場合を実行します。</p><pre class="language-bash"><code class="language-bash"><span class="token function">rm</span> -rf node_modules
+<span class="token function">yarn</span> --verbose <span class="token operator">>></span> data/cache-install.log
+</code></pre>
+          <p>これで2種類のログデータが生成されました。</p>
+          <h3>ログデータから時間を抽出</h3>
+          <p>ログデータを見て見ると、</p><pre class="language-plain"><code class="language-plain">verbose 1.089 Selecting &quot;@babel/core@7.4.4&quot; 
+verbose 1.089 Selecting &quot;@babel/core@7.4.4&quot; 
+verbose 1.089 Selecting &quot;react@16.8.6&quot; at l
+verbose 1.09 Selecting &quot;react@16.8.6&quot; at l
+verbose 1.09 Selecting &quot;typescript@3.4.3&quot; at l
+verbose 1.09 Selecting &quot;@babel/core@7.4.4&quot; 
+verbose 1.09 Selecting &quot;@babel/core@7.4.4&quot; 
+verbose 1.09 Selecting &quot;eslint@5.16.0&quot; at l
+</code></pre>
+          <p>というようなデータがひたすら並んでいるので、<code>verbose</code>でgrepして2列目を抽出すれば時間が収集できます。</p><pre class="language-bash"><code class="language-bash"><span class="token function">cat</span> data/cache-install.log <span class="token operator">|</span> <span class="token function">grep</span> verbose <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$2</span>}'</span> <span class="token operator">></span> data/cache-install.dat
+<span class="token function">cat</span> data/nocache-install.log <span class="token operator">|</span> <span class="token function">grep</span> verbose <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">'{print <span class="token variable">$2</span>}'</span> <span class="token operator">></span> data/nocache-install.dat
+</code></pre>
+          <p>※適当な文字列が混入した場合（エラー時など）は手動で消せばよいです。</p>
+          <h3>グラフ化</h3>
+          <p>gnuplotでやります。（最近はPythonが流行りっぽいですが、gnuplotで必要十分です）
+            スプレッドシートでも可能です。ただデータ量が多いので高速に処理するならローカルマシンで動作するようなものが楽でしょう。</p><pre class="language-bash"><code class="language-bash"><span class="token function">cd</span> data
+gnuplot
+</code></pre>
+          <p>以下のコードを<code>plot.gp</code>などのように保存し、<code>load &quot;plot.gp&quot;</code>とインタプリタに入力することも可能です。
+            もちろん、逐次入力して出力を確認することも可能です。</p><pre class="language-bash"><code class="language-bash"><span class="token comment"># フォントサイズの調整</span>
+<span class="token keyword">set</span> tics font <span class="token string">"Sanserif,11"</span> 
+<span class="token keyword">set</span> title font<span class="token string">"Sanserif,14"</span>
+<span class="token keyword">set</span> xlabel font<span class="token string">"Sanserif,14"</span>
+<span class="token keyword">set</span> ylabel font<span class="token string">"Sanserif1,14"</span>
+
+<span class="token comment"># 余白の設定</span>
+<span class="token keyword">set</span> lmargin 10
+<span class="token keyword">set</span> rmargin 10
+<span class="token keyword">set</span> tmargin 5
+<span class="token keyword">set</span> bmargin 5
+<span class="token keyword">set</span> key font <span class="token string">".8"</span>
+
+<span class="token comment"># 判例の位置</span>
+<span class="token keyword">set</span> key left <span class="token function">top</span>
+<span class="token comment"># 判例のフォントサイズ</span>
+<span class="token keyword">set</span> key font <span class="token string">",11"</span>
+
+<span class="token comment"># grid表示</span>
+<span class="token keyword">set</span> grid
+
+<span class="token keyword">set</span> title <span class="token string">"yarn install --frozen-lockfileの実行タスク数と所要時間の推移"</span>
+<span class="token keyword">set</span> xlabel <span class="token string">"Number of tasks executed"</span>
+<span class="token keyword">set</span> ylabel <span class="token string">"Task run time (sec)"</span>
+<span class="token comment"># プロットする</span>
+plot <span class="token string">"cache-install.dat"</span> title <span class="token string">"use cache"</span> with line linewidth 2, <span class="token string">"nocache-install.dat"</span> title <span class="token string">"no cache"</span> with line linewidth 2
+</code></pre>
+          <p>これを実行すると次のような結果が得られます。</p>
+          <p><img src="/javascript/images/yarn-install-time.svg" alt="yarn install --frozen-lockfileの実行タスク数と所要時間の推移" /></p>
+          <h4>gnuplotの参考</h4>
+          <ul>
+            <li><a href="http://www.eng.kagawa-u.ac.jp/~haruna/memo/gnuplot/gnutips.html">Gnuplotに関するいろいろメモ</a></li>
+            <li><a href="https://codeday.me/jp/qa/20190121/169312.html">gnuplot – キー/凡例の大きさを調整する - コードログ</a></li>
+            <li><a href="https://codeday.me/jp/qa/20190121/170005.html">gnuplotの凡例がグラフと重なる - コードログ</a></li>
+          </ul>
+          <h3>比較・考察</h3>
+          <ul>
+            <li>キャッシュなしの場合は前半10秒弱をネットワーク経由のダウンロードに要する</li>
+            <li>ダウンロード後はキャッシュありの場合と同じような遷移をする</li>
+          </ul>
+          <h2>使い所</h2>
+          <p>実際に遭遇した事例で紹介します。</p>
+          <h3>node-sass@4.2.0のインストール時間が遅い</h3>
+          <p><code>node-sass@4.2.0</code>のインストールに要する時間をプロットしてみます。</p>
+          <p><img src="/javascript/images/yarn-install-with-node-sass-time.svg" alt="node-sass@4.2.0を含んだyarn installの実行タスク数と所要時間の推移" /></p>
+          <p>明らかにおかしいですね。
+            吐き出されたログを調査してみると、以下の場所で時間がかかっていました。</p><pre class="language-plain"><code class="language-plain">verbose 5.348 Downloading binary from https://github.com/sass/node-sass/releases/download/v4.2.0/darwin-x64-64_binding.node
+Cannot download &quot;https://github.com/sass/node-sass/releases/download/v4.2.0/darwin-x64-64_binding.node&quot;: 
+
+HTTP error 404 Not Found
+
+Hint: If github.com is not accessible in your location
+      try setting a proxy via HTTP_PROXY, e.g. 
+
+      export HTTP_PROXY=http://example.com:1234
+
+or configure npm proxy via
+
+      npm config set proxy http://example.com:8080
+verbose 111.63 Building: /username/.nodebrew/node/v10.15.3/bin/node
+</code></pre>
+          <p>node-sass@4.2.0は今回インストールしたマシン用にバイナリが用意されていないため、ソースコードからビルドし直す様になっています。
+            あまりにも非効率なので、ダウンロード先を切り替えることができないかコードを調査します。
+            package.jsonの<code>install</code>や<code>postinstall</code>（参考：<a href="https://docs.npmjs.com/misc/scripts">https://docs.npmjs.com/misc/scripts</a>）あたりからたどっていくと、</p><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">getBinaryUrl</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">var</span> site <span class="token operator">=</span> <span class="token function">getArgument</span><span class="token punctuation">(</span><span class="token string">'--sass-binary-site'</span><span class="token punctuation">)</span> <span class="token operator">||</span>
+             process<span class="token punctuation">.</span>env<span class="token punctuation">.</span><span class="token constant">SASS_BINARY_SITE</span>  <span class="token operator">||</span>
+             process<span class="token punctuation">.</span>env<span class="token punctuation">.</span>npm_config_sass_binary_site <span class="token operator">||</span>
+             <span class="token punctuation">(</span>pkg<span class="token punctuation">.</span>nodeSassConfig <span class="token operator">&amp;&amp;</span> pkg<span class="token punctuation">.</span>nodeSassConfig<span class="token punctuation">.</span>binarySite<span class="token punctuation">)</span> <span class="token operator">||</span>
+             <span class="token string">'https://github.com/sass/node-sass/releases/download'</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">[</span>site<span class="token punctuation">,</span> <span class="token string">'v'</span> <span class="token operator">+</span> pkg<span class="token punctuation">.</span>version<span class="token punctuation">,</span> <span class="token function">getBinaryName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+          <p><a href="https://github.com/sass/node-sass/blob/1e76d99164a112a8895c668af795594a35dcdca6/lib/extensions.js#L231-L239">https://github.com/sass/node-sass/blob/1e76d99164a112a8895c668af795594a35dcdca6/lib/extensions.js#L231-L239</a></p>
+          <p>というコードにあたり、環境変数に<code>SASS_BINARY_SITE</code>を指定してあげればダウンロードの向き先を変更することができるようです。
+            <code>node-sass/vendor/darwin-x64-64/binding.node</code>というようなディレクトリにバイナリが生成されているので、
+            ファイル名のパターンだけ気をつけてホスティングすれば、バイナリのビルドではなく、ダウンロードのみになり時間が短縮できます。</p>
+          <h2>まとめ</h2>
+          <ul>
+            <li><code>yarn install</code>の時間が長い場合に原因を調査するためのプロット方法を紹介した。</li>
+            <li>yarnのcacheの時短効果の有効性を可視化した。</li>
+            <li><code>node-sass@4.2.0</code>のインストール時間（実質ビルド時間）が長い事例を紹介した。</li>
+            <li>JavaScriptのパッケージは芋づる式に大量のパッケージがダウンロードされるため、ボトルネックとなっている部分を「人間がわかるレベル」で調査する方法の一例を示した。</li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
