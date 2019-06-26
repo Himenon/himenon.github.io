@@ -1,0 +1,132 @@
+<html>
+
+  <head lang="ja">
+    <title>hubコマンドのreleaseを使ってみる</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="git,hub,release" />
+    <meta name="description" content="GitHubにシェルでreleaseするときのコマンドについて調査した" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="hubコマンドのreleaseを使ってみる" />
+    <meta property="og:url" content="https://himenon.github.io/tools/git-hub-release" />
+    <meta property="og:description" content="GitHubにシェルでreleaseするときのコマンドについて調査した" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?7be3d" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?7e879" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?081d7" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?44a19" rel="stylesheet" />
+    <link href="/lib/prism.css?f091d" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?cbee3" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;hubコマンドのreleaseを使ってみる&quot;,&quot;description&quot;:&quot;GitHubにシェルでreleaseするときのコマンドについて調査した&quot;,&quot;keywords&quot;:&quot;git,hub,release&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-06-27T01:00:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-06-27T01:00:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;hubコマンドのreleaseを使ってみる&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/tools/git-hub-release&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;GitHubにシェルでreleaseするときのコマンドについて調査した&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/tools/git-hub-release&quot;,&quot;content&quot;:&quot;\n## create\n\nリリースすると、自動的に`tag`もpushされる。\n\n### オプションを指定しないリリース\n\n```bash\nhub release create v0.1.0-alpha.1\n# エディターが開く\n# 保存後リリース完了\n# URLが出力される\nhttps://github.com/Himenon/taida-web/releases/tag/v0.1.0-alpha.1\n```\n\n### タイトルだけつけてリリース\n\n`-m`オプション\n\n```bash\nhub release create -m \&quot;hello world\&quot; v0.1.0-alpha.2\n```\n\n### Assetsをつけてリリース\n\n`-a`オプション。なお、アップロードするとWeb上でしか消せない。\n\n```bash\nhub release create -a ./dist.tar.gz v0.1.0-alpha.2\n```\n\n### Draftリリース\n\n`-d`オプション\n\n```bash\nhub release create -d v0.1.0-alpha.2\n```\n\n### リリースノート用のファイルから説明を読み込んでリリース\n\n```bash\nhub release create -a ./dist.tar.gz  -F ./RELEASE_NOTE.md  v0.1.0-alpha.5\n```\n\n`RELEASE_NOTE.md`の1行目は`-m`と同じ動作をするため、タイトルとなる。\nMarkdownと思って `# hoge`と書けば、`#`が先頭につくので注意。\n\n編集したい場合は\n\n```bash\nhub release edit v0.1.0-alpha.5 -F ./RELEASE_NOTE.md\n```\n\nとする。\n\n\n### プレリリース\n\n`-p`をつける\n\n```\nhub release create -p v0.1.0-alpha.5\n```\n\n## show\n\n```bash\nhub release show v0.1.0-alpha.3\n# タイトルと説明が表示\n```\n\n## download\n\n### assetsをアップロードした状態で実行する\n\n事前に`dist.tar.gz`をアップロードしておく。\n\n```bash\nhub release download v0.1.0-alpha.5\n```\n\n実行した場所に`dist.tar.gz`が保存される。\n\n### assetsがアップロードされていない場合\n\n何もダウンロードされない\n\n### assetsが複数アップロードされている場合\n\n`dist1.tar.gz`と`dist2.tar.gz`がリリースされている場合\n\n```bash\nhub release download v0.1.0-alpha.5\n```\n\nを実行すると、実行した場所に`dist1.tar.gz`と`dist2.tar.gz`が保存される。\n\n## edit\n\n### 説明の修正\n\n```bash\nhub release edit v0.1.0-alpha.3\n# エディターが起動\n```\n\n### assetsを追加で添付する\n\n```bash\nhub release edit v0.1.0-alpha.3 -a ./dist.tar.gz\n# エディターが起動\n```\n\n### 途中からプレリリースにする\n\n```bash\nhub release edit v0.1.0-alpha.5 -p\n```\n\n### 途中からdraft releaseにする\n\npre-releaseからも変更可能\n\n```bash\nhub release edit v0.1.0-alpha.5 -d\n```\n\n## delete\n\nリリースの削除が実行されるが、タグの削除は実行されない\n\n### リリースの削除\n\n```bash\nhub release delete v0.1.0-alpha.4\n```\n\nタグも消す\n\n```bash\n# ローカルのタグ削除\ngit fetch origin\ngit tag -d v0.1.0-alpha.4\n# リモートのタグ削除\ngit push origin :v0.1.0-alpha.4\n```\n\n## draft / pre-release\n\n`draft -&gt; pre-release -&gt; release`の順番\n\n## 参考\n\n* https://hub.github.com/hub-release.1.html\n\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;hubコマンドのreleaseを使ってみる&quot;,&quot;description&quot;:&quot;GitHubにシェルでreleaseするときのコマンドについて調査した&quot;,&quot;keywords&quot;:&quot;git,hub,release&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-06-27T01:00:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-06-27T01:00:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;hubコマンドのreleaseを使ってみる&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/tools/git-hub-release&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;GitHubにシェルでreleaseするときのコマンドについて調査した&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/tools/git-hub-release.md&quot;,&quot;name&quot;:&quot;tools/git-hub-release&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;hubコマンドのreleaseを使ってみる\&quot;\ndescription: \&quot;GitHubにシェルでreleaseするときのコマンドについて調査した\&quot;\nkeywords: \&quot;git,hub,release\&quot;\ncreatedAt: 2019-06-27 01:00:00\nupdatedAt: 2019-06-27 01:00:00\n---\n\n## create\n\nリリースすると、自動的に`tag`もpushされる。\n\n### オプションを指定しないリリース\n\n```bash\nhub release create v0.1.0-alpha.1\n# エディターが開く\n# 保存後リリース完了\n# URLが出力される\nhttps://github.com/Himenon/taida-web/releases/tag/v0.1.0-alpha.1\n```\n\n### タイトルだけつけてリリース\n\n`-m`オプション\n\n```bash\nhub release create -m \&quot;hello world\&quot; v0.1.0-alpha.2\n```\n\n### Assetsをつけてリリース\n\n`-a`オプション。なお、アップロードするとWeb上でしか消せない。\n\n```bash\nhub release create -a ./dist.tar.gz v0.1.0-alpha.2\n```\n\n### Draftリリース\n\n`-d`オプション\n\n```bash\nhub release create -d v0.1.0-alpha.2\n```\n\n### リリースノート用のファイルから説明を読み込んでリリース\n\n```bash\nhub release create -a ./dist.tar.gz  -F ./RELEASE_NOTE.md  v0.1.0-alpha.5\n```\n\n`RELEASE_NOTE.md`の1行目は`-m`と同じ動作をするため、タイトルとなる。\nMarkdownと思って `# hoge`と書けば、`#`が先頭につくので注意。\n\n編集したい場合は\n\n```bash\nhub release edit v0.1.0-alpha.5 -F ./RELEASE_NOTE.md\n```\n\nとする。\n\n\n### プレリリース\n\n`-p`をつける\n\n```\nhub release create -p v0.1.0-alpha.5\n```\n\n## show\n\n```bash\nhub release show v0.1.0-alpha.3\n# タイトルと説明が表示\n```\n\n## download\n\n### assetsをアップロードした状態で実行する\n\n事前に`dist.tar.gz`をアップロードしておく。\n\n```bash\nhub release download v0.1.0-alpha.5\n```\n\n実行した場所に`dist.tar.gz`が保存される。\n\n### assetsがアップロードされていない場合\n\n何もダウンロードされない\n\n### assetsが複数アップロードされている場合\n\n`dist1.tar.gz`と`dist2.tar.gz`がリリースされている場合\n\n```bash\nhub release download v0.1.0-alpha.5\n```\n\nを実行すると、実行した場所に`dist1.tar.gz`と`dist2.tar.gz`が保存される。\n\n## edit\n\n### 説明の修正\n\n```bash\nhub release edit v0.1.0-alpha.3\n# エディターが起動\n```\n\n### assetsを追加で添付する\n\n```bash\nhub release edit v0.1.0-alpha.3 -a ./dist.tar.gz\n# エディターが起動\n```\n\n### 途中からプレリリースにする\n\n```bash\nhub release edit v0.1.0-alpha.5 -p\n```\n\n### 途中からdraft releaseにする\n\npre-releaseからも変更可能\n\n```bash\nhub release edit v0.1.0-alpha.5 -d\n```\n\n## delete\n\nリリースの削除が実行されるが、タグの削除は実行されない\n\n### リリースの削除\n\n```bash\nhub release delete v0.1.0-alpha.4\n```\n\nタグも消す\n\n```bash\n# ローカルのタグ削除\ngit fetch origin\ngit tag -d v0.1.0-alpha.4\n# リモートのタグ削除\ngit push origin :v0.1.0-alpha.4\n```\n\n## draft / pre-release\n\n`draft -&gt; pre-release -&gt; release`の順番\n\n## 参考\n\n* https://hub.github.com/hub-release.1.html\n\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">hubコマンドのreleaseを使ってみる</h1>
+            <p id="page-description">GitHubにシェルでreleaseするときのコマンドについて調査した</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2019-06-27 10:00:00</time><span id="created-at__label">更新日</span><time>2019-06-27 10:00:00</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h2>create</h2>
+          <p>リリースすると、自動的に<code>tag</code>もpushされる。</p>
+          <h3>オプションを指定しないリリース</h3><pre class="language-bash"><code class="language-bash">hub release create v0.1.0-alpha.1
+<span class="token comment"># エディターが開く</span>
+<span class="token comment"># 保存後リリース完了</span>
+<span class="token comment"># URLが出力される</span>
+https://github.com/Himenon/taida-web/releases/tag/v0.1.0-alpha.1
+</code></pre>
+          <h3>タイトルだけつけてリリース</h3>
+          <p><code>-m</code>オプション</p><pre class="language-bash"><code class="language-bash">hub release create -m <span class="token string">"hello world"</span> v0.1.0-alpha.2
+</code></pre>
+          <h3>Assetsをつけてリリース</h3>
+          <p><code>-a</code>オプション。なお、アップロードするとWeb上でしか消せない。</p><pre class="language-bash"><code class="language-bash">hub release create -a ./dist.tar.gz v0.1.0-alpha.2
+</code></pre>
+          <h3>Draftリリース</h3>
+          <p><code>-d</code>オプション</p><pre class="language-bash"><code class="language-bash">hub release create -d v0.1.0-alpha.2
+</code></pre>
+          <h3>リリースノート用のファイルから説明を読み込んでリリース</h3><pre class="language-bash"><code class="language-bash">hub release create -a ./dist.tar.gz  -F ./RELEASE_NOTE.md  v0.1.0-alpha.5
+</code></pre>
+          <p><code>RELEASE_NOTE.md</code>の1行目は<code>-m</code>と同じ動作をするため、タイトルとなる。
+            Markdownと思って <code># hoge</code>と書けば、<code>#</code>が先頭につくので注意。</p>
+          <p>編集したい場合は</p><pre class="language-bash"><code class="language-bash">hub release edit v0.1.0-alpha.5 -F ./RELEASE_NOTE.md
+</code></pre>
+          <p>とする。</p>
+          <h3>プレリリース</h3>
+          <p><code>-p</code>をつける</p><pre class="language-plain"><code class="language-plain">hub release create -p v0.1.0-alpha.5
+</code></pre>
+          <h2>show</h2><pre class="language-bash"><code class="language-bash">hub release show v0.1.0-alpha.3
+<span class="token comment"># タイトルと説明が表示</span>
+</code></pre>
+          <h2>download</h2>
+          <h3>assetsをアップロードした状態で実行する</h3>
+          <p>事前に<code>dist.tar.gz</code>をアップロードしておく。</p><pre class="language-bash"><code class="language-bash">hub release download v0.1.0-alpha.5
+</code></pre>
+          <p>実行した場所に<code>dist.tar.gz</code>が保存される。</p>
+          <h3>assetsがアップロードされていない場合</h3>
+          <p>何もダウンロードされない</p>
+          <h3>assetsが複数アップロードされている場合</h3>
+          <p><code>dist1.tar.gz</code>と<code>dist2.tar.gz</code>がリリースされている場合</p><pre class="language-bash"><code class="language-bash">hub release download v0.1.0-alpha.5
+</code></pre>
+          <p>を実行すると、実行した場所に<code>dist1.tar.gz</code>と<code>dist2.tar.gz</code>が保存される。</p>
+          <h2>edit</h2>
+          <h3>説明の修正</h3><pre class="language-bash"><code class="language-bash">hub release edit v0.1.0-alpha.3
+<span class="token comment"># エディターが起動</span>
+</code></pre>
+          <h3>assetsを追加で添付する</h3><pre class="language-bash"><code class="language-bash">hub release edit v0.1.0-alpha.3 -a ./dist.tar.gz
+<span class="token comment"># エディターが起動</span>
+</code></pre>
+          <h3>途中からプレリリースにする</h3><pre class="language-bash"><code class="language-bash">hub release edit v0.1.0-alpha.5 -p
+</code></pre>
+          <h3>途中からdraft releaseにする</h3>
+          <p>pre-releaseからも変更可能</p><pre class="language-bash"><code class="language-bash">hub release edit v0.1.0-alpha.5 -d
+</code></pre>
+          <h2>delete</h2>
+          <p>リリースの削除が実行されるが、タグの削除は実行されない</p>
+          <h3>リリースの削除</h3><pre class="language-bash"><code class="language-bash">hub release delete v0.1.0-alpha.4
+</code></pre>
+          <p>タグも消す</p><pre class="language-bash"><code class="language-bash"><span class="token comment"># ローカルのタグ削除</span>
+<span class="token function">git</span> fetch origin
+<span class="token function">git</span> tag -d v0.1.0-alpha.4
+<span class="token comment"># リモートのタグ削除</span>
+<span class="token function">git</span> push origin :v0.1.0-alpha.4
+</code></pre>
+          <h2>draft / pre-release</h2>
+          <p><code>draft -&gt; pre-release -&gt; release</code>の順番</p>
+          <h2>参考</h2>
+          <ul>
+            <li><a href="https://hub.github.com/hub-release.1.html">https://hub.github.com/hub-release.1.html</a></li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
