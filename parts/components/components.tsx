@@ -43,6 +43,7 @@ export const generateCustomComponents: ExternalCustomComponent["generateCustomCo
           </pre>
         );
       }
+      document.createElement("ul", {});
       const newProps: JSX.IntrinsicElements["code"] = {
         ...props,
         children: undefined,
