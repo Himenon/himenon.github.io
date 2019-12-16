@@ -1,0 +1,77 @@
+<html>
+
+  <head lang="ja">
+    <title>あるディレクトリ内にある拡張子を数え上げる</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="nodejs,typescript,python,himenon,web,frontend" />
+    <meta name="description" content="早く画面から出たい人の備忘録。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="あるディレクトリ内にある拡張子を数え上げる" />
+    <meta property="og:url" content="https://himenon.github.io/tools/find-and-count-up-extensions" />
+    <meta property="og:description" content="早く画面から出たい人の備忘録。" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?b1f34" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?7087f" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?0ba75" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?26c51" rel="stylesheet" />
+    <link href="/lib/prism.css?26d17" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?44943" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;あるディレクトリ内にある拡張子を数え上げる&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;あるディレクトリ内にある拡張子を数え上げる&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/tools/find-and-count-up-extensions&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早く画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/tools/find-and-count-up-extensions&quot;,&quot;content&quot;:&quot;\n## 得手のディレクトリ内にあるファイルの拡張子を取得する\n\n`src`ディレクトリを対象に行う\n\n```bash\n# fish shell\nfor i in (find src -type f); echo $i | sed &#x27;s/^.*\\.\\([^\\.]*\\)$/\\1/&#x27; &gt;&gt; src.ext.txt ; end\ncat src.ext.txt | sort | uniq\n# bash\n```\n\n### 解説\n\n`src`ディレクトリ内にある「ファイル」を一覧にする\n\n```bash\nfind src -type f\n```\n\n## 参考\n\n* https://qiita.com/mriho/items/b30b3a33e8d2e25e94a8\n* https://qiita.com/yuba/items/489fadb350246b5c94e7&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;あるディレクトリ内にある拡張子を数え上げる&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;あるディレクトリ内にある拡張子を数え上げる&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/tools/find-and-count-up-extensions&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早く画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/tools/find-and-count-up-extensions.md&quot;,&quot;name&quot;:&quot;tools/find-and-count-up-extensions&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;あるディレクトリ内にある拡張子を数え上げる\&quot;\n---\n\n## 得手のディレクトリ内にあるファイルの拡張子を取得する\n\n`src`ディレクトリを対象に行う\n\n```bash\n# fish shell\nfor i in (find src -type f); echo $i | sed &#x27;s/^.*\\.\\([^\\.]*\\)$/\\1/&#x27; &gt;&gt; src.ext.txt ; end\ncat src.ext.txt | sort | uniq\n# bash\n```\n\n### 解説\n\n`src`ディレクトリ内にある「ファイル」を一覧にする\n\n```bash\nfind src -type f\n```\n\n## 参考\n\n* https://qiita.com/mriho/items/b30b3a33e8d2e25e94a8\n* https://qiita.com/yuba/items/489fadb350246b5c94e7&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">あるディレクトリ内にある拡張子を数え上げる</h1>
+            <p id="page-description">早く画面から出たい人の備忘録。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2019-12-16 05:02:03</time><span id="created-at__label">更新日</span><time>2019-12-16 05:02:03</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h2>得手のディレクトリ内にあるファイルの拡張子を取得する</h2>
+          <p><code>src</code>ディレクトリを対象に行う</p><pre class="language-bash"><code class="language-bash"><span class="token comment"># fish shell</span>
+<span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token punctuation">(</span>find src -type f<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">echo</span> <span class="token variable">$i</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">'s/^.*\.\([^\.]*\)$/\1/'</span> <span class="token operator">>></span> src.ext.txt <span class="token punctuation">;</span> end
+<span class="token function">cat</span> src.ext.txt <span class="token operator">|</span> <span class="token function">sort</span> <span class="token operator">|</span> <span class="token function">uniq</span>
+<span class="token comment"># bash</span>
+</code></pre>
+          <h3>解説</h3>
+          <p><code>src</code>ディレクトリ内にある「ファイル」を一覧にする</p><pre class="language-bash"><code class="language-bash"><span class="token function">find</span> src -type f
+</code></pre>
+          <h2>参考</h2>
+          <ul>
+            <li><a href="https://qiita.com/mriho/items/b30b3a33e8d2e25e94a8">https://qiita.com/mriho/items/b30b3a33e8d2e25e94a8</a></li>
+            <li><a href="https://qiita.com/yuba/items/489fadb350246b5c94e7">https://qiita.com/yuba/items/489fadb350246b5c94e7</a></li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
