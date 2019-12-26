@@ -1,0 +1,133 @@
+<html>
+
+  <head lang="ja">
+    <title>ローカルホストをインターネット上に外部公開するinletsの紹介</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="proxy,localhost,internet,inlets,websocket,http server,web開発,開発環境,slack,request url" />
+    <meta name="description" content="開発環境をサーバーでProxyを行い、インターネット上に公開する方法を紹介します。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="ローカルホストをインターネット上に外部公開するinletsの紹介" />
+    <meta property="og:url" content="https://himenon.github.io/infrastructure/how-to-use-inlets" />
+    <meta property="og:description" content="開発環境をサーバーでProxyを行い、インターネット上に公開する方法を紹介します。" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?e8c2a" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?dfda6" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?153c4" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?50856" rel="stylesheet" />
+    <link href="/lib/prism.css?09e47" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?7a406" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;ローカルホストをインターネット上に外部公開するinletsの紹介&quot;,&quot;description&quot;:&quot;開発環境をサーバーでProxyを行い、インターネット上に公開する方法を紹介します。&quot;,&quot;keywords&quot;:&quot;proxy,localhost,internet,inlets,websocket,http server,web開発,開発環境,slack,request url&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-12-26T14:22:47.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-12-26T14:22:47.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;ローカルホストをインターネット上に外部公開するinletsの紹介&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/infrastructure/how-to-use-inlets&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;開発環境をサーバーでProxyを行い、インターネット上に公開する方法を紹介します。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/infrastructure/how-to-use-inlets&quot;,&quot;content&quot;:&quot;\n# inletsの紹介\n\n## 忙しい人のための短い紹介\n\n* [inlets](https://github.com/inlets/inlets)はMITライセンスのOSSなので自社サーバー上に構築することができる\n* websocketも対応\n* [Video DEMO](https://www.youtube.com/watch?v=jrAqqe8N3q4&amp;feature=youtu.be)もあるよ\n* 3分くらいで導入できる\n* ローカルがインターネットに公開されるので気をつけて。\n\n## 詳しく見たい人のための紹介\n\nGitHub: https://github.com/inlets/inlets\n\n[ngrok](https://ngrok.com/)をご存じの方は、ngrokのOSS版いえば理解できるでしょう。\nMOONGIFTさんの記事（2019/05/04）[inlets - ローカルのサービスをインターネット上に公開する](https://www.moongift.jp/2019/05/inlets-%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%92%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E4%B8%8A%E3%81%AB%E5%85%AC%E9%96%8B/)で紹介されています。\n\n簡単に言えばローカルのサーバーをインターネットに公開するProxyのようなものです。\n\n[![intels architecture](./images/inlets.png)](https://github.com/inlets/inlets/blob/master/docs/inlets.png)\n\n利用する場面としては、ローカル開発環境を外部共有したような場面でしょう。\nたとえば、\n\n* SlackのRequest URLを指定するサーバーを構築するとき（いちいちデプロイするのが面倒な場合）\n* 知見共有のためにローカルの環境を他者に共有する場合\n* WEBをスマートフォンで動作確認するするため\n\nなど、開発時のユースケースが想像されます。\n\n## 使い方\n\n[Quick Tutorial](https://github.com/inlets/inlets#quickstart-tutorial)通りにやってみます。\nどちらがサーバーでクライアントかわからなくなるで気をつけましょう。\n\n### サーバー・クライアント両方のセットアップ\n\nCLIをインストールしておきます。\n\n* https://github.com/inlets/inlets#install-the-cli\n\n### サーバー側\n\nこのサーバーのローカルホストから見たホスト名を仮に`inlets.himenon.github.io`としておきます。\n\n`shasum`コマンドが入っていない可能性があるので、インストールしておきます。\n\n```bash\n# installerがyumの場合\nyum -y install perl-Digest-SHA\n```\n\ninletsサーバーをport 8090で起動します。\n\n```bash\nexport token=$(head -c 16 /dev/urandom | shasum | cut -d\&quot; \&quot; -f1)\ninlets server --port=8090 --token=\&quot;$token\&quot;\n```\n\nログに以下のようなログが出力されます。\n\n```bash\n2019/12/26 14:06:20 Welcome to inlets.dev! Find out more at https://github.com/inlets/inlets\n2019/12/26 14:06:20 Starting server - version 2.6.3\n2019/12/26 14:06:20 Server token: \&quot;123456a78b9bcd012e3fg4h456i7890j123kl456\&quot;  &lt;----- ここをクライアント側で利用する\n2019/12/26 14:06:20 Control Plane Listening on :8090\n2019/12/26 14:06:20 Data Plane Listening on :8090\n```\n\n### クライアント側\n\n適当な場所でHTTP Serverを起動します。何を使っても良いですが、手軽にPythonでHTTPサーバーをport 8000で起動します。\n\n```bash\n# python 2系\npython2 -m SimpleHTTPServer 8000\n# python 3系\npython3 -m http.server 8000\n```\n\n次に、inletsのサーバーと接続します。\n\n```bash\nexport REMOTE=\&quot;inlets.himenon.github.io:8090\&quot;            # Host名はIPアドレスでも良い\nexport TOKEN=\&quot;123456a78b9bcd012e3fg4h456i7890j123kl456\&quot;  # サーバー側のToken\n       inlets client \\\n       --remote=$REMOTE \\\n       --upstream=http://127.0.0.1:8000 \\                # ローカルのHTTPサーバーのport番号\n       --token $TOKEN\n```\n\n起動すると以下のようなログが出力されます。\n\n```\n2019/12/26 14:14:07 Welcome to inlets.dev! Find out more at https://github.com/inlets/inlets\n2019/12/26 14:14:07 Starting client - version 2.6.3\n2019/12/26 14:14:07 Upstream:  =&gt; http://127.0.0.1:8000\n2019/12/26 14:14:07 Token: \&quot;123456a78b9bcd012e3fg4h456i7890j123kl456\&quot;\nINFO[0000] Connecting to proxy                           url=\&quot;ws://inlets.himenon.github.io:8090/tunnel\&quot;\n```\n\n### アクセスする\n\nサーバー側にアクセス（`inlets.himenon.github.io:8090`）してみると、ローカルのサーバー（今回はPythonのサーバー）に接続されることが確認できます。\n\n## おわりに\n\n[inlets](https://github.com/inlets/inlets)の簡単な紹介をしました。\n他にもいろいろとオプションがあったり、[Dockerイメージ](https://hub.docker.com/r/alexellis2/inlets)があったりするようです。\n開発環境の共有を楽にするツールとしていかがでしょうか。\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;ローカルホストをインターネット上に外部公開するinletsの紹介&quot;,&quot;description&quot;:&quot;開発環境をサーバーでProxyを行い、インターネット上に公開する方法を紹介します。&quot;,&quot;keywords&quot;:&quot;proxy,localhost,internet,inlets,websocket,http server,web開発,開発環境,slack,request url&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-12-26T14:22:47.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-12-26T14:22:47.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;ローカルホストをインターネット上に外部公開するinletsの紹介&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/infrastructure/how-to-use-inlets&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;開発環境をサーバーでProxyを行い、インターネット上に公開する方法を紹介します。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/infrastructure/how-to-use-inlets.md&quot;,&quot;name&quot;:&quot;infrastructure/how-to-use-inlets&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;ローカルホストをインターネット上に外部公開するinletsの紹介\&quot;\ndescription: \&quot;開発環境をサーバーでProxyを行い、インターネット上に公開する方法を紹介します。\&quot;\nkeywords: \&quot;proxy,localhost,internet,inlets,websocket,http server,web開発,開発環境,slack,request url\&quot;\ncreatedAt: 2019-12-26 14:22:47\nupdatedAt: 2019-12-26 14:22:47\n---\n\n# inletsの紹介\n\n## 忙しい人のための短い紹介\n\n* [inlets](https://github.com/inlets/inlets)はMITライセンスのOSSなので自社サーバー上に構築することができる\n* websocketも対応\n* [Video DEMO](https://www.youtube.com/watch?v=jrAqqe8N3q4&amp;feature=youtu.be)もあるよ\n* 3分くらいで導入できる\n* ローカルがインターネットに公開されるので気をつけて。\n\n## 詳しく見たい人のための紹介\n\nGitHub: https://github.com/inlets/inlets\n\n[ngrok](https://ngrok.com/)をご存じの方は、ngrokのOSS版いえば理解できるでしょう。\nMOONGIFTさんの記事（2019/05/04）[inlets - ローカルのサービスをインターネット上に公開する](https://www.moongift.jp/2019/05/inlets-%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%92%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E4%B8%8A%E3%81%AB%E5%85%AC%E9%96%8B/)で紹介されています。\n\n簡単に言えばローカルのサーバーをインターネットに公開するProxyのようなものです。\n\n[![intels architecture](./images/inlets.png)](https://github.com/inlets/inlets/blob/master/docs/inlets.png)\n\n利用する場面としては、ローカル開発環境を外部共有したような場面でしょう。\nたとえば、\n\n* SlackのRequest URLを指定するサーバーを構築するとき（いちいちデプロイするのが面倒な場合）\n* 知見共有のためにローカルの環境を他者に共有する場合\n* WEBをスマートフォンで動作確認するするため\n\nなど、開発時のユースケースが想像されます。\n\n## 使い方\n\n[Quick Tutorial](https://github.com/inlets/inlets#quickstart-tutorial)通りにやってみます。\nどちらがサーバーでクライアントかわからなくなるで気をつけましょう。\n\n### サーバー・クライアント両方のセットアップ\n\nCLIをインストールしておきます。\n\n* https://github.com/inlets/inlets#install-the-cli\n\n### サーバー側\n\nこのサーバーのローカルホストから見たホスト名を仮に`inlets.himenon.github.io`としておきます。\n\n`shasum`コマンドが入っていない可能性があるので、インストールしておきます。\n\n```bash\n# installerがyumの場合\nyum -y install perl-Digest-SHA\n```\n\ninletsサーバーをport 8090で起動します。\n\n```bash\nexport token=$(head -c 16 /dev/urandom | shasum | cut -d\&quot; \&quot; -f1)\ninlets server --port=8090 --token=\&quot;$token\&quot;\n```\n\nログに以下のようなログが出力されます。\n\n```bash\n2019/12/26 14:06:20 Welcome to inlets.dev! Find out more at https://github.com/inlets/inlets\n2019/12/26 14:06:20 Starting server - version 2.6.3\n2019/12/26 14:06:20 Server token: \&quot;123456a78b9bcd012e3fg4h456i7890j123kl456\&quot;  &lt;----- ここをクライアント側で利用する\n2019/12/26 14:06:20 Control Plane Listening on :8090\n2019/12/26 14:06:20 Data Plane Listening on :8090\n```\n\n### クライアント側\n\n適当な場所でHTTP Serverを起動します。何を使っても良いですが、手軽にPythonでHTTPサーバーをport 8000で起動します。\n\n```bash\n# python 2系\npython2 -m SimpleHTTPServer 8000\n# python 3系\npython3 -m http.server 8000\n```\n\n次に、inletsのサーバーと接続します。\n\n```bash\nexport REMOTE=\&quot;inlets.himenon.github.io:8090\&quot;            # Host名はIPアドレスでも良い\nexport TOKEN=\&quot;123456a78b9bcd012e3fg4h456i7890j123kl456\&quot;  # サーバー側のToken\n       inlets client \\\n       --remote=$REMOTE \\\n       --upstream=http://127.0.0.1:8000 \\                # ローカルのHTTPサーバーのport番号\n       --token $TOKEN\n```\n\n起動すると以下のようなログが出力されます。\n\n```\n2019/12/26 14:14:07 Welcome to inlets.dev! Find out more at https://github.com/inlets/inlets\n2019/12/26 14:14:07 Starting client - version 2.6.3\n2019/12/26 14:14:07 Upstream:  =&gt; http://127.0.0.1:8000\n2019/12/26 14:14:07 Token: \&quot;123456a78b9bcd012e3fg4h456i7890j123kl456\&quot;\nINFO[0000] Connecting to proxy                           url=\&quot;ws://inlets.himenon.github.io:8090/tunnel\&quot;\n```\n\n### アクセスする\n\nサーバー側にアクセス（`inlets.himenon.github.io:8090`）してみると、ローカルのサーバー（今回はPythonのサーバー）に接続されることが確認できます。\n\n## おわりに\n\n[inlets](https://github.com/inlets/inlets)の簡単な紹介をしました。\n他にもいろいろとオプションがあったり、[Dockerイメージ](https://hub.docker.com/r/alexellis2/inlets)があったりするようです。\n開発環境の共有を楽にするツールとしていかがでしょうか。\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">ローカルホストをインターネット上に外部公開するinletsの紹介</h1>
+            <p id="page-description">開発環境をサーバーでProxyを行い、インターネット上に公開する方法を紹介します。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2019-12-26 11:22:47</time><span id="created-at__label">更新日</span><time>2019-12-26 11:22:47</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h1>inletsの紹介</h1>
+          <h2>忙しい人のための短い紹介</h2>
+          <ul>
+            <li><a href="https://github.com/inlets/inlets">inlets</a>はMITライセンスのOSSなので自社サーバー上に構築することができる</li>
+            <li>websocketも対応</li>
+            <li><a href="https://www.youtube.com/watch?v=jrAqqe8N3q4&amp;feature=youtu.be">Video DEMO</a>もあるよ</li>
+            <li>3分くらいで導入できる</li>
+            <li>ローカルがインターネットに公開されるので気をつけて。</li>
+          </ul>
+          <h2>詳しく見たい人のための紹介</h2>
+          <p>GitHub: <a href="https://github.com/inlets/inlets">https://github.com/inlets/inlets</a></p>
+          <p><a href="https://ngrok.com/">ngrok</a>をご存じの方は、ngrokのOSS版いえば理解できるでしょう。
+            MOONGIFTさんの記事（2019/05/04）<a href="https://www.moongift.jp/2019/05/inlets-%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%AB%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%92%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E4%B8%8A%E3%81%AB%E5%85%AC%E9%96%8B/">inlets - ローカルのサービスをインターネット上に公開する</a>で紹介されています。</p>
+          <p>簡単に言えばローカルのサーバーをインターネットに公開するProxyのようなものです。</p>
+          <p><a href="https://github.com/inlets/inlets/blob/master/docs/inlets.png"><img src="/infrastructure/images/inlets.png" alt="intels architecture" /></a></p>
+          <p>利用する場面としては、ローカル開発環境を外部共有したような場面でしょう。
+            たとえば、</p>
+          <ul>
+            <li>SlackのRequest URLを指定するサーバーを構築するとき（いちいちデプロイするのが面倒な場合）</li>
+            <li>知見共有のためにローカルの環境を他者に共有する場合</li>
+            <li>WEBをスマートフォンで動作確認するするため</li>
+          </ul>
+          <p>など、開発時のユースケースが想像されます。</p>
+          <h2>使い方</h2>
+          <p><a href="https://github.com/inlets/inlets#quickstart-tutorial">Quick Tutorial</a>通りにやってみます。
+            どちらがサーバーでクライアントかわからなくなるで気をつけましょう。</p>
+          <h3>サーバー・クライアント両方のセットアップ</h3>
+          <p>CLIをインストールしておきます。</p>
+          <ul>
+            <li><a href="https://github.com/inlets/inlets#install-the-cli">https://github.com/inlets/inlets#install-the-cli</a></li>
+          </ul>
+          <h3>サーバー側</h3>
+          <p>このサーバーのローカルホストから見たホスト名を仮に<code>inlets.himenon.github.io</code>としておきます。</p>
+          <p><code>shasum</code>コマンドが入っていない可能性があるので、インストールしておきます。</p><pre class="language-bash"><code class="language-bash"><span class="token comment"># installerがyumの場合</span>
+yum -y <span class="token function">install</span> perl-Digest-SHA
+</code></pre>
+          <p>inletsサーバーをport 8090で起動します。</p><pre class="language-bash"><code class="language-bash"><span class="token function">export</span> token<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token function">head</span> -c 16 /dev/urandom <span class="token operator">|</span> shasum <span class="token operator">|</span> <span class="token function">cut</span> -d<span class="token string">" "</span> -f1<span class="token variable">)</span></span>
+inlets server --port<span class="token operator">=</span>8090 --token<span class="token operator">=</span><span class="token string">"<span class="token variable">$token</span>"</span>
+</code></pre>
+          <p>ログに以下のようなログが出力されます。</p><pre class="language-bash"><code class="language-bash">2019/12/26 14:06:20 Welcome to inlets.dev<span class="token operator">!</span> Find out <span class="token function">more</span> at https://github.com/inlets/inlets
+2019/12/26 14:06:20 Starting server - version 2.6.3
+2019/12/26 14:06:20 Server token: <span class="token string">"123456a78b9bcd012e3fg4h456i7890j123kl456"</span>  <span class="token operator">&lt;</span>----- ここをクライアント側で利用する
+2019/12/26 14:06:20 Control Plane Listening on :8090
+2019/12/26 14:06:20 Data Plane Listening on :8090
+</code></pre>
+          <h3>クライアント側</h3>
+          <p>適当な場所でHTTP Serverを起動します。何を使っても良いですが、手軽にPythonでHTTPサーバーをport 8000で起動します。</p><pre class="language-bash"><code class="language-bash"><span class="token comment"># python 2系</span>
+python2 -m SimpleHTTPServer 8000
+<span class="token comment"># python 3系</span>
+python3 -m http.server 8000
+</code></pre>
+          <p>次に、inletsのサーバーと接続します。</p><pre class="language-bash"><code class="language-bash"><span class="token function">export</span> REMOTE<span class="token operator">=</span><span class="token string">"inlets.himenon.github.io:8090"</span>            <span class="token comment"># Host名はIPアドレスでも良い</span>
+<span class="token function">export</span> TOKEN<span class="token operator">=</span><span class="token string">"123456a78b9bcd012e3fg4h456i7890j123kl456"</span>  <span class="token comment"># サーバー側のToken</span>
+       inlets client \
+       --remote<span class="token operator">=</span><span class="token variable">$REMOTE</span> \
+       --upstream<span class="token operator">=</span>http://127.0.0.1:8000 \                <span class="token comment"># ローカルのHTTPサーバーのport番号</span>
+       --token <span class="token variable">$TOKEN</span>
+</code></pre>
+          <p>起動すると以下のようなログが出力されます。</p><pre class="language-plain"><code class="language-plain">2019/12/26 14:14:07 Welcome to inlets.dev! Find out more at https://github.com/inlets/inlets
+2019/12/26 14:14:07 Starting client - version 2.6.3
+2019/12/26 14:14:07 Upstream:  =&gt; http://127.0.0.1:8000
+2019/12/26 14:14:07 Token: &quot;123456a78b9bcd012e3fg4h456i7890j123kl456&quot;
+INFO[0000] Connecting to proxy                           url=&quot;ws://inlets.himenon.github.io:8090/tunnel&quot;
+</code></pre>
+          <h3>アクセスする</h3>
+          <p>サーバー側にアクセス（<code>inlets.himenon.github.io:8090</code>）してみると、ローカルのサーバー（今回はPythonのサーバー）に接続されることが確認できます。</p>
+          <h2>おわりに</h2>
+          <p><a href="https://github.com/inlets/inlets">inlets</a>の簡単な紹介をしました。
+            他にもいろいろとオプションがあったり、<a href="https://hub.docker.com/r/alexellis2/inlets">Dockerイメージ</a>があったりするようです。
+            開発環境の共有を楽にするツールとしていかがでしょうか。</p>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
