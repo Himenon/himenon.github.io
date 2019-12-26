@@ -1,6 +1,7 @@
 {
   "name": "himenon.github.io",
   "version": "1.0.0",
+  "license": "UNLICENSED",
   "scripts": {
     "start": "yarn run prebuild && run-p server build:*:watch",
     "prebuild": "run-p build:*",

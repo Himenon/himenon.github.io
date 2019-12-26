@@ -1,6 +1,9 @@
 import { Index, PostProps } from "@custom-site/interfaces/lib/page";
 import * as dayjs from "dayjs";
+import "dayjs/locale/ja";
 import * as React from "react";
+
+dayjs.locale("ja");
 
 const IndexList = ({ props: indexes }: { props: Index[] }) => {
   const total = indexes.length;
