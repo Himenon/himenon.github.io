@@ -1,0 +1,108 @@
+<html>
+
+  <head lang="ja">
+    <title>emccコマンドをインストールする</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="webassembly,wasm,emcc,install,インストール,emcc command not found" />
+    <meta name="description" content="emccコマンドをインストールする方法を紹介します。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="emccコマンドをインストールする" />
+    <meta property="og:url" content="https://himenon.github.io/web-assembly/install-emcc" />
+    <meta property="og:description" content="emccコマンドをインストールする方法を紹介します。" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?020e0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?4bf3b" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?88749" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?ade84" rel="stylesheet" />
+    <link href="/lib/prism.css?08a65" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?29a8e" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;emccコマンドをインストールする&quot;,&quot;description&quot;:&quot;emccコマンドをインストールする方法を紹介します。&quot;,&quot;keywords&quot;:&quot;webassembly,wasm,emcc,install,インストール,emcc command not found&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-12-30T18:25:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-12-30T18:25:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;emccコマンドをインストールする&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/web-assembly/install-emcc&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;emccコマンドをインストールする方法を紹介します。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/web-assembly/install-emcc&quot;,&quot;content&quot;:&quot;\n## 動機\n\nC/C++をWebAssemblyにコンパイルする状況が発生したので、コンパイラをインストールした。\n\n## インストール方法\n\nインストール環境はmacOSだったので、参考文献のとおりにやってみた。\n\n```bash\ncd ~ # $HOMEディレクトリに配置するようにした\ngit clone https://github.com/juj/emsdk.git\ncd emsdk\n\n./emsdk install latest\n./emsdk activate latest\n```\n\nバージョンを指定する方法`--build=Release sdk-incoming-64bit binaryen-master-64bit`を試してみたが、うまく行かなかったので、`latest`をインストール。\nshellは`fish`を利用していたため、&lt;https://github.com/emscripten-core/emsdk&gt;に存在する`emsdk_env.fish`を以下のコマンドで実行した。\n\n```fish\nfish emsdk_env.fish\n```\n\nこれでfish起動時にPATHが自動的に追加されると期待したが、このファイル自体を起動時に呼び出す必要がある。\nshell起動時に実行するファイル`~/.config/fish/config.fish`（bashなら`.bash_profile`など）に以下のスクリプトを追加した。\n\n```fish\nsource ~/emsdk/emsdk_env.fish &gt; /dev/null\n```\n\n新しくターミナルを開き`emcc`のPATHが通っていることを確認してインストールが完了。\n\n```\n$ emcc --version                                                                                                                                         月 12/30 18:14:04 2019\nemcc (Emscripten gcc/clang-like replacement) 1.39.5 (commit 369013943283939412fb2807bb0d2ded8ebd5a9e)\nCopyright (C) 2014 the Emscripten authors (see AUTHORS.txt)\nThis is free and open source software under the MIT license.\nThere is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n```\n\n## emcc command not found /  Unknown command &#x27;emcc&#x27;\n\n`source ./emsdk_env.sh`を実行して、以下のエラーが出る場合、shellが異なることが原因だった。\n\n```bash\n$ source emsdk_env.sh\n\nemsdk_env.sh (line 18): Missing end to balance this if statement\nif [ \&quot;$SRC\&quot; = \&quot;\&quot; ]; then\n^\nfrom sourcing file emsdk_env.sh\n\tcalled on standard input\n\nsource: Error while reading file &#x27;emsdk_env.sh&#x27;\n```\n\nこれでうまく行かない場合、\n\n```bash\nbash ./emsdk_env.sh\n```\n\nなどのように実行してみると良い。\n\n関連Issue\n\n* https://github.com/emscripten-core/emscripten/issues/5696\n\n## 参考文献\n\n* Mac OS X and Linux installation - WEBASSEMBLY&lt;br /&gt;&lt;https://webassembly.org/getting-started/developers-guide/#mac-os-x-and-linux-installation&gt;\n* C/C++からWebAssemblyにコンパイルする&lt;br /&gt;&lt;https://developer.mozilla.org/ja/docs/WebAssembly/C_to_wasm&gt;\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;emccコマンドをインストールする&quot;,&quot;description&quot;:&quot;emccコマンドをインストールする方法を紹介します。&quot;,&quot;keywords&quot;:&quot;webassembly,wasm,emcc,install,インストール,emcc command not found&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2019-12-30T18:25:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2019-12-30T18:25:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;emccコマンドをインストールする&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/web-assembly/install-emcc&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;emccコマンドをインストールする方法を紹介します。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/web-assembly/install-emcc.md&quot;,&quot;name&quot;:&quot;web-assembly/install-emcc&quot;,&quot;raw&quot;:&quot;---\ntitle: emccコマンドをインストールする\ndescription: emccコマンドをインストールする方法を紹介します。\nkeywords: webassembly,wasm,emcc,install,インストール,emcc command not found\ncreatedAt: 2019-12-30 18:25:00\nupdatedAt: 2019-12-30 18:25:00\n---\n\n## 動機\n\nC/C++をWebAssemblyにコンパイルする状況が発生したので、コンパイラをインストールした。\n\n## インストール方法\n\nインストール環境はmacOSだったので、参考文献のとおりにやってみた。\n\n```bash\ncd ~ # $HOMEディレクトリに配置するようにした\ngit clone https://github.com/juj/emsdk.git\ncd emsdk\n\n./emsdk install latest\n./emsdk activate latest\n```\n\nバージョンを指定する方法`--build=Release sdk-incoming-64bit binaryen-master-64bit`を試してみたが、うまく行かなかったので、`latest`をインストール。\nshellは`fish`を利用していたため、&lt;https://github.com/emscripten-core/emsdk&gt;に存在する`emsdk_env.fish`を以下のコマンドで実行した。\n\n```fish\nfish emsdk_env.fish\n```\n\nこれでfish起動時にPATHが自動的に追加されると期待したが、このファイル自体を起動時に呼び出す必要がある。\nshell起動時に実行するファイル`~/.config/fish/config.fish`（bashなら`.bash_profile`など）に以下のスクリプトを追加した。\n\n```fish\nsource ~/emsdk/emsdk_env.fish &gt; /dev/null\n```\n\n新しくターミナルを開き`emcc`のPATHが通っていることを確認してインストールが完了。\n\n```\n$ emcc --version                                                                                                                                         月 12/30 18:14:04 2019\nemcc (Emscripten gcc/clang-like replacement) 1.39.5 (commit 369013943283939412fb2807bb0d2ded8ebd5a9e)\nCopyright (C) 2014 the Emscripten authors (see AUTHORS.txt)\nThis is free and open source software under the MIT license.\nThere is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n```\n\n## emcc command not found /  Unknown command &#x27;emcc&#x27;\n\n`source ./emsdk_env.sh`を実行して、以下のエラーが出る場合、shellが異なることが原因だった。\n\n```bash\n$ source emsdk_env.sh\n\nemsdk_env.sh (line 18): Missing end to balance this if statement\nif [ \&quot;$SRC\&quot; = \&quot;\&quot; ]; then\n^\nfrom sourcing file emsdk_env.sh\n\tcalled on standard input\n\nsource: Error while reading file &#x27;emsdk_env.sh&#x27;\n```\n\nこれでうまく行かない場合、\n\n```bash\nbash ./emsdk_env.sh\n```\n\nなどのように実行してみると良い。\n\n関連Issue\n\n* https://github.com/emscripten-core/emscripten/issues/5696\n\n## 参考文献\n\n* Mac OS X and Linux installation - WEBASSEMBLY&lt;br /&gt;&lt;https://webassembly.org/getting-started/developers-guide/#mac-os-x-and-linux-installation&gt;\n* C/C++からWebAssemblyにコンパイルする&lt;br /&gt;&lt;https://developer.mozilla.org/ja/docs/WebAssembly/C_to_wasm&gt;\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">emccコマンドをインストールする</h1>
+            <p id="page-description">emccコマンドをインストールする方法を紹介します。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2019-12-31 03:25:00</time><span id="created-at__label">更新日</span><time>2019-12-31 03:25:00</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h2>動機</h2>
+          <p>C/C++をWebAssemblyにコンパイルする状況が発生したので、コンパイラをインストールした。</p>
+          <h2>インストール方法</h2>
+          <p>インストール環境はmacOSだったので、参考文献のとおりにやってみた。</p><pre class="language-bash"><code class="language-bash"><span class="token function">cd</span> ~ <span class="token comment"># $HOMEディレクトリに配置するようにした</span>
+<span class="token function">git</span> clone https://github.com/juj/emsdk.git
+<span class="token function">cd</span> emsdk
+
+./emsdk <span class="token function">install</span> latest
+./emsdk activate latest
+</code></pre>
+          <p>バージョンを指定する方法<code>--build=Release sdk-incoming-64bit binaryen-master-64bit</code>を試してみたが、うまく行かなかったので、<code>latest</code>をインストール。
+            shellは<code>fish</code>を利用していたため、<a href="https://github.com/emscripten-core/emsdk">https://github.com/emscripten-core/emsdk</a>に存在する<code>emsdk_env.fish</code>を以下のコマンドで実行した。</p><pre class="language-plain"><code class="language-fish">fish emsdk_env.fish
+</code></pre>
+          <p>これでfish起動時にPATHが自動的に追加されると期待したが、このファイル自体を起動時に呼び出す必要がある。
+            shell起動時に実行するファイル<code>~/.config/fish/config.fish</code>（bashなら<code>.bash_profile</code>など）に以下のスクリプトを追加した。</p><pre class="language-plain"><code class="language-fish">source ~/emsdk/emsdk_env.fish &gt; /dev/null
+</code></pre>
+          <p>新しくターミナルを開き<code>emcc</code>のPATHが通っていることを確認してインストールが完了。</p><pre class="language-plain"><code class="language-plain">$ emcc --version                                                                                                                                         月 12/30 18:14:04 2019
+emcc (Emscripten gcc/clang-like replacement) 1.39.5 (commit 369013943283939412fb2807bb0d2ded8ebd5a9e)
+Copyright (C) 2014 the Emscripten authors (see AUTHORS.txt)
+This is free and open source software under the MIT license.
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+</code></pre>
+          <h2>emcc command not found / Unknown command &#x27;emcc&#x27;</h2>
+          <p><code>source ./emsdk_env.sh</code>を実行して、以下のエラーが出る場合、shellが異なることが原因だった。</p><pre class="language-bash"><code class="language-bash">$ <span class="token function">source</span> emsdk_env.sh
+
+emsdk_env.sh <span class="token punctuation">(</span>line 18<span class="token punctuation">)</span>: Missing end to balance this <span class="token keyword">if</span> statement
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">"<span class="token variable">$SRC</span>"</span> <span class="token operator">=</span> <span class="token string">""</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+^
+from sourcing <span class="token function">file</span> emsdk_env.sh
+    called on standard input
+
+source: Error <span class="token keyword">while</span> reading <span class="token function">file</span> <span class="token string">'emsdk_env.sh'</span>
+</code></pre>
+          <p>これでうまく行かない場合、</p><pre class="language-bash"><code class="language-bash"><span class="token function">bash</span> ./emsdk_env.sh
+</code></pre>
+          <p>などのように実行してみると良い。</p>
+          <p>関連Issue</p>
+          <ul>
+            <li><a href="https://github.com/emscripten-core/emscripten/issues/5696">https://github.com/emscripten-core/emscripten/issues/5696</a></li>
+          </ul>
+          <h2>参考文献</h2>
+          <ul>
+            <li>Mac OS X and Linux installation - WEBASSEMBLY<br /><a href="https://webassembly.org/getting-started/developers-guide/#mac-os-x-and-linux-installation">https://webassembly.org/getting-started/developers-guide/#mac-os-x-and-linux-installation</a></li>
+            <li>C/C++からWebAssemblyにコンパイルする<br /><a href="https://developer.mozilla.org/ja/docs/WebAssembly/C_to_wasm">https://developer.mozilla.org/ja/docs/WebAssembly/C_to_wasm</a></li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
