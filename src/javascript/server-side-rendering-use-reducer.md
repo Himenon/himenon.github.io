@@ -1,7 +1,7 @@
 ---
 title: React.useReducerを利用したアプリケーションをSSRする
-description: 'Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons'の対処方法
-keywords: react,hooks,useReducer,reducer,server side,rendering,ssr
+description: "'Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons'の対処方法"
+keywords: "react,hooks,useReducer,reducer,server side,rendering,ssr"
 ---
 
 ## 修正方法
