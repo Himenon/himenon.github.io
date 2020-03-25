@@ -1,0 +1,328 @@
+<html>
+
+  <head lang="ja">
+    <title>簡単なPythonのパッケージを作る方法</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="python.library" />
+    <meta name="description" content="日付変換" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="簡単なPythonのパッケージを作る方法" />
+    <meta property="og:url" content="https://himenon.github.io/python/make-package" />
+    <meta property="og:description" content="日付変換" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?96b66" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?39621" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?15fa6" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?af8e6" rel="stylesheet" />
+    <link href="/lib/prism.css?2cc99" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?9c282" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;簡単なPythonのパッケージを作る方法&quot;,&quot;description&quot;:&quot;日付変換&quot;,&quot;keywords&quot;:&quot;python.library&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2016-12-04T03:49:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-03-26T00:15:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;簡単なPythonのパッケージを作る方法&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/python/make-package&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;日付変換&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/python/make-package&quot;,&quot;content&quot;:&quot;\n&gt; 追記: 2017/11/16\n&gt; よく見られているっぽいので、名前変えました。\n\nPythonのファイル分割とパッケージとかまでをすごいざっくりまとめてみる。\n\n「パッケージの最小サンプル」だけ見たい人は多分目次から飛んだほうが早いのでオススメ。\n\n# Pythonでファイルを分割するということ\n\n## 「ファイル分割 = 名前空間の作成」が気持ちいいぞ\n\n個人的に気に入ってるのがファイル分割。\n何かしらいろいろと作ってくるとコード数が増えて、「昨日書いたコードは今日の敵」のようなことになってしまうので、なるべく機能ごとにまとめて管理していきたい。\n\nだいたいこんな理由ではじめてファイル分割を検索するんだけど、「 **Python ファイル分割** 」みたいな感じでググっても、記事が古かったり、2系で書いてあるから不安になったり、リファレンスのモジュールの項を見ても欲しい情報に速攻にたどり着けなかったりする。\n\n参考：\n\n- [6. モジュール](http://docs.python.jp/2/tutorial/modules.html)\n\nなので、さっさとコードを書いて後から説明していく。\n\n\nファイル構成は次の通り\n\n```\nadvent2016        # ディレクトリ\n├── another.py # 分割したファイル\n└── main.py    # インポートする側\n```\n\n\n```python\n# another.py\nyear = 2016\n\ndef hello(name):\n    print(\&quot;Hello {0}\&quot;.format(name))\n\ndef goodbye(name):\n    print(\&quot;Goodbye {0} !\&quot;.format(name))\n```\n\n```python\n# main.py\nimport another # .pyなどはいらない。\n\nanother.hello(\&quot;Advent Calender\&quot;)\n\nanother.goodbye( another.year )\n```\n\nここまで書いて、`main.py` を実行すると次のようになる。\n\n```bash\n$ python main.py\n\nHello Advent Calender\nGoodbye 2016 !\n```\n\nさらにインポートの方法も複数あって、それを自分で選択できるのが便利。\n例えば、インポートするときの名前を変更したいなら、\n\n```python\n# main2.py\nimport another as an\n\nan.hello(\&quot;Advent Calender\&quot;)\n\nan.goodbye( an.year )\n```\n\nのように、 `as` を使って `another` を `an` に置き変えることが可能だ。\n名前空間が必要ではない場合、は次のように `from` を使って書くこともできる。\n\n```py\nfrom another import *\n\nhello(\&quot;Advent Calender\&quot;)\ngoodbye( year )\n```\n\n`*` (アスタリスク) は `another.py` で記述されているものを全てを引用することが可能だ。ただし、ファイルをインポートした時に同じ名前のメソッドがあった場合は危険であるから、必要なメソッドや変数のみに絞ってインポートしたい時がある。その場合は次のようにすれば良い。\n\n\n```python\n# main3.py\nfrom another import hello\n\nhello(\&quot;Advent Calender\&quot;)\n\ngoodbye( year )           # エラー\n```\n\nさっきの `*` アスタリスクの部分に必要なものを明示的に書いてあげればよいだけである。\n\nさて、少しだけ注意しておきたいことが有る。\nインポートするファイルに直接実行コードが書いてある時だ。\n\n```python\n# another.py\nyear = 2016\n\ndef hello(name):\n    print(\&quot;Hello {0}\&quot;.format(name))\n\ndef goodbye(name):\n    print(\&quot;Goodbye {0} !\&quot;.format(name))\n  \nprint(\&quot;Hello from another.py\&quot;) # 追加\n```\n\nこの場合、どのようになるか。\n仮に、 `main.py` で実行した時、次の様になる。\n\n```bash\n$ python main.py\n\nHello from athoer.py\nHello Advent Calender\nGoodbye 2016 !\n```\n\n`another.py` がインポートされた段階で実行されていることがわかる。\nこれを避けるためには次のようにすると良い。\n\n```python\n# another.py\nyear = 2016\n\ndef hello(name):\n    print(\&quot;Hello {0}\&quot;.format(name))\n\ndef goodbye(name):\n    print(\&quot;Goddbye {0} !\&quot;.format(name))\n\nif __name__ == &#x27;__main__&#x27;: # 追加\n\n    print(\&quot;Hello from another.py\&quot;) # 追加\n```\n\n`if __name__ == &#x27;__main__&#x27;:` の内側に書いてしまえば、直接実行された時以外は内側のコードは実行されなくなる。\nインポートされる可能性のあるファイル単体で実行するときは、書いておくほうが無難であろう。\n\n## ディレクトリ単位での分割も良いぞ\n\nファイル分割を個々まで説明してきたが、せっかくなのでディレクトリを利用した場合も説明しておこう。\n例えば次のようなファイル構成を作っておく。\n\n```\nadvent2016-part2        # ディレクトリ\n├── Special          # ディレクトリ\n│   └── sunday.py   # ファイル (追加)\n└── main.py          # ファイル\n```\n\n早速 `sunday.py` を `main.py` にインポートするコードを書いてみる。\n\n```python\n# sunday.py\nfilename = \&quot;sunday.py\&quot;\n\ndef hello(name):\n    print(\&quot;Hello {0}. From sunday.py\&quot;.format(name))\n```\n\n```python\n# main.py\nimport Special.sunday\n\nprint( Special.sunday.filename )\nSpecial.sunday.hello(\&quot;HELLO\&quot;)\n```\n\n見ての通り、 `import Special.sunday` でディレクトリ内にあるコードも読み込みが可能だ。\nただし、上記のようにインポートした時は `Special.sunday` をいちいち書く必要がある。\nが、ここまで読めば分かる通り、 `as` や `from` を利用すれば、長々と記述する必要がなくなるわけである。\n\n```python\nimport Special.sunday as sunday\n\nprint( sunday.filename )\nsunday.hello(\&quot;HELLO\&quot;)\n```\n\nすばらしい。好きなようにインポートするのがよいだろう。また、どこからインポートされているのかを確認したければ、\n\n```python\nimport Special\nprint( Special.__path__ )\n```\n\nとすると絶対パスが確認ができる。\n\n細かなエラーなどについては [Pythonのimportについてまとめる](http://qiita.com/suzuki-hoge/items/f951d56290617df4279e) を参照することをおすすめしたい。\n\n## 次に\n\nいやはや、ファイル分割はコードの見通しを良くする上でとても大事なことだけれども、\nここまでの内容だけだと、一つのディレクトリの中でたくさんコードを管理してしまうことになってしまう。\n\n1つのディレクトリ内でたくさんのコードを用意していればそれだけ引っ張り出せるのだけれど、\n人間は忘れてしまう生き物なので、どこに何があるのかいづれわからなくなってしまう。\n\n決して忘れることに罪はないので、忘れないうちに忘れたときの手を打っておくのが健全だろう。\n\nなので、パッケージ化してしまって、どこからでも引っ張りだせれば至極便利。\n\n# パッケージ化するって、つまりそういうこと\n\n頻度の高くないものや、小規模なプロジェクトにおいてはそのまま使うのが効率が良いとは思う。\nだが、この逆はパッケージ化したほうが便利ではなかろうか。そのはずだ。\n\nPythonのパッケージ化、でググってだいたい引っかかるのがこの辺。\n\n- [PyPIデビューしたい人の為のPyPI登録の手順 - Qiita : 2016年06月10日](http://qiita.com/kinpira/items/0a4e7c78fc5dd28bd695)\n- [PyPIデビュー - 清水川Web](http://www.freia.jp/taka/docs/pyhack4/pypi/)\n- [PyPIデビュー2015](https://tell-k.github.io/pyconjp2015/#1)\n- [PyPIデビューした 〜 PyPIデビューまでの道のり 〜](http://gaujin.jp/media/1/python/osakapy/2015-12/)\n\nざっと見た感じだと長いので、ここではさくさく終わらせていこう。\n\n## パッケージ化してしまえ\n\n`setup.py` さえ作ってしまえパッケージ化は簡単。\n\n```python\nfrom setuptools import setup, find_packages\n\nsetup(\n    name=&#x27;パッケージ名&#x27;,\n    version=\&quot;0.0.1\&quot;,                 # X.Y.Z 形式\n    description=\&quot;短めの説明\&quot;,\n    long_description=\&quot;長めの説明\&quot;,\n    url=&#x27;必要ならばURL&#x27;,\n    author=&#x27;作者名&#x27;,\n    author_email=&#x27;メールアドレス&#x27;,\n    license=&#x27;ライセンス&#x27;,\n    classifiers=[\n        # パッケージのカテゴリー\n        # https://pypi.python.org/pypi?:action=list_classifiers\n        # からあったものをコピペ。\n    ],\n    keywords=&#x27;キーワード&#x27;,\n    install_requires=[\&quot;依存関係のあるパッケージ\&quot;],\n)\n```\n\nこれが終わったら、コマンドでインストールしてしまえばいい。\n\n### ローカルでインストール(開発モード)\n\n```bash\npip install -e\npython setup.py develop\n```\n\nこれで、ローカル環境ではどこからでもインポートできる。\n\n\n### パッケージの最小サンプル\n\n試しに最小サンプルを用意しておこう。ただ単純に「\&quot;Farewell 2016 !\&quot;」と出力するだけのパッケージだ。 \n\n```\nFarewell2016\n├── Farewell2016\n│   └── Greet.py\n└── setup.py\n```\n\n```Greet.py\ndef farewell():\n\tprint(\&quot;Farewell 2016 !\&quot;)\n```\n\n```python\n# setup.py\nfrom setuptools import setup, find_packages\n\nsetup(\n    name=&#x27;Farewell2016&#x27;,\n    version=\&quot;0.0.1\&quot;,                 \n    description=\&quot;さよなら2016年\&quot;,\n    long_description=\&quot;2016年にお別れを言うだけのパッケージ\&quot;,\n    author=&#x27;k.himeno&#x27;,\n    license=&#x27;MIT&#x27;,\n    classifiers=[\n        \&quot;Development Status :: 1 - Planning\&quot;\n    ],\n    keywords=&#x27;farewell&#x27;\n)\n```\n\n書き終わったら `setup.py` のあるディレクトリで次のコマンドを実行すれば良い。\n\n```bash\npip install -e\npython setup.py develop\n```\n\nこれだけだ！\n\n試しに、全く関係のないディレクトリで次のコードを実行してみるとよい。\n\n```python\n# sample.py\nfrom Farewell2016.Greet import farewell\nfarewell()\n```\n\nこれだけでも随分と楽になる。\n\n## せっかくなのでPyPIに登録しちゃう？\n\nせっかく作ったらアップロードしちゃいましょう。\n\n（とかいって、アドベントカレンダー用に何かパッケージ作ろうとしてたら、まぁまぁ凝ったものを作ってしまった。）\n\n参考程度にソースコード\n\n- ソースコード: https://github.com/Himenon/CountDownApp\n- PyPI: https://pypi.python.org/pypi?:action=display&amp;name=CountDownApp&amp;version=0.0.1\n\nこやつの構成は次の通り。\n\n```\nCountDownApp\n├── CountDownApp       # パッケージの中身\n│   ├── __init__,py \n│   └── app.py        \n├── MANIFEST.in        # 配布ソースコードに何を含めるか書いたファイル\n├── README.rst         # 長い説明とかをまとめているファイル\n├── VERSION            # 勝手に作ったバージョンファイル\n├── image.png          # ただの画像\n├── requirements.txt   # 依存している他のパッケージをまとめるやつ\n├── setup.cfg          # オプションをまとめる便利なファイル\n└── setup.py           # パッケージの情報が詰まったファイル\n```\n\nこのパッケージのファイルをもとに簡単に説明してみる。\n\n### 配布用ソースコードの作成\n\n以下のコマンドで出来上がる。\n\n```\npython setup.py sdist\n```\n\n`MANIFEST.in` に従ってパッケージ化される。\n\n```MANIFEST.in\ninclude README.rst\ninclude setup.cfg\n```\n\n- http://docs.python.jp/2/distutils/sourcedist.html\n- https://docs.python.org/3/distutils/sourcedist.html\n\n\n### 配布用のバイナリの作成\n\n`wheel` パッケージを利用するのでインストールしておく。\n\n```bash\npip install wheel\n```\n\nwheelのドキュメント\n\n- http://wheel.readthedocs.io/en/latest/\n\n実行方法は\n\n```\npython setup.py bdist_wheel\n```\n\nとすればよい。\n\n[Defining the Python version](http://wheel.readthedocs.io/en/latest/#defining-the-python-version)では、\n`--universal` と `--python-tag XXX` が説明されてあるが、どの環境に対してパッケージ化するかが選択できる。\n\n`setup.cfg` ファイルにこれらのオプションをまとめておくことができる。\n\n```cfg\n# setup,cfg\n[bdist_wheel]\nuniversal=1\n```\n\nこうすれば、わざわざオプションをつけなくてよい。\n\n**setup,cfgについて**\n\n- http://docs.python.jp/2/distutils/configfile.html\n- https://docs.python.org/3/distutils/configfile.html\n\n### PyPIへアップロード\n\n配布用のソースコードとバイナリを作成してアップロードするなら\n\n```bash\npython setup.py sdist bdist_wheel upload\n```\n\nでよい。\n\n# さいごに\n\nこの記事は、箱入り娘状態のコードがあって、公開できるコードがあるのに、公開の方法を知らないという人に届いてホスィ。\n\nコードを共有してくれると僕と僕以外の全て、つまり「全て」が嬉しいので、パッケージを公開するなり、記事を公開するなりやってみませぬか？\n\nおわり。\n\n2016/12/5 追記\n-------------\n\n※ 編集リクエストくださってる方ありがとうございます！\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;簡単なPythonのパッケージを作る方法&quot;,&quot;description&quot;:&quot;日付変換&quot;,&quot;keywords&quot;:&quot;python.library&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2016-12-04T03:49:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-03-26T00:15:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;簡単なPythonのパッケージを作る方法&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/python/make-package&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;日付変換&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/python/make-package.md&quot;,&quot;name&quot;:&quot;python/make-package&quot;,&quot;raw&quot;:&quot;---\ntitle: 簡単なPythonのパッケージを作る方法\ndescription: \&quot;日付変換\&quot;\nkeywords: \&quot;python.library\&quot;\ncreatedAt: 2016-12-04 03:49:00\nupdatedAt: 2020-03-26 00:15:00\n---\n\n&gt; 追記: 2017/11/16\n&gt; よく見られているっぽいので、名前変えました。\n\nPythonのファイル分割とパッケージとかまでをすごいざっくりまとめてみる。\n\n「パッケージの最小サンプル」だけ見たい人は多分目次から飛んだほうが早いのでオススメ。\n\n# Pythonでファイルを分割するということ\n\n## 「ファイル分割 = 名前空間の作成」が気持ちいいぞ\n\n個人的に気に入ってるのがファイル分割。\n何かしらいろいろと作ってくるとコード数が増えて、「昨日書いたコードは今日の敵」のようなことになってしまうので、なるべく機能ごとにまとめて管理していきたい。\n\nだいたいこんな理由ではじめてファイル分割を検索するんだけど、「 **Python ファイル分割** 」みたいな感じでググっても、記事が古かったり、2系で書いてあるから不安になったり、リファレンスのモジュールの項を見ても欲しい情報に速攻にたどり着けなかったりする。\n\n参考：\n\n- [6. モジュール](http://docs.python.jp/2/tutorial/modules.html)\n\nなので、さっさとコードを書いて後から説明していく。\n\n\nファイル構成は次の通り\n\n```\nadvent2016        # ディレクトリ\n├── another.py # 分割したファイル\n└── main.py    # インポートする側\n```\n\n\n```python\n# another.py\nyear = 2016\n\ndef hello(name):\n    print(\&quot;Hello {0}\&quot;.format(name))\n\ndef goodbye(name):\n    print(\&quot;Goodbye {0} !\&quot;.format(name))\n```\n\n```python\n# main.py\nimport another # .pyなどはいらない。\n\nanother.hello(\&quot;Advent Calender\&quot;)\n\nanother.goodbye( another.year )\n```\n\nここまで書いて、`main.py` を実行すると次のようになる。\n\n```bash\n$ python main.py\n\nHello Advent Calender\nGoodbye 2016 !\n```\n\nさらにインポートの方法も複数あって、それを自分で選択できるのが便利。\n例えば、インポートするときの名前を変更したいなら、\n\n```python\n# main2.py\nimport another as an\n\nan.hello(\&quot;Advent Calender\&quot;)\n\nan.goodbye( an.year )\n```\n\nのように、 `as` を使って `another` を `an` に置き変えることが可能だ。\n名前空間が必要ではない場合、は次のように `from` を使って書くこともできる。\n\n```py\nfrom another import *\n\nhello(\&quot;Advent Calender\&quot;)\ngoodbye( year )\n```\n\n`*` (アスタリスク) は `another.py` で記述されているものを全てを引用することが可能だ。ただし、ファイルをインポートした時に同じ名前のメソッドがあった場合は危険であるから、必要なメソッドや変数のみに絞ってインポートしたい時がある。その場合は次のようにすれば良い。\n\n\n```python\n# main3.py\nfrom another import hello\n\nhello(\&quot;Advent Calender\&quot;)\n\ngoodbye( year )           # エラー\n```\n\nさっきの `*` アスタリスクの部分に必要なものを明示的に書いてあげればよいだけである。\n\nさて、少しだけ注意しておきたいことが有る。\nインポートするファイルに直接実行コードが書いてある時だ。\n\n```python\n# another.py\nyear = 2016\n\ndef hello(name):\n    print(\&quot;Hello {0}\&quot;.format(name))\n\ndef goodbye(name):\n    print(\&quot;Goodbye {0} !\&quot;.format(name))\n  \nprint(\&quot;Hello from another.py\&quot;) # 追加\n```\n\nこの場合、どのようになるか。\n仮に、 `main.py` で実行した時、次の様になる。\n\n```bash\n$ python main.py\n\nHello from athoer.py\nHello Advent Calender\nGoodbye 2016 !\n```\n\n`another.py` がインポートされた段階で実行されていることがわかる。\nこれを避けるためには次のようにすると良い。\n\n```python\n# another.py\nyear = 2016\n\ndef hello(name):\n    print(\&quot;Hello {0}\&quot;.format(name))\n\ndef goodbye(name):\n    print(\&quot;Goddbye {0} !\&quot;.format(name))\n\nif __name__ == &#x27;__main__&#x27;: # 追加\n\n    print(\&quot;Hello from another.py\&quot;) # 追加\n```\n\n`if __name__ == &#x27;__main__&#x27;:` の内側に書いてしまえば、直接実行された時以外は内側のコードは実行されなくなる。\nインポートされる可能性のあるファイル単体で実行するときは、書いておくほうが無難であろう。\n\n## ディレクトリ単位での分割も良いぞ\n\nファイル分割を個々まで説明してきたが、せっかくなのでディレクトリを利用した場合も説明しておこう。\n例えば次のようなファイル構成を作っておく。\n\n```\nadvent2016-part2        # ディレクトリ\n├── Special          # ディレクトリ\n│   └── sunday.py   # ファイル (追加)\n└── main.py          # ファイル\n```\n\n早速 `sunday.py` を `main.py` にインポートするコードを書いてみる。\n\n```python\n# sunday.py\nfilename = \&quot;sunday.py\&quot;\n\ndef hello(name):\n    print(\&quot;Hello {0}. From sunday.py\&quot;.format(name))\n```\n\n```python\n# main.py\nimport Special.sunday\n\nprint( Special.sunday.filename )\nSpecial.sunday.hello(\&quot;HELLO\&quot;)\n```\n\n見ての通り、 `import Special.sunday` でディレクトリ内にあるコードも読み込みが可能だ。\nただし、上記のようにインポートした時は `Special.sunday` をいちいち書く必要がある。\nが、ここまで読めば分かる通り、 `as` や `from` を利用すれば、長々と記述する必要がなくなるわけである。\n\n```python\nimport Special.sunday as sunday\n\nprint( sunday.filename )\nsunday.hello(\&quot;HELLO\&quot;)\n```\n\nすばらしい。好きなようにインポートするのがよいだろう。また、どこからインポートされているのかを確認したければ、\n\n```python\nimport Special\nprint( Special.__path__ )\n```\n\nとすると絶対パスが確認ができる。\n\n細かなエラーなどについては [Pythonのimportについてまとめる](http://qiita.com/suzuki-hoge/items/f951d56290617df4279e) を参照することをおすすめしたい。\n\n## 次に\n\nいやはや、ファイル分割はコードの見通しを良くする上でとても大事なことだけれども、\nここまでの内容だけだと、一つのディレクトリの中でたくさんコードを管理してしまうことになってしまう。\n\n1つのディレクトリ内でたくさんのコードを用意していればそれだけ引っ張り出せるのだけれど、\n人間は忘れてしまう生き物なので、どこに何があるのかいづれわからなくなってしまう。\n\n決して忘れることに罪はないので、忘れないうちに忘れたときの手を打っておくのが健全だろう。\n\nなので、パッケージ化してしまって、どこからでも引っ張りだせれば至極便利。\n\n# パッケージ化するって、つまりそういうこと\n\n頻度の高くないものや、小規模なプロジェクトにおいてはそのまま使うのが効率が良いとは思う。\nだが、この逆はパッケージ化したほうが便利ではなかろうか。そのはずだ。\n\nPythonのパッケージ化、でググってだいたい引っかかるのがこの辺。\n\n- [PyPIデビューしたい人の為のPyPI登録の手順 - Qiita : 2016年06月10日](http://qiita.com/kinpira/items/0a4e7c78fc5dd28bd695)\n- [PyPIデビュー - 清水川Web](http://www.freia.jp/taka/docs/pyhack4/pypi/)\n- [PyPIデビュー2015](https://tell-k.github.io/pyconjp2015/#1)\n- [PyPIデビューした 〜 PyPIデビューまでの道のり 〜](http://gaujin.jp/media/1/python/osakapy/2015-12/)\n\nざっと見た感じだと長いので、ここではさくさく終わらせていこう。\n\n## パッケージ化してしまえ\n\n`setup.py` さえ作ってしまえパッケージ化は簡単。\n\n```python\nfrom setuptools import setup, find_packages\n\nsetup(\n    name=&#x27;パッケージ名&#x27;,\n    version=\&quot;0.0.1\&quot;,                 # X.Y.Z 形式\n    description=\&quot;短めの説明\&quot;,\n    long_description=\&quot;長めの説明\&quot;,\n    url=&#x27;必要ならばURL&#x27;,\n    author=&#x27;作者名&#x27;,\n    author_email=&#x27;メールアドレス&#x27;,\n    license=&#x27;ライセンス&#x27;,\n    classifiers=[\n        # パッケージのカテゴリー\n        # https://pypi.python.org/pypi?:action=list_classifiers\n        # からあったものをコピペ。\n    ],\n    keywords=&#x27;キーワード&#x27;,\n    install_requires=[\&quot;依存関係のあるパッケージ\&quot;],\n)\n```\n\nこれが終わったら、コマンドでインストールしてしまえばいい。\n\n### ローカルでインストール(開発モード)\n\n```bash\npip install -e\npython setup.py develop\n```\n\nこれで、ローカル環境ではどこからでもインポートできる。\n\n\n### パッケージの最小サンプル\n\n試しに最小サンプルを用意しておこう。ただ単純に「\&quot;Farewell 2016 !\&quot;」と出力するだけのパッケージだ。 \n\n```\nFarewell2016\n├── Farewell2016\n│   └── Greet.py\n└── setup.py\n```\n\n```Greet.py\ndef farewell():\n\tprint(\&quot;Farewell 2016 !\&quot;)\n```\n\n```python\n# setup.py\nfrom setuptools import setup, find_packages\n\nsetup(\n    name=&#x27;Farewell2016&#x27;,\n    version=\&quot;0.0.1\&quot;,                 \n    description=\&quot;さよなら2016年\&quot;,\n    long_description=\&quot;2016年にお別れを言うだけのパッケージ\&quot;,\n    author=&#x27;k.himeno&#x27;,\n    license=&#x27;MIT&#x27;,\n    classifiers=[\n        \&quot;Development Status :: 1 - Planning\&quot;\n    ],\n    keywords=&#x27;farewell&#x27;\n)\n```\n\n書き終わったら `setup.py` のあるディレクトリで次のコマンドを実行すれば良い。\n\n```bash\npip install -e\npython setup.py develop\n```\n\nこれだけだ！\n\n試しに、全く関係のないディレクトリで次のコードを実行してみるとよい。\n\n```python\n# sample.py\nfrom Farewell2016.Greet import farewell\nfarewell()\n```\n\nこれだけでも随分と楽になる。\n\n## せっかくなのでPyPIに登録しちゃう？\n\nせっかく作ったらアップロードしちゃいましょう。\n\n（とかいって、アドベントカレンダー用に何かパッケージ作ろうとしてたら、まぁまぁ凝ったものを作ってしまった。）\n\n参考程度にソースコード\n\n- ソースコード: https://github.com/Himenon/CountDownApp\n- PyPI: https://pypi.python.org/pypi?:action=display&amp;name=CountDownApp&amp;version=0.0.1\n\nこやつの構成は次の通り。\n\n```\nCountDownApp\n├── CountDownApp       # パッケージの中身\n│   ├── __init__,py \n│   └── app.py        \n├── MANIFEST.in        # 配布ソースコードに何を含めるか書いたファイル\n├── README.rst         # 長い説明とかをまとめているファイル\n├── VERSION            # 勝手に作ったバージョンファイル\n├── image.png          # ただの画像\n├── requirements.txt   # 依存している他のパッケージをまとめるやつ\n├── setup.cfg          # オプションをまとめる便利なファイル\n└── setup.py           # パッケージの情報が詰まったファイル\n```\n\nこのパッケージのファイルをもとに簡単に説明してみる。\n\n### 配布用ソースコードの作成\n\n以下のコマンドで出来上がる。\n\n```\npython setup.py sdist\n```\n\n`MANIFEST.in` に従ってパッケージ化される。\n\n```MANIFEST.in\ninclude README.rst\ninclude setup.cfg\n```\n\n- http://docs.python.jp/2/distutils/sourcedist.html\n- https://docs.python.org/3/distutils/sourcedist.html\n\n\n### 配布用のバイナリの作成\n\n`wheel` パッケージを利用するのでインストールしておく。\n\n```bash\npip install wheel\n```\n\nwheelのドキュメント\n\n- http://wheel.readthedocs.io/en/latest/\n\n実行方法は\n\n```\npython setup.py bdist_wheel\n```\n\nとすればよい。\n\n[Defining the Python version](http://wheel.readthedocs.io/en/latest/#defining-the-python-version)では、\n`--universal` と `--python-tag XXX` が説明されてあるが、どの環境に対してパッケージ化するかが選択できる。\n\n`setup.cfg` ファイルにこれらのオプションをまとめておくことができる。\n\n```cfg\n# setup,cfg\n[bdist_wheel]\nuniversal=1\n```\n\nこうすれば、わざわざオプションをつけなくてよい。\n\n**setup,cfgについて**\n\n- http://docs.python.jp/2/distutils/configfile.html\n- https://docs.python.org/3/distutils/configfile.html\n\n### PyPIへアップロード\n\n配布用のソースコードとバイナリを作成してアップロードするなら\n\n```bash\npython setup.py sdist bdist_wheel upload\n```\n\nでよい。\n\n# さいごに\n\nこの記事は、箱入り娘状態のコードがあって、公開できるコードがあるのに、公開の方法を知らないという人に届いてホスィ。\n\nコードを共有してくれると僕と僕以外の全て、つまり「全て」が嬉しいので、パッケージを公開するなり、記事を公開するなりやってみませぬか？\n\nおわり。\n\n2016/12/5 追記\n-------------\n\n※ 編集リクエストくださってる方ありがとうございます！\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">簡単なPythonのパッケージを作る方法</h1>
+            <p id="page-description">日付変換</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2016-12-04 12:49:00</time><span id="created-at__label">更新日</span><time>2020-03-26 09:15:00</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <blockquote>
+            <p>追記: 2017/11/16
+              よく見られているっぽいので、名前変えました。</p>
+          </blockquote>
+          <p>Pythonのファイル分割とパッケージとかまでをすごいざっくりまとめてみる。</p>
+          <p>「パッケージの最小サンプル」だけ見たい人は多分目次から飛んだほうが早いのでオススメ。</p>
+          <h1>Pythonでファイルを分割するということ</h1>
+          <h2>「ファイル分割 = 名前空間の作成」が気持ちいいぞ</h2>
+          <p>個人的に気に入ってるのがファイル分割。
+            何かしらいろいろと作ってくるとコード数が増えて、「昨日書いたコードは今日の敵」のようなことになってしまうので、なるべく機能ごとにまとめて管理していきたい。</p>
+          <p>だいたいこんな理由ではじめてファイル分割を検索するんだけど、「 <strong>Python ファイル分割</strong> 」みたいな感じでググっても、記事が古かったり、2系で書いてあるから不安になったり、リファレンスのモジュールの項を見ても欲しい情報に速攻にたどり着けなかったりする。</p>
+          <p>参考：</p>
+          <ul>
+            <li><a href="http://docs.python.jp/2/tutorial/modules.html">6. モジュール</a></li>
+          </ul>
+          <p>なので、さっさとコードを書いて後から説明していく。</p>
+          <p>ファイル構成は次の通り</p><pre class="language-plain"><code class="language-plain">advent2016        # ディレクトリ
+├── another.py # 分割したファイル
+└── main.py    # インポートする側
+</code></pre><pre class="language-python"><code class="language-python"><span class="token comment"># another.py</span>
+year <span class="token operator">=</span> <span class="token number">2016</span>
+
+<span class="token keyword">def</span> <span class="token function">hello</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello {0}"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">goodbye</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Goodbye {0} !"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre><pre class="language-python"><code class="language-python"><span class="token comment"># main.py</span>
+<span class="token keyword">import</span> another <span class="token comment"># .pyなどはいらない。</span>
+
+another<span class="token punctuation">.</span>hello<span class="token punctuation">(</span><span class="token string">"Advent Calender"</span><span class="token punctuation">)</span>
+
+another<span class="token punctuation">.</span>goodbye<span class="token punctuation">(</span> another<span class="token punctuation">.</span>year <span class="token punctuation">)</span>
+</code></pre>
+          <p>ここまで書いて、<code>main.py</code> を実行すると次のようになる。</p><pre class="language-bash"><code class="language-bash">$ python main.py
+
+Hello Advent Calender
+Goodbye 2016 <span class="token operator">!</span>
+</code></pre>
+          <p>さらにインポートの方法も複数あって、それを自分で選択できるのが便利。
+            例えば、インポートするときの名前を変更したいなら、</p><pre class="language-python"><code class="language-python"><span class="token comment"># main2.py</span>
+<span class="token keyword">import</span> another <span class="token keyword">as</span> an
+
+an<span class="token punctuation">.</span>hello<span class="token punctuation">(</span><span class="token string">"Advent Calender"</span><span class="token punctuation">)</span>
+
+an<span class="token punctuation">.</span>goodbye<span class="token punctuation">(</span> an<span class="token punctuation">.</span>year <span class="token punctuation">)</span>
+</code></pre>
+          <p>のように、 <code>as</code> を使って <code>another</code> を <code>an</code> に置き変えることが可能だ。
+            名前空間が必要ではない場合、は次のように <code>from</code> を使って書くこともできる。</p><pre class="language-py"><code class="language-py"><span class="token keyword">from</span> another <span class="token keyword">import</span> <span class="token operator">*</span>
+
+hello<span class="token punctuation">(</span><span class="token string">"Advent Calender"</span><span class="token punctuation">)</span>
+goodbye<span class="token punctuation">(</span> year <span class="token punctuation">)</span>
+</code></pre>
+          <p><code>*</code> (アスタリスク) は <code>another.py</code> で記述されているものを全てを引用することが可能だ。ただし、ファイルをインポートした時に同じ名前のメソッドがあった場合は危険であるから、必要なメソッドや変数のみに絞ってインポートしたい時がある。その場合は次のようにすれば良い。</p><pre class="language-python"><code class="language-python"><span class="token comment"># main3.py</span>
+<span class="token keyword">from</span> another <span class="token keyword">import</span> hello
+
+hello<span class="token punctuation">(</span><span class="token string">"Advent Calender"</span><span class="token punctuation">)</span>
+
+goodbye<span class="token punctuation">(</span> year <span class="token punctuation">)</span>           <span class="token comment"># エラー</span>
+</code></pre>
+          <p>さっきの <code>*</code> アスタリスクの部分に必要なものを明示的に書いてあげればよいだけである。</p>
+          <p>さて、少しだけ注意しておきたいことが有る。
+            インポートするファイルに直接実行コードが書いてある時だ。</p><pre class="language-python"><code class="language-python"><span class="token comment"># another.py</span>
+year <span class="token operator">=</span> <span class="token number">2016</span>
+
+<span class="token keyword">def</span> <span class="token function">hello</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello {0}"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">goodbye</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Goodbye {0} !"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  
+<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello from another.py"</span><span class="token punctuation">)</span> <span class="token comment"># 追加</span>
+</code></pre>
+          <p>この場合、どのようになるか。
+            仮に、 <code>main.py</code> で実行した時、次の様になる。</p><pre class="language-bash"><code class="language-bash">$ python main.py
+
+Hello from athoer.py
+Hello Advent Calender
+Goodbye 2016 <span class="token operator">!</span>
+</code></pre>
+          <p><code>another.py</code> がインポートされた段階で実行されていることがわかる。
+            これを避けるためには次のようにすると良い。</p><pre class="language-python"><code class="language-python"><span class="token comment"># another.py</span>
+year <span class="token operator">=</span> <span class="token number">2016</span>
+
+<span class="token keyword">def</span> <span class="token function">hello</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello {0}"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">goodbye</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Goddbye {0} !"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">if</span> __name__ <span class="token operator">==</span> <span class="token string">'__main__'</span><span class="token punctuation">:</span> <span class="token comment"># 追加</span>
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello from another.py"</span><span class="token punctuation">)</span> <span class="token comment"># 追加</span>
+</code></pre>
+          <p><code>if __name__ == &#x27;__main__&#x27;:</code> の内側に書いてしまえば、直接実行された時以外は内側のコードは実行されなくなる。
+            インポートされる可能性のあるファイル単体で実行するときは、書いておくほうが無難であろう。</p>
+          <h2>ディレクトリ単位での分割も良いぞ</h2>
+          <p>ファイル分割を個々まで説明してきたが、せっかくなのでディレクトリを利用した場合も説明しておこう。
+            例えば次のようなファイル構成を作っておく。</p><pre class="language-plain"><code class="language-plain">advent2016-part2        # ディレクトリ
+├── Special          # ディレクトリ
+│   └── sunday.py   # ファイル (追加)
+└── main.py          # ファイル
+</code></pre>
+          <p>早速 <code>sunday.py</code> を <code>main.py</code> にインポートするコードを書いてみる。</p><pre class="language-python"><code class="language-python"><span class="token comment"># sunday.py</span>
+filename <span class="token operator">=</span> <span class="token string">"sunday.py"</span>
+
+<span class="token keyword">def</span> <span class="token function">hello</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"Hello {0}. From sunday.py"</span><span class="token punctuation">.</span><span class="token builtin">format</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre><pre class="language-python"><code class="language-python"><span class="token comment"># main.py</span>
+<span class="token keyword">import</span> Special<span class="token punctuation">.</span>sunday
+
+<span class="token keyword">print</span><span class="token punctuation">(</span> Special<span class="token punctuation">.</span>sunday<span class="token punctuation">.</span>filename <span class="token punctuation">)</span>
+Special<span class="token punctuation">.</span>sunday<span class="token punctuation">.</span>hello<span class="token punctuation">(</span><span class="token string">"HELLO"</span><span class="token punctuation">)</span>
+</code></pre>
+          <p>見ての通り、 <code>import Special.sunday</code> でディレクトリ内にあるコードも読み込みが可能だ。
+            ただし、上記のようにインポートした時は <code>Special.sunday</code> をいちいち書く必要がある。
+            が、ここまで読めば分かる通り、 <code>as</code> や <code>from</code> を利用すれば、長々と記述する必要がなくなるわけである。</p><pre class="language-python"><code class="language-python"><span class="token keyword">import</span> Special<span class="token punctuation">.</span>sunday <span class="token keyword">as</span> sunday
+
+<span class="token keyword">print</span><span class="token punctuation">(</span> sunday<span class="token punctuation">.</span>filename <span class="token punctuation">)</span>
+sunday<span class="token punctuation">.</span>hello<span class="token punctuation">(</span><span class="token string">"HELLO"</span><span class="token punctuation">)</span>
+</code></pre>
+          <p>すばらしい。好きなようにインポートするのがよいだろう。また、どこからインポートされているのかを確認したければ、</p><pre class="language-python"><code class="language-python"><span class="token keyword">import</span> Special
+<span class="token keyword">print</span><span class="token punctuation">(</span> Special<span class="token punctuation">.</span>__path__ <span class="token punctuation">)</span>
+</code></pre>
+          <p>とすると絶対パスが確認ができる。</p>
+          <p>細かなエラーなどについては <a href="http://qiita.com/suzuki-hoge/items/f951d56290617df4279e">Pythonのimportについてまとめる</a> を参照することをおすすめしたい。</p>
+          <h2>次に</h2>
+          <p>いやはや、ファイル分割はコードの見通しを良くする上でとても大事なことだけれども、
+            ここまでの内容だけだと、一つのディレクトリの中でたくさんコードを管理してしまうことになってしまう。</p>
+          <p>1つのディレクトリ内でたくさんのコードを用意していればそれだけ引っ張り出せるのだけれど、
+            人間は忘れてしまう生き物なので、どこに何があるのかいづれわからなくなってしまう。</p>
+          <p>決して忘れることに罪はないので、忘れないうちに忘れたときの手を打っておくのが健全だろう。</p>
+          <p>なので、パッケージ化してしまって、どこからでも引っ張りだせれば至極便利。</p>
+          <h1>パッケージ化するって、つまりそういうこと</h1>
+          <p>頻度の高くないものや、小規模なプロジェクトにおいてはそのまま使うのが効率が良いとは思う。
+            だが、この逆はパッケージ化したほうが便利ではなかろうか。そのはずだ。</p>
+          <p>Pythonのパッケージ化、でググってだいたい引っかかるのがこの辺。</p>
+          <ul>
+            <li><a href="http://qiita.com/kinpira/items/0a4e7c78fc5dd28bd695">PyPIデビューしたい人の為のPyPI登録の手順 - Qiita : 2016年06月10日</a></li>
+            <li><a href="http://www.freia.jp/taka/docs/pyhack4/pypi/">PyPIデビュー - 清水川Web</a></li>
+            <li><a href="https://tell-k.github.io/pyconjp2015/#1">PyPIデビュー2015</a></li>
+            <li><a href="http://gaujin.jp/media/1/python/osakapy/2015-12/">PyPIデビューした 〜 PyPIデビューまでの道のり 〜</a></li>
+          </ul>
+          <p>ざっと見た感じだと長いので、ここではさくさく終わらせていこう。</p>
+          <h2>パッケージ化してしまえ</h2>
+          <p><code>setup.py</code> さえ作ってしまえパッケージ化は簡単。</p><pre class="language-python"><code class="language-python"><span class="token keyword">from</span> setuptools <span class="token keyword">import</span> setup<span class="token punctuation">,</span> find_packages
+
+setup<span class="token punctuation">(</span>
+    name<span class="token operator">=</span><span class="token string">'パッケージ名'</span><span class="token punctuation">,</span>
+    version<span class="token operator">=</span><span class="token string">"0.0.1"</span><span class="token punctuation">,</span>                 <span class="token comment"># X.Y.Z 形式</span>
+    description<span class="token operator">=</span><span class="token string">"短めの説明"</span><span class="token punctuation">,</span>
+    long_description<span class="token operator">=</span><span class="token string">"長めの説明"</span><span class="token punctuation">,</span>
+    url<span class="token operator">=</span><span class="token string">'必要ならばURL'</span><span class="token punctuation">,</span>
+    author<span class="token operator">=</span><span class="token string">'作者名'</span><span class="token punctuation">,</span>
+    author_email<span class="token operator">=</span><span class="token string">'メールアドレス'</span><span class="token punctuation">,</span>
+    license<span class="token operator">=</span><span class="token string">'ライセンス'</span><span class="token punctuation">,</span>
+    classifiers<span class="token operator">=</span><span class="token punctuation">[</span>
+        <span class="token comment"># パッケージのカテゴリー</span>
+        <span class="token comment"># https://pypi.python.org/pypi?:action=list_classifiers</span>
+        <span class="token comment"># からあったものをコピペ。</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    keywords<span class="token operator">=</span><span class="token string">'キーワード'</span><span class="token punctuation">,</span>
+    install_requires<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">"依存関係のあるパッケージ"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">)</span>
+</code></pre>
+          <p>これが終わったら、コマンドでインストールしてしまえばいい。</p>
+          <h3>ローカルでインストール(開発モード)</h3><pre class="language-bash"><code class="language-bash">pip <span class="token function">install</span> -e
+python setup.py develop
+</code></pre>
+          <p>これで、ローカル環境ではどこからでもインポートできる。</p>
+          <h3>パッケージの最小サンプル</h3>
+          <p>試しに最小サンプルを用意しておこう。ただ単純に「&quot;Farewell 2016 !&quot;」と出力するだけのパッケージだ。 </p><pre class="language-plain"><code class="language-plain">Farewell2016
+├── Farewell2016
+│   └── Greet.py
+└── setup.py
+</code></pre><pre class="language-plain"><code class="language-Greet.py">def farewell():
+    print(&quot;Farewell 2016 !&quot;)
+</code></pre><pre class="language-python"><code class="language-python"><span class="token comment"># setup.py</span>
+<span class="token keyword">from</span> setuptools <span class="token keyword">import</span> setup<span class="token punctuation">,</span> find_packages
+
+setup<span class="token punctuation">(</span>
+    name<span class="token operator">=</span><span class="token string">'Farewell2016'</span><span class="token punctuation">,</span>
+    version<span class="token operator">=</span><span class="token string">"0.0.1"</span><span class="token punctuation">,</span>                 
+    description<span class="token operator">=</span><span class="token string">"さよなら2016年"</span><span class="token punctuation">,</span>
+    long_description<span class="token operator">=</span><span class="token string">"2016年にお別れを言うだけのパッケージ"</span><span class="token punctuation">,</span>
+    author<span class="token operator">=</span><span class="token string">'k.himeno'</span><span class="token punctuation">,</span>
+    license<span class="token operator">=</span><span class="token string">'MIT'</span><span class="token punctuation">,</span>
+    classifiers<span class="token operator">=</span><span class="token punctuation">[</span>
+        <span class="token string">"Development Status :: 1 - Planning"</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    keywords<span class="token operator">=</span><span class="token string">'farewell'</span>
+<span class="token punctuation">)</span>
+</code></pre>
+          <p>書き終わったら <code>setup.py</code> のあるディレクトリで次のコマンドを実行すれば良い。</p><pre class="language-bash"><code class="language-bash">pip <span class="token function">install</span> -e
+python setup.py develop
+</code></pre>
+          <p>これだけだ！</p>
+          <p>試しに、全く関係のないディレクトリで次のコードを実行してみるとよい。</p><pre class="language-python"><code class="language-python"><span class="token comment"># sample.py</span>
+<span class="token keyword">from</span> Farewell2016<span class="token punctuation">.</span>Greet <span class="token keyword">import</span> farewell
+farewell<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+          <p>これだけでも随分と楽になる。</p>
+          <h2>せっかくなのでPyPIに登録しちゃう？</h2>
+          <p>せっかく作ったらアップロードしちゃいましょう。</p>
+          <p>（とかいって、アドベントカレンダー用に何かパッケージ作ろうとしてたら、まぁまぁ凝ったものを作ってしまった。）</p>
+          <p>参考程度にソースコード</p>
+          <ul>
+            <li>ソースコード: <a href="https://github.com/Himenon/CountDownApp">https://github.com/Himenon/CountDownApp</a></li>
+            <li>PyPI: <a href="https://pypi.python.org/pypi?:action=display&amp;name=CountDownApp&amp;version=0.0.1">https://pypi.python.org/pypi?:action=display&amp;name=CountDownApp&amp;version=0.0.1</a></li>
+          </ul>
+          <p>こやつの構成は次の通り。</p><pre class="language-plain"><code class="language-plain">CountDownApp
+├── CountDownApp       # パッケージの中身
+│   ├── __init__,py 
+│   └── app.py        
+├── MANIFEST.in        # 配布ソースコードに何を含めるか書いたファイル
+├── README.rst         # 長い説明とかをまとめているファイル
+├── VERSION            # 勝手に作ったバージョンファイル
+├── image.png          # ただの画像
+├── requirements.txt   # 依存している他のパッケージをまとめるやつ
+├── setup.cfg          # オプションをまとめる便利なファイル
+└── setup.py           # パッケージの情報が詰まったファイル
+</code></pre>
+          <p>このパッケージのファイルをもとに簡単に説明してみる。</p>
+          <h3>配布用ソースコードの作成</h3>
+          <p>以下のコマンドで出来上がる。</p><pre class="language-plain"><code class="language-plain">python setup.py sdist
+</code></pre>
+          <p><code>MANIFEST.in</code> に従ってパッケージ化される。</p><pre class="language-plain"><code class="language-MANIFEST.in">include README.rst
+include setup.cfg
+</code></pre>
+          <ul>
+            <li><a href="http://docs.python.jp/2/distutils/sourcedist.html">http://docs.python.jp/2/distutils/sourcedist.html</a></li>
+            <li><a href="https://docs.python.org/3/distutils/sourcedist.html">https://docs.python.org/3/distutils/sourcedist.html</a></li>
+          </ul>
+          <h3>配布用のバイナリの作成</h3>
+          <p><code>wheel</code> パッケージを利用するのでインストールしておく。</p><pre class="language-bash"><code class="language-bash">pip <span class="token function">install</span> wheel
+</code></pre>
+          <p>wheelのドキュメント</p>
+          <ul>
+            <li><a href="http://wheel.readthedocs.io/en/latest/">http://wheel.readthedocs.io/en/latest/</a></li>
+          </ul>
+          <p>実行方法は</p><pre class="language-plain"><code class="language-plain">python setup.py bdist_wheel
+</code></pre>
+          <p>とすればよい。</p>
+          <p><a href="http://wheel.readthedocs.io/en/latest/#defining-the-python-version">Defining the Python version</a>では、
+            <code>--universal</code> と <code>--python-tag XXX</code> が説明されてあるが、どの環境に対してパッケージ化するかが選択できる。</p>
+          <p><code>setup.cfg</code> ファイルにこれらのオプションをまとめておくことができる。</p><pre class="language-plain"><code class="language-cfg"># setup,cfg
+[bdist_wheel]
+universal=1
+</code></pre>
+          <p>こうすれば、わざわざオプションをつけなくてよい。</p>
+          <p><strong>setup,cfgについて</strong></p>
+          <ul>
+            <li><a href="http://docs.python.jp/2/distutils/configfile.html">http://docs.python.jp/2/distutils/configfile.html</a></li>
+            <li><a href="https://docs.python.org/3/distutils/configfile.html">https://docs.python.org/3/distutils/configfile.html</a></li>
+          </ul>
+          <h3>PyPIへアップロード</h3>
+          <p>配布用のソースコードとバイナリを作成してアップロードするなら</p><pre class="language-bash"><code class="language-bash">python setup.py sdist bdist_wheel upload
+</code></pre>
+          <p>でよい。</p>
+          <h1>さいごに</h1>
+          <p>この記事は、箱入り娘状態のコードがあって、公開できるコードがあるのに、公開の方法を知らないという人に届いてホスィ。</p>
+          <p>コードを共有してくれると僕と僕以外の全て、つまり「全て」が嬉しいので、パッケージを公開するなり、記事を公開するなりやってみませぬか？</p>
+          <p>おわり。</p>
+          <h2>2016/12/5 追記</h2>
+          <p>※ 編集リクエストくださってる方ありがとうございます！</p>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>

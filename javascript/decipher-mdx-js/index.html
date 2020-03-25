@@ -1,0 +1,258 @@
+<html>
+
+  <head lang="ja">
+    <title>mdx-jsの実装を解読するまでの話</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="JavaScript,JSX,TypeScript,React,mdx-js" />
+    <meta name="description" content="日付変換" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="mdx-jsの実装を解読するまでの話" />
+    <meta property="og:url" content="https://himenon.github.io/javascript/decipher-mdx-js" />
+    <meta property="og:description" content="日付変換" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?6f93c" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?bcd9b" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?319f2" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?55911" rel="stylesheet" />
+    <link href="/lib/prism.css?f5393" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?1db30" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;mdx-jsの実装を解読するまでの話&quot;,&quot;description&quot;:&quot;日付変換&quot;,&quot;keywords&quot;:&quot;JavaScript,JSX,TypeScript,React,mdx-js&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2018-12-12T03:05:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-03-26T00:15:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;mdx-jsの実装を解読するまでの話&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/decipher-mdx-js&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;日付変換&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/javascript/decipher-mdx-js&quot;,&quot;content&quot;:&quot;\nこの記事は 第2のドワンゴ [Advent Calendar 2018](https://qiita.com/advent-calendar/2018/dwango2) の12日目の記事です。\n\n普段はReactを使ってフロントエンド開発のお仕事をしています。\n\n※ お仕事とは関係ないお話です\n\n## 話のはじまり\n\n* フロントエンド周りのコードを自分のブログとかで動かしてコレクション化したいなぁ\n* でも管理するの面倒だなぁ\n* そのあたりをうまく管理する静的サイトジェネレーターないかなぁ（[StaticGen](https://www.staticgen.com/)を探した）\n\n1つの解としては外部サービス（[CodeSandbox](https://codesandbox.io/)とか[codepen](https://codepen.io/)、[jsfiddle](https://jsfiddle.net/)）を埋め込んで利用する、に行き着くんですよね。\n\nでも、やっぱり自分の管理下でやりたい、という支配欲（？）があって長続きしません。\n\n「じゃあ作るか → どうやって？」となるんですけど、ゼロベースだとなかなか大変なので、GitHubをググってみて（？）[mdx-js/mdx](https://github.com/mdx-js/mdx)にたどり着きました。\n\nこやつ、何をやっているかというと、Markdown中にJSXを利用できるようにしよう、というもの。\n着想が面白くて、コードも興味深い箇所があったので今回はそれを紹介します。\n\n## mdx-jsのざっくりした流れ\n\n※ すごいざっくり説明するので、詳しくは[mdx-js/mdx](https://github.com/mdx-js/mdx)を見てください。\n\n### 1. Markdown中にJSXを書く\n\n```mdx\n# ヘッダータイトル\n&lt;ExampleComponent&gt;ここがReactによって定義されたコンポーネントに変わる&lt;/ExampleComponent&gt;\n```\n\n### 2. `ExampleComponent`に定義したコンポーネントをあてる\n\n```tsx\nimport * as React from \&quot;react\&quot;;\n\nexport interface ExampleComponentProps {\n  x: number;\n  y: number;\n}\n\nexport class ExampleComponent extends React.Component&lt;ExampleComponentProps, {}&gt; {\n  public render() {\n    return (\n      &lt;div className=\&quot;my-component\&quot;&gt;\n        {this.props.children} {this.props.x * this.props.y}\n      &lt;/div&gt;\n    );\n  }\n}\n```\n\n### 3. mdx-jsを使ってビルドする\n\n```html\n&lt;h1&gt;ヘッダータイトル&lt;/h1&gt;\n&lt;div className=\&quot;my-component\&quot;&gt;ここがReactによって定義されたコンポーネントに変わる&lt;/div&gt;\n```\n\n## どうやって処理するの？\n\n最初に見たときは「JSXの変換の部分」の処理をすぐに想像できませんでした。\n\n`package.json`をいろいろ見ると、Markdown自体をパースするのは[unifiedjs/unified](https://github.com/unifiedjs/unified)あたり。JSXを変換するものは[@babel/transform-react-jsx](https://www.npmjs.com/package/@babel/plugin-transform-react-jsx)とあたり、とすぐに暴けるのですが、コンポーネントのマッピングをどうやっているのか、なかなか見えてきません。\n\n### 紐解いてみる\n\n答えは[@mdx-js/runtime](https://www.npmjs.com/package/@mdx-js/runtime)のコードにありました。\n\n* https://github.com/mdx-js/mdx/blob/v0.16.0/packages/runtime/src/index.js\n\nv0.16.0以降のバージョンではライブラリ固有のものになりつつあるので、リンクはバージョンを固定しています。また、説明用に使うにはノイズが多いので、処理を抽出したサンプルコードを作成しました。\n\n* https://github.com/Himenon/convert-text-to-react\n\n本題のロジックは\n\n* https://github.com/Himenon/convert-text-to-react/blob/master/src/converter.tsx\n\nにあります。20行にも満たないコードです。\n\n#### サンプルコードの使い方\n\n[READMEのサンプルコード](https://github.com/Himenon/convert-text-to-react)にコメントをつけて説明します。\n\n```tsx\nimport { convert } from \&quot;convert-text-to-react\&quot;;\n\nexport interface ExampleComponentProps {\n  x: number;\n  y: number;\n}\n\n// 適当なコンポーネントを用意する\nexport class ExampleComponent extends React.Component&lt;ExampleComponentProps, {}&gt; {\n  public render() {\n    return (\n      &lt;div className=\&quot;my-component\&quot;&gt;\n        {this.props.children} {this.props.x * this.props.y}\n      &lt;/div&gt;\n    );\n  }\n}\n\n// 変換のマッピング\nconst components = {\n  ExampleComponent,\n}\n\n// テキストを変換するを登録した変換マップにしたがって変換する\nconst result = convert(\&quot;&lt;ExampleComponent x={1} y={-20}&gt;Result of multiplication:&lt;/ExampleComponent&gt;\&quot;, components);\n// ReactElementを得る\n```\n\nざーっくりとこんな感じです。\n\n## プレーンテキストにReactのコンポーネントを適用させる処理\n\n中身の処理を見てみます。コメントを付けながら解説すると、\n\n```ts\nimport * as babel from \&quot;@babel/core\&quot;;\nimport * as React from \&quot;react\&quot;;\n\n// JSXを含むプレーンテキストをJSのコードにトランスパイルする\nexport const toCode = (raw: string): string | null =&gt;\n  babel.transform(raw, {\n    plugins: [\&quot;@babel/plugin-transform-react-jsx\&quot;],\n  }).code;\n\nexport const convert = (raw: string, components: object): React.ReactElement&lt;any&gt; =&gt; {\n  const code = toCode(raw);\n  // キー名を取得\n  const keys = Object.keys(components);\n  // `keys`の並び順にcomponentsを習得\n  const values = keys.map(key =&gt; components[key]);\n  // React.createElementを含む関数を生成\n  const create = new Function(\&quot;React\&quot;, ...keys, `return ${code}`);\n  // 関数を実行、ReactElementを得る\n  return create(React, ...values);\n};\n```\n\nとなります。短いですね！どんどんいきます。\n\n### `Function`とは？\n\n唐突に出てきたFunctionって、普段使わないですよね。\n[Function \\- JavaScript \\| MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Function)によれば、\n動的に関数を生成し利用できます。ただし、`eval`と同じくセキュリティとパフォーマンスの問題に悩まされるようです。\n\nサンプルコードを見てみると次のようになっています。\n\n```js\nvar sum = new Function(&#x27;a&#x27;, &#x27;b&#x27;, &#x27;return a + b&#x27;);\nsum(2, 6)\n```\n\nつまり、`Function`の引数の最後以外が生成される関数の引数となり、最後の引数がJavaScriptの構文を含む関数として定義されます。\n\n### 具体的に解説してみる\n\n`convert`関数に渡す引数は次のように定義します。\nプレーンテキストをReactElementになるまで順を追って説明すると、\n\n```tsx\nconst raw = \&quot;&lt;ExampleComponent x={1} y={-20}&gt;Result of multiplication:&lt;/ExampleComponent&gt;\&quot;;\nconst components = {\n  ExampleComponent,\n}\nconvert(raw, components)\n```\n\nまずは`toCode`でJSXを含むテキストを、JSのシンタックスのコードに変換します。\n\n```js\n// IN\ntoCode(\&quot;&lt;ExampleComponent x={1} y={-20}&gt;Result of multiplication:&lt;/ExampleComponent&gt;\&quot;);\n// OUT\n`React.createElement(ExampleComponent, { x: 1, y: -20}, \&quot;Result of multiplication:\&quot;);`\n```\n\nJSXがJSのコードに分解されました。次に、`new Function`で必要な引数を用意します。\n\n```js\n// IN\nconst keys = Object.keys(components);\n// OUT\n[\&quot;ExampleComponent\&quot;] // 文字列の配列\n\n// IN　キーの順序でコンポーネントを取り出していく\nconst values = keys.map(key =&gt; components[key]);\n// OUT\n[ExampleComponent] // ReactComponentの配列\n```\n\nこれらを、`new Function`の引数に渡します。\n\n```js\n// IN\nconst create = new Function(\&quot;React\&quot;, ...keys, `return ${code}`);\n// 展開して書くと\nconst create = new Function(\&quot;React\&quot;, \&quot;ExampleComponent\&quot;, `return React.createElement(ExampleComponent, { x: 1, y: -20}, \&quot;Result of multiplication:\&quot;);`);\n```\n\n`new Function`経由ではなく、実際に`create`関数を定義した場合は次のようになります。\n\n```js\nconst create = (React, ExampleComponent) =&gt; React.createElement(ExampleComponent, { x: 1, y: -20}, \&quot;Result of multiplication:\&quot;);\n```\n\nもう最後はおわかりですね。\n\n```js\n// IN\ncreate(React, ...values);\n// 展開して書くと\ncreate(React, ExampleComponent)\n```\n\nこれでテキストからReactのElementに変換されました！やった！\n\nSpread Operator（`...`）のおかげで、複数の変換マップを入れた場合にも拡張できます（[参考](https://github.com/Himenon/convert-text-to-react/blob/24eddb070b8c2d10d7b1b3136bb0a7b138d13fa6/src/__tests__/index.test.tsx#L41-L45)）。\n\n# おわりに\n\nタイトルに「React意識せずにReactを使いたい」と書きましたが、内部実装を気にせず使う分には達成されるのかな（？）、と思います。\n\n巨人の力を借りて便利なツールを作るときに役に立てばいいなぁ（eval系は注意が必要ですが）。\n\n# おまけ\n\nJSXとか、そのへんのおもしろそうな記事とかリポジトリとかの紹介です。\n\n* [JSXのファクトリ関数を自作する方法と、Reactと全然違う挙動をさせるサンプル](https://qiita.com/boiyaa/items/0e89d7c6cecf8a58d902)\n  * これすき\n* Hyperappの話\n    * VDOMの取扱周りの知識が凝縮しているのでかなり勉強になった。\n        * https://qiita.com/JorgeBucaran/items/c48446babe0627e25ee6\n        * https://www.youtube.com/watch?v=jM9yubem0Pw\n    * Node学園2017の資料がとても良かったのですが、リンクが見当たらない\n        * 小さなコードで多いな利益を得るコードは勇気づけられました\n        * テストの書き方が参考になる\n* https://www.docz.site/\n    * mdx-jsを利用しているライブラリ。最近スターを伸ばしているのだけれど、`Function`で頭を悩ましているのだろうか（？）\n    * storybookから置き換わるかというとう〜ん、という感じ\n* https://github.com/c8r/gen\n    * `remark-react`を使った静的サイトジェネレーター（未完成のもの）。mdx-jsの作者のリポジトリにあった\n    * 実装が面白かったので型をあてました https://github.com/Himenon/gen\n        * さらにmdx-jsに内部実装を切り替えたものを現在作成中 https://github.com/Himenon/rocu\n\n2018年もおわりかー。Twitterたのしい。にゃーん。\n\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;mdx-jsの実装を解読するまでの話&quot;,&quot;description&quot;:&quot;日付変換&quot;,&quot;keywords&quot;:&quot;JavaScript,JSX,TypeScript,React,mdx-js&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2018-12-12T03:05:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-03-26T00:15:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;mdx-jsの実装を解読するまでの話&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/decipher-mdx-js&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;日付変換&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/javascript/decipher-mdx-js.md&quot;,&quot;name&quot;:&quot;javascript/decipher-mdx-js&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;mdx-jsの実装を解読するまでの話\&quot;\ndescription: \&quot;日付変換\&quot;\nkeywords: \&quot;JavaScript,JSX,TypeScript,React,mdx-js\&quot;\ncreatedAt: 2018-12-12 03:05:00\nupdatedAt: 2020-03-26 00:15:00\n---\n\nこの記事は 第2のドワンゴ [Advent Calendar 2018](https://qiita.com/advent-calendar/2018/dwango2) の12日目の記事です。\n\n普段はReactを使ってフロントエンド開発のお仕事をしています。\n\n※ お仕事とは関係ないお話です\n\n## 話のはじまり\n\n* フロントエンド周りのコードを自分のブログとかで動かしてコレクション化したいなぁ\n* でも管理するの面倒だなぁ\n* そのあたりをうまく管理する静的サイトジェネレーターないかなぁ（[StaticGen](https://www.staticgen.com/)を探した）\n\n1つの解としては外部サービス（[CodeSandbox](https://codesandbox.io/)とか[codepen](https://codepen.io/)、[jsfiddle](https://jsfiddle.net/)）を埋め込んで利用する、に行き着くんですよね。\n\nでも、やっぱり自分の管理下でやりたい、という支配欲（？）があって長続きしません。\n\n「じゃあ作るか → どうやって？」となるんですけど、ゼロベースだとなかなか大変なので、GitHubをググってみて（？）[mdx-js/mdx](https://github.com/mdx-js/mdx)にたどり着きました。\n\nこやつ、何をやっているかというと、Markdown中にJSXを利用できるようにしよう、というもの。\n着想が面白くて、コードも興味深い箇所があったので今回はそれを紹介します。\n\n## mdx-jsのざっくりした流れ\n\n※ すごいざっくり説明するので、詳しくは[mdx-js/mdx](https://github.com/mdx-js/mdx)を見てください。\n\n### 1. Markdown中にJSXを書く\n\n```mdx\n# ヘッダータイトル\n&lt;ExampleComponent&gt;ここがReactによって定義されたコンポーネントに変わる&lt;/ExampleComponent&gt;\n```\n\n### 2. `ExampleComponent`に定義したコンポーネントをあてる\n\n```tsx\nimport * as React from \&quot;react\&quot;;\n\nexport interface ExampleComponentProps {\n  x: number;\n  y: number;\n}\n\nexport class ExampleComponent extends React.Component&lt;ExampleComponentProps, {}&gt; {\n  public render() {\n    return (\n      &lt;div className=\&quot;my-component\&quot;&gt;\n        {this.props.children} {this.props.x * this.props.y}\n      &lt;/div&gt;\n    );\n  }\n}\n```\n\n### 3. mdx-jsを使ってビルドする\n\n```html\n&lt;h1&gt;ヘッダータイトル&lt;/h1&gt;\n&lt;div className=\&quot;my-component\&quot;&gt;ここがReactによって定義されたコンポーネントに変わる&lt;/div&gt;\n```\n\n## どうやって処理するの？\n\n最初に見たときは「JSXの変換の部分」の処理をすぐに想像できませんでした。\n\n`package.json`をいろいろ見ると、Markdown自体をパースするのは[unifiedjs/unified](https://github.com/unifiedjs/unified)あたり。JSXを変換するものは[@babel/transform-react-jsx](https://www.npmjs.com/package/@babel/plugin-transform-react-jsx)とあたり、とすぐに暴けるのですが、コンポーネントのマッピングをどうやっているのか、なかなか見えてきません。\n\n### 紐解いてみる\n\n答えは[@mdx-js/runtime](https://www.npmjs.com/package/@mdx-js/runtime)のコードにありました。\n\n* https://github.com/mdx-js/mdx/blob/v0.16.0/packages/runtime/src/index.js\n\nv0.16.0以降のバージョンではライブラリ固有のものになりつつあるので、リンクはバージョンを固定しています。また、説明用に使うにはノイズが多いので、処理を抽出したサンプルコードを作成しました。\n\n* https://github.com/Himenon/convert-text-to-react\n\n本題のロジックは\n\n* https://github.com/Himenon/convert-text-to-react/blob/master/src/converter.tsx\n\nにあります。20行にも満たないコードです。\n\n#### サンプルコードの使い方\n\n[READMEのサンプルコード](https://github.com/Himenon/convert-text-to-react)にコメントをつけて説明します。\n\n```tsx\nimport { convert } from \&quot;convert-text-to-react\&quot;;\n\nexport interface ExampleComponentProps {\n  x: number;\n  y: number;\n}\n\n// 適当なコンポーネントを用意する\nexport class ExampleComponent extends React.Component&lt;ExampleComponentProps, {}&gt; {\n  public render() {\n    return (\n      &lt;div className=\&quot;my-component\&quot;&gt;\n        {this.props.children} {this.props.x * this.props.y}\n      &lt;/div&gt;\n    );\n  }\n}\n\n// 変換のマッピング\nconst components = {\n  ExampleComponent,\n}\n\n// テキストを変換するを登録した変換マップにしたがって変換する\nconst result = convert(\&quot;&lt;ExampleComponent x={1} y={-20}&gt;Result of multiplication:&lt;/ExampleComponent&gt;\&quot;, components);\n// ReactElementを得る\n```\n\nざーっくりとこんな感じです。\n\n## プレーンテキストにReactのコンポーネントを適用させる処理\n\n中身の処理を見てみます。コメントを付けながら解説すると、\n\n```ts\nimport * as babel from \&quot;@babel/core\&quot;;\nimport * as React from \&quot;react\&quot;;\n\n// JSXを含むプレーンテキストをJSのコードにトランスパイルする\nexport const toCode = (raw: string): string | null =&gt;\n  babel.transform(raw, {\n    plugins: [\&quot;@babel/plugin-transform-react-jsx\&quot;],\n  }).code;\n\nexport const convert = (raw: string, components: object): React.ReactElement&lt;any&gt; =&gt; {\n  const code = toCode(raw);\n  // キー名を取得\n  const keys = Object.keys(components);\n  // `keys`の並び順にcomponentsを習得\n  const values = keys.map(key =&gt; components[key]);\n  // React.createElementを含む関数を生成\n  const create = new Function(\&quot;React\&quot;, ...keys, `return ${code}`);\n  // 関数を実行、ReactElementを得る\n  return create(React, ...values);\n};\n```\n\nとなります。短いですね！どんどんいきます。\n\n### `Function`とは？\n\n唐突に出てきたFunctionって、普段使わないですよね。\n[Function \\- JavaScript \\| MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Function)によれば、\n動的に関数を生成し利用できます。ただし、`eval`と同じくセキュリティとパフォーマンスの問題に悩まされるようです。\n\nサンプルコードを見てみると次のようになっています。\n\n```js\nvar sum = new Function(&#x27;a&#x27;, &#x27;b&#x27;, &#x27;return a + b&#x27;);\nsum(2, 6)\n```\n\nつまり、`Function`の引数の最後以外が生成される関数の引数となり、最後の引数がJavaScriptの構文を含む関数として定義されます。\n\n### 具体的に解説してみる\n\n`convert`関数に渡す引数は次のように定義します。\nプレーンテキストをReactElementになるまで順を追って説明すると、\n\n```tsx\nconst raw = \&quot;&lt;ExampleComponent x={1} y={-20}&gt;Result of multiplication:&lt;/ExampleComponent&gt;\&quot;;\nconst components = {\n  ExampleComponent,\n}\nconvert(raw, components)\n```\n\nまずは`toCode`でJSXを含むテキストを、JSのシンタックスのコードに変換します。\n\n```js\n// IN\ntoCode(\&quot;&lt;ExampleComponent x={1} y={-20}&gt;Result of multiplication:&lt;/ExampleComponent&gt;\&quot;);\n// OUT\n`React.createElement(ExampleComponent, { x: 1, y: -20}, \&quot;Result of multiplication:\&quot;);`\n```\n\nJSXがJSのコードに分解されました。次に、`new Function`で必要な引数を用意します。\n\n```js\n// IN\nconst keys = Object.keys(components);\n// OUT\n[\&quot;ExampleComponent\&quot;] // 文字列の配列\n\n// IN　キーの順序でコンポーネントを取り出していく\nconst values = keys.map(key =&gt; components[key]);\n// OUT\n[ExampleComponent] // ReactComponentの配列\n```\n\nこれらを、`new Function`の引数に渡します。\n\n```js\n// IN\nconst create = new Function(\&quot;React\&quot;, ...keys, `return ${code}`);\n// 展開して書くと\nconst create = new Function(\&quot;React\&quot;, \&quot;ExampleComponent\&quot;, `return React.createElement(ExampleComponent, { x: 1, y: -20}, \&quot;Result of multiplication:\&quot;);`);\n```\n\n`new Function`経由ではなく、実際に`create`関数を定義した場合は次のようになります。\n\n```js\nconst create = (React, ExampleComponent) =&gt; React.createElement(ExampleComponent, { x: 1, y: -20}, \&quot;Result of multiplication:\&quot;);\n```\n\nもう最後はおわかりですね。\n\n```js\n// IN\ncreate(React, ...values);\n// 展開して書くと\ncreate(React, ExampleComponent)\n```\n\nこれでテキストからReactのElementに変換されました！やった！\n\nSpread Operator（`...`）のおかげで、複数の変換マップを入れた場合にも拡張できます（[参考](https://github.com/Himenon/convert-text-to-react/blob/24eddb070b8c2d10d7b1b3136bb0a7b138d13fa6/src/__tests__/index.test.tsx#L41-L45)）。\n\n# おわりに\n\nタイトルに「React意識せずにReactを使いたい」と書きましたが、内部実装を気にせず使う分には達成されるのかな（？）、と思います。\n\n巨人の力を借りて便利なツールを作るときに役に立てばいいなぁ（eval系は注意が必要ですが）。\n\n# おまけ\n\nJSXとか、そのへんのおもしろそうな記事とかリポジトリとかの紹介です。\n\n* [JSXのファクトリ関数を自作する方法と、Reactと全然違う挙動をさせるサンプル](https://qiita.com/boiyaa/items/0e89d7c6cecf8a58d902)\n  * これすき\n* Hyperappの話\n    * VDOMの取扱周りの知識が凝縮しているのでかなり勉強になった。\n        * https://qiita.com/JorgeBucaran/items/c48446babe0627e25ee6\n        * https://www.youtube.com/watch?v=jM9yubem0Pw\n    * Node学園2017の資料がとても良かったのですが、リンクが見当たらない\n        * 小さなコードで多いな利益を得るコードは勇気づけられました\n        * テストの書き方が参考になる\n* https://www.docz.site/\n    * mdx-jsを利用しているライブラリ。最近スターを伸ばしているのだけれど、`Function`で頭を悩ましているのだろうか（？）\n    * storybookから置き換わるかというとう〜ん、という感じ\n* https://github.com/c8r/gen\n    * `remark-react`を使った静的サイトジェネレーター（未完成のもの）。mdx-jsの作者のリポジトリにあった\n    * 実装が面白かったので型をあてました https://github.com/Himenon/gen\n        * さらにmdx-jsに内部実装を切り替えたものを現在作成中 https://github.com/Himenon/rocu\n\n2018年もおわりかー。Twitterたのしい。にゃーん。\n\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">mdx-jsの実装を解読するまでの話</h1>
+            <p id="page-description">日付変換</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2018-12-12 12:05:00</time><span id="created-at__label">更新日</span><time>2020-03-26 09:15:00</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <p>この記事は 第2のドワンゴ <a href="https://qiita.com/advent-calendar/2018/dwango2">Advent Calendar 2018</a> の12日目の記事です。</p>
+          <p>普段はReactを使ってフロントエンド開発のお仕事をしています。</p>
+          <p>※ お仕事とは関係ないお話です</p>
+          <h2>話のはじまり</h2>
+          <ul>
+            <li>フロントエンド周りのコードを自分のブログとかで動かしてコレクション化したいなぁ</li>
+            <li>でも管理するの面倒だなぁ</li>
+            <li>そのあたりをうまく管理する静的サイトジェネレーターないかなぁ（<a href="https://www.staticgen.com/">StaticGen</a>を探した）</li>
+          </ul>
+          <p>1つの解としては外部サービス（<a href="https://codesandbox.io/">CodeSandbox</a>とか<a href="https://codepen.io/">codepen</a>、<a href="https://jsfiddle.net/">jsfiddle</a>）を埋め込んで利用する、に行き着くんですよね。</p>
+          <p>でも、やっぱり自分の管理下でやりたい、という支配欲（？）があって長続きしません。</p>
+          <p>「じゃあ作るか → どうやって？」となるんですけど、ゼロベースだとなかなか大変なので、GitHubをググってみて（？）<a href="https://github.com/mdx-js/mdx">mdx-js/mdx</a>にたどり着きました。</p>
+          <p>こやつ、何をやっているかというと、Markdown中にJSXを利用できるようにしよう、というもの。
+            着想が面白くて、コードも興味深い箇所があったので今回はそれを紹介します。</p>
+          <h2>mdx-jsのざっくりした流れ</h2>
+          <p>※ すごいざっくり説明するので、詳しくは<a href="https://github.com/mdx-js/mdx">mdx-js/mdx</a>を見てください。</p>
+          <h3>1. Markdown中にJSXを書く</h3><pre class="language-plain"><code class="language-mdx"># ヘッダータイトル
+&lt;ExampleComponent&gt;ここがReactによって定義されたコンポーネントに変わる&lt;/ExampleComponent&gt;
+</code></pre>
+          <h3>2. <code>ExampleComponent</code>に定義したコンポーネントをあてる</h3><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">ExampleComponentProps</span> <span class="token punctuation">{</span>
+  x<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  y<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ExampleComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span><span class="token operator">&lt;</span>ExampleComponentProps<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>my-component<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">}</span><span class="token plain-text"> </span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>x <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>y<span class="token punctuation">}</span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+          <h3>3. mdx-jsを使ってビルドする</h3><pre class="language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">></span></span>ヘッダータイトル<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">></span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>my-component<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>ここがReactによって定義されたコンポーネントに変わる<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+</code></pre>
+          <h2>どうやって処理するの？</h2>
+          <p>最初に見たときは「JSXの変換の部分」の処理をすぐに想像できませんでした。</p>
+          <p><code>package.json</code>をいろいろ見ると、Markdown自体をパースするのは<a href="https://github.com/unifiedjs/unified">unifiedjs/unified</a>あたり。JSXを変換するものは<a href="https://www.npmjs.com/package/@babel/plugin-transform-react-jsx">@babel/transform-react-jsx</a>とあたり、とすぐに暴けるのですが、コンポーネントのマッピングをどうやっているのか、なかなか見えてきません。</p>
+          <h3>紐解いてみる</h3>
+          <p>答えは<a href="https://www.npmjs.com/package/@mdx-js/runtime">@mdx-js/runtime</a>のコードにありました。</p>
+          <ul>
+            <li><a href="https://github.com/mdx-js/mdx/blob/v0.16.0/packages/runtime/src/index.js">https://github.com/mdx-js/mdx/blob/v0.16.0/packages/runtime/src/index.js</a></li>
+          </ul>
+          <p>v0.16.0以降のバージョンではライブラリ固有のものになりつつあるので、リンクはバージョンを固定しています。また、説明用に使うにはノイズが多いので、処理を抽出したサンプルコードを作成しました。</p>
+          <ul>
+            <li><a href="https://github.com/Himenon/convert-text-to-react">https://github.com/Himenon/convert-text-to-react</a></li>
+          </ul>
+          <p>本題のロジックは</p>
+          <ul>
+            <li><a href="https://github.com/Himenon/convert-text-to-react/blob/master/src/converter.tsx">https://github.com/Himenon/convert-text-to-react/blob/master/src/converter.tsx</a></li>
+          </ul>
+          <p>にあります。20行にも満たないコードです。</p>
+          <h4>サンプルコードの使い方</h4>
+          <p><a href="https://github.com/Himenon/convert-text-to-react">READMEのサンプルコード</a>にコメントをつけて説明します。</p><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">import</span> <span class="token punctuation">{</span> convert <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"convert-text-to-react"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">ExampleComponentProps</span> <span class="token punctuation">{</span>
+  x<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+  y<span class="token punctuation">:</span> <span class="token builtin">number</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 適当なコンポーネントを用意する</span>
+<span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">ExampleComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span><span class="token operator">&lt;</span>ExampleComponentProps<span class="token punctuation">,</span> <span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  <span class="token keyword">public</span> <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>my-component<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token plain-text">
+        </span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>children<span class="token punctuation">}</span><span class="token plain-text"> </span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>x <span class="token operator">*</span> <span class="token keyword">this</span><span class="token punctuation">.</span>props<span class="token punctuation">.</span>y<span class="token punctuation">}</span><span class="token plain-text">
+      </span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">></span></span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// 変換のマッピング</span>
+<span class="token keyword">const</span> components <span class="token operator">=</span> <span class="token punctuation">{</span>
+  ExampleComponent<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">// テキストを変換するを登録した変換マップにしたがって変換する</span>
+<span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token function">convert</span><span class="token punctuation">(</span><span class="token string">"&lt;ExampleComponent x={1} y={-20}>Result of multiplication:&lt;/ExampleComponent>"</span><span class="token punctuation">,</span> components<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// ReactElementを得る</span>
+</code></pre>
+          <p>ざーっくりとこんな感じです。</p>
+          <h2>プレーンテキストにReactのコンポーネントを適用させる処理</h2>
+          <p>中身の処理を見てみます。コメントを付けながら解説すると、</p><pre class="language-ts"><code class="language-ts"><span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> babel <span class="token keyword">from</span> <span class="token string">"@babel/core"</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token operator">*</span> <span class="token keyword">as</span> React <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+
+<span class="token comment">// JSXを含むプレーンテキストをJSのコードにトランスパイルする</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> toCode <span class="token operator">=</span> <span class="token punctuation">(</span>raw<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token builtin">string</span> <span class="token operator">|</span> <span class="token parameter"><span class="token keyword">null</span></span> <span class="token operator">=></span>
+  babel<span class="token punctuation">.</span><span class="token function">transform</span><span class="token punctuation">(</span>raw<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+    plugins<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"@babel/plugin-transform-react-jsx"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">.</span>code<span class="token punctuation">;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">const</span> convert <span class="token operator">=</span> <span class="token punctuation">(</span>raw<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> components<span class="token punctuation">:</span> object<span class="token punctuation">)</span><span class="token punctuation">:</span> React<span class="token punctuation">.</span>ReactElement<span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">></span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> code <span class="token operator">=</span> <span class="token function">toCode</span><span class="token punctuation">(</span>raw<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// キー名を取得</span>
+  <span class="token keyword">const</span> keys <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>components<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// `keys`の並び順にcomponentsを習得</span>
+  <span class="token keyword">const</span> values <span class="token operator">=</span> keys<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">key</span> <span class="token operator">=></span> components<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// React.createElementを含む関数を生成</span>
+  <span class="token keyword">const</span> create <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Function</span><span class="token punctuation">(</span><span class="token string">"React"</span><span class="token punctuation">,</span> <span class="token operator">...</span>keys<span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`return </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>code<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment">// 関数を実行、ReactElementを得る</span>
+  <span class="token keyword">return</span> <span class="token function">create</span><span class="token punctuation">(</span>React<span class="token punctuation">,</span> <span class="token operator">...</span>values<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+          <p>となります。短いですね！どんどんいきます。</p>
+          <h3><code>Function</code>とは？</h3>
+          <p>唐突に出てきたFunctionって、普段使わないですよね。
+            <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Function">Function - JavaScript | MDN</a>によれば、
+            動的に関数を生成し利用できます。ただし、<code>eval</code>と同じくセキュリティとパフォーマンスの問題に悩まされるようです。</p>
+          <p>サンプルコードを見てみると次のようになっています。</p><pre class="language-js"><code class="language-js"><span class="token keyword">var</span> sum <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Function</span><span class="token punctuation">(</span><span class="token string">'a'</span><span class="token punctuation">,</span> <span class="token string">'b'</span><span class="token punctuation">,</span> <span class="token string">'return a + b'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span>
+</code></pre>
+          <p>つまり、<code>Function</code>の引数の最後以外が生成される関数の引数となり、最後の引数がJavaScriptの構文を含む関数として定義されます。</p>
+          <h3>具体的に解説してみる</h3>
+          <p><code>convert</code>関数に渡す引数は次のように定義します。
+            プレーンテキストをReactElementになるまで順を追って説明すると、</p><pre class="language-tsx"><code class="language-tsx"><span class="token keyword">const</span> raw <span class="token operator">=</span> <span class="token string">"&lt;ExampleComponent x={1} y={-20}>Result of multiplication:&lt;/ExampleComponent>"</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> components <span class="token operator">=</span> <span class="token punctuation">{</span>
+  ExampleComponent<span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+<span class="token function">convert</span><span class="token punctuation">(</span>raw<span class="token punctuation">,</span> components<span class="token punctuation">)</span>
+</code></pre>
+          <p>まずは<code>toCode</code>でJSXを含むテキストを、JSのシンタックスのコードに変換します。</p><pre class="language-js"><code class="language-js"><span class="token comment">// IN</span>
+<span class="token function">toCode</span><span class="token punctuation">(</span><span class="token string">"&lt;ExampleComponent x={1} y={-20}>Result of multiplication:&lt;/ExampleComponent>"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// OUT</span>
+<span class="token template-string"><span class="token string">`React.createElement(ExampleComponent, { x: 1, y: -20}, "Result of multiplication:");`</span></span>
+</code></pre>
+          <p>JSXがJSのコードに分解されました。次に、<code>new Function</code>で必要な引数を用意します。</p><pre class="language-js"><code class="language-js"><span class="token comment">// IN</span>
+<span class="token keyword">const</span> keys <span class="token operator">=</span> Object<span class="token punctuation">.</span><span class="token function">keys</span><span class="token punctuation">(</span>components<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// OUT</span>
+<span class="token punctuation">[</span><span class="token string">"ExampleComponent"</span><span class="token punctuation">]</span> <span class="token comment">// 文字列の配列</span>
+
+<span class="token comment">// IN　キーの順序でコンポーネントを取り出していく</span>
+<span class="token keyword">const</span> values <span class="token operator">=</span> keys<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">key</span> <span class="token operator">=></span> components<span class="token punctuation">[</span>key<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// OUT</span>
+<span class="token punctuation">[</span>ExampleComponent<span class="token punctuation">]</span> <span class="token comment">// ReactComponentの配列</span>
+</code></pre>
+          <p>これらを、<code>new Function</code>の引数に渡します。</p><pre class="language-js"><code class="language-js"><span class="token comment">// IN</span>
+<span class="token keyword">const</span> create <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Function</span><span class="token punctuation">(</span><span class="token string">"React"</span><span class="token punctuation">,</span> <span class="token operator">...</span>keys<span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`return </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>code<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 展開して書くと</span>
+<span class="token keyword">const</span> create <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Function</span><span class="token punctuation">(</span><span class="token string">"React"</span><span class="token punctuation">,</span> <span class="token string">"ExampleComponent"</span><span class="token punctuation">,</span> <span class="token template-string"><span class="token string">`return React.createElement(ExampleComponent, { x: 1, y: -20}, "Result of multiplication:");`</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+          <p><code>new Function</code>経由ではなく、実際に<code>create</code>関数を定義した場合は次のようになります。</p><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">create</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token parameter">React<span class="token punctuation">,</span> ExampleComponent</span><span class="token punctuation">)</span> <span class="token operator">=></span> React<span class="token punctuation">.</span><span class="token function">createElement</span><span class="token punctuation">(</span>ExampleComponent<span class="token punctuation">,</span> <span class="token punctuation">{</span> x<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token operator">-</span><span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"Result of multiplication:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+          <p>もう最後はおわかりですね。</p><pre class="language-js"><code class="language-js"><span class="token comment">// IN</span>
+<span class="token function">create</span><span class="token punctuation">(</span>React<span class="token punctuation">,</span> <span class="token operator">...</span>values<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 展開して書くと</span>
+<span class="token function">create</span><span class="token punctuation">(</span>React<span class="token punctuation">,</span> ExampleComponent<span class="token punctuation">)</span>
+</code></pre>
+          <p>これでテキストからReactのElementに変換されました！やった！</p>
+          <p>Spread Operator（<code>...</code>）のおかげで、複数の変換マップを入れた場合にも拡張できます（<a href="https://github.com/Himenon/convert-text-to-react/blob/24eddb070b8c2d10d7b1b3136bb0a7b138d13fa6/src/__tests__/index.test.tsx#L41-L45">参考</a>）。</p>
+          <h1>おわりに</h1>
+          <p>タイトルに「React意識せずにReactを使いたい」と書きましたが、内部実装を気にせず使う分には達成されるのかな（？）、と思います。</p>
+          <p>巨人の力を借りて便利なツールを作るときに役に立てばいいなぁ（eval系は注意が必要ですが）。</p>
+          <h1>おまけ</h1>
+          <p>JSXとか、そのへんのおもしろそうな記事とかリポジトリとかの紹介です。</p>
+          <ul>
+            <li><a href="https://qiita.com/boiyaa/items/0e89d7c6cecf8a58d902">JSXのファクトリ関数を自作する方法と、Reactと全然違う挙動をさせるサンプル</a>
+              <ul>
+                <li>これすき</li>
+              </ul>
+            </li>
+            <li>Hyperappの話<ul>
+                <li>VDOMの取扱周りの知識が凝縮しているのでかなり勉強になった。<ul>
+                    <li><a href="https://qiita.com/JorgeBucaran/items/c48446babe0627e25ee6">https://qiita.com/JorgeBucaran/items/c48446babe0627e25ee6</a></li>
+                    <li><a href="https://www.youtube.com/watch?v=jM9yubem0Pw">https://www.youtube.com/watch?v=jM9yubem0Pw</a></li>
+                  </ul>
+                </li>
+                <li>Node学園2017の資料がとても良かったのですが、リンクが見当たらない<ul>
+                    <li>小さなコードで多いな利益を得るコードは勇気づけられました</li>
+                    <li>テストの書き方が参考になる</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><a href="https://www.docz.site/">https://www.docz.site/</a>
+              <ul>
+                <li>mdx-jsを利用しているライブラリ。最近スターを伸ばしているのだけれど、<code>Function</code>で頭を悩ましているのだろうか（？）</li>
+                <li>storybookから置き換わるかというとう〜ん、という感じ</li>
+              </ul>
+            </li>
+            <li><a href="https://github.com/c8r/gen">https://github.com/c8r/gen</a>
+              <ul>
+                <li><code>remark-react</code>を使った静的サイトジェネレーター（未完成のもの）。mdx-jsの作者のリポジトリにあった</li>
+                <li>実装が面白かったので型をあてました <a href="https://github.com/Himenon/gen">https://github.com/Himenon/gen</a>
+                  <ul>
+                    <li>さらにmdx-jsに内部実装を切り替えたものを現在作成中 <a href="https://github.com/Himenon/rocu">https://github.com/Himenon/rocu</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <p>2018年もおわりかー。Twitterたのしい。にゃーん。</p>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
