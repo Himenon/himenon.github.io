@@ -1,6 +1,6 @@
 ---
 title: 簡単なPythonのパッケージを作る方法
-description: "日付変換"
+description: "pythonのライブラリを作る方法を紹介します。"
 keywords: "python.library"
 createdAt: 2016-12-04 03:49:00
 updatedAt: 2020-03-26 00:15:00
