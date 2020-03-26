@@ -1,6 +1,6 @@
 ---
 title: "mdx-jsの実装を解読するまでの話"
-description: "日付変換"
+description: "mdx-jsの内部実装について解説します。"
 keywords: "JavaScript,JSX,TypeScript,React,mdx-js"
 createdAt: 2018-12-12 03:05:00
 updatedAt: 2020-03-26 00:15:00

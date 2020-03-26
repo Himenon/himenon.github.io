@@ -1,6 +1,6 @@
 ---
 title: "JavaScript・TypeScriptのimport・exportの依存関係を可視化するcode-dependencyの紹介"
-description: "@code-dependencyの照会"
+description: "js、tsのファイル間の依存関係を可視化するツールについて紹介します。"
 keywords: "JavaScript,TypeScript,設計,Vue.js,dependency-cruiser"
 createdAt: 2020-02-08 21:00:00
 updatedAt: 2020-03-26 00:15:00
