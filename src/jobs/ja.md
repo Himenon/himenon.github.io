@@ -1,5 +1,6 @@
 ---
 title: 求職情報
+description: "現在募集中の求職情報です"
 createdAt: 2020-03-31 15:00:00
 updatedAt: 2020-03-31 15:00:00
 ---
@@ -8,6 +9,7 @@ updatedAt: 2020-03-31 15:00:00
 
 * 副業としてとして労働可能であること。
 * フルリモート可能であること。
+* 派遣/SES不可。
 
 ## 稼働可能時間
 
@@ -22,15 +24,16 @@ updatedAt: 2020-03-31 15:00:00
 
 * WEBフロントエンドエンジニア
   * JavaScript/TypeScript/Node.js
+  * Backend Frontend Server (BFF)などのバックエンドは実装可能。
 
 ## 守備範囲
-
-* Vanilla JS
 
 ### Framework
 
 * react(<https://github.com/facebook/react>)
 * express(<https://github.com/expressjs/express>)
+
+必要に応じて多種多様なライブラリを利用しています。
 
 ### ビルド
 
@@ -62,3 +65,10 @@ updatedAt: 2020-03-31 15:00:00
   * 開発時のブログ：<https://himenon.github.io/custom-site-blog/>
 * 複雑なパッケージ更新順序の整理可視化（案件の依存関係の整理と同等）
   * https://github.com/Himenon/sort-dependency
+
+### 経験
+
+* 大規模フロントエンド開発経験あり
+* フロントエンドのパフォーマンス・チューニング経験あり
+* CI/CDを用いた開発環境の整備経験あり（主にDrone、GitHub Action、Circle CI、Travis）
+* 開発マネジメント経験アリ（タスク分割、スケジュール調整、他チームとの渉外）
