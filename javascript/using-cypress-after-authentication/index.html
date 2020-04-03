@@ -1,0 +1,130 @@
+<html>
+
+  <head lang="ja">
+    <title>認証後にcypressを利用してe2eテストを行う</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="cypress,e2e,login,authorization,cors,cross origin" />
+    <meta name="description" content="ログインが必要なページでcypressのe2eテストを実行する場合の方法を紹介します" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="認証後にcypressを利用してe2eテストを行う" />
+    <meta property="og:url" content="https://himenon.github.io/javascript/using-cypress-after-authentication" />
+    <meta property="og:description" content="ログインが必要なページでcypressのe2eテストを実行する場合の方法を紹介します" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?a99c4" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?4dde1" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?efb71" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?edeb5" rel="stylesheet" />
+    <link href="/lib/prism.css?84536" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?18f8a" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;認証後にcypressを利用してe2eテストを行う&quot;,&quot;description&quot;:&quot;ログインが必要なページでcypressのe2eテストを実行する場合の方法を紹介します&quot;,&quot;keywords&quot;:&quot;cypress,e2e,login,authorization,cors,cross origin&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2020-04-03T14:00:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-04-03T14:00:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;認証後にcypressを利用してe2eテストを行う&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/using-cypress-after-authentication&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;ログインが必要なページでcypressのe2eテストを実行する場合の方法を紹介します&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/javascript/using-cypress-after-authentication&quot;,&quot;content&quot;:&quot;\n# 動機\n\ncypressでe2eを行う場合にログインを必要とするページがあります。\nまた、ログインページとe2e対象のページのURLがcross-originではなく、cypressが失敗する場合もあります。\nたとえば、ローカル開発環境で実行したい場合に遭遇します。\n\n## command.jsにログイン方法を定義する\n\n`cypress/support/commands.js`にログイン方法を一度記述することで、`cypress/integration`内部のどこからでも呼び出せるようになります。\n\n### fetch requestを利用してログインする方法 (CORS対策)\n\n`cy.request`を利用することで、ログインページへ訪れずにログインできます。\n\n```js\n// cypress/support/commands.js\nCypress.Commands.add(\&quot;loginByCsrf\&quot;, (username, password) =&gt; {\n  cy.request({\n    method: \&quot;POST\&quot;,\n    url: \&quot;formのaction部分\&quot;,\n    failOnStatusCode: false,\n    form: true,\n    // ログインに必要なparameterを追加する\n    body: {\n    },\n  });\n  return cy;\n});\n```\n\n### UIを直接操作してログインする方法\n\nログインページと、テスト対象のページがsame originであれば次のようにログインコマンドを定義できます。\n\n```js\n// cypress/support/commands.js\nCypress.Commands.add(\&quot;login\&quot;, (username, password) =&gt; {\n  cy.visit(\&quot;login page url\&quot;); // ログインページへ一度繊維\n  cy.get(&#x27;username query selector&#x27;).type(username);\n  cy.get(&#x27;password query selector&#x27;).type(password);\n  cy.get(\&quot;submit button query selector\&quot;).click();\n  return cy;\n});\n```\n\n### 型定義\n\n```ts\n// cypress/support/index.d.ts\n/* eslint-disable @typescript-eslint/triple-slash-reference */\n/// &lt;reference types=\&quot;cypress\&quot; /&gt;\n\ndeclare namespace Cypress {\n  interface Chainable&lt;Subject&gt; {\n    /**\n     * UIを通じてログインする\n     */\n    login(email: string, password: string): Chainable&lt;any&gt;;\n    /**\n     * 直接APIを叩いてログインする\n     */\n    loginByCsrf(email: string, password: string): Chainable&lt;any&gt;;\n  }\n}\n```\n\n## 使い方\n\nユーザー情報をfixtureに保存しておきます。\n\n```json\n// cypress/fixtures/test-user.json\n{\n  \&quot;username\&quot;: \&quot;username\&quot;,\n  \&quot;password\&quot;: \&quot;password\&quot;\n}\n```\n\n```ts\ndescribe(\&quot;e2eテスト\&quot;, () =&gt; {\n  // 一度だけログインすることで、各テスト項目にsessionを引き継ぐことができる\n  before(() =&gt; {\n    cy.fixture(\&quot;test-user.json\&quot;).then(loginInfo =&gt; {\n      cy.loginByCsrf(loginInfo.username, loginInfo.password);\n    });\n  });\n});\n```\n\n## 参考\n\n* &lt;https://docs.cypress.io/guides/guides/web-security.html#Limitations&gt;\n\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;認証後にcypressを利用してe2eテストを行う&quot;,&quot;description&quot;:&quot;ログインが必要なページでcypressのe2eテストを実行する場合の方法を紹介します&quot;,&quot;keywords&quot;:&quot;cypress,e2e,login,authorization,cors,cross origin&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2020-04-03T14:00:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-04-03T14:00:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;認証後にcypressを利用してe2eテストを行う&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/using-cypress-after-authentication&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;ログインが必要なページでcypressのe2eテストを実行する場合の方法を紹介します&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/javascript/using-cypress-after-authentication.md&quot;,&quot;name&quot;:&quot;javascript/using-cypress-after-authentication&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;認証後にcypressを利用してe2eテストを行う\&quot;\ndescription: \&quot;ログインが必要なページでcypressのe2eテストを実行する場合の方法を紹介します\&quot;\nkeywords: \&quot;cypress,e2e,login,authorization,cors,cross origin\&quot;\ncreatedAt: 2020-04-03 14:00:00\nupdatedAt: 2020-04-03 14:00:00\n---\n\n# 動機\n\ncypressでe2eを行う場合にログインを必要とするページがあります。\nまた、ログインページとe2e対象のページのURLがcross-originではなく、cypressが失敗する場合もあります。\nたとえば、ローカル開発環境で実行したい場合に遭遇します。\n\n## command.jsにログイン方法を定義する\n\n`cypress/support/commands.js`にログイン方法を一度記述することで、`cypress/integration`内部のどこからでも呼び出せるようになります。\n\n### fetch requestを利用してログインする方法 (CORS対策)\n\n`cy.request`を利用することで、ログインページへ訪れずにログインできます。\n\n```js\n// cypress/support/commands.js\nCypress.Commands.add(\&quot;loginByCsrf\&quot;, (username, password) =&gt; {\n  cy.request({\n    method: \&quot;POST\&quot;,\n    url: \&quot;formのaction部分\&quot;,\n    failOnStatusCode: false,\n    form: true,\n    // ログインに必要なparameterを追加する\n    body: {\n    },\n  });\n  return cy;\n});\n```\n\n### UIを直接操作してログインする方法\n\nログインページと、テスト対象のページがsame originであれば次のようにログインコマンドを定義できます。\n\n```js\n// cypress/support/commands.js\nCypress.Commands.add(\&quot;login\&quot;, (username, password) =&gt; {\n  cy.visit(\&quot;login page url\&quot;); // ログインページへ一度繊維\n  cy.get(&#x27;username query selector&#x27;).type(username);\n  cy.get(&#x27;password query selector&#x27;).type(password);\n  cy.get(\&quot;submit button query selector\&quot;).click();\n  return cy;\n});\n```\n\n### 型定義\n\n```ts\n// cypress/support/index.d.ts\n/* eslint-disable @typescript-eslint/triple-slash-reference */\n/// &lt;reference types=\&quot;cypress\&quot; /&gt;\n\ndeclare namespace Cypress {\n  interface Chainable&lt;Subject&gt; {\n    /**\n     * UIを通じてログインする\n     */\n    login(email: string, password: string): Chainable&lt;any&gt;;\n    /**\n     * 直接APIを叩いてログインする\n     */\n    loginByCsrf(email: string, password: string): Chainable&lt;any&gt;;\n  }\n}\n```\n\n## 使い方\n\nユーザー情報をfixtureに保存しておきます。\n\n```json\n// cypress/fixtures/test-user.json\n{\n  \&quot;username\&quot;: \&quot;username\&quot;,\n  \&quot;password\&quot;: \&quot;password\&quot;\n}\n```\n\n```ts\ndescribe(\&quot;e2eテスト\&quot;, () =&gt; {\n  // 一度だけログインすることで、各テスト項目にsessionを引き継ぐことができる\n  before(() =&gt; {\n    cy.fixture(\&quot;test-user.json\&quot;).then(loginInfo =&gt; {\n      cy.loginByCsrf(loginInfo.username, loginInfo.password);\n    });\n  });\n});\n```\n\n## 参考\n\n* &lt;https://docs.cypress.io/guides/guides/web-security.html#Limitations&gt;\n\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">認証後にcypressを利用してe2eテストを行う</h1>
+            <p id="page-description">ログインが必要なページでcypressのe2eテストを実行する場合の方法を紹介します</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2020-04-03 11:00:00</time><span id="created-at__label">更新日</span><time>2020-04-03 11:00:00</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h1>動機</h1>
+          <p>cypressでe2eを行う場合にログインを必要とするページがあります。
+            また、ログインページとe2e対象のページのURLがcross-originではなく、cypressが失敗する場合もあります。
+            たとえば、ローカル開発環境で実行したい場合に遭遇します。</p>
+          <h2>command.jsにログイン方法を定義する</h2>
+          <p><code>cypress/support/commands.js</code>にログイン方法を一度記述することで、<code>cypress/integration</code>内部のどこからでも呼び出せるようになります。</p>
+          <h3>fetch requestを利用してログインする方法 (CORS対策)</h3>
+          <p><code>cy.request</code>を利用することで、ログインページへ訪れずにログインできます。</p><pre class="language-js"><code class="language-js"><span class="token comment">// cypress/support/commands.js</span>
+Cypress<span class="token punctuation">.</span>Commands<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"loginByCsrf"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">username<span class="token punctuation">,</span> password</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  cy<span class="token punctuation">.</span><span class="token function">request</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    method<span class="token punctuation">:</span> <span class="token string">"POST"</span><span class="token punctuation">,</span>
+    url<span class="token punctuation">:</span> <span class="token string">"formのaction部分"</span><span class="token punctuation">,</span>
+    failOnStatusCode<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
+    form<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+    <span class="token comment">// ログインに必要なparameterを追加する</span>
+    body<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> cy<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+          <h3>UIを直接操作してログインする方法</h3>
+          <p>ログインページと、テスト対象のページがsame originであれば次のようにログインコマンドを定義できます。</p><pre class="language-js"><code class="language-js"><span class="token comment">// cypress/support/commands.js</span>
+Cypress<span class="token punctuation">.</span>Commands<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">"login"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token parameter">username<span class="token punctuation">,</span> password</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  cy<span class="token punctuation">.</span><span class="token function">visit</span><span class="token punctuation">(</span><span class="token string">"login page url"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ログインページへ一度繊維</span>
+  cy<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'username query selector'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span>username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  cy<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">'password query selector'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span>password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  cy<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"submit button query selector"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> cy<span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+          <h3>型定義</h3><pre class="language-ts"><code class="language-ts"><span class="token comment">// cypress/support/index.d.ts</span>
+<span class="token comment">/* eslint-disable @typescript-eslint/triple-slash-reference */</span>
+<span class="token comment">/// &lt;reference types="cypress" /></span>
+
+<span class="token keyword">declare</span> <span class="token keyword">namespace</span> Cypress <span class="token punctuation">{</span>
+  <span class="token keyword">interface</span> <span class="token class-name">Chainable</span><span class="token operator">&lt;</span>Subject<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * UIを通じてログインする
+     */</span>
+    <span class="token function">login</span><span class="token punctuation">(</span>email<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> password<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Chainable<span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">></span><span class="token punctuation">;</span>
+    <span class="token comment">/**
+     * 直接APIを叩いてログインする
+     */</span>
+    <span class="token function">loginByCsrf</span><span class="token punctuation">(</span>email<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">,</span> password<span class="token punctuation">:</span> <span class="token builtin">string</span><span class="token punctuation">)</span><span class="token punctuation">:</span> Chainable<span class="token operator">&lt;</span><span class="token builtin">any</span><span class="token operator">></span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+          <h2>使い方</h2>
+          <p>ユーザー情報をfixtureに保存しておきます。</p><pre class="language-json"><code class="language-json"><span class="token comment">// cypress/fixtures/test-user.json</span>
+<span class="token punctuation">{</span>
+  <span class="token property">"username"</span><span class="token operator">:</span> <span class="token string">"username"</span><span class="token punctuation">,</span>
+  <span class="token property">"password"</span><span class="token operator">:</span> <span class="token string">"password"</span>
+<span class="token punctuation">}</span>
+</code></pre><pre class="language-ts"><code class="language-ts"><span class="token function">describe</span><span class="token punctuation">(</span><span class="token string">"e2eテスト"</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  <span class="token comment">// 一度だけログインすることで、各テスト項目にsessionを引き継ぐことができる</span>
+  <span class="token function">before</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+    cy<span class="token punctuation">.</span><span class="token function">fixture</span><span class="token punctuation">(</span><span class="token string">"test-user.json"</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span><span class="token parameter">loginInfo</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+      cy<span class="token punctuation">.</span><span class="token function">loginByCsrf</span><span class="token punctuation">(</span>loginInfo<span class="token punctuation">.</span>username<span class="token punctuation">,</span> loginInfo<span class="token punctuation">.</span>password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+          <h2>参考</h2>
+          <ul>
+            <li><a href="https://docs.cypress.io/guides/guides/web-security.html#Limitations">https://docs.cypress.io/guides/guides/web-security.html#Limitations</a></li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>

@@ -1,0 +1,133 @@
+<html>
+
+  <head lang="ja">
+    <title>認証を通したlighthouseをprogramaticallyに利用する</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="lighthouse,puppeteer,performance,authorization,auth,CI,nodejs,サンプル,html" />
+    <meta name="description" content="ログイン後のLighthouseを利用する方法を紹介します" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="認証を通したlighthouseをprogramaticallyに利用する" />
+    <meta property="og:url" content="https://himenon.github.io/javascript/use-lighthouse-through-authentication-for programatically" />
+    <meta property="og:description" content="ログイン後のLighthouseを利用する方法を紹介します" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?a99c4" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?4dde1" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?efb71" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?edeb5" rel="stylesheet" />
+    <link href="/lib/prism.css?84536" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?18f8a" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;認証を通したlighthouseをprogramaticallyに利用する&quot;,&quot;description&quot;:&quot;ログイン後のLighthouseを利用する方法を紹介します&quot;,&quot;keywords&quot;:&quot;lighthouse,puppeteer,performance,authorization,auth,CI,nodejs,サンプル,html&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2020-04-03T14:00:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-04-03T14:00:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;認証を通したlighthouseをprogramaticallyに利用する&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/use-lighthouse-through-authentication-for programatically&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;ログイン後のLighthouseを利用する方法を紹介します&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/javascript/use-lighthouse-through-authentication-for programatically&quot;,&quot;content&quot;:&quot;\n# 動機\n\n1. Lighthouseの結果をPull Request単位で取得したり、CI内部で実行したりしたい。\n2. 扱っているページがログインページの場合に前処理が必要となるため、それも同時に解決したい。\n\n## 方法\n\nLighthouseを実行する前に、`puppeteer`を利用してログインし、そのセッション情報をLighthouseに引き継ぐ事ができます。\n\n## サンプルコード\n\n事前に関連ライブラリをインストールしておきます。\n\n```bash\nyarn add -D lighthouse puppeteer\n```\n\n下記のコード中の情報を適宜修正してください。\n\n```js\n// lighthouse.js\nconst fs = require(\&quot;fs\&quot;);\nconst puppeteer = require(\&quot;puppeteer\&quot;);\nconst lighthouse = require(\&quot;lighthouse\&quot;);\nconst ReportGenerator = require(\&quot;lighthouse/lighthouse-core/report/report-generator\&quot;);\n\nconst username = \&quot;\&quot;;\nconst password = \&quot;\&quot;;\n\nconst PORT = 8041;\n\nconst flags = {\n  logLevel: \&quot;info\&quot;,\n  port: PORT, // puppeteerで利用するブラウザと同じPORTを利用することで、sessionが継続される\n  disableStorageReset: true,\n};\n\nconst config = {\n  extends: \&quot;lighthouse:default\&quot;,\n  settings: {\n    maxWaitForFcp: 15 * 1000,\n    maxWaitForLoad: 35 * 1000,\n    emulatedFormFactor: \&quot;desktop\&quot;,\n    skipAudits: [\&quot;uses-http2\&quot;],\n  },\n};\n\nconst main = async () =&gt; {\n  console.info(\&quot;Now login ...\&quot;);\n  const browser = await puppeteer.launch({\n    args: [`--remote-debugging-port=${PORT}`],\n    headless: true,\n  });\n  const page = await browser.newPage();\n  \n  await page.goto(\&quot;your login page\&quot;);\n  await page.type(\&quot;username query selector\&quot;, username);\n  await page.type(\&quot;password query selector\&quot;, password);\n  await Promise.all([page.click(\&quot;submit button query selector\&quot;), page.waitForNavigation()]);\n  await page.close(); // ページは閉じるが、ブラウザは閉じない\n\n  console.info(\&quot;Running lighthouse ...\&quot;);\n  const result = await lighthouse(\&quot;target url\&quot;, flags, config);\n  const html = ReportGenerator.generateReport(result.lhr, \&quot;html\&quot;); // HTML出力する\n  \n  console.info(\&quot;Save report ...\&quot;);\n  fs.writeFileSync(\&quot;report.html\&quot;, html);\n  \n  await browser.close(); // すべてが完了してからブラウザを閉じる\n};\n\nmain().catch(console.error);\n```\n\n以下のように実行します。\n\n```bash\nnode lighthouse.js\n```\n\n## 参考文献\n\n* &lt;https://github.com/GoogleChrome/lighthouse/tree/master/docs/recipes/auth&gt;\n* &lt;https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically&gt;\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;認証を通したlighthouseをprogramaticallyに利用する&quot;,&quot;description&quot;:&quot;ログイン後のLighthouseを利用する方法を紹介します&quot;,&quot;keywords&quot;:&quot;lighthouse,puppeteer,performance,authorization,auth,CI,nodejs,サンプル,html&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2020-04-03T14:00:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-04-03T14:00:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;認証を通したlighthouseをprogramaticallyに利用する&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/use-lighthouse-through-authentication-for programatically&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;ログイン後のLighthouseを利用する方法を紹介します&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/javascript/use-lighthouse-through-authentication-for programatically.md&quot;,&quot;name&quot;:&quot;javascript/use-lighthouse-through-authentication-for programatically&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;認証を通したlighthouseをprogramaticallyに利用する\&quot;\ndescription: \&quot;ログイン後のLighthouseを利用する方法を紹介します\&quot;\nkeywords: \&quot;lighthouse,puppeteer,performance,authorization,auth,CI,nodejs,サンプル,html\&quot;\ncreatedAt: 2020-04-03 14:00:00\nupdatedAt: 2020-04-03 14:00:00\n---\n\n# 動機\n\n1. Lighthouseの結果をPull Request単位で取得したり、CI内部で実行したりしたい。\n2. 扱っているページがログインページの場合に前処理が必要となるため、それも同時に解決したい。\n\n## 方法\n\nLighthouseを実行する前に、`puppeteer`を利用してログインし、そのセッション情報をLighthouseに引き継ぐ事ができます。\n\n## サンプルコード\n\n事前に関連ライブラリをインストールしておきます。\n\n```bash\nyarn add -D lighthouse puppeteer\n```\n\n下記のコード中の情報を適宜修正してください。\n\n```js\n// lighthouse.js\nconst fs = require(\&quot;fs\&quot;);\nconst puppeteer = require(\&quot;puppeteer\&quot;);\nconst lighthouse = require(\&quot;lighthouse\&quot;);\nconst ReportGenerator = require(\&quot;lighthouse/lighthouse-core/report/report-generator\&quot;);\n\nconst username = \&quot;\&quot;;\nconst password = \&quot;\&quot;;\n\nconst PORT = 8041;\n\nconst flags = {\n  logLevel: \&quot;info\&quot;,\n  port: PORT, // puppeteerで利用するブラウザと同じPORTを利用することで、sessionが継続される\n  disableStorageReset: true,\n};\n\nconst config = {\n  extends: \&quot;lighthouse:default\&quot;,\n  settings: {\n    maxWaitForFcp: 15 * 1000,\n    maxWaitForLoad: 35 * 1000,\n    emulatedFormFactor: \&quot;desktop\&quot;,\n    skipAudits: [\&quot;uses-http2\&quot;],\n  },\n};\n\nconst main = async () =&gt; {\n  console.info(\&quot;Now login ...\&quot;);\n  const browser = await puppeteer.launch({\n    args: [`--remote-debugging-port=${PORT}`],\n    headless: true,\n  });\n  const page = await browser.newPage();\n  \n  await page.goto(\&quot;your login page\&quot;);\n  await page.type(\&quot;username query selector\&quot;, username);\n  await page.type(\&quot;password query selector\&quot;, password);\n  await Promise.all([page.click(\&quot;submit button query selector\&quot;), page.waitForNavigation()]);\n  await page.close(); // ページは閉じるが、ブラウザは閉じない\n\n  console.info(\&quot;Running lighthouse ...\&quot;);\n  const result = await lighthouse(\&quot;target url\&quot;, flags, config);\n  const html = ReportGenerator.generateReport(result.lhr, \&quot;html\&quot;); // HTML出力する\n  \n  console.info(\&quot;Save report ...\&quot;);\n  fs.writeFileSync(\&quot;report.html\&quot;, html);\n  \n  await browser.close(); // すべてが完了してからブラウザを閉じる\n};\n\nmain().catch(console.error);\n```\n\n以下のように実行します。\n\n```bash\nnode lighthouse.js\n```\n\n## 参考文献\n\n* &lt;https://github.com/GoogleChrome/lighthouse/tree/master/docs/recipes/auth&gt;\n* &lt;https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically&gt;\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">認証を通したlighthouseをprogramaticallyに利用する</h1>
+            <p id="page-description">ログイン後のLighthouseを利用する方法を紹介します</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2020-04-03 11:00:00</time><span id="created-at__label">更新日</span><time>2020-04-03 11:00:00</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h1>動機</h1>
+          <ol>
+            <li>Lighthouseの結果をPull Request単位で取得したり、CI内部で実行したりしたい。</li>
+            <li>扱っているページがログインページの場合に前処理が必要となるため、それも同時に解決したい。</li>
+          </ol>
+          <h2>方法</h2>
+          <p>Lighthouseを実行する前に、<code>puppeteer</code>を利用してログインし、そのセッション情報をLighthouseに引き継ぐ事ができます。</p>
+          <h2>サンプルコード</h2>
+          <p>事前に関連ライブラリをインストールしておきます。</p><pre class="language-bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> -D lighthouse puppeteer
+</code></pre>
+          <p>下記のコード中の情報を適宜修正してください。</p><pre class="language-js"><code class="language-js"><span class="token comment">// lighthouse.js</span>
+<span class="token keyword">const</span> fs <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"fs"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> puppeteer <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"puppeteer"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> lighthouse <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"lighthouse"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> ReportGenerator <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">"lighthouse/lighthouse-core/report/report-generator"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> username <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> password <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token constant">PORT</span> <span class="token operator">=</span> <span class="token number">8041</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> flags <span class="token operator">=</span> <span class="token punctuation">{</span>
+  logLevel<span class="token punctuation">:</span> <span class="token string">"info"</span><span class="token punctuation">,</span>
+  port<span class="token punctuation">:</span> <span class="token constant">PORT</span><span class="token punctuation">,</span> <span class="token comment">// puppeteerで利用するブラウザと同じPORTを利用することで、sessionが継続される</span>
+  disableStorageReset<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> config <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token keyword">extends</span><span class="token punctuation">:</span> <span class="token string">"lighthouse:default"</span><span class="token punctuation">,</span>
+  settings<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    maxWaitForFcp<span class="token punctuation">:</span> <span class="token number">15</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+    maxWaitForLoad<span class="token punctuation">:</span> <span class="token number">35</span> <span class="token operator">*</span> <span class="token number">1000</span><span class="token punctuation">,</span>
+    emulatedFormFactor<span class="token punctuation">:</span> <span class="token string">"desktop"</span><span class="token punctuation">,</span>
+    skipAudits<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"uses-http2"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function-variable function">main</span> <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> <span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"Now login ..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> browser <span class="token operator">=</span> <span class="token keyword">await</span> puppeteer<span class="token punctuation">.</span><span class="token function">launch</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+    args<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token template-string"><span class="token string">`--remote-debugging-port=</span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span><span class="token constant">PORT</span><span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    headless<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> page <span class="token operator">=</span> <span class="token keyword">await</span> browser<span class="token punctuation">.</span><span class="token function">newPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">goto</span><span class="token punctuation">(</span><span class="token string">"your login page"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">"username query selector"</span><span class="token punctuation">,</span> username<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">type</span><span class="token punctuation">(</span><span class="token string">"password query selector"</span><span class="token punctuation">,</span> password<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">await</span> Promise<span class="token punctuation">.</span><span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">[</span>page<span class="token punctuation">.</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token string">"submit button query selector"</span><span class="token punctuation">)</span><span class="token punctuation">,</span> page<span class="token punctuation">.</span><span class="token function">waitForNavigation</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">await</span> page<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// ページは閉じるが、ブラウザは閉じない</span>
+
+  console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"Running lighthouse ..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> result <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">lighthouse</span><span class="token punctuation">(</span><span class="token string">"target url"</span><span class="token punctuation">,</span> flags<span class="token punctuation">,</span> config<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> html <span class="token operator">=</span> ReportGenerator<span class="token punctuation">.</span><span class="token function">generateReport</span><span class="token punctuation">(</span>result<span class="token punctuation">.</span>lhr<span class="token punctuation">,</span> <span class="token string">"html"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// HTML出力する</span>
+  
+  console<span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token string">"Save report ..."</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  fs<span class="token punctuation">.</span><span class="token function">writeFileSync</span><span class="token punctuation">(</span><span class="token string">"report.html"</span><span class="token punctuation">,</span> html<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  
+  <span class="token keyword">await</span> browser<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// すべてが完了してからブラウザを閉じる</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">catch</span><span class="token punctuation">(</span>console<span class="token punctuation">.</span>error<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+          <p>以下のように実行します。</p><pre class="language-bash"><code class="language-bash">node lighthouse.js
+</code></pre>
+          <h2>参考文献</h2>
+          <ul>
+            <li><a href="https://github.com/GoogleChrome/lighthouse/tree/master/docs/recipes/auth">https://github.com/GoogleChrome/lighthouse/tree/master/docs/recipes/auth</a></li>
+            <li><a href="https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically">https://github.com/GoogleChrome/lighthouse/blob/master/docs/readme.md#using-programmatically</a></li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
