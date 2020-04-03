@@ -2,6 +2,8 @@
 title: "認証を通したlighthouseをprogramaticallyに利用する"
 description: "ログイン後のLighthouseを利用する方法を紹介します"
 keywords: "lighthouse,puppeteer,performance,authorization,auth,CI,nodejs,サンプル,html"
+createdAt: 2020-04-03 14:00:00
+updatedAt: 2020-04-03 14:00:00
 ---
 
 # 動機
