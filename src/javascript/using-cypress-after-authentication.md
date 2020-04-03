@@ -1,6 +1,6 @@
 ---
 title: "認証後にcypressを利用してe2eテストを行う"
-description: "ログインが必要なページでcypressのe2eテストを実行する場合の方法を紹介します"
+description: "cypressをログイン後にCORSで弾かれずに実行する方法を紹介します"
 keywords: "cypress,e2e,login,authorization,cors,cross origin"
 createdAt: 2020-04-03 14:00:00
 updatedAt: 2020-04-03 14:00:00
