@@ -1,0 +1,125 @@
+<html>
+
+  <head lang="ja">
+    <title>ReactのServer side rendering時に&#x27;Invalid hook call&#x27;が出てしまう問題と解決方法</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="invalid hook call,react,hooks,useReducer,reducer,server side,rendering,ssr" />
+    <meta name="description" content="&#x27;Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons&#x27;の対処方法" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="ReactのServer side rendering時に&#x27;Invalid hook call&#x27;が出てしまう問題と解決方法" />
+    <meta property="og:url" content="https://himenon.github.io/javascript/react-invalid-hook-call" />
+    <meta property="og:description" content="&#x27;Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons&#x27;の対処方法" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?33c8a" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?13b38" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?7eedf" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?b2868" rel="stylesheet" />
+    <link href="/lib/prism.css?b5a17" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?ca281" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;ReactのServer side rendering時に&#x27;Invalid hook call&#x27;が出てしまう問題と解決方法&quot;,&quot;description&quot;:&quot;&#x27;Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons&#x27;の対処方法&quot;,&quot;keywords&quot;:&quot;invalid hook call,react,hooks,useReducer,reducer,server side,rendering,ssr&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2020-04-19T20:00:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-04-19T20:00:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;ReactのServer side rendering時に&#x27;Invalid hook call&#x27;が出てしまう問題と解決方法&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/react-invalid-hook-call&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;&#x27;Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons&#x27;の対処方法&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/javascript/react-invalid-hook-call&quot;,&quot;content&quot;:&quot;\n## エラー内容\n\n```\nError: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.\n```\n\n## webpackを利用してビルドしている場合の解決方法\n\n原因は本記事の下部。\n\n### クライアントサイドで利用するwebpackの設定（umd）\n\n```js\n// webpack.Configuration\n{\n  externals: [\n    {\n      react: \&quot;React\&quot;,\n      \&quot;react-dom\&quot;: \&quot;ReactDOM\&quot;,\n    }\n  ],\n}\n```\n\n### サーバーサイド用にビルドするwebpackの設定（cjs）\n\nwebpackでパッケージングされたライブラリをサーバー側で利用するReactのライブラリは、以下の設定を行う。\n\n```js\n// webpack.Configuration\n{\n  externals: [\n    {\n      react: \&quot;react\&quot;,\n      \&quot;react-dom\&quot;: \&quot;react-dom\&quot;,\n    },\n  ],\n}\n```\n\n## 原因\n\n### Reactのバージョンの不整合\n\n複数バージョンがインストールされていないか確認する（package-lock.jsonやyarn.lockを調査）必要があります。\n[yarnlock-dedupe-check](https://github.com/Himenon/yarnlock-dedupe-check)を利用すれば簡単にチェックできます。\n\n\n```bash\nyarn add -D yarnlock-dedupe-check\n# or\n\nyarnlock-dedupe-check --input ./yarn.lock --test \&quot;^react$|^react-dom$\&quot;\n```\n\n```bash\nnpm i -D yarnlock-dedupe-check\n\nyarnlock-dedupe-check --input ./package-lock.json --test \&quot;^react$|^react-dom$\&quot;\n```\n\n### Reactの参照先が異なる場合\n\n* Monorepoや、yarn workspaceを利用している場合に発生します。\n\n```bash\npackages/client-app # reactをブラウザで利用する\npackages/server-app # reactをサーバー側で利用し、client-appをSSRする\n```\n\nこの場合、client-appは`webpack`でビルドします（※rollupはからないのでwebpackだけ紹介）。\nこれをserver-appに取り込むと、server-appとclient-appの参照する`react`が違う場合があります。\n\n理由は、client-appでReactの`externals`設定（外部ライブラリとして利用する）をしていない場合に、成果物にReactを同封してしまい、\nsever-appが利用する`require(\&quot;react\&quot;)`を参照が変わってしまうところに問題があります。\n\n公式（&lt;https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react&gt;）によれば、次のようなコードを記述することで確認できます。\nここでは、サーバー側のコード中で確認している例を示しています。\n\n```ts\nconst React = __webpack_require__(/*! ../../ */ \&quot;./src/index.ts\&quot;);\nconst React2 = require(\&quot;react\&quot;);\n\nconsole.info(`Same react?: ${React === React2}`)\n```\n\nしたがって、server-appでclient-appを利用することを考え、`externals`の設定をすることによりこの問題を回避できます。\n\n\n## 参考文献\n\n* Invalid Hook Call Warning – React&lt;br /&gt;&lt;https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react&gt;\n* Hooks + multiple instances of React · Issue #13991 · facebook/react&lt;br /&gt;&lt;https://github.com/facebook/react/issues/13991&gt;\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;ReactのServer side rendering時に&#x27;Invalid hook call&#x27;が出てしまう問題と解決方法&quot;,&quot;description&quot;:&quot;&#x27;Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons&#x27;の対処方法&quot;,&quot;keywords&quot;:&quot;invalid hook call,react,hooks,useReducer,reducer,server side,rendering,ssr&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2020-04-19T20:00:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-04-19T20:00:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;ReactのServer side rendering時に&#x27;Invalid hook call&#x27;が出てしまう問題と解決方法&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/react-invalid-hook-call&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;&#x27;Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons&#x27;の対処方法&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/javascript/react-invalid-hook-call.md&quot;,&quot;name&quot;:&quot;javascript/react-invalid-hook-call&quot;,&quot;raw&quot;:&quot;---\ntitle: \&quot;ReactのServer side rendering時に&#x27;Invalid hook call&#x27;が出てしまう問題と解決方法\&quot;\ndescription: \&quot;&#x27;Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons&#x27;の対処方法\&quot;\nkeywords: \&quot;invalid hook call,react,hooks,useReducer,reducer,server side,rendering,ssr\&quot;\ncreatedAt: 2020-04-19 20:00:00\nupdatedAt: 2020-04-19 20:00:00\n---\n\n## エラー内容\n\n```\nError: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:\n1. You might have mismatching versions of React and the renderer (such as React DOM)\n2. You might be breaking the Rules of Hooks\n3. You might have more than one copy of React in the same app\nSee https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.\n```\n\n## webpackを利用してビルドしている場合の解決方法\n\n原因は本記事の下部。\n\n### クライアントサイドで利用するwebpackの設定（umd）\n\n```js\n// webpack.Configuration\n{\n  externals: [\n    {\n      react: \&quot;React\&quot;,\n      \&quot;react-dom\&quot;: \&quot;ReactDOM\&quot;,\n    }\n  ],\n}\n```\n\n### サーバーサイド用にビルドするwebpackの設定（cjs）\n\nwebpackでパッケージングされたライブラリをサーバー側で利用するReactのライブラリは、以下の設定を行う。\n\n```js\n// webpack.Configuration\n{\n  externals: [\n    {\n      react: \&quot;react\&quot;,\n      \&quot;react-dom\&quot;: \&quot;react-dom\&quot;,\n    },\n  ],\n}\n```\n\n## 原因\n\n### Reactのバージョンの不整合\n\n複数バージョンがインストールされていないか確認する（package-lock.jsonやyarn.lockを調査）必要があります。\n[yarnlock-dedupe-check](https://github.com/Himenon/yarnlock-dedupe-check)を利用すれば簡単にチェックできます。\n\n\n```bash\nyarn add -D yarnlock-dedupe-check\n# or\n\nyarnlock-dedupe-check --input ./yarn.lock --test \&quot;^react$|^react-dom$\&quot;\n```\n\n```bash\nnpm i -D yarnlock-dedupe-check\n\nyarnlock-dedupe-check --input ./package-lock.json --test \&quot;^react$|^react-dom$\&quot;\n```\n\n### Reactの参照先が異なる場合\n\n* Monorepoや、yarn workspaceを利用している場合に発生します。\n\n```bash\npackages/client-app # reactをブラウザで利用する\npackages/server-app # reactをサーバー側で利用し、client-appをSSRする\n```\n\nこの場合、client-appは`webpack`でビルドします（※rollupはからないのでwebpackだけ紹介）。\nこれをserver-appに取り込むと、server-appとclient-appの参照する`react`が違う場合があります。\n\n理由は、client-appでReactの`externals`設定（外部ライブラリとして利用する）をしていない場合に、成果物にReactを同封してしまい、\nsever-appが利用する`require(\&quot;react\&quot;)`を参照が変わってしまうところに問題があります。\n\n公式（&lt;https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react&gt;）によれば、次のようなコードを記述することで確認できます。\nここでは、サーバー側のコード中で確認している例を示しています。\n\n```ts\nconst React = __webpack_require__(/*! ../../ */ \&quot;./src/index.ts\&quot;);\nconst React2 = require(\&quot;react\&quot;);\n\nconsole.info(`Same react?: ${React === React2}`)\n```\n\nしたがって、server-appでclient-appを利用することを考え、`externals`の設定をすることによりこの問題を回避できます。\n\n\n## 参考文献\n\n* Invalid Hook Call Warning – React&lt;br /&gt;&lt;https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react&gt;\n* Hooks + multiple instances of React · Issue #13991 · facebook/react&lt;br /&gt;&lt;https://github.com/facebook/react/issues/13991&gt;\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">ReactのServer side rendering時に&#x27;Invalid hook call&#x27;が出てしまう問題と解決方法</h1>
+            <p id="page-description">&#x27;Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons&#x27;の対処方法</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2020-04-20 05:00:00</time><span id="created-at__label">更新日</span><time>2020-04-20 05:00:00</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h2>エラー内容</h2><pre class="language-plain"><code class="language-plain">Error: Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons:
+1. You might have mismatching versions of React and the renderer (such as React DOM)
+2. You might be breaking the Rules of Hooks
+3. You might have more than one copy of React in the same app
+See https://fb.me/react-invalid-hook-call for tips about how to debug and fix this problem.
+</code></pre>
+          <h2>webpackを利用してビルドしている場合の解決方法</h2>
+          <p>原因は本記事の下部。</p>
+          <h3>クライアントサイドで利用するwebpackの設定（umd）</h3><pre class="language-js"><code class="language-js"><span class="token comment">// webpack.Configuration</span>
+<span class="token punctuation">{</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      react<span class="token punctuation">:</span> <span class="token string">"React"</span><span class="token punctuation">,</span>
+      <span class="token string">"react-dom"</span><span class="token punctuation">:</span> <span class="token string">"ReactDOM"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre>
+          <h3>サーバーサイド用にビルドするwebpackの設定（cjs）</h3>
+          <p>webpackでパッケージングされたライブラリをサーバー側で利用するReactのライブラリは、以下の設定を行う。</p><pre class="language-js"><code class="language-js"><span class="token comment">// webpack.Configuration</span>
+<span class="token punctuation">{</span>
+  externals<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+      react<span class="token punctuation">:</span> <span class="token string">"react"</span><span class="token punctuation">,</span>
+      <span class="token string">"react-dom"</span><span class="token punctuation">:</span> <span class="token string">"react-dom"</span><span class="token punctuation">,</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+</code></pre>
+          <h2>原因</h2>
+          <h3>Reactのバージョンの不整合</h3>
+          <p>複数バージョンがインストールされていないか確認する（package-lock.jsonやyarn.lockを調査）必要があります。
+            <a href="https://github.com/Himenon/yarnlock-dedupe-check">yarnlock-dedupe-check</a>を利用すれば簡単にチェックできます。</p><pre class="language-bash"><code class="language-bash"><span class="token function">yarn</span> <span class="token function">add</span> -D yarnlock-dedupe-check
+<span class="token comment"># or</span>
+
+yarnlock-dedupe-check --input ./yarn.lock --test <span class="token string">"^react$|^react-dom$"</span>
+</code></pre><pre class="language-bash"><code class="language-bash"><span class="token function">npm</span> i -D yarnlock-dedupe-check
+
+yarnlock-dedupe-check --input ./package-lock.json --test <span class="token string">"^react$|^react-dom$"</span>
+</code></pre>
+          <h3>Reactの参照先が異なる場合</h3>
+          <ul>
+            <li>Monorepoや、yarn workspaceを利用している場合に発生します。</li>
+          </ul><pre class="language-bash"><code class="language-bash">packages/client-app <span class="token comment"># reactをブラウザで利用する</span>
+packages/server-app <span class="token comment"># reactをサーバー側で利用し、client-appをSSRする</span>
+</code></pre>
+          <p>この場合、client-appは<code>webpack</code>でビルドします（※rollupはからないのでwebpackだけ紹介）。
+            これをserver-appに取り込むと、server-appとclient-appの参照する<code>react</code>が違う場合があります。</p>
+          <p>理由は、client-appでReactの<code>externals</code>設定（外部ライブラリとして利用する）をしていない場合に、成果物にReactを同封してしまい、
+            sever-appが利用する<code>require(&quot;react&quot;)</code>を参照が変わってしまうところに問題があります。</p>
+          <p>公式（<a href="https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react">https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react</a>）によれば、次のようなコードを記述することで確認できます。
+            ここでは、サーバー側のコード中で確認している例を示しています。</p><pre class="language-ts"><code class="language-ts"><span class="token keyword">const</span> React <span class="token operator">=</span> <span class="token function">__webpack_require__</span><span class="token punctuation">(</span><span class="token comment">/*! ../../ */</span> <span class="token string">"./src/index.ts"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">const</span> React2 <span class="token operator">=</span> <span class="token keyword">require</span><span class="token punctuation">(</span><span class="token string">"react"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token builtin">console</span><span class="token punctuation">.</span><span class="token function">info</span><span class="token punctuation">(</span><span class="token template-string"><span class="token string">`Same react?: </span><span class="token interpolation"><span class="token interpolation-punctuation punctuation">${</span>React <span class="token operator">===</span> React2<span class="token interpolation-punctuation punctuation">}</span></span><span class="token string">`</span></span><span class="token punctuation">)</span>
+</code></pre>
+          <p>したがって、server-appでclient-appを利用することを考え、<code>externals</code>の設定をすることによりこの問題を回避できます。</p>
+          <h2>参考文献</h2>
+          <ul>
+            <li>Invalid Hook Call Warning – React<br /><a href="https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react">https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react</a></li>
+            <li>Hooks + multiple instances of React · Issue #13991 · facebook/react<br /><a href="https://github.com/facebook/react/issues/13991">https://github.com/facebook/react/issues/13991</a></li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
