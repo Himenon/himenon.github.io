@@ -3,18 +3,25 @@ title: "JavaScriptで同期的なwait/sleep/delay関数を作る"
 description: "ありそうでない待つ（wait/sleep/delay）処理の作り方。Promiseチェーンとコールバックでの表現についても解説しました。"
 keywords: "nodejs,filesystem,javascript,wait,sleep,delay"
 createdAt: 2019-06-12 22:59:00
-updatedAt: 2019-06-12 22:59:00
+updatedAt: 2020-04-11 22:50:00
 ---
 
 ## ブラウザのDevToolsにコピー＆ペーストできるサンプルコード
 
 動作確認は、async/awaitがデフォルトでサポートされているGoogle Chrome推奨です。
+1行で書くと次のようになります。
 
 ```javascript
+const wait = async (ms) => new Promise(resolve => setTimeout(resolve, ms));
+```
+
+展開型はこうなります。
+
+```js
 const wait = async (ms) => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve();
+      resolve(); // setTimeoutの第一引数の関数として簡略化できる
     }, ms)
   });
 }
