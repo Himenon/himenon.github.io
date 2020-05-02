@@ -50,6 +50,14 @@ docker run -it --rm ubuntu:14.04 /bin/bash
 
 * 参考：[Ubuntu や Alpine Linux をワンコマンドで瞬時に立ち上げる](https://qiita.com/dtan4/items/3be396665f9305428f4f)
 
+### コンテナ内からコピー
+
+```bash
+docker cp [container id]:[コンテナ内のfile path(コピー元)] [hostのfile path(コピー先)]
+```
+
+* 参考：<https://docs.docker.com/engine/reference/commandline/cp/>
+
 ## イメージの停止・削除
 
 ### すべてのdocker psを停止
