@@ -1,0 +1,102 @@
+<html>
+
+  <head lang="ja">
+    <title>TypeScriptで、TS2307のエラーが出たとき、TS1149のエラーも疑う</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="typescript,error,ts1149,ts2307,filename" />
+    <meta name="description" content="error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing." />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="TypeScriptで、TS2307のエラーが出たとき、TS1149のエラーも疑う" />
+    <meta property="og:url" content="https://himenon.github.io/javascript/case-sensitive-paths-error" />
+    <meta property="og:description" content="error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing." />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?07894" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?58eb1" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?18e07" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800?4fbc4" rel="stylesheet" />
+    <link href="/lib/prism.css?340fd" rel="stylesheet" />
+    <link href="/assets/stylesheets/styles.css?1454e" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;TypeScriptで、TS2307のエラーが出たとき、TS1149のエラーも疑う&quot;,&quot;description&quot;:&quot;error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing.&quot;,&quot;keywords&quot;:&quot;typescript,error,ts1149,ts2307,filename&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2020-04-11T22:30:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-04-11T22:30:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;TypeScriptで、TS2307のエラーが出たとき、TS1149のエラーも疑う&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/case-sensitive-paths-error&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing.&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/javascript/case-sensitive-paths-error&quot;,&quot;content&quot;:&quot;\n## 状況\n\nファイルが次のようにある場合、\n\n```\nmain.ts\nlibrary.ts\n```\n\n`main.ts`から`library.ts`を呼び出すとき、以下の後者のような呼び方をするとコンパイルエラーが出る。\n\n```ts\n// 正しい\nimport {} from \&quot;./library\&quot;;\n// 間違い\nimport {} from \&quot;./Library\&quot;;\n```\n\n大文字と小文字の差によって生じるらしいが、MacやLinux環境によっては`TS1149`のエラーだったり、`TS2307`のエラーだったり、\n若干の差異があるようだ。\n\n## error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing.\n\nTS1149はエラーの原因を的確に表しており、間違いに気が付きやすい。\n\n* &lt;https://github.com/Microsoft/TypeScript/issues/25460&gt;\n\n## error TS2307: Cannot find module &#x27;./Library&#x27;.\n\n厄介なのがこっちだ。`TS2307`は対象のファイルが見つからない、というエラーなのだが、大文字・小文字の違いでエラーが出ていることに気がついていない間は、\n微妙な違いに気がつけずに時間を費やしてしまう。\n\nTS2307のエラーが表示された場合の確認手順は以下の通り。\n\n1. `library` のファイル名が確実にあることを検索する。\n2. `library` で完全一致で検索する。\n3. エラーで表示されているファイル名をコピーして、`touch library.ts`などのように作成する。\n   * すでにある場合は、作成されないはず。\n\n## gitの処理\n\nファイル名の大文字小文字だけを変換した場合、gitに観測されないことがある。\n`git mv`を利用することで、ステージングに載せることが可能である。\n\n```bash\ngit mv library.ts Library.ts\n```\n\n* https://stackoverflow.com/questions/10523849/changing-capitalization-of-filenames-in-git\n\n## Webpack Plugin\n\n* Case Sensitive Paths - Webpack Plugin: https://www.npmjs.com/package/case-sensitive-paths-webpack-plugin\n\n\n\n\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;TypeScriptで、TS2307のエラーが出たとき、TS1149のエラーも疑う&quot;,&quot;description&quot;:&quot;error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing.&quot;,&quot;keywords&quot;:&quot;typescript,error,ts1149,ts2307,filename&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;createdAt&quot;:&quot;2020-04-11T22:30:00.000Z&quot;,&quot;updatedAt&quot;:&quot;2020-04-11T22:30:00.000Z&quot;,&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;https://fonts.googleapis.com/css?family=Open+Sans:600,800&quot;,&quot;/lib/prism.css&quot;,&quot;/assets/stylesheets/styles.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;TypeScriptで、TS2307のエラーが出たとき、TS1149のエラーも疑う&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/javascript/case-sensitive-paths-error&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing.&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/javascript/case-sensitive-paths-error.md&quot;,&quot;name&quot;:&quot;javascript/case-sensitive-paths-error&quot;,&quot;raw&quot;:&quot;---\ntitle: TypeScriptで、TS2307のエラーが出たとき、TS1149のエラーも疑う\ndescription: \&quot;error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing.\&quot;\nkeywords: typescript,error,ts1149,ts2307,filename\ncreatedAt: 2020-04-11 22:30:00\nupdatedAt: 2020-04-11 22:30:00\n---\n\n## 状況\n\nファイルが次のようにある場合、\n\n```\nmain.ts\nlibrary.ts\n```\n\n`main.ts`から`library.ts`を呼び出すとき、以下の後者のような呼び方をするとコンパイルエラーが出る。\n\n```ts\n// 正しい\nimport {} from \&quot;./library\&quot;;\n// 間違い\nimport {} from \&quot;./Library\&quot;;\n```\n\n大文字と小文字の差によって生じるらしいが、MacやLinux環境によっては`TS1149`のエラーだったり、`TS2307`のエラーだったり、\n若干の差異があるようだ。\n\n## error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing.\n\nTS1149はエラーの原因を的確に表しており、間違いに気が付きやすい。\n\n* &lt;https://github.com/Microsoft/TypeScript/issues/25460&gt;\n\n## error TS2307: Cannot find module &#x27;./Library&#x27;.\n\n厄介なのがこっちだ。`TS2307`は対象のファイルが見つからない、というエラーなのだが、大文字・小文字の違いでエラーが出ていることに気がついていない間は、\n微妙な違いに気がつけずに時間を費やしてしまう。\n\nTS2307のエラーが表示された場合の確認手順は以下の通り。\n\n1. `library` のファイル名が確実にあることを検索する。\n2. `library` で完全一致で検索する。\n3. エラーで表示されているファイル名をコピーして、`touch library.ts`などのように作成する。\n   * すでにある場合は、作成されないはず。\n\n## gitの処理\n\nファイル名の大文字小文字だけを変換した場合、gitに観測されないことがある。\n`git mv`を利用することで、ステージングに載せることが可能である。\n\n```bash\ngit mv library.ts Library.ts\n```\n\n* https://stackoverflow.com/questions/10523849/changing-capitalization-of-filenames-in-git\n\n## Webpack Plugin\n\n* Case Sensitive Paths - Webpack Plugin: https://www.npmjs.com/package/case-sensitive-paths-webpack-plugin\n\n\n\n\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">TypeScriptで、TS2307のエラーが出たとき、TS1149のエラーも疑う</h1>
+            <p id="page-description">error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing.</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2020-04-12 07:30:00</time><span id="created-at__label">更新日</span><time>2020-04-12 07:30:00</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h2>状況</h2>
+          <p>ファイルが次のようにある場合、</p><pre class="language-plain"><code class="language-plain">main.ts
+library.ts
+</code></pre>
+          <p><code>main.ts</code>から<code>library.ts</code>を呼び出すとき、以下の後者のような呼び方をするとコンパイルエラーが出る。</p><pre class="language-ts"><code class="language-ts"><span class="token comment">// 正しい</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"./library"</span><span class="token punctuation">;</span>
+<span class="token comment">// 間違い</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span><span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"./Library"</span><span class="token punctuation">;</span>
+</code></pre>
+          <p>大文字と小文字の差によって生じるらしいが、MacやLinux環境によっては<code>TS1149</code>のエラーだったり、<code>TS2307</code>のエラーだったり、
+            若干の差異があるようだ。</p>
+          <h2>error TS1149: File name &#x27;library.ts&#x27; differs from already included file name &#x27;Library.ts&#x27; only in casing.</h2>
+          <p>TS1149はエラーの原因を的確に表しており、間違いに気が付きやすい。</p>
+          <ul>
+            <li><a href="https://github.com/Microsoft/TypeScript/issues/25460">https://github.com/Microsoft/TypeScript/issues/25460</a></li>
+          </ul>
+          <h2>error TS2307: Cannot find module &#x27;./Library&#x27;.</h2>
+          <p>厄介なのがこっちだ。<code>TS2307</code>は対象のファイルが見つからない、というエラーなのだが、大文字・小文字の違いでエラーが出ていることに気がついていない間は、
+            微妙な違いに気がつけずに時間を費やしてしまう。</p>
+          <p>TS2307のエラーが表示された場合の確認手順は以下の通り。</p>
+          <ol>
+            <li><code>library</code> のファイル名が確実にあることを検索する。</li>
+            <li><code>library</code> で完全一致で検索する。</li>
+            <li>エラーで表示されているファイル名をコピーして、<code>touch library.ts</code>などのように作成する。<ul>
+                <li>すでにある場合は、作成されないはず。</li>
+              </ul>
+            </li>
+          </ol>
+          <h2>gitの処理</h2>
+          <p>ファイル名の大文字小文字だけを変換した場合、gitに観測されないことがある。
+            <code>git mv</code>を利用することで、ステージングに載せることが可能である。</p><pre class="language-bash"><code class="language-bash"><span class="token function">git</span> <span class="token function">mv</span> library.ts Library.ts
+</code></pre>
+          <ul>
+            <li><a href="https://stackoverflow.com/questions/10523849/changing-capitalization-of-filenames-in-git">https://stackoverflow.com/questions/10523849/changing-capitalization-of-filenames-in-git</a></li>
+          </ul>
+          <h2>Webpack Plugin</h2>
+          <ul>
+            <li>Case Sensitive Paths - Webpack Plugin: <a href="https://www.npmjs.com/package/case-sensitive-paths-webpack-plugin">https://www.npmjs.com/package/case-sensitive-paths-webpack-plugin</a></li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
