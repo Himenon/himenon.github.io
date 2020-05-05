@@ -56,9 +56,9 @@ git mv library.ts Library.ts
 
 * https://stackoverflow.com/questions/10523849/changing-capitalization-of-filenames-in-git
 
-## 捜索中（もしくは作る）
+## Webpack Plugin
 
-* file importしているファイル名を完全一致で検査するlinter
+* Case Sensitive Paths - Webpack Plugin: https://www.npmjs.com/package/case-sensitive-paths-webpack-plugin
 
 
 

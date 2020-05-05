@@ -1,7 +1,7 @@
 ---
 title: "Djangoでデータベースを分割して利用する"
 description: "複数のデータベースへの参照をDjangoで構築する"
-keywords: "python,django,database,separate"
+keywords: "python,django,database,separate,django 複数データベース,django model 分割,database_routers,django 複数db,database_apps_mapping,django db 複数,django multiple database,django database router,django database 複数,django db_for_read"
 createdAt: 2018-04-16 01:54:44
 updatedAt: 2019-05-21 11:22:01
 ---

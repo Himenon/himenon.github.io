@@ -1,7 +1,7 @@
 ---
 title: "NodeJSのrequireがどのファイルを探索しているのかを調べる"
 description: "`require.resolve`を使えば良いでしょう。requireが参照するディレクトリや、moduleが見つからない場合の対処方法を紹介します。"
-keywords: "nodejs,require,resolve,module"
+keywords: "nodejs,require.resolve,node require path,require resolve,nodejs require,node.js require,require,resolve,module"
 createdAt: 2019-06-11 22:37:07
 updatedAt: 2019-06-11 22:37:07
 ---

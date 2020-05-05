@@ -1,7 +1,7 @@
 ---
 title: "JavaScriptでHTMLを動的に生成するときの書き方の実践例"
 description: "コーディングルールを決めた上でJavaScript内で動的にDOMを生成する実装をステップを踏んで紹介します。"
-keywords: "JavaScript,表示,書き方,例,サンプル,使い方,実用例"
+keywords: "javascript,html,生成,動的生成,createelement,表示,書き方,例,サンプル,使い方,実用例"
 createdAt: 2019-12-15 17:00:00
 updatedAt: 2019-12-16 17:00:00
 ---

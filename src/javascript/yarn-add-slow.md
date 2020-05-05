@@ -1,7 +1,7 @@
 ---
 title: "yarn installが遅い原因の調査方法"
 description: "プロジェクトが依存するパッケージに比例して線形にインストール時間が増えていることが期待します。"
-keywords: "yarn,npm,install,slow,cache,キャッシュ,計測,遅い"
+keywords: "yarn 遅い,npm install 遅い,yarn cache,npm 遅い,yarn install slow,yarn install no cache,yarn slow,yarn cache dir,yarn install cache,npm install 高速化,yarn,npm,install,slow,cache,キャッシュ,計測,遅い"
 createdAt: 2019-06-12 22:59:00
 updatedAt: 2019-06-12 22:59:00
 ---
