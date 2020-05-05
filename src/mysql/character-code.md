@@ -1,7 +1,7 @@
 ---
 title: "DockerのMySQLでUTF-8を使えるようにする"
 description: "DockerのMySQLコンテンでUTF-8を使えるようにしておく"
-keywords: "mysql,docker,utf-8"
+keywords: "mysql,docker,utf-8,docker mysql utf8,docker mysql 文字コード,docker mysql utf8mb4,docker-compose mysql utf8mb4,docker mysql 日本語 文字化け,docker mysql 文字化け,docker mysql charset,mysql docker utf8mb4,docker mysql charset utf8,mysql docker utf8"
 createdAt: 2018-09-13 04:13:53
 updatedAt: 2019-05-21 11:22:01
 ---

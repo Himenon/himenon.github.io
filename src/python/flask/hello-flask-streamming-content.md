@@ -1,7 +1,7 @@
 ---
 title: "Flaskのストリーミングを利用してみる"
 description: "ジェネレーターを利用して文字列のストリーミングを試す"
-keywords: "python,flask,streaming"
+keywords: "flask streaming,flask ストリーミング,flask yield,python ストリーミング,flask stream,flask file stream,flask stream response,flask request stream,flask response generator,flask stream_with_context,python,flask,streaming"
 createdAt: 2018-03-09 11:40:20
 updatedAt: 2019-05-21 11:22:01
 ---

@@ -1,7 +1,7 @@
 ---
 title: "JavaScriptで同期的なwait/sleep/delay関数を作る"
 description: "ありそうでない待つ（wait/sleep/delay）処理の作り方。Promiseチェーンとコールバックでの表現についても解説しました。"
-keywords: "nodejs,filesystem,javascript,wait,sleep,delay"
+keywords: "javascript wait,javascript sleep 同期,javascript wait 同期,wait javascript,js wait,javascript sleep,promise wait,javascript wait sleep,javascript delay,await wait javascript,nodejs,filesystem,javascript,wait,sleep,delay"
 createdAt: 2019-06-12 22:59:00
 updatedAt: 2020-04-11 22:50:00
 ---
