@@ -1944,6 +1944,11 @@ latest-version@^5.0.0:
   dependencies:
     package-json "^6.3.0"
 
+latex.css@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/latex.css/-/latex.css-1.1.0.tgz#dd1cd74ad16cc38d9770d23a44c66e4c4c2a002d"
+  integrity sha512-T+GOO4BU6lm4jm7fhlib8+0FwRt27c8y7pC3pfIj5hTXRlJIoxRjA4XVzWhn1ZdCGlQNKBdxMGVJRhfyqd50Rw==
+
 levn@^0.3.0, levn@~0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/levn/-/levn-0.3.0.tgz#3b09924edf9f083c0490fdd4c0bc4421e04764ee"

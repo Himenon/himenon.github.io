@@ -17,9 +17,8 @@
     },
     "js": [],
     "css": [
-      "https://fonts.googleapis.com/css?family=Open+Sans:600,800",
-      "./node_modules/prismjs/themes/prism.css",
-      "/assets/stylesheets/styles.css"
+      "/assets/stylesheets/style.min.css",
+      "./node_modules/prismjs/themes/prism.css"
     ],
     "link": [
       {

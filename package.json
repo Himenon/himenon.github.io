@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "yarn run prebuild && run-p server build:*:watch",
+    "start": "yarn prebuild && yarn server",
     "prebuild": "run-p build:*",
     "server": "custom-site -c config.json -Do",
-    "build": "yarn run clean && custom-site -c config.json --out-dir docs",
-    "build:lib": "yarn run clean:lib && tsc -b tsconfig.json",
-    "build:lib:watch": "yarn run build:lib --watch",
+    "build": "yarn clean && custom-site -c config.json --out-dir docs",
+    "build:lib": "yarn clean:lib && tsc -b tsconfig.json",
+    "build:lib:watch": "yarn build:lib --watch",
     "clean:lib": "rimraf parts/**/*.js",
     "clean": "rimraf ./docs",
     "publish": "ts-node ./scripts/publish.ts",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@custom-site/cli": "^0.3.1",
+    "latex.css": "^1.1.0",
     "react": "^16.8.6"
   },
   "devDependencies": {
