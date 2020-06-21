@@ -1,0 +1,256 @@
+<html>
+
+  <head lang="ja">
+    <title>rust入門</title>
+    <meta charSet="utf-8" />
+    <meta name="keywords" content="nodejs,typescript,python,himenon,web,frontend" />
+    <meta name="description" content="早く画面から出たい人の備忘録。" />
+    <meta name="copyright" content="@Himenon" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Himenon" />
+    <meta property="og:title" content="rust入門" />
+    <meta property="og:url" content="https://himenon.github.io/rust/hello-world" />
+    <meta property="og:description" content="早く画面から出たい人の備忘録。" />
+    <meta property="og:image" content="https://himenon.github.io/assets/images/miku.png" />
+    <meta name="viewport" content="initial-scale=1,minimum-scale=0.5,user-scalable=no" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/miku.png?e31e1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png?5851b" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png?810ce" />
+    <link href="/assets/stylesheets/style.min.css?416bb" rel="stylesheet" />
+    <link href="/lib/prism.css?1e04e" rel="stylesheet" />
+    <script>
+      (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+          (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+          m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+      })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+      ga('create', 'UA-55455343-7', 'auto');
+      ga('send', 'pageview');
+    </script>
+    <script id="csr-props" data-csr-props="{&quot;htmlMetaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;rust入門&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;/assets/stylesheets/style.min.css&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;/assets/stylesheets/style.min.css&quot;,&quot;/lib/prism.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;rust入門&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/rust/hello-world&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早く画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;page&quot;:{&quot;uri&quot;:&quot;/rust/hello-world&quot;,&quot;content&quot;:&quot;\n## ログ出力\n\n### println!マクロ\n\n`{}`はplaceholder\n\n```rs\nprintln!(\&quot;x = {}\&quot;, 1);\n// x = 1\nprintln!(\&quot;x = {}\&quot;, \&quot;a\&quot;);\n// x = a\nprintln!(\&quot;{}, {}, {}\&quot;, 1, 2, 3);\n// 1, 2, 3\n```\n\n## 可変変数\n\n`mut`キーワードで定義する\n\n```rs\nlet mut x = 1;\n```\n\n## 定数\n\n```rs\nconst x: i32 = 2; // 変数束縛\n```\n\nコンパイル後は**インライン化**される\n\n```\n2 * x --&gt; 2 * 2\n```\n\n## 演算\n\n### 整数\n\n```rs\nfn main() {\n  let x = 10;\n  let y = 3;\n  let mut z;\n  z = x + y\n  z = x - y\n  z = x * y\n  z = x / y\n  z = x % y\n}\n```\n\n## 型\n\n後置修飾\n\n```rs\nlet 変数名: 型\n```\n\n### 整数型\n\n* `i8`:\n* `i32`:\n* `i64`:\n* `i128`:\n* `u8`:\n* `u32`:\n* `u64`:\n* `u128`:\n\n### リテラル\n\n* ソースコード内に記述できる値：数値・文字・文字列\n  * 10進数、2進数、16進数、8進数など\n\n### 浮動少数点数\n\n* `f32`\n* `f64`\n\n### bool型\n\n```rs\nlet x: bool = true;\n```\n\n### 文字（char）\n\n「文字」と「文字列」は異なるデータ型であることに注意\n\n**文字型**は**シングルクォート**で囲む\n\n```rs\nlet character: char = &#x27;0&#x27;;\n```\n\n### タプル\n\n定義\n\n```rs\nlet val = (1, 2, 3);\n```\n\n分割代入\n\n```rs\nlet (x, y, z) = val;\n// 無視\nlet (_, y, z) = val;\n```\n\n## 条件分岐\n\n```rs\nif condition {\n\n}\n```\n\n* AND: `&amp;&amp;`\n* OR: `||`\n\n## for文\n\n```rs\nfor i in 0..10 {\n  println!(\&quot;i = {}.\&quot;, i);\n}\n```\n\n## while文\n\n```rs\nlet mut i = 0;\nwhile i &lt; 10 {\n  println!(\&quot;i = {}.\&quot;, i);\n  i += 1;\n}\n```\n\n## loop\n\n```rs\nlet mut i = 0;\nloop {\n  i += 1;\n  if i == 9 {\n    break;\n  }\n}\n```\n\n## 関数定義\n\n**返り値**\n\n```rs\nfn add(x: i32, y: i32) -&gt; i32 {\n  x + y // セミコロンがないことがポイント。セミコロンがある場合は戻り値として認識されない\n}\n\nfn add2(x: i32, y: i32) -&gt; i32 {\n  return x + y; // もしくは`return ;`をつける\n}\n\nfn main() {\n  let z = add(10, 5);\n  println!(\&quot;10 + 5 = {}\&quot;, z);\n}\n```\n\n## 静的変数\n\n* インライン化されない\n* グローバル変数のデータは静的領域内のメモリ領域に格納される\n\n```rs\nstatic PI: f64 = 3.14;\n```\n\n## 静的可変変数\n\n静的変数を可変にしたい場合は`mut`を付ける\n\n```rs\nstatic mut PI: f64 = 3.14;\n```\n\n静的可変変数を利用する場合は`unsafe`ブロックで囲む。\nすなわち、安全ではないコードであることを明示的にする。\n\n```rs\nunsafe {\n  2.0 * PI * radius\n}\n```\n\n## マクロ\n\n* あらかじめ定義した規則に従って置換する機能\n\n```rs\nmacro_rule! マクロ名 {\n  マクロの中身\n}\n```\n\n## 静的メソッド\n\n変数の値に依存しない型固有の操作\n\n```rs\n型::メソッド名();\n```\n\n## ポインタ\n\n### 生ポインタ\n\n```\nlet ポインタ変数名; *const 型名 = &amp;変数名;\n```\n\n### 可変ポインタ\n\n```\nlet mut 変数名: *const 型 = &amp;参照先の変数名;\n```\n\n### 参照型（Box型）\n\n```\nlet 変数名: Box&lt; 型 &gt; = Box:new(値);\n```\n\n## 配列\n\n```\nlet 変数名 = [初期値;大きさ];\n```\n\n多次元配列\n\n```\nlet 変数名 = [[初期値; 大きさ2]; 大きさ1];\n```\n\n## 構造体\n\n宣言\n\n```rs\nstruct Human {\n  age: i32,\n}\n```\n\nメソッドの実装\n\n```rs\nimpl Human {\n  fn say(&amp;self) {\n    println!(\&quot;Hello {}\&quot;, self.age);\n  }\n}\n```\n\nコンストラクタ\n\n```rs\nimpl Human {\n  new (age: i32) -&gt; Human {\n    Human{age: age}\n  }\n}\n\nlet human = Human::new(20);\n```\n\n## ベクタ型\n\n```rs\nlet mut vec: Vec&lt;i32&gt; = Vec::new();\nvec.push(1);\nvec.remove(0);\n\nprintln!(\&quot;|vec| = {}\&quot;, vec.len());\nprintln!(\&quot;vec elements = {:?}\&quot;, vec);\n```\n\nmacroによる定義\n\n```rs\nlet mut vec: Vec&lt;i32&gt; = vec![1, 3, 5, 7, 9];\n\nfor i in 0..vec.len() {\n  vec[i] = vec[i] * 2; // indexでアクセス可能\n}\n```\n\n## 所有権システム\n\nメモリ管理で置きうるバグ\n\n* ダングリングポインタ\n  * 開放されたメモリ領域へのアクセス\n* メモリの多重開放（multiple free）\n* 初期化されていないメモリへのアクセス\n\n### Dropトレイト\n\n### 所有権の移動\n\n* 一度、所有権が移動した変数は利用できない\n\n### コピー型\n\n* プリミティブな型はコピーされる\n* Box型のオブジェクトの中身はプリミティブだが、構造体であるため所有権の移動が発生する\n\n\n&quot;,&quot;metaData&quot;:{&quot;lang&quot;:&quot;ja&quot;,&quot;title&quot;:&quot;rust入門&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;keywords&quot;:&quot;nodejs,typescript,python,himenon,web,frontend&quot;,&quot;copyright&quot;:&quot;@Himenon&quot;,&quot;viewport&quot;:{&quot;initial-scale&quot;:1,&quot;minimum-scale&quot;:0.5,&quot;user-scalable&quot;:&quot;no&quot;},&quot;thirdParty&quot;:{&quot;googleAnalytics&quot;:{&quot;ua&quot;:&quot;UA-55455343-7&quot;}},&quot;js&quot;:[],&quot;css&quot;:[&quot;/assets/stylesheets/style.min.css&quot;,&quot;./node_modules/prismjs/themes/prism.css&quot;],&quot;link&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;assets/images/favicon-16x16.png&quot;}],&quot;globalScripts&quot;:[],&quot;globalLinks&quot;:[{&quot;rel&quot;:&quot;apple-touch-icon&quot;,&quot;sizes&quot;:&quot;180x180&quot;,&quot;href&quot;:&quot;/assets/images/miku.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;32x32&quot;,&quot;href&quot;:&quot;/assets/images/favicon-32x32.png&quot;},{&quot;rel&quot;:&quot;icon&quot;,&quot;type&quot;:&quot;image/png&quot;,&quot;sizes&quot;:&quot;16x16&quot;,&quot;href&quot;:&quot;/assets/images/favicon-16x16.png&quot;},&quot;/assets/stylesheets/style.min.css&quot;,&quot;/lib/prism.css&quot;],&quot;localLinks&quot;:[],&quot;extend&quot;:{&quot;meta&quot;:[{&quot;name&quot;:&quot;twitter:card&quot;,&quot;content&quot;:&quot;summary&quot;},{&quot;name&quot;:&quot;twitter:site&quot;,&quot;content&quot;:&quot;@Himenon&quot;},{&quot;property&quot;:&quot;og:title&quot;,&quot;content&quot;:&quot;rust入門&quot;},{&quot;property&quot;:&quot;og:url&quot;,&quot;content&quot;:&quot;https://himenon.github.io/rust/hello-world&quot;},{&quot;property&quot;:&quot;og:description&quot;,&quot;content&quot;:&quot;早く画面から出たい人の備忘録。&quot;},{&quot;property&quot;:&quot;og:image&quot;,&quot;content&quot;:&quot;https://himenon.github.io/assets/images/miku.png&quot;}]}},&quot;ext&quot;:&quot;.md&quot;,&quot;filename&quot;:&quot;src/rust/hello-world.md&quot;,&quot;name&quot;:&quot;rust/hello-world&quot;,&quot;raw&quot;:&quot;---\ntitle: rust入門\n---\n\n## ログ出力\n\n### println!マクロ\n\n`{}`はplaceholder\n\n```rs\nprintln!(\&quot;x = {}\&quot;, 1);\n// x = 1\nprintln!(\&quot;x = {}\&quot;, \&quot;a\&quot;);\n// x = a\nprintln!(\&quot;{}, {}, {}\&quot;, 1, 2, 3);\n// 1, 2, 3\n```\n\n## 可変変数\n\n`mut`キーワードで定義する\n\n```rs\nlet mut x = 1;\n```\n\n## 定数\n\n```rs\nconst x: i32 = 2; // 変数束縛\n```\n\nコンパイル後は**インライン化**される\n\n```\n2 * x --&gt; 2 * 2\n```\n\n## 演算\n\n### 整数\n\n```rs\nfn main() {\n  let x = 10;\n  let y = 3;\n  let mut z;\n  z = x + y\n  z = x - y\n  z = x * y\n  z = x / y\n  z = x % y\n}\n```\n\n## 型\n\n後置修飾\n\n```rs\nlet 変数名: 型\n```\n\n### 整数型\n\n* `i8`:\n* `i32`:\n* `i64`:\n* `i128`:\n* `u8`:\n* `u32`:\n* `u64`:\n* `u128`:\n\n### リテラル\n\n* ソースコード内に記述できる値：数値・文字・文字列\n  * 10進数、2進数、16進数、8進数など\n\n### 浮動少数点数\n\n* `f32`\n* `f64`\n\n### bool型\n\n```rs\nlet x: bool = true;\n```\n\n### 文字（char）\n\n「文字」と「文字列」は異なるデータ型であることに注意\n\n**文字型**は**シングルクォート**で囲む\n\n```rs\nlet character: char = &#x27;0&#x27;;\n```\n\n### タプル\n\n定義\n\n```rs\nlet val = (1, 2, 3);\n```\n\n分割代入\n\n```rs\nlet (x, y, z) = val;\n// 無視\nlet (_, y, z) = val;\n```\n\n## 条件分岐\n\n```rs\nif condition {\n\n}\n```\n\n* AND: `&amp;&amp;`\n* OR: `||`\n\n## for文\n\n```rs\nfor i in 0..10 {\n  println!(\&quot;i = {}.\&quot;, i);\n}\n```\n\n## while文\n\n```rs\nlet mut i = 0;\nwhile i &lt; 10 {\n  println!(\&quot;i = {}.\&quot;, i);\n  i += 1;\n}\n```\n\n## loop\n\n```rs\nlet mut i = 0;\nloop {\n  i += 1;\n  if i == 9 {\n    break;\n  }\n}\n```\n\n## 関数定義\n\n**返り値**\n\n```rs\nfn add(x: i32, y: i32) -&gt; i32 {\n  x + y // セミコロンがないことがポイント。セミコロンがある場合は戻り値として認識されない\n}\n\nfn add2(x: i32, y: i32) -&gt; i32 {\n  return x + y; // もしくは`return ;`をつける\n}\n\nfn main() {\n  let z = add(10, 5);\n  println!(\&quot;10 + 5 = {}\&quot;, z);\n}\n```\n\n## 静的変数\n\n* インライン化されない\n* グローバル変数のデータは静的領域内のメモリ領域に格納される\n\n```rs\nstatic PI: f64 = 3.14;\n```\n\n## 静的可変変数\n\n静的変数を可変にしたい場合は`mut`を付ける\n\n```rs\nstatic mut PI: f64 = 3.14;\n```\n\n静的可変変数を利用する場合は`unsafe`ブロックで囲む。\nすなわち、安全ではないコードであることを明示的にする。\n\n```rs\nunsafe {\n  2.0 * PI * radius\n}\n```\n\n## マクロ\n\n* あらかじめ定義した規則に従って置換する機能\n\n```rs\nmacro_rule! マクロ名 {\n  マクロの中身\n}\n```\n\n## 静的メソッド\n\n変数の値に依存しない型固有の操作\n\n```rs\n型::メソッド名();\n```\n\n## ポインタ\n\n### 生ポインタ\n\n```\nlet ポインタ変数名; *const 型名 = &amp;変数名;\n```\n\n### 可変ポインタ\n\n```\nlet mut 変数名: *const 型 = &amp;参照先の変数名;\n```\n\n### 参照型（Box型）\n\n```\nlet 変数名: Box&lt; 型 &gt; = Box:new(値);\n```\n\n## 配列\n\n```\nlet 変数名 = [初期値;大きさ];\n```\n\n多次元配列\n\n```\nlet 変数名 = [[初期値; 大きさ2]; 大きさ1];\n```\n\n## 構造体\n\n宣言\n\n```rs\nstruct Human {\n  age: i32,\n}\n```\n\nメソッドの実装\n\n```rs\nimpl Human {\n  fn say(&amp;self) {\n    println!(\&quot;Hello {}\&quot;, self.age);\n  }\n}\n```\n\nコンストラクタ\n\n```rs\nimpl Human {\n  new (age: i32) -&gt; Human {\n    Human{age: age}\n  }\n}\n\nlet human = Human::new(20);\n```\n\n## ベクタ型\n\n```rs\nlet mut vec: Vec&lt;i32&gt; = Vec::new();\nvec.push(1);\nvec.remove(0);\n\nprintln!(\&quot;|vec| = {}\&quot;, vec.len());\nprintln!(\&quot;vec elements = {:?}\&quot;, vec);\n```\n\nmacroによる定義\n\n```rs\nlet mut vec: Vec&lt;i32&gt; = vec![1, 3, 5, 7, 9];\n\nfor i in 0..vec.len() {\n  vec[i] = vec[i] * 2; // indexでアクセス可能\n}\n```\n\n## 所有権システム\n\nメモリ管理で置きうるバグ\n\n* ダングリングポインタ\n  * 開放されたメモリ領域へのアクセス\n* メモリの多重開放（multiple free）\n* 初期化されていないメモリへのアクセス\n\n### Dropトレイト\n\n### 所有権の移動\n\n* 一度、所有権が移動した変数は利用できない\n\n### コピー型\n\n* プリミティブな型はコピーされる\n* Box型のオブジェクトの中身はプリミティブだが、構造体であるため所有権の移動が発生する\n\n\n&quot;},&quot;site&quot;:{&quot;title&quot;:&quot;himenon.github.io&quot;,&quot;description&quot;:&quot;早く画面から出たい人の備忘録。&quot;,&quot;baseUri&quot;:&quot;/&quot;,&quot;baseUrl&quot;:&quot;https://himenon.github.io&quot;}}"></script>
+  </head>
+
+  <body>
+
+    <body>
+      <div>
+        <nav id="nav-bar">
+          <div id="nav-bar-container"><a href="/">TOP</a></div>
+        </nav>
+        <header id="site-header">
+          <div id="site-header-container">
+            <h1 id="page-title">rust入門</h1>
+            <p id="page-description">早く画面から出たい人の備忘録。</p>
+            <p id="article-time"><span id="posted-at__label">投稿日</span><time>2020-06-21 07:26:17</time><span id="created-at__label">更新日</span><time>2020-06-21 07:26:17</time></p>
+          </div>
+        </header>
+      </div>
+      <div class="wrapper">
+        <section>
+          <h2>ログ出力</h2>
+          <h3>println!マクロ</h3>
+          <p><code>{}</code>はplaceholder</p><pre class="language-plain"><code class="language-rs">println!(&quot;x = {}&quot;, 1);
+// x = 1
+println!(&quot;x = {}&quot;, &quot;a&quot;);
+// x = a
+println!(&quot;{}, {}, {}&quot;, 1, 2, 3);
+// 1, 2, 3
+</code></pre>
+          <h2>可変変数</h2>
+          <p><code>mut</code>キーワードで定義する</p><pre class="language-plain"><code class="language-rs">let mut x = 1;
+</code></pre>
+          <h2>定数</h2><pre class="language-plain"><code class="language-rs">const x: i32 = 2; // 変数束縛
+</code></pre>
+          <p>コンパイル後は<strong>インライン化</strong>される</p><pre class="language-plain"><code class="language-plain">2 * x --&gt; 2 * 2
+</code></pre>
+          <h2>演算</h2>
+          <h3>整数</h3><pre class="language-plain"><code class="language-rs">fn main() {
+  let x = 10;
+  let y = 3;
+  let mut z;
+  z = x + y
+  z = x - y
+  z = x * y
+  z = x / y
+  z = x % y
+}
+</code></pre>
+          <h2>型</h2>
+          <p>後置修飾</p><pre class="language-plain"><code class="language-rs">let 変数名: 型
+</code></pre>
+          <h3>整数型</h3>
+          <ul>
+            <li><code>i8</code>:</li>
+            <li><code>i32</code>:</li>
+            <li><code>i64</code>:</li>
+            <li><code>i128</code>:</li>
+            <li><code>u8</code>:</li>
+            <li><code>u32</code>:</li>
+            <li><code>u64</code>:</li>
+            <li><code>u128</code>:</li>
+          </ul>
+          <h3>リテラル</h3>
+          <ul>
+            <li>ソースコード内に記述できる値：数値・文字・文字列<ul>
+                <li>10進数、2進数、16進数、8進数など</li>
+              </ul>
+            </li>
+          </ul>
+          <h3>浮動少数点数</h3>
+          <ul>
+            <li><code>f32</code></li>
+            <li><code>f64</code></li>
+          </ul>
+          <h3>bool型</h3><pre class="language-plain"><code class="language-rs">let x: bool = true;
+</code></pre>
+          <h3>文字（char）</h3>
+          <p>「文字」と「文字列」は異なるデータ型であることに注意</p>
+          <p><strong>文字型</strong>は<strong>シングルクォート</strong>で囲む</p><pre class="language-plain"><code class="language-rs">let character: char = &#x27;0&#x27;;
+</code></pre>
+          <h3>タプル</h3>
+          <p>定義</p><pre class="language-plain"><code class="language-rs">let val = (1, 2, 3);
+</code></pre>
+          <p>分割代入</p><pre class="language-plain"><code class="language-rs">let (x, y, z) = val;
+// 無視
+let (_, y, z) = val;
+</code></pre>
+          <h2>条件分岐</h2><pre class="language-plain"><code class="language-rs">if condition {
+
+}
+</code></pre>
+          <ul>
+            <li>AND: <code>&amp;&amp;</code></li>
+            <li>OR: <code>||</code></li>
+          </ul>
+          <h2>for文</h2><pre class="language-plain"><code class="language-rs">for i in 0..10 {
+  println!(&quot;i = {}.&quot;, i);
+}
+</code></pre>
+          <h2>while文</h2><pre class="language-plain"><code class="language-rs">let mut i = 0;
+while i &lt; 10 {
+  println!(&quot;i = {}.&quot;, i);
+  i += 1;
+}
+</code></pre>
+          <h2>loop</h2><pre class="language-plain"><code class="language-rs">let mut i = 0;
+loop {
+  i += 1;
+  if i == 9 {
+    break;
+  }
+}
+</code></pre>
+          <h2>関数定義</h2>
+          <p><strong>返り値</strong></p><pre class="language-plain"><code class="language-rs">fn add(x: i32, y: i32) -&gt; i32 {
+  x + y // セミコロンがないことがポイント。セミコロンがある場合は戻り値として認識されない
+}
+
+fn add2(x: i32, y: i32) -&gt; i32 {
+  return x + y; // もしくは`return ;`をつける
+}
+
+fn main() {
+  let z = add(10, 5);
+  println!(&quot;10 + 5 = {}&quot;, z);
+}
+</code></pre>
+          <h2>静的変数</h2>
+          <ul>
+            <li>インライン化されない</li>
+            <li>グローバル変数のデータは静的領域内のメモリ領域に格納される</li>
+          </ul><pre class="language-plain"><code class="language-rs">static PI: f64 = 3.14;
+</code></pre>
+          <h2>静的可変変数</h2>
+          <p>静的変数を可変にしたい場合は<code>mut</code>を付ける</p><pre class="language-plain"><code class="language-rs">static mut PI: f64 = 3.14;
+</code></pre>
+          <p>静的可変変数を利用する場合は<code>unsafe</code>ブロックで囲む。
+            すなわち、安全ではないコードであることを明示的にする。</p><pre class="language-plain"><code class="language-rs">unsafe {
+  2.0 * PI * radius
+}
+</code></pre>
+          <h2>マクロ</h2>
+          <ul>
+            <li>あらかじめ定義した規則に従って置換する機能</li>
+          </ul><pre class="language-plain"><code class="language-rs">macro_rule! マクロ名 {
+  マクロの中身
+}
+</code></pre>
+          <h2>静的メソッド</h2>
+          <p>変数の値に依存しない型固有の操作</p><pre class="language-plain"><code class="language-rs">型::メソッド名();
+</code></pre>
+          <h2>ポインタ</h2>
+          <h3>生ポインタ</h3><pre class="language-plain"><code class="language-plain">let ポインタ変数名; *const 型名 = &amp;変数名;
+</code></pre>
+          <h3>可変ポインタ</h3><pre class="language-plain"><code class="language-plain">let mut 変数名: *const 型 = &amp;参照先の変数名;
+</code></pre>
+          <h3>参照型（Box型）</h3><pre class="language-plain"><code class="language-plain">let 変数名: Box&lt; 型 &gt; = Box:new(値);
+</code></pre>
+          <h2>配列</h2><pre class="language-plain"><code class="language-plain">let 変数名 = [初期値;大きさ];
+</code></pre>
+          <p>多次元配列</p><pre class="language-plain"><code class="language-plain">let 変数名 = [[初期値; 大きさ2]; 大きさ1];
+</code></pre>
+          <h2>構造体</h2>
+          <p>宣言</p><pre class="language-plain"><code class="language-rs">struct Human {
+  age: i32,
+}
+</code></pre>
+          <p>メソッドの実装</p><pre class="language-plain"><code class="language-rs">impl Human {
+  fn say(&amp;self) {
+    println!(&quot;Hello {}&quot;, self.age);
+  }
+}
+</code></pre>
+          <p>コンストラクタ</p><pre class="language-plain"><code class="language-rs">impl Human {
+  new (age: i32) -&gt; Human {
+    Human{age: age}
+  }
+}
+
+let human = Human::new(20);
+</code></pre>
+          <h2>ベクタ型</h2><pre class="language-plain"><code class="language-rs">let mut vec: Vec&lt;i32&gt; = Vec::new();
+vec.push(1);
+vec.remove(0);
+
+println!(&quot;|vec| = {}&quot;, vec.len());
+println!(&quot;vec elements = {:?}&quot;, vec);
+</code></pre>
+          <p>macroによる定義</p><pre class="language-plain"><code class="language-rs">let mut vec: Vec&lt;i32&gt; = vec![1, 3, 5, 7, 9];
+
+for i in 0..vec.len() {
+  vec[i] = vec[i] * 2; // indexでアクセス可能
+}
+</code></pre>
+          <h2>所有権システム</h2>
+          <p>メモリ管理で置きうるバグ</p>
+          <ul>
+            <li>ダングリングポインタ<ul>
+                <li>開放されたメモリ領域へのアクセス</li>
+              </ul>
+            </li>
+            <li>メモリの多重開放（multiple free）</li>
+            <li>初期化されていないメモリへのアクセス</li>
+          </ul>
+          <h3>Dropトレイト</h3>
+          <h3>所有権の移動</h3>
+          <ul>
+            <li>一度、所有権が移動した変数は利用できない</li>
+          </ul>
+          <h3>コピー型</h3>
+          <ul>
+            <li>プリミティブな型はコピーされる</li>
+            <li>Box型のオブジェクトの中身はプリミティブだが、構造体であるため所有権の移動が発生する</li>
+          </ul>
+        </section>
+      </div>
+    </body>
+  </body>
+
+</html>
