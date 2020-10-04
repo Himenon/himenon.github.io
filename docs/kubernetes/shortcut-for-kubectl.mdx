@@ -1,0 +1,74 @@
+---
+title: "Kubernetesでよく使うコマンド（コピペ用）"
+description: "aliasをはらずにコピペだけで動作するコードをここに書き積もらせる"
+keywords:
+  - kubernetes
+  - kubectl
+createdAt: 2018-03-26 06:03:09
+updatedAt: 2019-05-21 02:10:19
+---
+
+```
+$ kubectl config get-contexts
+```
+
+## コンテキストの切り替え
+
+docker edgeとGKEを切り替えたりするときに使う
+
+```
+$ kubectl config use-context
+
+# Docker for Edge
+$ kubectl config use-context docker-for-desktop
+```
+
+## DefaultのNamespaceの変更
+
+`--namespace=`が打つのがめんどくさいときに使う
+
+```bash
+kubectl config set-context (kubectl config current-context) --namespace=
+```
+
+
+## Deployment, Service, Podsを一気に確認する
+
+```
+kubectl get deploy,svc,po
+```
+
+
+## コマンドラインからDeploymentにServiceをバインドする
+
+`hello-web`というDeploymentに含まれるコンテナが、Port8080でExposeしているとする。
+それに対して、type=LoadBalancerのServiceを接続して、アプリケーションをPort 80で公開する。
+
+```bash
+$ kubectl expose deployment hello-web --type=LoadBalancer --port 80 --target-port 8080
+```
+
+## Deploymentを速攻で試す
+
+ローカルにあるコンテナを使ってデバッグを行う用。
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: debug-pod
+  labels:
+    app: debug-pod
+spec:
+  replicas: 1
+  tempalte:
+    metadata:
+      labels:
+        app: debug-pod
+    spec:
+      containers:
+        - name: debug-container
+          image: "[YOUR IMAEGE]"
+      command: [""]
+```
+
