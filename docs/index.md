@@ -1,7 +1,6 @@
 ---
 id: root
 title: "目次"
-sidebar_label: Style Guide
 slug: /
 ---
 

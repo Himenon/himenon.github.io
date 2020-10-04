@@ -1,102 +1,98 @@
 module.exports = {
-  title: 'My Site',
-  tagline: 'The tagline of my site',
-  url: 'https://your-docusaurus-test-site.com',
-  baseUrl: '/',
-  onBrokenLinks: 'throw',
-  favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  title: "himenon.github.io",
+  tagline: "開発のまとめ",
+  url: "https://himenon.github.io/",
+  baseUrl: "/",
+  onBrokenLinks: "throw",
+  favicon: "img/favicon-32x32.png",
+  organizationName: "Himenon", // Usually your GitHub org/user name.
+  projectName: "himenon.github.io", // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'My Site',
+      title: "himenon.github.io",
       logo: {
-        alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        alt: "miku logo",
+        src: "img/miku.png",
       },
       items: [
         {
-          to: 'docs/',
-          activeBasePath: 'docs',
-          label: 'Docs',
-          position: 'left',
+          to: "docs/",
+          activeBasePath: "docs",
+          label: "Docs",
+          position: "left",
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
+        { to: "blog", label: "Blog", position: "left" },
         {
-          href: 'https://github.com/facebook/docusaurus',
-          label: 'GitHub',
-          position: 'right',
+          href: "https://github.com/Himenon/himenon.github.io",
+          label: "GitHub",
+          position: "right",
         },
       ],
     },
     footer: {
-      style: 'dark',
+      style: "dark",
       links: [
         {
-          title: 'Docs',
+          title: "Docs",
           items: [
             {
-              label: 'Style Guide',
-              to: 'docs/',
+              label: "Document",
+              to: "docs/",
             },
             {
-              label: 'Second Doc',
-              to: 'docs/doc2/',
+              label: "Blog",
+              to: "blog/",
             },
           ],
         },
         {
-          title: 'Community',
+          title: "Community",
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: "Stack Overflow",
+              href: "https://ja.stackoverflow.com/users/7997",
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              label: "Twitter",
+              href: "https://twitter.com/himenoglyph",
             },
           ],
         },
         {
-          title: 'More',
+          title: "More",
           items: [
             {
-              label: 'Blog',
-              to: 'blog',
+              label: "Blog",
+              to: "blog",
             },
             {
-              label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              label: "GitHub",
+              href: "https://github.com/Himenon",
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Himenon.`,
     },
   },
   presets: [
     [
-      '@docusaurus/preset-classic',
+      "@docusaurus/preset-classic",
       {
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/',
+            "https://github.com/facebook/docusaurus/edit/master/website/",
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl:
-            'https://github.com/facebook/docusaurus/edit/master/website/blog/',
+            "https://github.com/Himenon/himenon.github.io/edit/develop/blog/",
         },
         theme: {
-          customCss: require.resolve('./src/css/custom.css'),
+          customCss: require.resolve("./src/css/custom.css"),
         },
       },
     ],
