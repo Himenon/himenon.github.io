@@ -1,6 +1,6 @@
 module.exports = {
   someSidebar: {
-    Root: ["root"],
+    "Hello World": ["root"],
     JavaScript: [
       "javascript/case-sensitive-paths-error",
       "javascript/change-query-params",
