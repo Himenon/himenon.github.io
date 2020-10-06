@@ -12,8 +12,20 @@ module.exports = {
   plugins: [],
   themeConfig: {
     alt: "miku logo",
+    prism: {
+      theme: require("prism-react-renderer/themes/dracula"),
+    },
+    googleAnalytics: {
+      trackingID: "UA-55455343-7",
+    },
     gtag: {
       trackingID: "UA-55455343-7",
+    },
+    sitemap: {
+      cacheTime: 600 * 1000, // 600 sec - cache purge period
+      changefreq: "weekly",
+      priority: 0.5,
+      trailingSlash: false,
     },
     navbar: {
       title: "himenon.github.io",
