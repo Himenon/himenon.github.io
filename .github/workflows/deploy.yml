@@ -31,6 +31,7 @@ jobs:
           USE_SSH: true
           GIT_USER: git
           CURRENT_BRANCH: develop
+          DEPLOYMENT_BRANCH: gh-pages
         run: |
           git config --global user.email "actions@gihub.com"
           git config --global user.name "gh-actions"

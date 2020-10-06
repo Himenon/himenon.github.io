@@ -7,8 +7,8 @@ module.exports = {
   baseUrl: "/",
   onBrokenLinks: "throw",
   favicon: "img/favicon-32x32.png",
-  organizationName: "Himenon", // Usually your GitHub org/user name.
-  projectName: "himenon.github.io", // Usually your repo name.
+  organizationName: "Himenon",
+  projectName: "himenon.github.io",
   plugins: [],
   themeConfig: {
     alt: "miku logo",
