@@ -1,17 +1,31 @@
+/**
+ * @see https://github.com/facebook/docusaurus/blob/master/website/docusaurus.config.js
+ */
 module.exports = {
   title: "himenon.github.io",
-  tagline: "開発のまとめ",
   url: "https://himenon.github.io/",
   baseUrl: "/",
   onBrokenLinks: "throw",
   favicon: "img/favicon-32x32.png",
   organizationName: "Himenon", // Usually your GitHub org/user name.
   projectName: "himenon.github.io", // Usually your repo name.
+  plugins: [
+    "@docusaurus/plugin-google-gtag",
+    [
+      "@docusaurus/plugin-sitemap",
+      {
+        cacheTime: 600 * 1000,
+      },
+    ],
+  ],
   themeConfig: {
+    alt: "miku logo",
+    gtag: {
+      trackingID: "UA-55455343-7",
+    },
     navbar: {
       title: "himenon.github.io",
       logo: {
-        alt: "miku logo",
         src: "img/miku.png",
       },
       items: [
@@ -82,8 +96,7 @@ module.exports = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl:
-            "https://github.com/Himenon/himenon.github.io/edit/master/website/",
+          editUrl: "https://github.com/Himenon/himenon.github.io/edit/master/",
         },
         blog: {
           showReadingTime: true,
