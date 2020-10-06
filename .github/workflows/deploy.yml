@@ -29,7 +29,7 @@ jobs:
       - name: Release to GitHub Pages
         env:
           USE_SSH: true
-          GIT_USER: git
+          GIT_USER: Himenon
           CURRENT_BRANCH: develop
           DEPLOYMENT_BRANCH: gh-pages
         run: |
