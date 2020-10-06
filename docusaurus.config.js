@@ -9,15 +9,7 @@ module.exports = {
   favicon: "img/favicon-32x32.png",
   organizationName: "Himenon", // Usually your GitHub org/user name.
   projectName: "himenon.github.io", // Usually your repo name.
-  plugins: [
-    "@docusaurus/plugin-google-gtag",
-    [
-      "@docusaurus/plugin-sitemap",
-      {
-        cacheTime: 600 * 1000,
-      },
-    ],
-  ],
+  plugins: [],
   themeConfig: {
     alt: "miku logo",
     gtag: {

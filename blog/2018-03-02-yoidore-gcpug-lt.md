@@ -1,5 +1,4 @@
 ---
-slug: 2018-03-02-yoidore-gcpug-it
 title: "2018年3月2日 酔いどれGCPUG で発表してきました"
 description: "GKEを数ヶ月扱ってきた中で、最初に見ておくと良かったね、というものをまとめました"
 tags: [gke, google kubernetes engine, 発表]

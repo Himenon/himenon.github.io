@@ -19,7 +19,7 @@ updatedAt: 2019-05-21 11:22:01
 
 1. 03/08 Kubernetes Meetup Tokyo #10
 2. 03/02 酔いどれGCPUG
-    - LT発表しました → [発表後のブログ](/presentation/2018/03-02-Yoidore-GCPUG-LT/)
+    - LT発表しました → [発表後のブログ](../../blog/2018/03/02/yoidore-gcpug-lt)
 3. 02/21 【サポーターズCoLab勉強会】GKEで学ぶKubernetes入門
 4. 02/16 Docker Meetup Tokyo #21
 5. 02/10 Cookpad TechConf 2018

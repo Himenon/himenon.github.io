@@ -23,7 +23,7 @@ updatedAt: 2019-05-21 11:22:01
 - [Himenon/oauth2_proxy](https://github.com/Himenon/oauth2_proxy)
     - oauth2_proxyが入ったNginxでReverse Proxyした時に、GoogleなどのOAuth認証がかかるようなもの。
     - それを複数のドメインに対して行ったサンプルコード
-    - [記事](/server/Multiple-Reverse-Proxy-Sapmle-with-oauth2_proxy/)を書いて紹介しています。
+    - [記事](../infrastructure/multiple-reverse-proxy-sapmle-with-oauth2_proxy)を書いて紹介しています。
 - [Himenon/charts](https://github.com/Himenon/charts)
     - KubernetesのChartsリポジトリ
     - redashは公式のものなどが無かったので自作しています。(`helm install himenon/redash`でインストールDONE)

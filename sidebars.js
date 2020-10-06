@@ -51,7 +51,6 @@ module.exports = {
       "profile/index",
       "profile/skill",
       "profile/study-history",
-      "presentation/2018-03-02-yoidore-gcpug-lt",
     ],
     Python: [
       "python/django/celery-periodic-tasks",

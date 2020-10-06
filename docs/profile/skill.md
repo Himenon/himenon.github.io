@@ -52,7 +52,7 @@ wxpythonでGUIの基本的な部分は学んだ。
 - celery
 - certifi
 - click
-- [cookiecutter](cookiecutter)
+- cookiecutter
 - Django
 - django-admin2
 - django-braces
@@ -280,7 +280,7 @@ Markdownで提出したらPDFを要求されたときの緊急避難対応用に
 APIは[Django REST framework](http://www.django-rest-framework.org/)を利用。
 Task Queueに関しては、[Celery](http://www.celeryproject.org/)を導入し、
 Celery 4系をDjango 2系に組み込んだ記事はなかったので、
-[記事](/webapp/django/Introduction-of-Celery-Django/)にした。
+[記事]../python/django/Introduction-of-Celery-Django/)にした。
 
 ### Flask
 
@@ -422,7 +422,7 @@ PublicでCIを回す時はTravis CIを利用する。
 ## Cloud
 
 [酔いどれGCPUG 2018/03/02](https://gcpug-tokyo.connpass.com/event/78667/)というイベントでLTしてきた事がある。
-詳細は[酔いどれGCPUG で発表してきました](/presentation/2018/03-02-Yoidore-GCPUG-LT/)に書いてある。
+詳細は[酔いどれGCPUG で発表してきました](../../blog/2018/03/02/yoidore-gcpug-lt)に書いてある。
 
 ### AWS
 

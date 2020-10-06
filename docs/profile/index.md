@@ -13,15 +13,15 @@ updatedAt: 2019-05-21 11:22:01
 
 ## Q. 何ができる人か確認したい
 
-[スキルセット](/profile/skill/)のページをご覧ください。
+[スキルセット](../profile/skill/)のページをご覧ください。
 
 - Qiita: <https://qiita.com/himenoglyph>
 - GIthub: <https://github.com/>
 
 ## Q. 活動を見たい
 
-[勉強会参加履歴](/profile/study-history/)をご覧ください。
-直近だと、2018/03/02に[LT発表](/presentation/2018/03-02-Yoidore-GCPUG-LT/)してます。
+[勉強会参加履歴](../profile/study-history/)をご覧ください。
+直近だと、2018/03/02に[LT発表](../../blog/2018/03/02/yoidore-gcpug-lt)してます。
 
 **大学時代の学んだこと**
 
@@ -35,7 +35,7 @@ updatedAt: 2019-05-21 11:22:01
 
 ## Q. Githubの何を見ればいいの？
 
-[Githubの活動状況](/profile/github-activity/)をご覧ください。
+[Githubの活動状況](../profile/github-activity/)をご覧ください。
 
 **OSS活動**
 
