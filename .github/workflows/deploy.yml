@@ -23,8 +23,9 @@ jobs:
           chmod 600 ~/.ssh/docsaurus_rsa
           cat <<EOT >> ~/.ssh/config
           Host github.com
-          HostName github.com
-          IdentityFile ~/.ssh/docsaurus_rsa
+            HostName github.com
+            IdentityFile ~/.ssh/docsaurus_rsa
+            User git
           EOT
       - name: Release to GitHub Pages
         env:
@@ -36,4 +37,4 @@ jobs:
           git config --global user.email "actions@gihub.com"
           git config --global user.name "gh-actions"
           yarn install --frozen-lockfile
-          GIT_SSH_COMMAND="ssh -v -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" yarn docusaurus deploy
+          GIT_SSH_COMMAND="ssh -v -o UserKnownHostsFile=~/.ssh/known_hosts -o StrictHostKeyChecking=no" yarn docusaurus deploy
