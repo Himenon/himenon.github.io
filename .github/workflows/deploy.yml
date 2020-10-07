@@ -19,12 +19,12 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-          echo "${{ secrets.GH_PAGES_DEPLOY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.GH_PAGES_DEPLOY }}" > ~/.ssh/docsaurus_rsa
+          chmod 600 ~/.ssh/docsaurus_rsa
           cat <<EOT >> ~/.ssh/config
           Host github.com
           HostName github.com
-          IdentityFile ~/.ssh/id_rsa
+          IdentityFile ~/.ssh/docsaurus_rsa
           EOT
       - name: Release to GitHub Pages
         env:
@@ -33,7 +33,7 @@ jobs:
           CURRENT_BRANCH: develop
           DEPLOYMENT_BRANCH: gh-pages
         run: |
-          git config --global user.email "k.himeno314@gmail.com"
-          git config --global user.name "Himenon"
+          git config --global user.email "actions@gihub.com"
+          git config --global user.name "gh-actions"
           yarn install --frozen-lockfile
-          yarn docusaurus deploy
+          GIT_SSH_COMMAND="ssh -v -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" yarn docusaurus deploy
