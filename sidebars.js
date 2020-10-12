@@ -25,6 +25,13 @@ module.exports = {
       "javascript/yarn-add-slow",
       "javascript/yarn-offline-install",
     ],
+    GoogleAnalytics: [
+      "google-analytics/index",
+      "google-optimize/index",
+      "google-optimize/ab-test-design-and-how-to-share-it",
+      "google-optimize/requirements-for-measuring-effectiveness-with-google-optimize-and-google-analytics",
+      "google-optimize/how-to-implement-google-optimize-ab-testing-in-react-spa-using-server-side-rendering"
+    ],
     Docker: [
       "docker/command",
       "docker/pycharm",
