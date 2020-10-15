@@ -1,12 +1,12 @@
 ---
 title: NodeJSライブラリにおけるProxy Directoryパターンとライブラリの参照整理
-description: package.jsonのalias機能を用いたProxy Directoryパターンの実装と原理を説明する。
+description: ライブラリ内部でpackage.jsonを参照解決のproxyとして扱い、ライブラリの開発者と利用者の両方に恩恵のある設計を提供する方法を示す。
 keywords:
   - Proxy Directory
   - design pattern
   - nodejs
   - module
-image: "docs/javascript/package/assets/proxy-directory-arch.svg"
+image: "docs/javascript/proxy-directory-arch.svg"
 ---
 
 ## 概要
@@ -207,7 +207,7 @@ cherry-pick \
 
 Proxy Directoryのアーキテクチャを俯瞰した図で表すと次のようになる。
 
-![Proxy Directoryのアーキテクチャ](./assets/proxy-directory-arch.svg)
+![Proxy Directoryのアーキテクチャ](./images/proxy-directory-arch.svg)
 
 ### ビルド周り
 
