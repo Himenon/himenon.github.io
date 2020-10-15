@@ -3,7 +3,7 @@
  */
 module.exports = {
   title: "himenon.github.io",
-  url: "https://himenon.github.io/",
+  url: "https://himenon.github.io",
   baseUrl: "/",
   onBrokenLinks: "throw",
   favicon: "img/favicon-32x32.png",
@@ -12,6 +12,10 @@ module.exports = {
   plugins: [],
   themeConfig: {
     alt: "miku logo",
+    algolia: {
+      apiKey: "ce71323b49e20959a6517cdb6b4bb107",
+      indexName: "himenon",
+    },
     prism: {
       theme: require("prism-react-renderer/themes/dracula"),
     },
