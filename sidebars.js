@@ -2,7 +2,7 @@ module.exports = {
   someSidebar: {
     "Hello World": ["root"],
     JavaScript: [
-      "javascript/proxy-directory-pattern",
+      "javascript/proxy-directory-design-pattern",
       "javascript/case-sensitive-paths-error",
       "javascript/change-query-params",
       "javascript/child-process-log-stream",
