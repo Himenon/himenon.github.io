@@ -6,6 +6,7 @@ keywords:
   - design pattern
   - nodejs
   - module
+  - cherry-pick
 image: "docs/javascript/proxy-directory-arch.svg"
 ---
 
@@ -100,6 +101,8 @@ react-dom-16.14.0
 
 ## Proxy Directory
 
+Proxy Directoryの説明に移る前にもう少し知識のインプットと、問題意識の共有をしておきたい。
+
 ### `package.json`を`alias`として使う
 
 先に示したように、`package.json`のフィールドに置いて、`main`フィールドはライブラリ内でaliasとして機能する。
@@ -132,20 +135,20 @@ const foo = require("[library-root]/foo"); // 参照先はfoo/package.jsonの設
 
 - [Flagging modules are ESM - webpack](https://webpack.js.org/guides/ecma-script-modules/#flagging-modules-are-esm)
 
-### 影響範囲と個別インポートと問題
+### ライブラリ変更時の影響範囲とファイルの個別インポートによる問題点
 
 `commonjs`用と`esmodule`用の両方を用意した場合、`package.json`の`main`と`module`にそれぞれ登録できるのは1ファイルだけである。
 この場合、ライブラリ側を信用してパッケージのルートから必要なモジュールを読み込み、コードをTree Shakingにかける。
 読み込んだモジュールの下位に属するモジュールが副作用([side effects](https://webpack.js.org/guides/tree-shaking/#mark-the-file-as-side-effect-free))を持たなければ問題ないものの、
 万が一、副作用のあるコードが紛れ込んだときに、芋づる式にバンドルされてしまう可能性があり、影響範囲が大きい。
 
-**問題点**
+:::tip 問題点
+影響範囲を最小限に抑えるためにはesmoduleの実装を個別にインポートする必要がある。
+しかし、ライブラリ利用者側がライブラリの内部実装を知る必要が出てきてしまう。
+これではライブラリとして提供している意味がなくなってきてしまうので、個別インポートの選択肢を残しつつ、利用者が内部実装を知らない状態にする解決策が必要となる。
+:::
 
-そのため、esmoduleの実装を個別にインポートすることができると望ましい。
-ライブラリ利用者側が対応する必要が出てくるが、ライブラリの内部実装を利用者が知る必要が出てくる。
-これではライブラリとして提供している意味がなくなってきてしまうので、なるべく利用者フレンドリーな提供方法が求められる。
-
-**解決方法**
+### 解決方法
 
 したがって、
 
@@ -153,6 +156,7 @@ const foo = require("[library-root]/foo"); // 参照先はfoo/package.jsonの設
 - ライブラリ実装者側：[package.jsonをaliasとして扱えば](#packagejsonをaliasとして使う)
 
 が達成されれば、両者が恩恵を受ける。
+このうち、package.jsonをaliasとして提供するための設計構造を**Proxy Directory**というデザインパターンと呼ぶ。
 
 ## [cherry-pick](https://www.npmjs.com/package/cherry-pick)ライブラリを利用してProxy Directoryを作成する
 
@@ -211,16 +215,19 @@ Proxy Directoryのアーキテクチャを俯瞰した図で表すと次のよ�
 
 ### ビルド周り
 
-**工事中**: 全部書くと長く本筋とずれる可能性がるので別の記事に書くかもしれません。
+実際にはcherry-pickを利用してもまだライブラリの利用者が参照パスを書くために内部実装を知る必要が出てくる。
+これを解決するにはProxy Directoryを吐き出した先でpublish可能な状態に調整する必要があるが、
+全部書くと長く本筋とずれるので、記事を切り出しておく（現在工事中）。
 
 ## まとめ
 
 Proxy Directoryパターンの恩恵は以下。
 
-* 小さな範囲でコードを利用することが可能になる。
-* 副作用の有無の把握が容易になる。
-* cjsとesmoduleの両方に対応したコードを同時に公開できる。
-* ライブラリの利用者にcommonjsとesmoduleの明示的な選択を強制する必要がなくなる。
+* ライブラリの実装者
+  * 実装の都合がライブラリの利用者に影響しなくなる。
+* ライブラリ利用者
+  * 小さな範囲でコードを利用する選択肢を得られる。
+  * cjsかesmoduleか調べなくても良くなる。
 
 ## Reference
 
