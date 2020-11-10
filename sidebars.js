@@ -27,7 +27,8 @@ module.exports = {
       "javascript/yarn-offline-install",
     ],
     OpenAPI: [
-      "openapi/typescript-code-gen"
+      "openapi/typescript-code-gen",
+      "openapi/json-to-openapi-schema"
     ],
     GoogleAnalytics: [
       "google-analytics/index",
