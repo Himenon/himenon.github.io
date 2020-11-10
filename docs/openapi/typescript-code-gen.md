@@ -1,6 +1,6 @@
 ---
 title: OpenAPI(Swagger)を利用してTypeScriptのAPI Clientを自動生成する設計と実装
-description: 複数のendpointに対するCI/CDのパイプラインの設計と実装例を紹介する。
+description: 複数のendpointに対するビルドパイプラインの設計と実装例を紹介する。
 keywords:
   - TypeScript
   - JavaScript
@@ -20,7 +20,7 @@ image: "docs/openapi/images/build-pipeline.png"
 
 ## OpenAPI Specification(OAS)とはなにか
 
-[OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification)はAPIを記述すため規格で、旧名がSwaggerとなっている。
+[OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification)はAPIを記述するため規格で、旧名がSwaggerとなっている。
 
 ### 百聞一見に如かず
 
