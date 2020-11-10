@@ -26,6 +26,9 @@ module.exports = {
       "javascript/yarn-add-slow",
       "javascript/yarn-offline-install",
     ],
+    OpenAPI: [
+      "openapi/typescript-code-gen"
+    ],
     GoogleAnalytics: [
       "google-analytics/index",
       "google-optimize/index",
