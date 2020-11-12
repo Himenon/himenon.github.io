@@ -26,6 +26,9 @@ module.exports = {
       "javascript/yarn-add-slow",
       "javascript/yarn-offline-install",
     ],
+    TypeScript: [
+      "typescript/wrapper-async-or-sync-function"
+    ],
     OpenAPI: [
       "openapi/typescript-code-gen",
       "openapi/json-to-openapi-schema"

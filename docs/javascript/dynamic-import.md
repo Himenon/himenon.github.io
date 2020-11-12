@@ -1,5 +1,5 @@
 ---
-title: "JavaScript（NodeJS）ののDynamic Import"
+title: "JavaScript（NodeJS）のDynamic Import"
 description: "NodeJSで他のモジュールを動的にインポートするときの書き方。"
 keywords:
   - nodejs
