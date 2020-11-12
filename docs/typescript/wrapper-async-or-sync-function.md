@@ -1,5 +1,5 @@
 ---
-title: "TypeScriptで非同期/動機関数のwrapper関数を定義する"
+title: "TypeScriptで非同期/同期関数のwrapper関数を定義する"
 description: "同期処理、非同時処理の両方に対応した定義を紹介"
 keywords:
   - TypeScript
