@@ -20,7 +20,7 @@ image: "docs/javascript/proxy-directory-arch.svg"
 ### 整理されていな例
 
 たとえば[csv-stringify@5.5.1](https://www.npmjs.com/package/csv-stringify/v/5.5.1)というライブラリで、
-同期的にcsv形式のデータを生成する際の関数はは次のようにインポートする。
+同期的にcsv形式のデータを生成する際の関数は次のようにインポートする。
 
 ```ts
 import stringify from "csv-stringify/lib/sync";
