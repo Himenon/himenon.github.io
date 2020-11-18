@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="Docusaurus v2.0.0-alpha.65">
+<link rel="preconnect" href="https://www.google-analytics.com">
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-55455343-7","auto"),ga("send","pageview")</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-55455343-7"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-55455343-7",{})</script>
+<link rel="search" type="application/opensearchdescription+xml" title="himenon.github.io" href="/opensearch.xml"><title data-react-helmet="true">コンテナーアプリケーション作成時のディレクトリ成長設計の考察 | himenon.github.io</title><meta data-react-helmet="true" property="og:title" content="コンテナーアプリケーション作成時のディレクトリ成長設計の考察 | himenon.github.io"><meta data-react-helmet="true" name="description" content="コンテナーを利用したアプリケーションを作成するときのディレクトリ設計について考えてみた。"><meta data-react-helmet="true" property="og:description" content="コンテナーを利用したアプリケーションを作成するときのディレクトリ設計について考えてみた。"><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" name="keywords" content="docker,kubernetes,container,thinking,考察"><link data-react-helmet="true" rel="shortcut icon" href="/img/favicon-32x32.png"><link data-react-helmet="true" rel="preconnect" href="https://BH4D9OD16A-dsn.algolia.net" crossorigin="anonymous"><link rel="stylesheet" href="/styles.a0e3deaf.css">
+<link rel="preload" href="/styles.19cdeb78.js" as="script">
+<link rel="preload" href="/runtime~main.082f1472.js" as="script">
+<link rel="preload" href="/main.6ea6635b.js" as="script">
+<link rel="preload" href="/1.d6bfba3e.js" as="script">
+<link rel="preload" href="/2.5b55d5cd.js" as="script">
+<link rel="preload" href="/3.2fab8970.js" as="script">
+<link rel="preload" href="/01a85c17.0c4517e4.js" as="script">
+<link rel="preload" href="/127.fc5751c4.js" as="script">
+<link rel="preload" href="/6875c492.6d4d402c.js" as="script">
+<link rel="preload" href="/a4a43f13.9fe98a29.js" as="script">
+<link rel="preload" href="/a6aa9e1f.173630a2.js" as="script">
+<link rel="preload" href="/c4f5d8e4.cb5d8ab6.js" as="script">
+<link rel="preload" href="/ccc49370.67891fb7.js" as="script">
+<link rel="preload" href="/10a610ac.938ae3ef.js" as="script">
+</head>
+<body>
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){var t=null;try{t=localStorage.getItem("theme")}catch(t){}return t}();t(null!==e?e:"light")}()</script><div id="__docusaurus">
+<nav class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><div aria-label="Navigation bar toggle" class="navbar__toggle" role="button" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img" focusable="false"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></div><a class="navbar__brand" href="/"><img class="navbar__logo" src="/img/miku.png"><strong class="navbar__title">himenon.github.io</strong></a><a class="navbar__item navbar__link" href="/docs/">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/Himenon/himenon.github.io" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub</a><div class="react-toggle react-toggle--disabled displayOnlyInLargeViewport_2aTZ"><div class="react-toggle-track"><div class="react-toggle-track-check"><span class="toggle_BsTx">🌜</span></div><div class="react-toggle-track-x"><span class="toggle_BsTx">🌞</span></div></div><div class="react-toggle-thumb"></div><input type="checkbox" disabled="" aria-label="Dark mode toggle" class="react-toggle-screenreader-only"></div><button type="button" class="DocSearch DocSearch-Button" aria-label="Search"><svg width="20" height="20" class="DocSearch-Search-Icon" viewBox="0 0 20 20"><path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg><span class="DocSearch-Button-Placeholder">Search</span><span class="DocSearch-Button-Key">⌘</span><span class="DocSearch-Button-Key">K</span></button></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div><div class="navbar-sidebar"><div class="navbar-sidebar__brand"><a class="navbar__brand" href="/"><img class="navbar__logo" src="/img/miku.png"><strong class="navbar__title">himenon.github.io</strong></a></div><div class="navbar-sidebar__items"><div class="menu"><ul class="menu__list"><li class="menu__list-item"><a class="menu__link" href="/docs/">Docs</a></li><li class="menu__list-item"><a aria-current="page" class="menu__link navbar__link--active" href="/blog">Blog</a></li><li class="menu__list-item"><a href="https://github.com/Himenon/himenon.github.io" target="_blank" rel="noopener noreferrer" class="menu__link">GitHub</a></li></ul></div></div></div></nav><div class="main-wrapper"><div class="container margin-vert--lg"><div class="row"><div class="col col--8 col--offset-2"><article><header><h1 class="margin-bottom--sm blogPostTitle_1mse">コンテナーアプリケーション作成時のディレクトリ成長設計の考察</h1><div class="margin-vert--md"><time datetime="2020-11-18T01:00:44.104Z" class="blogPostDate_3bQP">November 18, 2020  · 2 min read</time></div><div class="avatar margin-vert--md"><div class="avatar__intro"></div></div></header><section class="markdown"><h2 id="はじめに">はじめに</h2><p>Dockerを使ったWEBアプリケーションのディレクトリ成長設計について考えていきます。</p><h3 id="提起">提起</h3><p>PCを使う上で、我々の扱うデータはディレクトリ構造の中に格納されています。
+アプリケーション開発は、コーディングして、バージョン管理し、デプロイまで
+行ってはじめてユーザーに届きます。
+時が経過するに連れて、使用する技術やサービスの規模感が変わってきますが、
+ディレクトリ構造の初期設計次第で、迅速に対応できるかどうかが決まってくると考えられます。</p><h3 id="課題">課題</h3><p>マイクロサービスアプリケーションにおける、
+コンテナーを用いたアプリケーションの
+ディレクトリの成長設計の考察を具体的に行う。</p><h3 id="方向性">方向性</h3><p>「UNIXという考え方ーその設計思想と哲学」の本に乗っ取り、
+以下のことを目標に考えていきます。</p><ul><li>小さく作る</li><li>1つのプログラムには1つのことだけをやらせる</li><li>試作が早く作れる状態にする</li><li>効率より移植性を取る</li><li>すべてのプログラムをフィルターにする</li></ul><p>これから外れる考えのものは、除外する方針で行います。</p><h2 id="解説用のアプリケーションの要件定義">解説用のアプリケーションの要件定義</h2><p>説明のため、あらかじめ要件定義をしておきます。
+（問題の抽象度とここの具体度がかけ離れすぎなので、気が向いたら調整）</p><ol><li>WEBアプリケーションを作成する</li><li>言語はPythonとする</li><li>開発環境はDockerを用いる</li><li>デプロイ先はKubernetesとする</li><li>KubernetesはHelmによって管理する</li><li>CI/CDを用いて、自動テスト、自動デプロイを行う</li><li>コードはGitHubで管理する</li><li>テスト駆動を行う</li><li>ドキュメントを必ず残す</li><li>マイクロサービスアーキテクチャを採用する</li></ol><h2 id="具体的な手順に落とし込んで俯瞰する">具体的な手順に落とし込んで俯瞰する</h2><p>要件を満たすように、WEBアプリケーションを育ててみます。
+その時のファイル構造、ディレクトリ構造の変化を見ていきます。
+モチベーションの維持のために、「まず動かす」を前提に構築します</p><h3 id="1-小さなwebアプリケーションを作成する">1. 小さなWEBアプリケーションを作成する</h3><pre><code>+ server.py
+</code></pre><p>ローカルでサクッと試せるアプリケーションのコードを配置します。
+ファイル分割とかは後回しです。まず動かす、という部分を達成する。</p><h3 id="2-テストコードを追加する">2. テストコードを追加する</h3><pre><code>  server.py
++ test_server.py
+</code></pre><p>この段階ではまだ<code>test/</code>ディレクトリを切らないでおく。
+理由は、まずはコンテナーで動かすが目標。</p><h3 id="3-ドキュメントを追加する">3. ドキュメントを追加する</h3><pre><code>  server.py
+  test_server.py
++ README.md
+</code></pre><p>git pullしてから、起動、テストを行う方法を書いておいたほうが良いでしょう。
+アプリの想像力の方にリソースを持っていかれるので、忘れないうちに書きます。</p><h3 id="4-ciの設定を組み込む">4. CIの設定を組み込む</h3><pre><code>+ .ci_settings
+  server.py
+  test_server.py
+  README.md
+</code></pre><p>Circle CIでも、Travis CIでも良いので、まず突っ込みます。
+アプリケーションが肥大化する前に設置することが大事です。</p><h3 id="5-コンテナー化する">5. コンテナー化する</h3><pre><code>  .ci_settings
++ Dockerfile
+  server.py
+  test_server.py
+  README.md
+</code></pre><p>Dockerfileは、このアプリケーションが<code>docker pull</code>したあと、
+<code>docker run</code>で立ち上がるように記述します。</p><h3 id="6-git-cloneしたあとに立ち上げやすいようにする">6. git cloneしたあとに立ち上げやすいようにする</h3><pre><code>  .ci_settings
+  Dockerfile
++ docker-compose.yml
+  server.py
+  test_server.py
+  README.md
+</code></pre><p><code>docker-compose up</code>もしくは、それと同等のコマンドで、
+ミドルウェアも含めたアプリケーションがすべて立ち上がると開発への着手がはやい。</p><h3 id="7-frontendとbackendで切り分ける">7. frontendとbackendで切り分ける</h3><pre><code>  .ci_settings
++ frontend/
++   Dockerfile
++ backend/
+    Dockerfile
+    server.py
+    test_server.py
+  docker-compose.yml # build contextの変更
+  README.md
+</code></pre><p>FrontendとBackendのコードを分離して保守しやすい状態にします。
+マイクロサービスの下地ができました。</p><h3 id="8-成長させる">8. 成長させる</h3><pre><code>  .ci_settings
+  frontend/
+    Dockerfile
+    ...
+  backend/
+    Dockerfile
+    server.py
+    module/
+      ...
+    test/
+      test_server.py
+  docker-compose.yml # build contextの変更
+  README.md
+</code></pre><p>前回でディレクトリの切り分けが終わったので、あとはそれぞれのマイクロサービスを成長させるだけです。
+それぞれのマイクロサービスでドメイン設計を行いつつ、
+ディレクトリの成長設計をすると、開発者にとっても、サービスにとっても良いことしかないでしょう。</p><h2 id="まとめ">まとめ</h2><p>成長痛を味わいますが、小さいうちに、手の届く範囲からTDDできる状態に
+ディレクトリの成長設計を行っておくことで、
+肥大化するアプリケーションに対して先手を打つことができます。</p><p>大規模なOSSを見たり、実際に運用されているコードを見て、
+自らの知識や理論、経験からくる構造設計と照らし合わせながら今後も考察していきたいですね。</p><h2 id="【余談】dockerfileのentrypointとcmdに関して、個人的な考察">【余談】Dockerfileの<code>ENTRYPOINT</code>と<code>CMD</code>に関して、個人的な考察</h2><p>いろいろ試した結果、要件が確定していない場合や、より明確に実行コマンドを開発者に伝えるには、
+<code>CMD</code>と<code>ENTRYPOINT</code>の役割を明確化しておく必要があると考えます。
+具体的には次の2つです。</p><ol><li><code>Dockerfile</code>の最後は<code>CMD</code>で終わるようにし、フォアグラウンドプロセスとして起動するようにしておく。</li><li><code>ENTRYPOINT</code>は<code>exec $@</code>を末尾に記述しておき、環境変数によって、コンテナー内部の状態が切り替わるようにしておく。</li></ol><p>比喩を用いて例えると、<code>CMD</code>は手で、<code>ENTRYPOINT</code>は腕のような感じです。</p><p>直接アプリケーションを実行するのは<code>CMD</code>にしておき、
+たとえば、同一のアプリケーションでも異なる立ち上げ方を試したような場合（引数などをつける）ときに、
+素のコマンドを起動時に伝えるとより検証が早くなります。</p><p><code>ENTRYPOINT</code>の使い方は、先の検証によって導き出された設定を環境変数で切り替えることだけを考えます。
+<code>ENTRYPOINT</code>はシェルスクリプトで記述しますが、
+末尾に<code>exec &quot;$@&quot;</code>をつけることで、<code>CMD</code>を実行することが可能です。
+ここに至る前までに、環境変数でコンテナー内部の状態を切り替えることで<code>CMD</code>の機動力を失わずに、設定を切り替えられます。</p><p>1つのアプリケーションが複数の起動コマンドを持っている場合に、この2つに分離しておくと良いことがわかります。
+具体的な例だと、タスクキューライブラリの<code>celery</code>を使っている時にこの事象が発生しました。
+Celeryは同一のコードで、<code>worker</code>、<code>scheduler</code>、<code>server</code>の3つの役割をもたせることができます。
+起動コマンドが異なるだけで、それ以外はまったく同じです。</p><p>これを環境変数で起動コマンドを切り替えるようにすることも可能ですが、
+結局どんなコマンドで実行していたのかを確認するためには、ロジックを読まないとたどり着けず、
+それだけで消耗してしまいます。</p><p>幸いにして、<code>CMD</code>の部分は<code>docker-compose</code>の<code>command</code>であとから変更できますし、
+Kubernetesも同様のことがdeploymentでできます。
+若干Portabilityの部分を下げる印象があります。
+そもそもアプリケーションが複数の起動パターンを持っている場合はあとから変更することが可能な状態にしておいたほうが良いと考えられます。</p><h3 id="反例">反例</h3><p>反例は有ります。<a href="https://github.com/getredash/redash">getredash/redash</a>です。
+<code>bin/docker-entrypoint</code>に起動ロジックが集約されています。
+<code>docker-compose.yml</code>は<code>command</code>を受け付けていますが、純粋なcommandではなく、引数になっています。
+(この部分、本当なら<code>args</code>を利用したほうが良いように思えますが、
+今後<code>docker-compose</code>が主流でなくなった時に<code>args</code>があるかどうかわからないのでこれはこれで正解かなと思います。)
+redashの場合、アーキテクチャがすでに決まっているようなOSSになっているので、
+ユーザー側にむしろ負担を強いいないような設計になっているのかな、と勝手に推測します。</p></section></article><div><a href="https://github.com/Himenon/himenon.github.io/edit/develop/blog/blog/container-app-directory-management-consideration.md" target="_blank" rel="noreferrer noopener"><svg fill="currentColor" height="1.2em" width="1.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40" style="margin-right:0.3em;vertical-align:sub"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="margin-vert--xl"><nav class="pagination-nav" aria-label="Blog post page navigation"><div class="pagination-nav__item"></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/blog/static-site-generator"><div class="pagination-nav__sublabel">Older Post</div><div class="pagination-nav__label">静的サイトジェネレーターの選定時に考えること »</div></a></div></nav></div></div><div class="col col--2"><div class="tableOfContents_3SO_"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#はじめに" class="table-of-contents__link">はじめに</a><ul><li><a href="#提起" class="table-of-contents__link">提起</a></li><li><a href="#課題" class="table-of-contents__link">課題</a></li><li><a href="#方向性" class="table-of-contents__link">方向性</a></li></ul></li><li><a href="#解説用のアプリケーションの要件定義" class="table-of-contents__link">解説用のアプリケーションの要件定義</a></li><li><a href="#具体的な手順に落とし込んで俯瞰する" class="table-of-contents__link">具体的な手順に落とし込んで俯瞰する</a><ul><li><a href="#1-小さなwebアプリケーションを作成する" class="table-of-contents__link">1. 小さなWEBアプリケーションを作成する</a></li><li><a href="#2-テストコードを追加する" class="table-of-contents__link">2. テストコードを追加する</a></li><li><a href="#3-ドキュメントを追加する" class="table-of-contents__link">3. ドキュメントを追加する</a></li><li><a href="#4-ciの設定を組み込む" class="table-of-contents__link">4. CIの設定を組み込む</a></li><li><a href="#5-コンテナー化する" class="table-of-contents__link">5. コンテナー化する</a></li><li><a href="#6-git-cloneしたあとに立ち上げやすいようにする" class="table-of-contents__link">6. git cloneしたあとに立ち上げやすいようにする</a></li><li><a href="#7-frontendとbackendで切り分ける" class="table-of-contents__link">7. frontendとbackendで切り分ける</a></li><li><a href="#8-成長させる" class="table-of-contents__link">8. 成長させる</a></li></ul></li><li><a href="#まとめ" class="table-of-contents__link">まとめ</a></li><li><a href="#【余談】dockerfileのentrypointとcmdに関して、個人的な考察" class="table-of-contents__link">【余談】Dockerfileの<code>ENTRYPOINT</code>と<code>CMD</code>に関して、個人的な考察</a><ul><li><a href="#反例" class="table-of-contents__link">反例</a></li></ul></li></ul></div></div></div></div></div><footer class="footer footer--dark"><div class="container"><div class="row footer__links"><div class="col footer__col"><h4 class="footer__title">Docs</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" href="/docs/">Document</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/">Blog</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">Community</h4><ul class="footer__items"><li class="footer__item"><a href="https://ja.stackoverflow.com/users/7997" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow</a></li><li class="footer__item"><a href="https://twitter.com/himenoglyph" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">More</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/Himenon" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub</a></li></ul></div></div><div class="text--center"><div>Copyright © 2020 Himenon.</div></div></div></footer></div>
+<script src="/styles.19cdeb78.js"></script>
+<script src="/runtime~main.082f1472.js"></script>
+<script src="/main.6ea6635b.js"></script>
+<script src="/1.d6bfba3e.js"></script>
+<script src="/2.5b55d5cd.js"></script>
+<script src="/3.2fab8970.js"></script>
+<script src="/01a85c17.0c4517e4.js"></script>
+<script src="/127.fc5751c4.js"></script>
+<script src="/6875c492.6d4d402c.js"></script>
+<script src="/a4a43f13.9fe98a29.js"></script>
+<script src="/a6aa9e1f.173630a2.js"></script>
+<script src="/c4f5d8e4.cb5d8ab6.js"></script>
+<script src="/ccc49370.67891fb7.js"></script>
+<script src="/10a610ac.938ae3ef.js"></script>
+</body>
+</html>
