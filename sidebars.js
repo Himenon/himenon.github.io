@@ -9,6 +9,7 @@ module.exports = {
       "javascript/decipher-mdx-js",
       "javascript/dynamic-import",
       "javascript/dynamic-load-css",
+      "javascript/flat-is-not-a-function",
       "javascript/get-collect-domain-name",
       "javascript/higher-order-function-tips",
       "javascript/introduction-code-dependency",
