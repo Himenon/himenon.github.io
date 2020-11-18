@@ -13,15 +13,15 @@
 <script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-55455343-7",{})</script>
 <link rel="search" type="application/opensearchdescription+xml" title="himenon.github.io" href="/opensearch.xml"><title data-react-helmet="true">ReactのServer side rendering時に&#x27;Invalid hook call&#x27;が出てしまう問題と解決方法 | himenon.github.io</title><meta data-react-helmet="true" name="docsearch:version" content="current,latest"><meta data-react-helmet="true" name="twitter:card" content="summary_large_image"><meta data-react-helmet="true" property="og:title" content="ReactのServer side rendering時に&#x27;Invalid hook call&#x27;が出てしまう問題と解決方法 | himenon.github.io"><meta data-react-helmet="true" name="description" content="&#x27;Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons&#x27;の対処方法"><meta data-react-helmet="true" property="og:description" content="&#x27;Invalid hook call. Hooks can only be called inside of the body of a function component. This could happen for one of the following reasons&#x27;の対処方法"><meta data-react-helmet="true" name="keywords" content="invalid hook call,react,hooks,useReducer,reducer,server side,rendering,ssr"><meta data-react-helmet="true" property="og:url" content="https://himenon.github.io/docs/javascript/react-invalid-hook-call"><link data-react-helmet="true" rel="shortcut icon" href="/img/favicon-32x32.png"><link data-react-helmet="true" rel="preconnect" href="https://BH4D9OD16A-dsn.algolia.net" crossorigin="anonymous"><link data-react-helmet="true" rel="canonical" href="https://himenon.github.io/docs/javascript/react-invalid-hook-call"><link rel="stylesheet" href="/styles.a0e3deaf.css">
 <link rel="preload" href="/styles.19cdeb78.js" as="script">
-<link rel="preload" href="/runtime~main.63c8dc25.js" as="script">
-<link rel="preload" href="/main.6ea6635b.js" as="script">
-<link rel="preload" href="/1.d6bfba3e.js" as="script">
-<link rel="preload" href="/2.5b55d5cd.js" as="script">
+<link rel="preload" href="/runtime~main.b8fa6e11.js" as="script">
+<link rel="preload" href="/main.0f1a74a4.js" as="script">
+<link rel="preload" href="/1.194f2af3.js" as="script">
+<link rel="preload" href="/2.59991bff.js" as="script">
 <link rel="preload" href="/3.2fab8970.js" as="script">
-<link rel="preload" href="/1be78505.8f4fe69a.js" as="script">
+<link rel="preload" href="/1be78505.30334f82.js" as="script">
 <link rel="preload" href="/935f2afb.e9934929.js" as="script">
 <link rel="preload" href="/17896441.2e9c0749.js" as="script">
-<link rel="preload" href="/5b533f9e.a7dd8166.js" as="script">
+<link rel="preload" href="/5b533f9e.52eb74ce.js" as="script">
 </head>
 <body>
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){var t=null;try{t=localStorage.getItem("theme")}catch(t){}return t}();t(null!==e?e:"light")}()</script><div id="__docusaurus">
@@ -67,14 +67,14 @@ const React2 = require(&quot;react&quot;);
 console.info(`Same react?: ${React === React2}`)
 </code></pre><p>したがって、server-appでclient-appを利用することを考え、<code>externals</code>の設定をすることによりこの問題を回避できます。</p><h2 id="参考文献">参考文献</h2><ul><li>Invalid Hook Call Warning – React<br><a href="https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react">https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react</a></li><li>Hooks + multiple instances of React · Issue #13991 · facebook/react<br><a href="https://github.com/facebook/react/issues/13991">https://github.com/facebook/react/issues/13991</a></li></ul></div></article><div class="margin-vert--xl"><div class="row"><div class="col"><a href="https://github.com/Himenon/himenon.github.io/edit/master/docs/javascript/react-invalid-hook-call.md" target="_blank" rel="noreferrer noopener"><svg fill="currentColor" height="1.2em" width="1.2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40" style="margin-right:0.3em;vertical-align:sub"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div></div></div><div class="margin-vert--lg"><nav class="pagination-nav" aria-label="Blog list page navigation"><div class="pagination-nav__item"><a class="pagination-nav__link" href="/docs/javascript/mobx-minify-warning"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">« [mobx] you are running a minified build, but &#x27;process.env.NODE_ENV&#x27; was not set to &#x27;production&#x27; in your bundler. This results in an unnecessarily large and slow bundle</div></a></div><div class="pagination-nav__item pagination-nav__item--next"><a class="pagination-nav__link" href="/docs/javascript/read-ctime"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">NodeJSのfsライブラリでファイルの作成日を取得する »</div></a></div></nav></div></div></div><div class="col col--3"><div class="tableOfContents_3SO_"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#エラー内容" class="table-of-contents__link">エラー内容</a></li><li><a href="#webpackを利用してビルドしている場合の解決方法" class="table-of-contents__link">webpackを利用してビルドしている場合の解決方法</a><ul><li><a href="#クライアントサイドで利用するwebpackの設定（umd）" class="table-of-contents__link">クライアントサイドで利用するwebpackの設定（umd）</a></li><li><a href="#サーバーサイド用にビルドするwebpackの設定（cjs）" class="table-of-contents__link">サーバーサイド用にビルドするwebpackの設定（cjs）</a></li></ul></li><li><a href="#原因" class="table-of-contents__link">原因</a><ul><li><a href="#reactのバージョンの不整合" class="table-of-contents__link">Reactのバージョンの不整合</a></li><li><a href="#reactの参照先が異なる場合" class="table-of-contents__link">Reactの参照先が異なる場合</a></li></ul></li><li><a href="#参考文献" class="table-of-contents__link">参考文献</a></li></ul></div></div></div></div></main></div></div><footer class="footer footer--dark"><div class="container"><div class="row footer__links"><div class="col footer__col"><h4 class="footer__title">Docs</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" href="/docs/">Document</a></li><li class="footer__item"><a class="footer__link-item" href="/blog/">Blog</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">Community</h4><ul class="footer__items"><li class="footer__item"><a href="https://ja.stackoverflow.com/users/7997" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow</a></li><li class="footer__item"><a href="https://twitter.com/himenoglyph" target="_blank" rel="noopener noreferrer" class="footer__link-item">Twitter</a></li></ul></div><div class="col footer__col"><h4 class="footer__title">More</h4><ul class="footer__items"><li class="footer__item"><a class="footer__link-item" href="/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/Himenon" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub</a></li></ul></div></div><div class="text--center"><div>Copyright © 2020 Himenon.</div></div></div></footer></div>
 <script src="/styles.19cdeb78.js"></script>
-<script src="/runtime~main.63c8dc25.js"></script>
-<script src="/main.6ea6635b.js"></script>
-<script src="/1.d6bfba3e.js"></script>
-<script src="/2.5b55d5cd.js"></script>
+<script src="/runtime~main.b8fa6e11.js"></script>
+<script src="/main.0f1a74a4.js"></script>
+<script src="/1.194f2af3.js"></script>
+<script src="/2.59991bff.js"></script>
 <script src="/3.2fab8970.js"></script>
-<script src="/1be78505.8f4fe69a.js"></script>
+<script src="/1be78505.30334f82.js"></script>
 <script src="/935f2afb.e9934929.js"></script>
 <script src="/17896441.2e9c0749.js"></script>
-<script src="/5b533f9e.a7dd8166.js"></script>
+<script src="/5b533f9e.52eb74ce.js"></script>
 </body>
 </html>
