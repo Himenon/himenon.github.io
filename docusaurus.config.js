@@ -103,17 +103,12 @@ module.exports = {
       {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          editUrl: "https://github.com/Himenon/himenon.github.io/edit/master/",
+          editUrl: "https://github.com/Himenon/himenon.github.io/edit/default/",
         },
         blog: {
           showReadingTime: true,
-          // Please change this to your repo.
           editUrl:
             "https://github.com/Himenon/himenon.github.io/edit/develop/blog/",
-        },
-        theme: {
-          customCss: require.resolve("./src/css/custom.css"),
         },
       },
     ],
