@@ -1,6 +1,9 @@
 module.exports = {
   someSidebar: {
     "Hello World": ["root"],
+    "顧客が本当に必要だったもの": [
+      "what-the-customer-really-needed/introduction"
+    ],
     JavaScript: [
       "javascript/proxy-directory-design-pattern",
       "javascript/case-sensitive-paths-error",
