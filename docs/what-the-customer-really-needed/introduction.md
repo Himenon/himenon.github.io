@@ -1,6 +1,6 @@
 ---
-title: 「顧客が本当に必要だったもの」とはなにか
-description: 見つめ直しタイム
+title: 「顧客が本当に必要だったもの」はどうやって作られるか
+description: 顧客が本当に必要だったものを作るための因子を考えてみる。
 image: "docs/what-the-customer-really-needed/images/project_comedy_l.gif"
 ---
 
