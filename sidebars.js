@@ -100,7 +100,11 @@ module.exports = {
     Rust: ["rust/hello-world"],
     "顧客が本当に必要だったもの": [
       "what-the-customer-really-needed/introduction",
-      "what-the-customer-really-needed/theory-of-constraints"
+      "what-the-customer-really-needed/theory-of-constraints",
+      "what-the-customer-really-needed/preliminary-research-and-design",
+      "what-the-customer-really-needed/feedback",
+      "what-the-customer-really-needed/improvement-and-withdrawal",
+      "what-the-customer-really-needed/thought-and-senses",
     ],
   },
 };
