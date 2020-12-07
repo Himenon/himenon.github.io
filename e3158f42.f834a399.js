@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[116],{185:function(e){e.exports=JSON.parse('{"allTagsPath":"/blog/tags","slug":"google-kubernetes-engine","name":"google kubernetes engine","count":1,"permalink":"/blog/tags/google-kubernetes-engine"}')}}]);
