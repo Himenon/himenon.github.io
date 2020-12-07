@@ -1,5 +1,4 @@
 ---
-id: multiple-reverse-proxy-sapmle-with-oauth2_proxy
 title: "複数のホストをoauth2_proxyを用いてOAuth認証してリバースプロキシする"
 description: "oauth2_proxyを複数のリバースプロキシ先に対応させてみた。"
 keywords:

@@ -57,9 +57,9 @@ module.exports = {
     MySQL: ["mysql/character-code"],
     Infrastructure: [
       "infrastructure/how-to-use-inlets",
-      "infrastructure/multiple-reverse-proxy-sapmle-with-oauth2_proxy",
+      "infrastructure/multiple-reverse-proxy-sample-with-oauth2_proxy",
     ],
-    Adobe: ["adobe/premire-pro"],
+    Adobe: ["adobe/premier-pro"],
     Event: ["event/2018-05-21-cloud-native", "event/2018-10-13-abema-tv"],
     Jobs: ["jobs/ja"],
     Profile: [
@@ -73,7 +73,7 @@ module.exports = {
       "python/django/fixture",
       "python/django/initialize-new-app",
       "python/django/introduction-of-celery-django",
-      "python/django/seperate-django-database",
+      "python/django/separate-django-database",
       "python/django/show-many-to-many-admin-view",
       "python/django/signal",
       "python/django/static-file",
@@ -98,5 +98,13 @@ module.exports = {
     ],
     WebAssembly: ["web-assembly/install-emcc"],
     Rust: ["rust/hello-world"],
+    "顧客が本当に必要だったもの": [
+      "what-the-customer-really-needed/introduction",
+      "what-the-customer-really-needed/theory-of-constraints",
+      "what-the-customer-really-needed/preliminary-research-and-design",
+      "what-the-customer-really-needed/feedback",
+      "what-the-customer-really-needed/improvement-and-withdrawal",
+      "what-the-customer-really-needed/thought-and-senses",
+    ],
   },
 };
