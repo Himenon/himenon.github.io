@@ -44,6 +44,8 @@ image: "docs/what-the-customer-really-needed/images/project_comedy_l.gif"
 | 統計データ         | 顧客の求めている「もの」対して統計データから何らかのパターンを抽出できるか。   |
 | ペルソナ           | 製作者側が認識しているユーザー像を構築する。                                   |
 
+[記事へ](./preliminary-research-and-design.md)
+
 ### 成果物の期待値
 
 | 期待値           | 内容                                                                               |
