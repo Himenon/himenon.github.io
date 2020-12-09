@@ -1,6 +1,9 @@
 module.exports = {
   someSidebar: {
     "Hello World": ["root"],
+    "Web Develop": [
+      "webdev/problems"
+    ],
     JavaScript: [
       "javascript/proxy-directory-design-pattern",
       "javascript/case-sensitive-paths-error",
