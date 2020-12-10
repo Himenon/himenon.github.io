@@ -17,6 +17,7 @@ module.exports = {
       indexName: "himenon",
     },
     image: "img/miku.png",
+    metadatas: [{ name: "twitter:card", content: "summary" }],
     prism: {
       theme: require("prism-react-renderer/themes/dracula"),
     },
