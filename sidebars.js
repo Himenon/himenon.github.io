@@ -1,6 +1,16 @@
 module.exports = {
   someSidebar: {
     "Hello World": ["root"],
+    "Web Develop": [
+      "webdev/index",
+      "webdev/problems",
+      "webdev/initialize-problem",
+      "webdev/api-client-increase-problem",
+      "webdev/base-url-definition-change-problem-for-each-environment",
+      "webdev/demo-sharing",
+      "webdev/increased-size-of-artifacts-with-svg-file-bundles",
+      "webdev/minify-node-modules-into-a-container"
+    ],
     JavaScript: [
       "javascript/proxy-directory-design-pattern",
       "javascript/case-sensitive-paths-error",

@@ -1,5 +1,4 @@
 ---
-id: how-to-use-inlets
 title: "ローカルホストをインターネット上に外部公開するinletsの紹介"
 description: "開発環境をサーバーでProxyを行い、インターネット上に公開する方法を紹介します。"
 keywords:
