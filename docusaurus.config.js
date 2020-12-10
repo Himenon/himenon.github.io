@@ -16,6 +16,7 @@ module.exports = {
       apiKey: "ce71323b49e20959a6517cdb6b4bb107",
       indexName: "himenon",
     },
+    image: "img/miku.png",
     prism: {
       theme: require("prism-react-renderer/themes/dracula"),
     },
