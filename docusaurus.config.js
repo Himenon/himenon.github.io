@@ -21,11 +21,8 @@ module.exports = {
     prism: {
       theme: require("prism-react-renderer/themes/dracula"),
     },
-    googleAnalytics: {
-      trackingID: "UA-55455343-7",
-    },
     gtag: {
-      trackingID: "UA-55455343-7",
+      trackingID: "G-6HLJ7N55HE",
     },
     sitemap: {
       cacheTime: 600 * 1000, // 600 sec - cache purge period
