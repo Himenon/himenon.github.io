@@ -1,6 +1,10 @@
 ---
 title: サーバーサイドのnode_modulesをminifyしてコンテナ化する
 description: コンテナイメージの容量削減の方法
+keywords:
+  - minify
+  - Docker
+  - node_modules
 ---
 
 ## まとめ

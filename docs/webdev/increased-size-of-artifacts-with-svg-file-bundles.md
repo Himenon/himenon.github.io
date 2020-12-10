@@ -5,6 +5,8 @@ keywords:
   - web
   - react
   - svg
+  - 動的ロード
+  - dynamic load
 ---
 
 ## まとめ

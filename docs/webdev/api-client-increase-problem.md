@@ -1,5 +1,10 @@
 ---
 title: API Client 増加問題の対策
+description: HTTP/websocket/RPC などの各種クライアントがエンドポイント単位で作成されメンテナンスコストが増える問題と対策
+keywords:
+  - OpenAPI
+  - メンテナンス
+  - 自動化
 ---
 
 ## まとめ

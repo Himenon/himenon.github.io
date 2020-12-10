@@ -3,6 +3,8 @@ title: DEMOのシェア
 description: 容易にホスティングできない DEMO を開発者らに共有するときに、わざわざクローンさせる手間の問題の対策
 keywords:
   - web
+  - share
+  - inlets
 ---
 
 ## まとめ

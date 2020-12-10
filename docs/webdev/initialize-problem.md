@@ -1,6 +1,10 @@
 ---
 title: Webページの初期化問題
 description: JavaScriptの初期化に時間がかかる問題
+keywords:
+  - 初期化
+  - 継続
+  - JavaScript
 ---
 
 ## まとめ
