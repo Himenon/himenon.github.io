@@ -2,7 +2,11 @@ module.exports = {
   someSidebar: {
     "Hello World": ["root"],
     "Web Develop": [
-      "webdev/problems"
+      "webdev/index",
+      "webdev/problems",
+      "webdev/initialize-problem",
+      "webdev/api-client-increase-problem",
+      "webdev/base-url-definition-change-problem-for-each-environment"
     ],
     JavaScript: [
       "javascript/proxy-directory-design-pattern",
