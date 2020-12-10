@@ -15,14 +15,14 @@ keywords:
 
 | 問題点                                                                                                  | 内容                                                                                                   |
 | :------------------------------------------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------- |
-| [成果物のサイズが大きくなる問題](../webdev/increased-size-of-artifacts-with-svg-file-bundles)                   | サイズが大きくなっていることに気が付かない問題。                                                       |
-| [(Docker)コンテナのサイズが大きい問題](../webdev/minify-node-modules-into-a-container)                          | コンテナのサイズが大きい問題。主に`node_modules`を含むと 500MB 以上になりうる。                        |
+| [成果物のサイズが大きくなる問題](increased-size-of-artifacts-with-svg-file-bundles.md)                   | サイズが大きくなっていることに気が付かない問題。                                                       |
+| [(Docker)コンテナのサイズが大きい問題](minify-node-modules-into-a-container.md)                          | コンテナのサイズが大きい問題。主に`node_modules`を含むと 500MB 以上になりうる。                        |
 | [初期化問題](initialize-problem)                                                                      | Time to Interactive の時間を決定する問題。同期的初期化と非同期初期化（遅延初期化）の取り扱いの問題     |
-| [環境ごとの基底 URL 定義変更問題](../webdev/base-url-definition-change-problem-for-each-environment)            | 環境ごとに基底 URL を切り替える必要がある問題                                                          |
-| [minify や難読化されたコードのデバッグ](../webdev/debugging-minified-code)                                      | 本番環境で不具合が発生した時に成果物に minify されたコードしかない場合、再ビルドする必要が出てくる問題 |
-| [DEMO の共有](../webdev/demo-sharing)                                                                           | 容易にホスティングできない DEMO を開発者らに共有するときに、わざわざクローンさせる手間の問題           |
-| [API Client 増加問題](../webdev/api-client-increase-problem)                                                    | HTTP/websocket/RPC などの各種クライアントがエンドポイント単位で作成されメンテナンスコストが増える問題  |
-| [SVG ファイルバンドルによる成果物のサイズ増加問題](../webdev/increased-size-of-artifacts-with-svg-file-bundles) | SVG ファイルをバンドルすることによりサイズが肥大化する問題                                             |
+| [環境ごとの基底 URL 定義変更問題](base-url-definition-change-problem-for-each-environment.md)            | 環境ごとに基底 URL を切り替える必要がある問題                                                          |
+| [minify や難読化されたコードのデバッグ](debugging-minified-code.md)                                      | 本番環境で不具合が発生した時に成果物に minify されたコードしかない場合、再ビルドする必要が出てくる問題 |
+| [DEMO の共有](demo-sharing.md)                                                                           | 容易にホスティングできない DEMO を開発者らに共有するときに、わざわざクローンさせる手間の問題           |
+| [API Client 増加問題](api-client-increase-problem.md)                                                    | HTTP/websocket/RPC などの各種クライアントがエンドポイント単位で作成されメンテナンスコストが増える問題  |
+| [SVG ファイルバンドルによる成果物のサイズ増加問題](increased-size-of-artifacts-with-svg-file-bundles.md) | SVG ファイルをバンドルすることによりサイズが肥大化する問題                                             |
 
 ### 対策記事執筆予定 / 整理中
 
