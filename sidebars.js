@@ -9,7 +9,9 @@ module.exports = {
       "webdev/base-url-definition-change-problem-for-each-environment",
       "webdev/demo-sharing",
       "webdev/increased-size-of-artifacts-with-svg-file-bundles",
-      "webdev/minify-node-modules-into-a-container"
+      "webdev/minify-node-modules-into-a-container",
+      "webdev/temporary-ui-state-preservation",
+      "webdev/comprehensive-ui-display-combinations",
     ],
     JavaScript: [
       "javascript/proxy-directory-design-pattern",

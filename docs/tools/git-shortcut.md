@@ -36,7 +36,7 @@ git fetch origin pull/2/head:pr-2
 
 となる。
 
-Aliasを貼るならば、Clone Pull Requestの頭文字を取ってきて、`cpr`とします。Pull RequestをClonseするときは、レビューするときなど関心が非常に高いので、チェックアウトも自動的に済ませておくと作業効率があがります。
+Aliasを貼るならば、Clone Pull Requestの頭文字を取ってきて、`cpr`とします。Pull RequestをClonseするときは、レビューするときなど関心が非常に高いので、チェックアウトも自動的に済ませておくと作業効率があります。
 
 ```bash
 cpr = "!f() { git fetch $1 pull/$2/head:pr-$2; git checkout pr-$2; };f"

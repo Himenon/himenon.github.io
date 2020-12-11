@@ -100,6 +100,9 @@ module.exports = {
     [
       "@docusaurus/preset-classic",
       {
+        theme: {
+          customCss: [require.resolve("./src/css/text.css")],
+        },
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: "https://github.com/Himenon/himenon.github.io/edit/default/",

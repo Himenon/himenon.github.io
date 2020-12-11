@@ -1,5 +1,5 @@
 ---
-title: サーバーサイドのnode_modulesをminifyしてコンテナ化する
+title: サーバーサイドのnode_modulesをminifyしてコンテナ化する方法
 description: コンテナイメージの容量削減の方法
 keywords:
   - minify

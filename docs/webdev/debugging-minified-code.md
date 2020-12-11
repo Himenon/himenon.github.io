@@ -1,5 +1,5 @@
 ---
-title: minifyや難読化されたコードのデバッグ
+title: minifyや難読化されたコードのデバッグする方法
 description: Production用のコードで不具合が生じたときにいかに速く問題を突き止めることができるか。
 ---
 
