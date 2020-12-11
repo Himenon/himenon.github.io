@@ -1,10 +1,12 @@
 ---
-title: Webページの初期化問題が拡大しないための対策
+title: Time to Interactiveが長くなる問題と対策
 description: JavaScriptの初期化に時間がかかる問題
 keywords:
   - 初期化
   - 継続
   - JavaScript
+  - time to interactive
+  - パフォーマンス
 ---
 
 ## まとめ
