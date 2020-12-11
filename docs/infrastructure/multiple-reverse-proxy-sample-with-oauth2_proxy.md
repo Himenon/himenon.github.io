@@ -13,10 +13,8 @@ updatedAt: 2019-05-21 11:22:01
 
 ## これはなに？
 
-[oauth2_proxy](https://github.com/bitly/oauth2_proxy)を複数のリバースプロキシ先に対応させた、
+[oauth2-proxy](https://github.com/oauth2-proxy/oauth2-proxy)（旧名 [oauth2_proxy](https://github.com/bitly/oauth2_proxy)）を複数のリバースプロキシ先に対応させた、
 サンプル（[Himenon/oauth2_proxy](https://github.com/Himenon/oauth2_proxy)）を作成した紹介です。
-
-（スターください。PRも歓迎です）
 
 ### 何に使える？
 

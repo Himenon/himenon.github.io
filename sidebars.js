@@ -4,12 +4,15 @@ module.exports = {
     "Web Develop": [
       "webdev/index",
       "webdev/problems",
-      "webdev/initialize-problem",
+      "webdev/time-to-interactive-problem",
       "webdev/api-client-increase-problem",
       "webdev/base-url-definition-change-problem-for-each-environment",
       "webdev/demo-sharing",
       "webdev/increased-size-of-artifacts-with-svg-file-bundles",
-      "webdev/minify-node-modules-into-a-container"
+      "webdev/minify-node-modules-into-a-container",
+      "webdev/temporary-ui-state-preservation",
+      "webdev/comprehensive-ui-display-combinations",
+      "webdev/static-site-maintenance-mode",
     ],
     JavaScript: [
       "javascript/proxy-directory-design-pattern",

@@ -1,10 +1,12 @@
 ---
-title: Webページの初期化問題
+title: Time to Interactiveが長くなる問題と対策
 description: JavaScriptの初期化に時間がかかる問題
 keywords:
   - 初期化
   - 継続
   - JavaScript
+  - time to interactive
+  - パフォーマンス
 ---
 
 ## まとめ
@@ -72,3 +74,4 @@ keywords:
 * <https://developers.google.com/analytics/devguides/collection/gtagjs/user-timings>
 * [日経電子版を高速化させるためにフロントエンド側で取り組んだ4つのこと](https://logmi.jp/tech/articles/283703)
 * [日経電子版を速くする / nikkei-inside-frontend](https://speakerdeck.com/sisidovski/nikkei-inside-frontend)
+* [web vitals](https://web.dev/vitals/)

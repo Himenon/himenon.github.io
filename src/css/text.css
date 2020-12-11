@@ -1,0 +1,25 @@
+:root {
+  --ifm-menu-link-padding-vertical: 0.1em;
+}
+
+.menu__link {
+  font-size: 0.8rem;
+}
+
+.menu__link--sublist:after {
+  height: 0.8rem;
+  width: 0.8rem;
+}
+
+[class*="docTitle"] {
+  font-size: 2rem !important;
+}
+
+.markdown h2 {
+  --ifm-h2-font-size: 1.5em;
+}
+
+.markdown h3 {
+  --ifm-h3-font-size: 1.1rem
+}
+

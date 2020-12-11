@@ -1,5 +1,5 @@
 ---
-title: DEMOのシェア
+title: 簡単にデモをシェアできない問題の対策
 description: 容易にホスティングできない DEMO を開発者らに共有するときに、わざわざクローンさせる手間の問題の対策
 keywords:
   - web

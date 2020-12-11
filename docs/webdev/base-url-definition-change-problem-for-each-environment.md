@@ -1,5 +1,5 @@
 ---
-title: 環境ごとの基底URL定義変更問題
+title: 環境ごとの基底URL定義変更問題の対策
 description: 開発環境や本番環境でURLを変更する必要がある問題
 keywords:
   - OpenAPI
