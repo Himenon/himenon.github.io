@@ -1,5 +1,5 @@
 ---
-title: NodeJSライブラリにおけるProxy Directoryパターンとライブラリの参照整理
+title: JavaScriptライブラリにおけるProxy Directoryパターンとライブラリの参照整理
 description: ライブラリ内部でpackage.jsonを参照解決のproxyとして扱い、ライブラリの開発者と利用者の両方に恩恵のある設計を提供する方法を示す。
 keywords:
   - Proxy Directory

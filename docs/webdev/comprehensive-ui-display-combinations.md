@@ -22,7 +22,7 @@ keywords:
 
 ## 対策
 
-* CSSを[local scope]](https://webpack.js.org/loaders/css-loader/)で運用する
+* CSSを[local scope](https://webpack.js.org/loaders/css-loader/)で運用する
 * [storybook](https://storybook.js.org/)を利用して状態の組み合わせが再現できるようにする
 * UIの初期表示状態をクエリパラメーターで調整できるようにする
   * `?display=ViewA,ViewB&highlight=ViewC`と言った具合で`動作=対象[]`とすることで**初期表示**の固定化を行う
