@@ -104,6 +104,7 @@ module.exports = {
       "tools/alfread",
       "tools/cookiecutter",
       "tools/find-and-count-up-extensions",
+      "tools/setup-fish-shell",
       "tools/fish-history",
       "tools/git-hub-release",
       "tools/git-shortcut",
