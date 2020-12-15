@@ -13,6 +13,7 @@ module.exports = {
       "webdev/temporary-ui-state-preservation",
       "webdev/comprehensive-ui-display-combinations",
       "webdev/static-site-maintenance-mode",
+      "webdev/maintaining-the-build-tool",
     ],
     JavaScript: [
       "javascript/proxy-directory-design-pattern",
@@ -74,7 +75,6 @@ module.exports = {
     ],
     Adobe: ["adobe/premier-pro"],
     Event: ["event/2018-05-21-cloud-native", "event/2018-10-13-abema-tv"],
-    Jobs: ["jobs/ja"],
     Profile: [
       "profile/github-activity",
       "profile/index",
