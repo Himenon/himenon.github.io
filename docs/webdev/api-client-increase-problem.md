@@ -7,6 +7,11 @@ keywords:
   - 自動化
 ---
 
+## 背景
+
+axiosやfetchをアプリケーション内で直接利用していると、その実装を真似してAPI Clientが増えていく。
+また、レスポンスを変換する層を含め始めると純粋なAPI Clientとして利用でいなくなっていく。
+
 ## まとめ
 
 1. [OpenAPI(Swagger)](https://swagger.io/)を利用してSchema定義を行う
