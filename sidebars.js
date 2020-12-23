@@ -42,6 +42,7 @@ module.exports = {
       "javascript/yarn-offline-install",
     ],
     TypeScript: [
+      "typescript/extend-error",
       "typescript/wrapper-async-or-sync-function"
     ],
     OpenAPI: [
