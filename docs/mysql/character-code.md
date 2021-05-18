@@ -1,6 +1,6 @@
 ---
 title: "DockerのMySQLでUTF-8を使えるようにする"
-description: "DockerのMySQLコンテンでUTF-8を使えるようにしておく"
+description: "DockerのMySQLコンテナでUTF-8を使えるようにしておく"
 keywords:
   - mysql
   - docker
